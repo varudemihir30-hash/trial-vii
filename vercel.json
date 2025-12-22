@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "public": false,
+  "builds": [
+    {
+      "src": "Aivora/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/Aivora/$1"
+    }
+  ]
+}
+

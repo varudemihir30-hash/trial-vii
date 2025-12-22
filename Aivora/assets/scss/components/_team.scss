@@ -1,0 +1,262 @@
+.xb-team-item {
+    z-index: 1;
+    position: relative;
+    min-height: 223px;
+    padding: 30px 20px 20px 30px;
+    @include border-radius(10px);
+    backdrop-filter: blur(40px);
+    background: linear-gradient(209deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    @include respond(sm) {
+        padding: 30px 20px 20px;
+    }
+    .xb-item {
+        &--img {
+            width: 85px;
+            height: 98px;
+            img {
+                overflow: hidden;
+                transform: scale(1);
+                @include transition(.3s);
+                @include border-radius(10px);
+                transform-origin: bottom left;
+            }
+        }
+        &--holder {
+            margin-top: 22px;
+        }
+        &--name {
+            font-size: 18px;
+            letter-spacing: -0.04em;
+            text-transform: capitalize;
+        }
+        &--desig {
+            font-size: 16px;
+        }
+        &--desig span {
+            color: var(--color-primary);
+        }
+        &--social {
+            height: 40px;
+            width: 40px;
+            @include center;
+            @include transition(.3s);
+            @include border-radius(100px);
+            background: var(--color-secondary);
+            i {
+                color: var(--color-white);
+                @include transition(.3s);
+            }
+            &::after {
+                z-index: 1;
+                border-radius: inherit;
+            }
+        }
+    }
+    .xb-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+    }
+    &:hover {
+        .xb-item {
+            &--img img {
+                transform: scale(1.63);
+            }
+            &--social {
+                background: var(--color-primary);
+                i {
+                    color: var(--color-secondary);
+                }
+            }
+        }
+    }
+}
+.xb-team-item-big {
+    padding: 50px;
+    @include respond(lg) {
+        padding: 30px;
+    }
+    .xb-item {
+        &--img {
+            width: 100%;
+            height: 100%;
+            @include respond(md) {
+                width: 50%;
+                height: 50%;
+            }
+            @include respond(xs) {
+                width: 35%;
+                height: 35%;
+            }
+        }
+        &--name {
+            font-size: 32px;
+            @include respond(lg) {
+                font-size: 26px;
+            }
+            @include respond(xs) {
+                font-size: 22px;
+            }
+        }
+        &--desig {
+            font-size: 17px;
+            @include respond(xs) {
+                font-size: 16px;
+            }
+        }
+        &--holder {
+            gap: 20px;
+            align-items: end;
+            @include respond(xs) {
+                align-items: center;
+            }
+        }
+        &--social {
+            height: 84px;
+            width: 84px;
+            @include respond(lg) {
+                height: 74px;
+                width: 74px;
+            }
+            @include respond(xs) {
+                height: 54px;
+                width: 54px;
+            }
+            i {
+                font-size: 32px;
+                @include respond(lg) {
+                    font-size: 24px;
+                }
+                @include respond(xs) {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    &:hover {
+        .xb-item {
+            &--img img {
+                transform: scale(1.4);
+            }
+        }
+    }
+}
+
+// New Team Section Styles (Empyr Style)
+.team {
+    position: relative;
+    padding: 150px 0 195px;
+    @include respond(lg) {
+        padding-bottom: 150px;
+    }
+    @include respond(xs) {
+        padding-bottom: 80px;
+        padding-top: 100px;
+    }
+}
+
+.xb-team_wrapper {
+    text-align: center;
+    margin-top: -60px;
+    padding-bottom: 50px;
+    @include respond(lg) {
+        margin-top: -30px;
+    }
+}
+
+.team-item {
+    display: inline-block;
+    margin-top: 60px;
+    margin-right: 35px;
+    vertical-align: top;
+    @include respond(lg) {
+        margin-top: 25px;
+        margin-right: 20px;
+    }
+    @include respond(xs) {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 40px;
+    }
+    
+    .xb-item {
+        &--desig {
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-default);
+            transition: 0.3s;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        &--name {
+            display: inline-block;
+            font-size: 64px;
+            color: var(--color-heading);
+            position: relative;
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+            @include respond(laptop) {
+                font-size: 50px;
+            }
+            @include respond(lg) {
+                font-size: 40px;
+            }
+            @include respond(xs) {
+                font-size: 28px;
+            }
+            
+            &:hover::before {
+                width: 100%;
+            }
+            
+            a {
+                color: currentColor;
+                text-decoration: none;
+            }
+            
+            span {
+                font-family: 'Georgia', 'Times New Roman', serif;
+                font-weight: 400;
+            }
+            
+            &::before {
+                position: absolute;
+                content: '';
+                left: 0;
+                bottom: 5px;
+                height: 4px;
+                width: 0;
+                background: var(--color-heading);
+                transition: 0.3s;
+            }
+        }
+    }
+    
+    &:hover .xb-item--desig {
+        color: var(--color-primary);
+    }
+    
+    .xb-img-reveal-wrapper {
+        width: 250px;
+    }
+}
+
+.xb-team_shape {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
