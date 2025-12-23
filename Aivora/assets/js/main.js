@@ -538,7 +538,7 @@
 	= marquee
 	-------------------------------------------*/
 	$('.marquee-left').marquee({
-		duration: 2000,
+		duration: 800,
 		gap: 0,
 		delayBeforeStart: 0,
 		direction: 'left',
@@ -547,7 +547,7 @@
 		startVisible: true,
 	});	
 	$('.marquee-right').marquee({
-		duration: 2000,
+		duration: 800,
 		gap: 0,
 		delayBeforeStart: 0,
 		direction: 'right',
