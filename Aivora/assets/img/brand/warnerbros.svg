@@ -1,3 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
-  <text x="100" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle" opacity="0.9">Warner Bros</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" fill="#FFFFFF">
+  <!-- Warner Bros Official Shield Logo -->
+  <!-- Shield outline -->
+  <path d="M100 5 Q120 5 130 8 L175 15 Q185 20 185 30 L185 50 Q185 60 175 65 L130 72 Q120 75 100 75 Q80 75 70 72 L25 65 Q15 60 15 50 L15 30 Q15 20 25 15 L70 8 Q80 5 100 5 Z" fill="#FFFFFF" opacity="0.95" stroke="#FFFFFF" stroke-width="1"/>
+  <!-- Shield interior (blue area) -->
+  <path d="M100 8 Q115 8 125 10 L170 16 Q178 20 178 30 L178 50 Q178 60 170 64 L125 70 Q115 72 100 72 Q85 72 75 70 L30 64 Q22 60 22 50 L22 30 Q22 20 30 16 L75 10 Q85 8 100 8 Z" fill="#003DA5" opacity="0.9"/>
+  <!-- WB Letters in shield -->
+  <text x="100" y="42" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#FFD700" text-anchor="middle" letter-spacing="2">WB</text>
+  <!-- WARNER BROS. Text below -->
+  <text x="100" y="65" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#003DA5" text-anchor="middle" letter-spacing="1" opacity="0.9">WARNER BROS.</text>
 </svg>
