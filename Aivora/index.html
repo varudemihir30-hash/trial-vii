@@ -1172,14 +1172,19 @@
                 
                 console.log('✓ All checks passed, initializing Galaxy...');
                 window.galaxyInstance = new Galaxy(galaxyContainer, {
-                    mouseRepulsion: true,
                     mouseInteraction: true,
-                    density: 1.5,
-                    glowIntensity: 0.5,
-                    saturation: 0.8,
-                    hueShift: 240,
-                    transparent: true,
-                    speed: 1.0
+                    mouseRepulsion: true,
+                    density: 1,
+                    glowIntensity: 0.3,
+                    saturation: 1,
+                    hueShift: 70,
+                    twinkleIntensity: 0.5,
+                    rotationSpeed: 0.1,
+                    repulsionStrength: 2,
+                    autoCenterRepulsion: 1,
+                    starSpeed: 0.5,
+                    speed: 0.8,
+                    transparent: true
                 });
                 console.log('✓ Galaxy initialized successfully', window.galaxyInstance);
                 
