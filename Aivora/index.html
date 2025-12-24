@@ -25,6 +25,32 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Galaxy Styles -->
+    <style>
+        .galaxy-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .galaxy-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .hero.hero-full {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body class="ai-agency">
@@ -332,7 +358,10 @@
     <main>
        <!-- hero start -->
 <section class="hero hero-style pos-rel hero-full">
-    <div class="container">
+    <!-- Galaxy Background -->
+    <div id="galaxy-container" class="galaxy-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;"></div>
+    
+    <div class="container" style="position: relative; z-index: 1;">
         <div class="row align-items-center">
             <div class="col-lg-9 col-md-9">
                 <div class="hero-content">
@@ -951,8 +980,74 @@
 <script src="assets/js/lenis.js"></script>
 <script src="assets/js/magiccursor.js"></script>
 
+<!-- OGL Library for Galaxy -->
+<script src="https://cdn.jsdelivr.net/npm/ogl@0.0.79/dist/index.umd.js"></script>
+
+<!-- Galaxy Component -->
+<script src="assets/js/galaxy.js"></script>
+
 <!-- Main custom script -->
 <script src="assets/js/main.js"></script>
+
+<!-- Initialize Galaxy -->
+<script>
+    (function() {
+        let initAttempts = 0;
+        const maxAttempts = 50; // 5 seconds max wait
+        
+        function initGalaxy() {
+            initAttempts++;
+            if (initAttempts > maxAttempts) {
+                console.warn('Galaxy initialization timeout. OGL or Galaxy class may not be loaded.');
+                return;
+            }
+            
+            const galaxyContainer = document.getElementById('galaxy-container');
+            if (!galaxyContainer) {
+                setTimeout(initGalaxy, 100);
+                return;
+            }
+            
+            // Check for OGL (handle different export formats)
+            const OGL_NS = window.OGL || window.ogl;
+            if (typeof OGL_NS === 'undefined') {
+                setTimeout(initGalaxy, 100);
+                return;
+            }
+            
+            // Wait for Galaxy class to be available
+            if (typeof Galaxy === 'undefined') {
+                setTimeout(initGalaxy, 100);
+                return;
+            }
+            
+            // Initialize Galaxy with custom settings
+            try {
+                window.galaxyInstance = new Galaxy(galaxyContainer, {
+                    mouseRepulsion: true,
+                    mouseInteraction: true,
+                    density: 1.5,
+                    glowIntensity: 0.5,
+                    saturation: 0.8,
+                    hueShift: 240,
+                    transparent: true,
+                    speed: 1.0
+                });
+                console.log('Galaxy initialized successfully');
+            } catch (error) {
+                console.error('Error initializing Galaxy:', error);
+            }
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initGalaxy, 300);
+            });
+        } else {
+            setTimeout(initGalaxy, 500);
+        }
+    })();
+</script>
 
 <!-- Team Image Reveal Initialization -->
 <script>

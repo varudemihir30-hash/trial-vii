@@ -383,18 +383,18 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 mt-20">
                                     <div class="xb-input-field xb-select-file">
-                                        <input type="file" required>
+                                        <input id="file-attachment" type="file" name="file" accept="*/*">
                                         <img src="assets/img/icon/upload-icon.svg" alt="icon">
-                                        <span>Attach file...</span>
+                                        <span>Attach file (optional)...</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 mt-20">
                                     <div class="xb-input-field xb-select-field">
-                                        <select class="nice-select">
-                                            <option value="1">Select Service*</option>
-                                            <option value="2">AI - marketing</option>
-                                            <option value="3">AI consulting</option>
-                                            <option value="4">AI chatbot virtual</option>
+                                        <select id="service-select" class="nice-select" required>
+                                            <option value="">Select Service*</option>
+                                            <option value="AI - marketing">AI - marketing</option>
+                                            <option value="AI consulting">AI consulting</option>
+                                            <option value="AI chatbot virtual">AI chatbot virtual</option>
                                         </select>
                                         <img src="assets/img/icon/list-icon.svg" alt="icon">
                                     </div>
@@ -609,6 +609,9 @@
 <!-- Main custom script -->
 <script src="assets/js/main.js"></script>
 
+<!-- Contact Form Google Sheets Integration Script -->
+<script src="assets/js/contact-form-handler.js"></script>
+
 <!-- Contact Form Success Modal Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -622,10 +625,51 @@
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Show the success modal
-                if (successModal) {
-                    successModal.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                // Get form data
+                const formData = {
+                    name: document.getElementById('author-name').value.trim(),
+                    email: document.getElementById('author-email').value.trim(),
+                    phone: document.getElementById('author-phone').value.trim(),
+                    service: document.getElementById('service-select').value,
+                    message: document.getElementById('massage').value.trim(),
+                    file: document.getElementById('file-attachment').files[0] ? document.getElementById('file-attachment').files[0].name : 'No file'
+                };
+
+                // Get submit button
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Disable button and show loading
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="text">Sending...</span>';
+
+                // Send to Google Sheets
+                if (typeof submitToGoogleSheets === 'function') {
+                    submitToGoogleSheets(formData)
+                        .then(() => {
+                            // Show success modal
+                            if (successModal) {
+                                successModal.classList.add('active');
+                                document.body.style.overflow = 'hidden';
+                            }
+                            // Reset form
+                            contactForm.reset();
+                        })
+                        .catch((error) => {
+                            alert('Sorry, there was an error sending your message. Please try again later.');
+                            console.error('Form submission error:', error);
+                        })
+                        .finally(() => {
+                            // Re-enable button
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalText;
+                        });
+                } else {
+                    // Fallback if script not loaded
+                    console.error('Google Sheets handler not loaded');
+                    alert('Form handler not loaded. Please check your configuration.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
                 }
             });
         }
