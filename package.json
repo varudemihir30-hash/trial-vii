@@ -12,6 +12,8 @@
     "agency"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "shadcn": "^3.6.2"
+  }
 }
-

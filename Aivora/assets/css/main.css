@@ -6376,7 +6376,7 @@ Drop Down menu end
 
 .xb-service-item {
   flex: 1;
-  height: 920px;
+  width: 100%;
   overflow: hidden;
   position: relative;
   transition: all 0.6s ease;
@@ -6384,20 +6384,10 @@ Drop Down menu end
   transform-origin: center;
   box-shadow: 0 4px 24px -1px rgba(28, 9, 61, 0.2);
   background: linear-gradient(209deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%); }
-  @media only screen and (min-width: 1200px) and (max-width: 1500px) {
-    .xb-service-item {
-      height: 800px; } }
-  @media (max-width: 1199px) {
-    .xb-service-item {
-      height: 670px; } }
   @media (max-width: 767px) {
     .xb-service-item {
-      height: 635px;
       width: 100%;
       flex: unset; } }
-  @media only screen and (min-width: 576px) and (max-width: 767px) {
-    .xb-service-item {
-      height: 810px; } }
   .xb-service-item::before {
     position: absolute;
     content: '';
@@ -6482,7 +6472,8 @@ Drop Down menu end
     visibility: visible;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 60px;
     width: 100%;
     height: 100%;
     top: 0;
@@ -6495,7 +6486,7 @@ Drop Down menu end
     .xb-service-item .xb-item--head-item .xb-item--title {
       font-size: 24px;
       color: #fff;
-      text-align: center;
+      text-align: left;
       margin: 0; }
       .xb-service-item .xb-item--head-item .xb-item--title a {
         color: #fff; }
@@ -6512,6 +6503,8 @@ Drop Down menu end
     display: inline-block;
     opacity: 0;
     visibility: hidden;
+    font-size: 20px;
+    line-height: 1.5;
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
@@ -6571,10 +6564,13 @@ Drop Down menu end
       margin-bottom: 80px; } }
 
 .xb-service-wrap {
-  display: flex; }
+  display: flex;
+  flex-direction: column;
+  height: 600px; }
   @media (max-width: 767px) {
     .xb-service-wrap {
-      flex-wrap: wrap; } }
+      flex-wrap: wrap;
+      height: auto; } }
 
 .service-vertical-text {
   transition: all 0.3s ease;
@@ -6582,15 +6578,15 @@ Drop Down menu end
   visibility: hidden;
   z-index: 2;
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 40%;
-  height: 100%;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding-right: 60px; }
+  align-items: center; }
   @media (max-width: 767px) {
     .service-vertical-text {
       display: none; } }
@@ -6607,23 +6603,22 @@ Drop Down menu end
     white-space: nowrap;
     text-align: center;
     align-items: center;
-    transform: rotate(90deg);
+    transform: rotate(0deg);
     justify-content: center;
     transform-origin: center;
     color: #fff;
-    font-size: 48px;
+    font-size: 80px;
     font-weight: 700;
     z-index: 3;
-    margin-bottom: 80px;
+    margin-bottom: 0;
     left: auto;
     top: auto; }
     @media only screen and (min-width: 1200px) and (max-width: 1500px) {
       .service-vertical-text .xb-item--title {
-        font-size: 40px; } }
+        font-size: 70px; } }
     @media (max-width: 1199px) {
       .service-vertical-text .xb-item--title {
-        font-size: 36px;
-        margin-bottom: 60px; } }
+        font-size: 60px; } }
   .service-vertical-text .xb-item--desc-vertical {
     position: relative;
     width: 300px;

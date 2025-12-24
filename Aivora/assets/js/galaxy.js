@@ -44,10 +44,47 @@ class Galaxy {
       return;
     }
 
-    // Check if OGL is available (handle different export formats)
-    const OGL_NS = window.OGL || window.ogl;
-    if (typeof OGL_NS === 'undefined') {
+    // Check if OGL is available (handle ES module default export)
+    let OGL_NS = window.OGL;
+    
+    // ES modules might export as default
+    if (OGL_NS && OGL_NS.default) {
+      OGL_NS = OGL_NS.default;
+      window.OGL = OGL_NS; // Update reference
+    }
+    
+    // If still not found, try to find it
+    if (!OGL_NS) {
+      // Check common variations
+      OGL_NS = window.ogl || window.OGL_NS;
+      
+      // Search window for OGL-like objects
+      if (!OGL_NS) {
+        for (let key in window) {
+          if (key.toLowerCase().includes('ogl') && 
+              typeof window[key] === 'object' && 
+              window[key] !== null) {
+            // Check if it has Renderer (might be default export)
+            let candidate = window[key];
+            if (candidate.default && candidate.default.Renderer) {
+              OGL_NS = candidate.default;
+            } else if (candidate.Renderer) {
+              OGL_NS = candidate;
+            }
+            
+            if (OGL_NS && OGL_NS.Renderer) {
+              window.OGL = OGL_NS; // Cache it
+              break;
+            }
+          }
+        }
+      }
+    }
+    
+    if (!OGL_NS || typeof OGL_NS.Renderer === 'undefined') {
       console.error('Galaxy: OGL library not loaded. Please include OGL from CDN.');
+      console.error('window.OGL:', window.OGL);
+      console.error('Available window properties:', Object.keys(window).filter(k => k.toLowerCase().includes('ogl')));
       return;
     }
 
@@ -89,8 +126,11 @@ class Galaxy {
     canvas.style.position = 'absolute';
     canvas.style.top = '0';
     canvas.style.left = '0';
+    canvas.style.opacity = '1';
+    canvas.style.visibility = 'visible';
+    canvas.style.zIndex = '0';
     
-    this.container.appendChild(canvas);
+    // Make sure container is properly positioned
     this.container.style.position = 'absolute';
     this.container.style.top = '0';
     this.container.style.left = '0';
@@ -98,12 +138,28 @@ class Galaxy {
     this.container.style.height = '100%';
     this.container.style.zIndex = '0';
     this.container.style.pointerEvents = 'none';
+    this.container.style.background = 'transparent';
+    
+    this.container.appendChild(canvas);
+    
+    // Force a test render to verify it works
+    setTimeout(() => {
+      if (this.renderer && this.mesh) {
+        // Fill canvas with a test color to verify it's visible
+        const testGl = this.renderer.gl;
+        testGl.clearColor(0.1, 0.0, 0.2, 0.3); // Dark purple tint
+        testGl.clear(testGl.COLOR_BUFFER_BIT);
+        this.renderer.render({ scene: this.mesh });
+        console.log('Galaxy: Test render completed');
+      }
+    }, 100);
     
     console.log('Galaxy: Canvas added to container', {
       containerWidth: this.container.offsetWidth,
       containerHeight: this.container.offsetHeight,
       canvasWidth: canvas.width,
-      canvasHeight: canvas.height
+      canvasHeight: canvas.height,
+      canvasInDOM: document.body.contains(canvas)
     });
 
     // Resize handler
