@@ -39,21 +39,39 @@ class Galaxy {
   }
 
   init() {
-    if (!this.container) return;
+    if (!this.container) {
+      console.error('Galaxy: Container not found');
+      return;
+    }
 
     // Check if OGL is available (handle different export formats)
     const OGL_NS = window.OGL || window.ogl;
     if (typeof OGL_NS === 'undefined') {
-      console.error('OGL library not loaded. Please include OGL from CDN.');
+      console.error('Galaxy: OGL library not loaded. Please include OGL from CDN.');
       return;
     }
 
+    console.log('Galaxy: Initializing with OGL', OGL_NS);
+
     // Create renderer
-    this.renderer = new OGL_NS.Renderer({
-      alpha: this.options.transparent,
-      premultipliedAlpha: false
-    });
+    try {
+      this.renderer = new OGL_NS.Renderer({
+        alpha: this.options.transparent,
+        premultipliedAlpha: false
+      });
+    } catch (error) {
+      console.error('Galaxy: Failed to create renderer', error);
+      return;
+    }
+    
     const gl = this.renderer.gl;
+    
+    if (!gl) {
+      console.error('Galaxy: WebGL context not available');
+      return;
+    }
+    
+    console.log('Galaxy: Renderer created, WebGL context:', gl);
 
     if (this.options.transparent) {
       gl.enable(gl.BLEND);
@@ -64,7 +82,15 @@ class Galaxy {
     }
 
     // Setup canvas
-    this.container.appendChild(this.renderer.gl.canvas);
+    const canvas = this.renderer.gl.canvas;
+    canvas.style.display = 'block';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.position = 'absolute';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    
+    this.container.appendChild(canvas);
     this.container.style.position = 'absolute';
     this.container.style.top = '0';
     this.container.style.left = '0';
@@ -72,10 +98,18 @@ class Galaxy {
     this.container.style.height = '100%';
     this.container.style.zIndex = '0';
     this.container.style.pointerEvents = 'none';
+    
+    console.log('Galaxy: Canvas added to container', {
+      containerWidth: this.container.offsetWidth,
+      containerHeight: this.container.offsetHeight,
+      canvasWidth: canvas.width,
+      canvasHeight: canvas.height
+    });
 
     // Resize handler
+    this.resizeHandler = () => this.resize();
     this.resize();
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('resize', this.resizeHandler);
 
     // Create geometry and program
     const geometry = new OGL_NS.Triangle(gl);
@@ -112,19 +146,41 @@ class Galaxy {
 
     // Mouse handlers
     if (this.options.mouseInteraction) {
-      this.container.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-      this.container.addEventListener('mouseleave', () => this.handleMouseLeave());
+      this.handleMouseMove = this.handleMouseMove.bind(this);
+      this.handleMouseLeave = this.handleMouseLeave.bind(this);
+      this.container.addEventListener('mousemove', this.handleMouseMove);
+      this.container.addEventListener('mouseleave', this.handleMouseLeave);
       this.container.style.pointerEvents = 'auto';
     }
 
     // Start animation
+    console.log('Galaxy: Starting animation loop');
     this.animate();
+    
+    // Force initial render
+    setTimeout(() => {
+      if (this.renderer && this.mesh) {
+        this.renderer.render({ scene: this.mesh });
+        console.log('Galaxy: Initial render complete');
+      }
+    }, 100);
   }
 
   resize() {
     if (!this.renderer || !this.container) return;
+    
+    // Get container dimensions
+    const width = this.container.offsetWidth || window.innerWidth;
+    const height = this.container.offsetHeight || window.innerHeight;
+    
+    if (width === 0 || height === 0) {
+      console.warn('Galaxy: Container has zero dimensions', { width, height });
+      return;
+    }
+    
     const scale = 1;
-    this.renderer.setSize(this.container.offsetWidth * scale, this.container.offsetHeight * scale);
+    this.renderer.setSize(width * scale, height * scale);
+    
     if (this.program) {
       const gl = this.renderer.gl;
       if (this.program && this.program.uniforms && this.program.uniforms.uResolution) {
@@ -138,6 +194,8 @@ class Galaxy {
         }
       }
     }
+    
+    console.log('Galaxy: Resized', { width, height, canvasWidth: this.renderer.gl.canvas.width, canvasHeight: this.renderer.gl.canvas.height });
   }
 
   handleMouseMove(e) {
@@ -177,12 +235,25 @@ class Galaxy {
   destroy() {
     if (this.animateId) {
       cancelAnimationFrame(this.animateId);
+      this.animateId = null;
     }
-    window.removeEventListener('resize', () => this.resize());
-    if (this.container && this.renderer) {
-      this.container.removeChild(this.renderer.gl.canvas);
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler);
+    }
+    if (this.options.mouseInteraction) {
+      this.container.removeEventListener('mousemove', this.handleMouseMove);
+      this.container.removeEventListener('mouseleave', this.handleMouseLeave);
+    }
+    if (this.container && this.renderer && this.renderer.gl && this.renderer.gl.canvas) {
+      try {
+        this.container.removeChild(this.renderer.gl.canvas);
+      } catch (e) {
+        // Canvas might already be removed
+      }
       const gl = this.renderer.gl;
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
+      if (gl.getExtension('WEBGL_lose_context')) {
+        gl.getExtension('WEBGL_lose_context').loseContext();
+      }
     }
   }
 
