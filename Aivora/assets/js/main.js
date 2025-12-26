@@ -538,7 +538,7 @@
 	= marquee
 	-------------------------------------------*/
 	$('.marquee-left').marquee({
-		duration: 500,
+		duration: 30000,
 		gap: 0,
 		delayBeforeStart: 0,
 		direction: 'left',
@@ -547,7 +547,7 @@
 		startVisible: true,
 	});	
 	$('.marquee-right').marquee({
-		duration: 500,
+		duration: 30000,
 		gap: 0,
 		delayBeforeStart: 0,
 		direction: 'right',
@@ -888,7 +888,79 @@
 
 
 
-
+	/*------------------------------------------
+	= Mega Menu Positioning
+	-------------------------------------------*/
+	$(document).ready(function() {
+		// Don't initialize mega menu on service pages
+		if ($('body').hasClass('service-page')) {
+			return;
+		}
+		
+		function positionMegaMenu() {
+			$('.main-menu > ul > li.megamenu').each(function() {
+				var $menuItem = $(this);
+				var $submenu = $menuItem.find('.submenu');
+				var $megaWrapper = $submenu.find('.mega_menu_wrapper');
+				
+				if ($megaWrapper.length) {
+					$menuItem.on('mouseenter', function() {
+						var menuItemOffset = $menuItem.offset();
+						var menuItemHeight = $menuItem.outerHeight();
+						var headerHeight = $('.xb-header').outerHeight() || 0;
+						var scrollTop = $(window).scrollTop();
+						
+						// Calculate top position
+						var topPosition = menuItemOffset.top + menuItemHeight - scrollTop;
+						
+						// Position the mega menu wrapper
+						$megaWrapper.css({
+							'top': topPosition + 'px',
+							'left': '0',
+							'right': '0',
+							'margin': '0 auto'
+						});
+						
+						// Show the submenu
+						$submenu.css({
+							'opacity': '1',
+							'visibility': 'visible'
+						});
+					});
+					
+					$menuItem.on('mouseleave', function() {
+						$submenu.css({
+							'opacity': '0',
+							'visibility': 'hidden'
+						});
+					});
+				}
+			});
+		}
+		
+		positionMegaMenu();
+		
+		// Reposition on scroll and resize
+		$(window).on('scroll resize', function() {
+			$('.main-menu > ul > li.megamenu').each(function() {
+				var $menuItem = $(this);
+				var $submenu = $menuItem.find('.submenu');
+				var $megaWrapper = $submenu.find('.mega_menu_wrapper');
+				
+				if ($megaWrapper.length && $submenu.is(':visible')) {
+					var menuItemOffset = $menuItem.offset();
+					var menuItemHeight = $menuItem.outerHeight();
+					var scrollTop = $(window).scrollTop();
+					
+					var topPosition = menuItemOffset.top + menuItemHeight - scrollTop;
+					
+					$megaWrapper.css({
+						'top': topPosition + 'px'
+					});
+				}
+			});
+		});
+	});
 
 })(jQuery);
 

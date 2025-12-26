@@ -21,9 +21,17 @@
 		width: 46px;
 		overflow: hidden;
 		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		@include transition(.3s);
 		@include border-radius(50px);
 		background: var(--color-secondary);
+		i {
+			color: white;
+			font-size: 18px;
+			@include transition(.3s);
+		}
 		svg {
 			position: absolute;
 			left: 9px;

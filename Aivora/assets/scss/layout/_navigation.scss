@@ -20,7 +20,7 @@
                 display: inline-block;
                 @include transition(.3s);
                 text-transform: capitalize;
-                color: var(--color-white);
+                color: #000000 !important;
                 font-family: var(--font-body);
             }
             &.menu-item-has-children {
@@ -28,7 +28,7 @@
                     span::after {
                         content: '\f107';
                         font-weight: 500;
-                        color: #fff;
+                        color: #000000 !important;
                         margin: 1px 0 0 3px;
                         @include transition(.3s);
                         font-family: "Font Awesome 6 Pro";
@@ -39,12 +39,17 @@
                     visibility: visible;
                     top: calc(100% + 0px);
                 }
+                &.megamenu:hover > .submenu {
+                    opacity: 1;
+                    visibility: visible;
+                    top: calc(100% + 0px);
+                }
             }
             &:hover > a,
             &.active > a {
-                color: var(--color-white);
+                color: #000000 !important;
                 & > span::after {
-                    color: var(--color-white);
+                    color: #000000 !important;
                 }
             }
             .submenu {
@@ -153,6 +158,8 @@
 	position: fixed;
   padding: 0 15px;
 	max-width: 1650px;
+	top: auto;
+	z-index: 9999;
 }
 .mega_menu_wrapper_inner {
     z-index: 2;
@@ -181,6 +188,13 @@
     background: transparent;
     box-shadow: none !important;
     border: none;
+    position: absolute;
+    top: calc(100% + 0px);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100%;
+    z-index: 9999;
   }
   .stricked-menu .main-menu ul li.megamenu .submenu {
     position: fixed;

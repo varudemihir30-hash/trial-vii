@@ -45,6 +45,9 @@ logs/
 *.temp
 .cache/
 
+# Archive files
+*.zip
+
 # Vercel
 .vercel
 

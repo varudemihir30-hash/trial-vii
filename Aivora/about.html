@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Vertex Tech Io - AI Agency & Technology HTML Template</title>
+    <title>Vertex Tech Io </title>
 
     <link rel="shortcut icon" href="assets/img/favicon.svg" type="images/x-icon">
 
@@ -25,6 +25,219 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Liquid Glass Header Effect -->
+    <style>
+        /* Liquid Glass Effect for Header */
+        .header-area .header__wrap,
+        #xb-header-area .header__wrap,
+        .header-style--one .header__wrap,
+        .header-style--two .header__wrap,
+        .header-style--three .header__wrap,
+        .xb-header-area-sticky .header__wrap,
+        .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            background-image: none !important;
+        }
+        .xb-header-area-sticky,
+        .xb-header-area-sticky.xb-header-fixed {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        }
+        /* Make menu text white/light for visibility on glass header */
+        .main-menu > ul > li > a,
+        .main-menu > ul > li > a span,
+        .main-menu > ul > li.menu-item-has-children > a span::after,
+        .main-menu > ul > li:hover > a,
+        .main-menu > ul > li.active > a,
+        .main-menu > ul > li:hover > a > span::after,
+        .main-menu > ul > li.active > a > span::after {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+        /* Company name styling - same font as team names */
+        .xb-header-logo .company-name {
+            font-family: var(--font-heading) !important;
+            font-weight: 600;
+            font-size: 26px;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+            margin-left: 0;
+            margin-top: 4px;
+            margin-bottom: 0;
+            align-self: center;
+            padding-bottom: 0;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        /* Logo divider line */
+        .xb-header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 100%;
+            align-self: stretch;
+        }
+        .xb-header-logo .logo-divider {
+            display: inline-block;
+            width: 2px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.6);
+            flex-shrink: 0;
+            border-radius: 1px;
+            align-self: stretch;
+        }
+        /* Make logo white for glass background */
+        .xb-header-logo img,
+        .xb-logo-mobile img {
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+            -webkit-filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+        }
+        @media (max-width: 991px) {
+            .xb-header-logo .company-name {
+                font-size: 22px;
+                margin-left: 0;
+                margin-top: 3px;
+            }
+            .xb-header-logo {
+                gap: 10px;
+            }
+            .xb-header-logo .logo-divider {
+                height: 65px;
+                width: 2px;
+            }
+        }
+        @media (max-width: 767px) {
+            .xb-header-logo .company-name {
+                font-size: 20px;
+                margin-left: 0;
+                margin-top: 2px;
+            }
+            .xb-header-logo {
+                gap: 8px;
+            }
+            .xb-header-logo .logo-divider {
+                height: 55px;
+                width: 2px;
+            }
+        }
+        /* Increase header size */
+        .header-area .header__wrap,
+        #xb-header-area .header__wrap,
+        .header-style--one .header__wrap {
+            padding: 15px 25px !important;
+            min-height: 70px !important;
+        }
+        .xb-header-area-sticky,
+        .xb-header-area-sticky.xb-header-fixed {
+            padding: 35px 0 !important;
+        }
+        .xb-header-area-sticky .header__wrap,
+        .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            padding: 15px 25px !important;
+            min-height: 70px !important;
+        }
+        @media (max-width: 991px) {
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap {
+                padding: 12px 22px !important;
+                min-height: 65px !important;
+            }
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                padding: 12px 22px !important;
+                min-height: 65px !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap {
+                padding: 10px 18px !important;
+                min-height: 55px !important;
+            }
+            .xb-header-area-sticky {
+                padding: 22px 0 !important;
+            }
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                padding: 10px 18px !important;
+                min-height: 55px !important;
+            }
+        }
+        /* Mobile menu button styling for glass effect */
+        .header-bar-mobile .xb-nav-mobile,
+        .xb-nav-mobile {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+        .header-bar-mobile .xb-nav-mobile i,
+        .xb-nav-mobile i {
+            color: #ffffff !important;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+        }
+        /* Submenu styling for glass effect */
+        .main-menu .submenu,
+        .main-menu .mega_menu_wrapper {
+            background: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+        }
+        /* Hover effects for glass header */
+        .main-menu > ul > li:hover > a {
+            color: #ffffff !important;
+            opacity: 0.9;
+        }
+        /* Disable Services dropdown menu hover effect */
+        .main-menu > ul > li.megamenu:hover > .submenu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+        .main-menu > ul > li.megamenu .submenu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+        /* Make feature cards equal height */
+        .about-page .row.mt-40 {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .about-page .row.mt-40 > [class*="col-"] {
+            display: flex;
+        }
+        .about-page .xb-feature-item {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .about-page .xb-feature-item .xb-item--inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex-grow: 1;
+        }
+        .about-page .xb-feature-item .xb-item--holder {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .about-page .xb-feature-item .xb-item--content {
+            flex-grow: 1;
+        }
+    </style>
 </head>
 
 <body class="about-page inner-page">
@@ -44,7 +257,7 @@
             <div class="loader-line"></div>
         </div>
         <div class="loader-logo">
-            <img src="assets/img/logo/logo.svg" alt="Site Logo – Vertex Tech Io – AI Agency & Technology HTML Template">
+            <img src="assets/img/logo/vertex-logo.svg" alt="Site Logo – Vertex Tech Io – ">
         </div>
     </div>
 </div>
@@ -58,7 +271,9 @@
             <div class="container mxw-1650">
                 <div class="header__wrap ul_li_between">
                     <div class="xb-header-logo">
-                        <a href="index.html" class="logo1"><img src="assets/img/logo/logo.svg" alt=""></a>
+                        <a href="index.html" class="logo1"><img src="assets/img/logo/vertex-logo.svg" alt=""></a>
+                        <span class="logo-divider"></span>
+                        <span class="company-name">Vertex Tech io</span>
                     </div>
                     <div class="main-menu__wrap  navbar navbar-expand-lg p-0">
                         <nav class="main-menu collapse navbar-collapse">
@@ -69,7 +284,7 @@
                                 </li>
                                 <li class="active"><a href="about.html"><span>About Us</span></a></li>
                                 <li class="menu-item-has-children megamenu">
-                                    <a href="#!"><span>Services</span></a>
+                                    <a href="service.html"><span>Services</span></a>
                                     <ul class="submenu">
                                         <li>
                                             <div class="mega_menu_wrapper">
@@ -250,13 +465,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="blog.html"><span>Blog</span></a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html"><span>Blog</span></a></li>
-                                        <li><a href="blog-details.html"><span>Blog Details</span></a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="contact.html"><span>Contact Us</span></a></li>
                             </ul>
                         </nav>
@@ -272,7 +480,7 @@
                         <div class="xb-header-menu-scroll">
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
                             <div class="xb-logo-mobile xb-hide-xl">
-                            <a href="index.html" rel="home"><img src="assets/img/logo/logo.svg" alt=""></a></div>
+                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-logo.svg" alt=""></a></div>
                             <div class="xb-header-mobile-search xb-hide-xl">
                                 <form role="search" action="#">
                                     <input type="text" placeholder="Search..." name="s" class="search-field">
@@ -283,11 +491,7 @@
                                 <ul class="xb-menu-primary clearfix">
                                     <li class="menu-item menu-item-has-children">
                                         <a href="#"><span>Home</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="index.html"><span>Ai Agency</span></a></li>
-                                            <li><a href="ai-marketing.html"><span>Ai Marketing</span></a></li>
-                                            <li><a href="ai-chatbot.html"><span>Ai Chatbot</span></a></li>
-                                        </ul>
+                                        
                                     </li>
                                     <li><a href="about.html"><span>about us</span></a></li>
                                     <li class="menu-item menu-item-has-children">
@@ -301,17 +505,10 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children">
-                                        <a href="#!"><span>services</span></a>
+                                        <a href="service.html"><span>services</span></a>
                                         <ul class="sub-menu">
                                             <li><a href="service.html"><span>Services</span></a></li>
                                             <li><a href="service-details.html"><span>Service Details</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="blog.html"><span>Blog</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html"><span>Blog</span></a></li>
-                                            <li><a href="blog-details.html"><span>Blog Details</span></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html"><span>Contact Us</span></a></li>
@@ -345,53 +542,13 @@
         <!-- hero end -->
 
         <!-- about start -->
-        <section class="about pos-rel pb-140">
-            <div class="container">
-                <div class="about-top-image ul_li_between align-items-start">
-                    <div class="img-hove-effect">
-                        <div class="xb-img">
-                            <a href="#!"><img src="assets/img/about/img05.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img05.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img05.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img05.jpg" alt="image"></a>
-                        </div>
-                    </div>
-                    <div class="img-hove-effect">
-                        <div class="xb-img">
-                            <a href="#!"><img src="assets/img/about/img06.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img06.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img06.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img06.jpg" alt="image"></a>
-                        </div>
-                    </div>
-                    <div class="xb-video">
-                        <video loop="" muted="" playsinline="" autoplay="" poster="assets/img/about/video-img.png">
-                            <source src="https://www.pexels.com/download/video/18069701/">
-                        </video>
-                    </div>
-                    <div class="img-hove-effect">
-                        <div class="xb-img">
-                            <a href="#!"><img src="assets/img/about/img07.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img07.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img07.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img07.jpg" alt="image"></a>
-                        </div>
-                    </div>
-                    <div class="img-hove-effect">
-                        <div class="xb-img">
-                            <a href="#!"><img src="assets/img/about/img08.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img08.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img08.jpg" alt="image"></a>
-                            <a href="#!"><img src="assets/img/about/img08.jpg" alt="image"></a>
-                        </div>
-                    </div>
-                </div>
+        
                 <div class="sec-title sec-title-center about-sec-title about-sec-title-two mt-45">
-                    <span class="sub-title mb-10">Who We are?</span>
+                    <span class="sub-title mb-10">Who We Are?</span>
                     <h2 class="title">
-                        We helping<span><img src="assets/img/icon/original-66948a0d81d.gif" alt="image"></span> grow businesses and<span><img src="assets/img/icon/0deec720000b2066289b.gif" alt="image"></span>scale with smart, <span><img src="assets/img/icon/b10c3e43e836d32554bf.gif" alt="image"></span>  data-driven AI agency 
+                        Where career goals are supported with strategy and care. 
                     </h2>
-                    <p class="content">We help grow and scale your business by delivering smart, data-driven AI solutions tailored to your needs. Our technology optimizes operations, enhances decision-making, and uncovers new opportunities for growth.</p>
+                    <p class="content">We believe success comes from the right preparation and consistent support, which is why we work closely with candidates from the first step to final placement.</p>
                 </div>
                 <div class="row mt-40">
                     <div class="col-lg-4 col-md-6 mt-30">
@@ -399,8 +556,8 @@
                             <div class="xb-item--inner xb-border">
                                 <span class="xb-item--icon"><img src="assets/img/icon/feature-icon01.svg" alt="icon"></span>
                                 <div class="xb-item--holder">
-                                    <h2 class="xb-item--title">Smarter insights</h2>
-                                    <p class="xb-item--content">Make faster, data-driven decisions powered by real-time AI analysis and prediction.</p>
+                                    <h2 class="xb-item--title">Smarter Career Strategy</h2>
+                                    <p class="xb-item--content">Make informed career moves with structured guidance, market insights, and role‑specific preparation tailored to the U.S. job market.</p>
                                 </div>
                             </div>
                         </div>
@@ -410,8 +567,8 @@
                             <div class="xb-item--inner xb-border">
                                 <span class="xb-item--icon"><img src="assets/img/icon/feature-icon02.svg" alt="icon"></span>
                                 <div class="xb-item--holder">
-                                    <h2 class="xb-item--title">Integrated AI solutions</h2>
-                                    <p class="xb-item--content">No extra tools or plugins needed. Get built-in, scalable AI from day one.</p>
+                                    <h2 class="xb-item--title">Complete Profile Support</h2>
+                                    <p class="xb-item--content">From resumes and LinkedIn to job portal marketing, we build strong professional profiles that attract recruiters from day one</p>
                                 </div>
                             </div>
                         </div>
@@ -421,8 +578,9 @@
                             <div class="xb-item--inner xb-border">
                                 <span class="xb-item--icon"><img src="assets/img/icon/feature-icon03.svg" alt="icon"></span>
                                 <div class="xb-item--holder">
-                                    <h2 class="xb-item--title">End-to-end automation</h2>
-                                    <p class="xb-item--content">Eliminate bottlenecks with intelligent workflows that never leave you guessing.</p>
+                                    <h2 class="xb-item--title">End‑to‑End Job Assistance</h2>
+                                    <p class="xb-item--content">Eliminate uncertainty with continuous support—from interview preparation and updates to full‑time job placement.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -439,9 +597,6 @@
         <section class="brand pb-150">
             <div class="container">
                 <div class="sec-title sec-title-center brand-sec-title text-center mb-40">
-                    <p class="sub-title">
-                        World's Best <span>120 Companies</span> Work With Us
-                    </p>
                 </div>
             </div>
             <div class="brand-marquee ac-brand-marquee marquee-left">
@@ -499,7 +654,7 @@
                                     <div class="xb-feature-item xb-feature-item2">
                                         <div class="xb-item--inner xb-border">
                                             <span class="xb-item--icon"><img src="assets/img/icon/fea-small-icon01.svg" alt="icon"></span>
-                                            <h2 class="xb-item--title">Secure, ethical & <br> scalable AI</h2>
+                                            <h2 class="xb-item--title">Trusted & Transparent Support<br></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -507,7 +662,7 @@
                                     <div class="xb-feature-item xb-feature-item2 xb-border">
                                         <div class="xb-item--inner xb-border">
                                             <span class="xb-item--icon"><img src="assets/img/icon/fea-small-icon04.svg" alt="icon"></span>
-                                            <h2 class="xb-item--title">Expert team of AI <br> specialists</h2>
+                                            <h2 class="xb-item--title">Expert team of  Career Coaches<br></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -515,7 +670,7 @@
                                     <div class="xb-feature-item xb-feature-item2">
                                         <div class="xb-item--inner xb-border">
                                             <span class="xb-item--icon"><img src="assets/img/icon/fea-small-icon02.svg" alt="icon"></span>
-                                            <h2 class="xb-item--title">Custom-built <br> solutions that fit you</h2>
+                                            <h2 class="xb-item--title">Custom-built <br> career solutions for you</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -523,7 +678,7 @@
                                     <div class="xb-feature-item xb-feature-item2 xb-border">
                                         <div class="xb-item--inner xb-border">
                                             <span class="xb-item--icon"><img src="assets/img/icon/fea-small-icon06.svg" alt="icon"></span>
-                                            <h2 class="xb-item--title">Client-centered, <br> business-focused</h2>
+                                            <h2 class="xb-item--title">Client-Focused, <br>Customized Career Solutions</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -586,11 +741,9 @@
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
                         <div class="xb-item--icon">
-                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.46973 0C14.6996 0 18.9395 4.25357 18.9395 9.5C18.9394 14.7464 14.6996 19 9.46973 19C4.24002 18.9998 8.74258e-05 14.7463 0 9.5C0 4.25366 4.23997 0.000150177 9.46973 0ZM8.27441 10.1201L4.02344 15.0771H4.98438L8.70117 10.7422L11.6709 15.0771H14.9131L10.5039 8.64062L14.5586 3.91309H13.5977L10.0771 8.01758L7.26562 3.91309H4.02344L8.27441 10.1201ZM13.5977 14.3848H12.1221L5.33008 4.63867H6.80566L13.5977 14.3848Z" fill="#FFF" />
-                            </svg>
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
-                        <span class="xb-item--name">Twitter</span>
+                        <span class="xb-item--name">WhatsApp</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -603,7 +756,7 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://wa.me/917046067600" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
@@ -623,14 +776,14 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
                         <div class="xb-item--icon">
-                            <i class="fa-brands fa-square-youtube"></i>
+                            <i class="fa-brands fa-instagram"></i>
                         </div>
-                        <span class="xb-item--name">youtube</span>
+                        <span class="xb-item--name">Instagram</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -643,7 +796,7 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"></a>
                 </div>
             </div>
             <div class="xb-footer-bottom">

@@ -699,13 +699,14 @@
         }
     }
     
-    &:hover {
-        background: rgba(255, 255, 255, 0.08);
-    }
+    // Hover effects removed
+    // &:hover {
+    //     background: rgba(255, 255, 255, 0.08);
+    // }
     
-    &.service-step:hover {
-        transform: translateX(0) scale(1.01);
-    }
+    // &.service-step:hover {
+    //     transform: translateX(0) scale(1.01);
+    // }
 }
 
 @keyframes stepReveal {

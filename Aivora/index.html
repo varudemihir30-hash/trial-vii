@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Vertex Tech Io - AI Agency & Technology HTML Template</title>
+    <title>Vertex Tech IO </title>
 
     <link rel="shortcut icon" href="assets/img/favicon.svg" type="images/x-icon">
 
@@ -25,6 +25,634 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Liquid Glass Header Effect -->
+    <style>
+        /* Liquid Glass Effect for Header */
+        .header-area .header__wrap,
+        #xb-header-area .header__wrap,
+        .header-style--one .header__wrap,
+        .header-style--two .header__wrap,
+        .header-style--three .header__wrap,
+        .xb-header-area-sticky .header__wrap,
+        .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            background-image: none !important;
+        }
+        .xb-header-area-sticky,
+        .xb-header-area-sticky.xb-header-fixed {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        }
+        /* Make menu text white/light for visibility on glass header */
+        .main-menu > ul > li > a,
+        .main-menu > ul > li > a span,
+        .main-menu > ul > li.menu-item-has-children > a span::after,
+        .main-menu > ul > li:hover > a,
+        .main-menu > ul > li.active > a,
+        .main-menu > ul > li:hover > a > span::after,
+        .main-menu > ul > li.active > a > span::after {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+        /* Company name styling - same font as team names */
+        .xb-header-logo .company-name {
+            font-family: var(--font-heading) !important;
+            font-weight: 600;
+            font-size: 26px;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+            margin-left: 0;
+            margin-top: 4px;
+            margin-bottom: 0;
+            align-self: center;
+            padding-bottom: 0;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        /* Logo divider line */
+        .xb-header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 100%;
+            align-self: stretch;
+        }
+        .xb-header-logo .logo-divider {
+            display: inline-block;
+            width: 2px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.6);
+            flex-shrink: 0;
+            border-radius: 1px;
+            align-self: stretch;
+        }
+        /* Make logo white for glass background */
+        .xb-header-logo img,
+        .xb-logo-mobile img {
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+            -webkit-filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+        }
+        @media (max-width: 991px) {
+            .xb-header-logo .company-name {
+                font-size: 22px;
+                margin-left: 0;
+                margin-top: 3px;
+            }
+            .xb-header-logo {
+                gap: 10px;
+            }
+            .xb-header-logo .logo-divider {
+                height: 65px;
+                width: 2px;
+            }
+        }
+        @media (max-width: 767px) {
+            .xb-header-logo .company-name {
+                font-size: 20px;
+                margin-left: 0;
+                margin-top: 2px;
+            }
+            .xb-header-logo {
+                gap: 8px;
+            }
+            .xb-header-logo .logo-divider {
+                height: 55px;
+                width: 2px;
+            }
+        }
+        /* Increase header size */
+        .header-area .header__wrap,
+        #xb-header-area .header__wrap,
+        .header-style--one .header__wrap {
+            padding: 15px 25px !important;
+            min-height: 70px !important;
+        }
+        .xb-header-area-sticky,
+        .xb-header-area-sticky.xb-header-fixed {
+            padding: 35px 0 !important;
+        }
+        .xb-header-area-sticky .header__wrap,
+        .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            padding: 15px 25px !important;
+            min-height: 70px !important;
+        }
+        @media (max-width: 991px) {
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap {
+                padding: 12px 22px !important;
+                min-height: 65px !important;
+            }
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                padding: 12px 22px !important;
+                min-height: 65px !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap {
+                padding: 10px 18px !important;
+                min-height: 55px !important;
+            }
+            .xb-header-area-sticky {
+                padding: 22px 0 !important;
+            }
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                padding: 10px 18px !important;
+                min-height: 55px !important;
+            }
+        }
+        /* Mobile menu button styling for glass effect */
+        .header-bar-mobile .xb-nav-mobile,
+        .xb-nav-mobile {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+        .header-bar-mobile .xb-nav-mobile i,
+        .xb-nav-mobile i {
+            color: #ffffff !important;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+        }
+        /* Submenu styling for glass effect */
+        .main-menu .submenu,
+        .main-menu .mega_menu_wrapper {
+            background: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+        }
+        /* Hover effects for glass header */
+        .main-menu > ul > li:hover > a {
+            color: #ffffff !important;
+            opacity: 0.9;
+        }
+        /* Disable Services dropdown menu hover effect */
+        .main-menu > ul > li.megamenu:hover > .submenu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+        .main-menu > ul > li.megamenu .submenu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+        /* Service section alignment */
+        .service .sec-title {
+            text-align: left;
+        }
+        
+        /* CareerHub Section Styles */
+        .careerhub-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 4rem;
+            overflow: hidden;
+            background: #000000;
+        }
+        
+        .careerhub-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.12) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .careerhub-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .careerhub-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .careerhub-headline {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #F9FAFB;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-headline .highlight {
+            color: #3B82F6;
+            position: relative;
+        }
+        
+        .careerhub-subheadline {
+            font-size: 1.25rem;
+            color: #9CA3AF;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .careerhub-btn-primary {
+            background: #3B82F6;
+            border: none;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .careerhub-btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        
+        .careerhub-btn-secondary-link {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+            position: relative;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-btn-secondary-link:hover {
+            color: #2563EB;
+            text-decoration: none;
+        }
+        
+        .careerhub-btn-secondary-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #3B82F6;
+            opacity: 0.3;
+        }
+        
+        .careerhub-feature-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+        
+        .careerhub-feature-card {
+            background: #0A0A0A;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .careerhub-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3), 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        
+        .careerhub-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #60A5FA, #3B82F6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .careerhub-feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .careerhub-card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(96, 165, 250, 0.15) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .careerhub-feature-card:hover .careerhub-card-icon {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(96, 165, 250, 0.25) 100%);
+            transform: scale(1.05);
+        }
+        
+        .careerhub-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #F9FAFB;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-feature-card:hover .careerhub-card-title {
+            color: #3B82F6;
+        }
+        
+        .careerhub-card-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .careerhub-card-features li {
+            color: #9CA3AF;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+            padding-left: 1.5rem;
+            position: relative;
+            transition: color 0.2s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #3B82F6;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .careerhub-feature-card:hover .careerhub-card-features li {
+            color: #E5E7EB;
+        }
+        
+        .careerhub-stats-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #0A0A0A;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .careerhub-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .careerhub-stat-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(96, 165, 250, 0.15) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .careerhub-stat-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .careerhub-stat-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #F9FAFB;
+            line-height: 1.2;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-stat-label {
+            font-size: 0.875rem;
+            color: #9CA3AF;
+            font-weight: 500;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .careerhub-stat-divider {
+            width: 1px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.3);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .careerhub-feature-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .careerhub-feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .careerhub-feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .careerhub-feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        
+        .careerhub-stats-strip {
+            animation: fadeInUp 0.6s ease-out backwards;
+            animation-delay: 0.4s;
+        }
+        
+        @media (max-width: 1024px) {
+            .careerhub-headline {
+                font-size: 3rem;
+            }
+            
+            .careerhub-feature-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .careerhub-stats-strip {
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .careerhub-headline {
+                font-size: 2.25rem;
+            }
+            
+            .careerhub-subheadline {
+                font-size: 1.1rem;
+            }
+            
+            .careerhub-feature-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .careerhub-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .careerhub-btn-primary {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .careerhub-stats-strip {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .careerhub-stat-divider {
+                width: 100%;
+                height: 1px;
+            }
+            
+            .careerhub-stat-item {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .careerhub-headline {
+                font-size: 1.875rem;
+            }
+            
+            .careerhub-subheadline {
+                font-size: 1rem;
+            }
+            
+            .careerhub-feature-card {
+                padding: 1.5rem;
+            }
+            
+            .careerhub-card-title {
+                font-size: 1.125rem;
+            }
+            
+            .careerhub-card-features li {
+                font-size: 0.875rem;
+            }
+        }
+        .service .sec-title .row {
+            align-items: flex-end;
+        }
+        .service .sec-title .sub-title {
+            display: block;
+            margin-bottom: 15px;
+        }
+        .service .sec-title .title {
+            margin-bottom: 0;
+            text-align: left;
+        }
+        .service .xb-heading-btn {
+            margin-top: 0;
+        }
+        .service .sec-title .title.title-grouped {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .service .sec-title .title.title-grouped .line-group {
+            display: block;
+            line-height: 1.2;
+            margin-bottom: 0.3em;
+        }
+        .service .sec-title .title.title-grouped .line-group:last-child {
+            margin-bottom: 0;
+        }
+        @media (max-width: 991px) {
+            .service .sec-title .col-lg-6 {
+                margin-bottom: 30px;
+            }
+            .service .sec-title .col-lg-6.text-lg-end {
+                text-align: left !important;
+            }
+            .service .sec-title .title {
+                text-align: left;
+            }
+        }
+    </style>
     
     <!-- Galaxy Styles -->
     <style>
@@ -86,7 +714,7 @@
         <div class="loader-line"></div>
         </div>
         <div class="loader-logo">
-        <img src="assets/img/logo/logo.svg" alt="Site Logo – Vertex Tech Io – AI Agency & Technology HTML Template">
+        <img src="assets/img/logo/vertex-logo.svg" alt="Site Logo – Vertex Tech Io – AI Agency & Technology HTML Template">
         </div>
     </div>
 </div>
@@ -100,7 +728,9 @@
             <div class="container mxw-1650">
                 <div class="header__wrap ul_li_between">
                     <div class="xb-header-logo">
-                        <a href="index.html" class="logo1"><img src="assets/img/logo/logo.svg" alt=""></a>
+                        <a href="index.html" class="logo1"><img src="assets/img/logo/vertex-logo.svg" alt=""></a>
+                        <span class="logo-divider"></span>
+                        <span class="company-name">Vertex Tech io</span>
                     </div>
                     <div class="main-menu__wrap  navbar navbar-expand-lg p-0">
                         <nav class="main-menu collapse navbar-collapse">
@@ -111,7 +741,7 @@
                                 </li>
                                 <li class=""><a href="about.html"><span>About Us</span></a></li>
                                 <li class="menu-item-has-children megamenu">
-                                    <a href="#!"><span>Services</span></a>
+                                    <a href="service.html"><span>Services</span></a>
                                     <ul class="submenu">
                                         <li>
                                             <div class="mega_menu_wrapper">
@@ -292,13 +922,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="blog.html"><span>Blog</span></a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html"><span>Blog</span></a></li>
-                                        <li><a href="blog-details.html"><span>Blog Details</span></a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="contact.html"><span>Contact Us</span></a></li>
                             </ul>
                         </nav>
@@ -314,7 +937,7 @@
                         <div class="xb-header-menu-scroll">
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
                             <div class="xb-logo-mobile xb-hide-xl">
-                            <a href="index.html" rel="home"><img src="assets/img/logo/logo.svg" alt=""></a></div>
+                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-logo.svg" alt=""></a></div>
                             <div class="xb-header-mobile-search xb-hide-xl">
                                 <form role="search" action="#">
                                     <input type="text" placeholder="Search..." name="s" class="search-field">
@@ -343,17 +966,10 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children">
-                                        <a href="#!"><span>services</span></a>
+                                        <a href="service.html"><span>services</span></a>
                                         <ul class="sub-menu">
                                             <li><a href="service.html"><span>Services</span></a></li>
                                             <li><a href="service-details.html"><span>Service Details</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="blog.html"><span>Blog</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html"><span>Blog</span></a></li>
-                                            <li><a href="blog-details.html"><span>Blog Details</span></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html"><span>Contact Us</span></a></li>
@@ -372,6 +988,136 @@
         
     <!-- main area start -->
     <main>
+       <!-- CareerHub Section Start -->
+       <section class="careerhub-section">
+           <div class="careerhub-background"></div>
+           
+           <div class="careerhub-container">
+               <!-- Main Content -->
+               <div class="careerhub-content">
+                   <h1 class="careerhub-headline">
+                       Your Next Career Move Is Just <span class="highlight">One Click</span> Away
+                   </h1>
+                   <p class="careerhub-subheadline">
+                       We help you get placed with confidence through<br>
+                       resume building, LinkedIn optimization, and interview preparation.
+                   </p>
+                   
+                   <div class="careerhub-cta">
+                       <a href="tel:+917046067600" class="careerhub-btn-primary">Book A call now</a>
+                       <a href="#services" class="careerhub-btn-secondary-link">Explore Our Services</a>
+                   </div>
+               </div>
+
+               <!-- Feature Cards -->
+               <div class="careerhub-feature-cards">
+                   <!-- Card 1: Resume & Profile Support -->
+                   <div class="careerhub-feature-card">
+                       <div class="careerhub-card-icon">
+                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M14 2V8H20" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M16 13H8" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+                               <path d="M16 17H8" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+                               <path d="M10 9H9H8" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+                           </svg>
+                       </div>
+                       <h3 class="careerhub-card-title">Resume & Profile Support</h3>
+                       <ul class="careerhub-card-features">
+                           <li>ATS-Optimized Resume Building</li>
+                           <li>Industry-standard formatting</li>
+                           <li>Keyword optimization</li>
+                           <li>Recruiter-ready profiles</li>
+                       </ul>
+                   </div>
+
+                   <!-- Card 2: Interview Preparation -->
+                   <div class="careerhub-feature-card">
+                       <div class="careerhub-card-icon">
+                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                           </svg>
+                       </div>
+                       <h3 class="careerhub-card-title">Interview Preparation</h3>
+                       <ul class="careerhub-card-features">
+                           <li>Interview & Mock Sessions</li>
+                           <li>1-on-1 mock interviews</li>
+                           <li>Technical + HR rounds</li>
+                           <li>Personalized feedback</li>
+                       </ul>
+                   </div>
+
+                   <!-- Card 3: Placement Assistance -->
+                   <div class="careerhub-feature-card">
+                       <div class="careerhub-card-icon">
+                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                           </svg>
+                       </div>
+                       <h3 class="careerhub-card-title">Placement Assistance</h3>
+                       <ul class="careerhub-card-features">
+                           <li>Placement & Career Guidance</li>
+                           <li>Job matching support</li>
+                           <li>Hiring partner referrals</li>
+                           <li>Career roadmap planning</li>
+                       </ul>
+                   </div>
+               </div>
+
+               <!-- Stats Strip -->
+               <div class="careerhub-stats-strip">
+                   <div class="careerhub-stat-item">
+                       <div class="careerhub-stat-icon">
+                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z" stroke="#3B82F6" stroke-width="2"/>
+                               <path d="M10 12C5.58172 12 2 13.7909 2 16V20H18V16C18 13.7909 14.4183 12 10 12Z" stroke="#3B82F6" stroke-width="2"/>
+                           </svg>
+                       </div>
+                       <div class="careerhub-stat-content">
+                           <div class="careerhub-stat-number">10,000+</div>
+                           <div class="careerhub-stat-label">Candidates Guided</div>
+                       </div>
+                   </div>
+                   
+                   <div class="careerhub-stat-divider"></div>
+                   
+                   <div class="careerhub-stat-item">
+                       <div class="careerhub-stat-icon">
+                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M3 9L10 2L17 9" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                               <path d="M6 18H14" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+                               <path d="M10 22V10" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+                           </svg>
+                       </div>
+                       <div class="careerhub-stat-content">
+                           <div class="careerhub-stat-number">500+</div>
+                           <div class="careerhub-stat-label">Hiring Partners</div>
+                       </div>
+                   </div>
+                   
+                   <div class="careerhub-stat-divider"></div>
+                   
+                   <div class="careerhub-stat-item">
+                       <div class="careerhub-stat-icon">
+                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10Z" stroke="#3B82F6" stroke-width="2"/>
+                               <path d="M7 10L9 12L13 8" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                           </svg>
+                       </div>
+                       <div class="careerhub-stat-content">
+                           <div class="careerhub-stat-number">85%</div>
+                           <div class="careerhub-stat-label">Placement Success Rate</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+       <!-- CareerHub Section End -->
+       
        <!-- hero start -->
 <section class="hero hero-style pos-rel hero-full" style="position: relative;">
     <!-- Galaxy Background -->
@@ -381,21 +1127,19 @@
         <div class="row align-items-center">
             <div class="col-lg-9 col-md-9">
                 <div class="hero-content">
-                    <h2 class="title scale-animation wow">
-                        Two Paths, one Purpose,<br>The Peak.
-                    </h2>
+                    <h2 class="title scale-animation wow">Two Paths,<br>One Purpose, The Peak.</h2>
 
                     <p class="sub-title scale-animation wow">
-                        Unlock growth and efficiency with tailored AI solutions.
-                        We use automation and data-driven strategies to help you innovate and scale.
+                        Where preparation meets real career outcomes.
+                        We guide, train, and support you until you land your full-time role.
                     </p>
 
                     <div class="hero-btn scale-animation wow">
-                        <a class="thm-btn agency-btn" href="about.html">
+                        <a class="thm-btn agency-btn" href="tel:+917046067600">
                             <span class="text">Book a Call Now</span>
                             <span class="arrow">
                                 <span class="arrow-icon">
-                                    <!-- SVGs unchanged -->
+                                    <i class="fas fa-phone"></i>
                                 </span>
                             </span>
                         </a>
@@ -407,66 +1151,72 @@
 </section>
 <!-- hero end -->
 
-        <!-- service start -->
-        <section class="service pt-135">
-            <div class="container">
-                <div class="row justify-content-center">
+<!-- service start -->
+<section id="services" class="service pt-135">
+    <div class="container">
+        <div class="row justify-content-center">
                     <div class="col-lg-11">
-                        <div class="sec-title custom-sec-title xb-sec-padding text-center">
-                            <span class="sub-title">Our Main Services</span>
-                            <h2 class="title">
-                                Helping you grow with the power of AI 
-                            </h2>
-                            <div class="xb-heading-btn d-inline">
-                                <a class="thm-btn agency-btn" href="service.html">
-                                    <span class="text">
-                                        view more services
-                                    </span>
-                                    <span class="arrow">
-                                        <span class="arrow-icon">
-                                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="5.06592" y="19.9785" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06592 19.9785)" fill="white" />
-                                            <rect x="7.97095" y="7.24463" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97095 7.24463)" fill="white" />
-                                            <rect x="11.6523" y="7.54834" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6523 7.54834)" fill="white" />
-                                            <rect x="15.334" y="7.85205" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.334 7.85205)" fill="white" />
-                                            <rect x="18.7119" y="11.8374" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7119 11.8374)" fill="white" />
-                                            <rect x="18.4084" y="15.52" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4084 15.52)" fill="white" />
-                                            <rect x="18.104" y="19.2012" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.104 19.2012)" fill="white" />
-                                            </svg>
-                                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="5.06592" y="19.9785" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06592 19.9785)" fill="white" />
-                                            <rect x="7.97095" y="7.24463" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97095 7.24463)" fill="white" />
-                                            <rect x="11.6523" y="7.54834" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6523 7.54834)" fill="white" />
-                                            <rect x="15.334" y="7.85205" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.334 7.85205)" fill="white" />
-                                            <rect x="18.7119" y="11.8374" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7119 11.8374)" fill="white" />
-                                            <rect x="18.4084" y="15.52" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4084 15.52)" fill="white" />
-                                            <rect x="18.104" y="19.2012" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.104 19.2012)" fill="white" />
-                                            </svg>
-                                        </span>
-                                    </span>
-                                </a>
+                        <div class="sec-title custom-sec-title xb-sec-padding">
+                            <div class="row align-items-end">
+                                <div class="col-lg-6">
+                                    <h2 style="font-size: 42px;">
+                                        Comprehensive career support designed to help you secure a full-time role in the U.S.
+                                    </h2>
+                                </div>
+                                <div class="col-lg-6 text-lg-end">
+                                    <div class="xb-heading-btn d-inline-block">
+                                        <a class="thm-btn agency-btn" href="service.html">
+                                            <span class="text">
+                                                view more services
+                                            </span>
+                                            <span class="arrow">
+                                                <span class="arrow-icon">
+                                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="5.06592" y="19.9785" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06592 19.9785)" fill="white" />
+                                                        <rect x="7.97095" y="7.24463" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97095 7.24463)" fill="white" />
+                                                        <rect x="11.6523" y="7.54834" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6523 7.54834)" fill="white" />
+                                                        <rect x="15.334" y="7.85205" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.334 7.85205)" fill="white" />
+                                                        <rect x="18.7119" y="11.8374" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7119 11.8374)" fill="white" />
+                                                        <rect x="18.4084" y="15.52" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4084 15.52)" fill="white" />
+                                                        <rect x="18.104" y="19.2012" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.104 19.2012)" fill="white" />
+                                                        </svg>
+                                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="5.06592" y="19.9785" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06592 19.9785)" fill="white" />
+                                                        <rect x="7.97095" y="7.24463" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97095 7.24463)" fill="white" />
+                                                        <rect x="11.6523" y="7.54834" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6523 7.54834)" fill="white" />
+                                                        <rect x="15.334" y="7.85205" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.334 7.85205)" fill="white" />
+                                                        <rect x="18.7119" y="11.8374" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7119 11.8374)" fill="white" />
+                                                        <rect x="18.4084" y="15.52" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4084 15.52)" fill="white" />
+                                                        <rect x="18.104" y="19.2012" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.104 19.2012)" fill="white" />
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg.png">
+            <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg-new.png">
                 <div class="xb-service-item xb-border xb-mouseenter active">
                     <div class="xb-item--inner">
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">AI saas product</a>
+                                    <a href="service-details.html">Resume Writing</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
-                            <p class="xb-item--content">Use AI to target audiences, personalize campaigns, and analyze data for better engagement and results.</p>
+                            <p class="xb-item--content">Crafting resumes and profiles that meet U.S. hiring standards and get noticed.</p>
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">AI saas product</a>
+                                <a href="service-details.html">Resume Writing</a>
                             </h3>
                         </div>
                     </div>
@@ -476,17 +1226,17 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">Data science</a>
+                                    <a href="service-details.html" style="font-size: 0.9em;">LinkedIn Optimization</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
-                            <p class="xb-item--content">We turn complex data into clear, actionable insights using AI and advanced analytics—empowering smarter decisions.</p>
+                            <p class="xb-item--content">Positioning your LinkedIn profile to attract recruiters and hiring managers</p>
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">Data science</a>
+                                <a href="service-details.html" style="font-size: 0.9em;">LinkedIn Optimization</a>
                             </h3>
                         </div>
                     </div>
@@ -496,17 +1246,17 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">AI chatbot virtual</a>
+                                    <a href="service-details.html">Profile Marketing</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
-                            <p class="xb-item--content">We create intelligent chatbots and virtual assistants that improve customer support and automate interactions 24/7.</p>
+                            <p class="xb-item--content">Actively promoting your profile across top job portals for better visibility.</p>
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">AI chatbot virtual</a>
+                                <a href="service-details.html">Profile Marketing</a>
                             </h3>
                         </div>
                     </div>
@@ -516,17 +1266,17 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">AI for ecommerce</a>
+                                    <a href="service-details.html">Interview Guidance</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
-                            <p class="xb-item--content">We enhance e-commerce with AI-powered, dynamic pricing, and personalized customer experiences.</p>
+                            <p class="xb-item--content">Step-by-step interview preparation to help you perform with confidence.</p>
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">AI for ecommerce</a>
+                                <a href="service-details.html">Interview Guidance</a>
                             </h3>
                         </div>
                     </div>
@@ -536,17 +1286,17 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">AI consulting</a>
+                                    <a href="service-details.html" style="font-size: 0.75em;">Technical Training & Support</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
-                            <p class="xb-item--content">We guide businesses in adopting AI strategies, optimizing processes, and integrating technologies for lasting success.</p>
+                            <p class="xb-item--content">Practical technical training and assistance aligned with job requirements.</p>
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">AI consulting</a>
+                                <a href="service-details.html" style="font-size: 0.75em;">Technical Training & Support</a>
                             </h3>
                         </div>
                     </div>
@@ -556,17 +1306,17 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">AI - marketing</a>
+                                    <a href="service-details.html">Full Job Support</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
-                            <p class="xb-item--content">Use AI to target audiences, personalize campaigns, and analyze data for better engagement and results.</p>
+                            <p class="xb-item--content">End-to-end support from preparation to securing a full-time offer.</p>
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">AI - marketing</a>
+                                <a href="service-details.html">Full Job Support</a>
                             </h3>
                         </div>
                     </div>
@@ -582,9 +1332,6 @@
             <section class="brand pt-170 pb-150">
                 <div class="container">
                     <div class="xb-brand-wrap">
-                        <div class="brand-sub-title xb-border">
-                            <p>World's Best <span>120 Companies</span> Work With Us</p>
-                        </div>
                         <div class="brand-marquee marquee-left">
                             <div class="xb-brand-inner ul_li_between">
                                 <div class="xb-brand-item">
@@ -788,52 +1535,33 @@
             <div class="container">
                 <div class="xb-team_wrapper text-center mt-none-60 pb-50">
                     <div class="team-item">
-                        <span class="xb-item--desig">founder</span>
+                        <span class="xb-item--desig">CEO</span>
                         <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img01.jpg" data-fx="1">
-                            <a href="#!"> Tirth<span> Patel</span></a>
+                            <a href="#!">Tirth <span>Patel</span></a>
                         </h2>
-                        </div>
+                    </div>
                     <div class="team-item">
-                        <span class="xb-item--desig">ceo</span>
+                        <span class="xb-item--desig">Senior Career Advisor</span>
                         <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img02.jpg" data-fx="1">
                             <a href="#!">Arya <span>Patel</span></a>
                         </h2>
-                        </div>
+                    </div>
                     <div class="team-item">
-                        <span class="xb-item--desig">Creator</span>
+                        <span class="xb-item--desig">Manging Director</span>
                         <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img03.jpg" data-fx="1">
                             <a href="#!">Yuvrajsinh <span>Bhati</span></a>
                         </h2>
                     </div>
                     <div class="team-item">
-                        <span class="xb-item--desig">Team Lead</span>
+                        <span class="xb-item--desig">Marketing Head</span>
                         <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img04.jpg" data-fx="1">
-                            <a href="#!">Harsh Patel</a>
+                            <a href="#!">Harsh <span>Patel</span></a>
                         </h2>
-                                        </div>
-                    <div class="team-item">
-                        <span class="xb-item--desig">Creator</span>
-                        <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img05.jpg" data-fx="1">
-                            <a href="#!">Sydney <span>Jone</span></a>
-                                            </h2>
-                                        </div>
-                    <div class="team-item">
-                        <span class="xb-item--desig">Lead Spaker</span>
-                        <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img06.jpg" data-fx="1">
-                            <a href="#!">Ronald <span>Richards</span></a>
-                                            </h2>
-                                        </div>
-                    <div class="team-item">
-                        <span class="xb-item--desig">Creator</span>
-                        <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img07.jpg" data-fx="1">
-                            <a href="#!">Floyd <span>Miles</span></a>
-                                            </h2>
-                                        </div>
-                                    </div>
-                                </div>
-            <div class="xb-team_shape">
-                <img src="assets/img/shape/team-lines.png" alt="" onerror="this.style.display='none'">
-            </div>
+                    </div>
+                </div>
+                <div class="xb-team_shape">
+                    <img src="assets/img/shape/team-lines.png" alt="" onerror="this.style.display='none'">
+                </div>
         </section>
         <!-- team end -->
 
@@ -846,7 +1574,7 @@
         <div class="xb-footer-wrap">
             <div class="xb-footer-heading wow zoomIn" data-wow-delay="0ms" data-wow-duration="600ms">
                 <h1 class="title">Vertex</h1>
-                <a class="mail" href="mailto:vertextechio@domain.com"><img src="assets/img/icon/email-icon.svg" alt="icon">vertextechio@domain.com</a>
+                <a class="mail" href="mailto:vertextechio@domain.com"><img src="assets/img/icon/email-icon.svg" alt="icon">info@vertextechio.com</a>
             </div>
             <div class="xb-footer-nav">
                 <div class="xb-footer-nav-item">
@@ -887,11 +1615,9 @@
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
                         <div class="xb-item--icon">
-                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.46973 0C14.6996 0 18.9395 4.25357 18.9395 9.5C18.9394 14.7464 14.6996 19 9.46973 19C4.24002 18.9998 8.74258e-05 14.7463 0 9.5C0 4.25366 4.23997 0.000150177 9.46973 0ZM8.27441 10.1201L4.02344 15.0771H4.98438L8.70117 10.7422L11.6709 15.0771H14.9131L10.5039 8.64062L14.5586 3.91309H13.5977L10.0771 8.01758L7.26562 3.91309H4.02344L8.27441 10.1201ZM13.5977 14.3848H12.1221L5.33008 4.63867H6.80566L13.5977 14.3848Z" fill="#FFF" />
-                            </svg>
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
-                        <span class="xb-item--name">Twitter</span>
+                        <span class="xb-item--name">WhatsApp</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -904,7 +1630,7 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://wa.me/917046067600" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
@@ -924,14 +1650,14 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
                         <div class="xb-item--icon">
-                            <i class="fa-brands fa-square-youtube"></i>
+                            <i class="fa-brands fa-instagram"></i>
                         </div>
-                        <span class="xb-item--name">youtube</span>
+                        <span class="xb-item--name">Instagram</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -944,13 +1670,13 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"></a>
                 </div>
             </div>
             <div class="xb-footer-bottom">
                 <div class="contact-item">
                     <img src="assets/img/icon/location-icon.svg" alt="icon">
-                    <span class="contact-method">4517 Washington, USA</span>
+                    <span class="contact-method">30 N GOULD ST, STE A, USA</span>
                 </div>
                 <div class="contact-item copyright-item">
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
@@ -1181,7 +1907,7 @@
                     twinkleIntensity: 0.5,
                     rotationSpeed: 0.1,
                     repulsionStrength: 2,
-                    autoCenterRepulsion: 1,
+                    autoCenterRepulsion: 0,
                     starSpeed: 0.5,
                     speed: 0.8,
                     transparent: true

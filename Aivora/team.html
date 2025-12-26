@@ -25,6 +25,111 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Force White Header - Override Glass Effect -->
+    <style>
+        .header-area .header__wrap,
+        #xb-header-area .header__wrap,
+        .header-style--one .header__wrap,
+        .header-style--two .header__wrap,
+        .header-style--three .header__wrap,
+        .xb-header-area-sticky .header__wrap,
+        .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background-image: none !important;
+        }
+        .xb-header-area-sticky,
+        .xb-header-area-sticky.xb-header-fixed {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        /* Make menu text black for visibility on white header */
+        .main-menu > ul > li > a,
+        .main-menu > ul > li > a span,
+        .main-menu > ul > li.menu-item-has-children > a span::after,
+        .main-menu > ul > li:hover > a,
+        .main-menu > ul > li.active > a,
+        .main-menu > ul > li:hover > a > span::after,
+        .main-menu > ul > li.active > a > span::after {
+            color: #000000 !important;
+        }
+        /* Company name styling - same font as team names */
+        .xb-header-logo .company-name {
+            font-family: var(--font-heading) !important;
+            font-weight: 600;
+            font-size: 26px;
+            color: #000000 !important;
+            margin-left: 0;
+            margin-top: 4px;
+            margin-bottom: 0;
+            align-self: center;
+            padding-bottom: 0;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        /* Logo divider line */
+        .xb-header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 100%;
+            align-self: stretch;
+        }
+        .xb-header-logo .logo-divider {
+            display: inline-block;
+            width: 2px;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            border-radius: 1px;
+            align-self: stretch;
+        }
+        @media (max-width: 991px) {
+            .xb-header-logo .company-name {
+                font-size: 22px;
+                margin-left: 0;
+                margin-top: 3px;
+            }
+            .xb-header-logo {
+                gap: 10px;
+            }
+            .xb-header-logo .logo-divider {
+                height: 65px;
+                width: 2px;
+            }
+        }
+        @media (max-width: 767px) {
+            .xb-header-logo .company-name {
+                font-size: 20px;
+                margin-left: 0;
+                margin-top: 2px;
+            }
+            .xb-header-logo {
+                gap: 8px;
+            }
+            .xb-header-logo .logo-divider {
+                height: 55px;
+                width: 2px;
+            }
+        }
+        /* Disable Services dropdown menu hover effect */
+        .main-menu > ul > li.megamenu:hover > .submenu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+        .main-menu > ul > li.megamenu .submenu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body class="about-page inner-page">
@@ -44,7 +149,7 @@
         <div class="loader-line"></div>
         </div>
         <div class="loader-logo">
-        <img src="assets/img/logo/logo.svg" alt="Site Logo – Vertex Tech Io – AI Agency & Technology HTML Template">
+        <img src="assets/img/logo/vertex-logo.svg" alt="Site Logo – Vertex Tech Io – AI Agency & Technology HTML Template">
         </div>
     </div>
 </div>
@@ -58,7 +163,9 @@
             <div class="container mxw-1650">
                 <div class="header__wrap ul_li_between">
                     <div class="xb-header-logo">
-                        <a href="index.html" class="logo1"><img src="assets/img/logo/logo.svg" alt=""></a>
+                        <a href="index.html" class="logo1"><img src="assets/img/logo/vertex-logo.svg" alt=""></a>
+                        <span class="logo-divider"></span>
+                        <span class="company-name">Vertex Tech io</span>
                     </div>
                     <div class="main-menu__wrap  navbar navbar-expand-lg p-0">
                         <nav class="main-menu collapse navbar-collapse">
@@ -73,7 +180,7 @@
                                 </li>
                                 <li><a href="about.html"><span>About Us</span></a></li>
                                 <li class="menu-item-has-children megamenu">
-                                    <a href="#!"><span>Services</span></a>
+                                    <a href="service.html"><span>Services</span></a>
                                     <ul class="submenu">
                                         <li>
                                             <div class="mega_menu_wrapper">
@@ -254,13 +361,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="blog.html"><span>Blog</span></a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html"><span>Blog</span></a></li>
-                                        <li><a href="blog-details.html"><span>Blog Details</span></a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="contact.html"><span>Contact Us</span></a></li>
                             </ul>
                         </nav>
@@ -276,7 +376,7 @@
                         <div class="xb-header-menu-scroll">
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
                             <div class="xb-logo-mobile xb-hide-xl">
-                            <a href="index.html" rel="home"><img src="assets/img/logo/logo.svg" alt=""></a></div>
+                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-logo.svg" alt=""></a></div>
                             <div class="xb-header-mobile-search xb-hide-xl">
                                 <form role="search" action="#">
                                     <input type="text" placeholder="Search..." name="s" class="search-field">
@@ -305,17 +405,10 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item menu-item-has-children">
-                                        <a href="#!"><span>services</span></a>
+                                        <a href="service.html"><span>services</span></a>
                                         <ul class="sub-menu">
                                             <li><a href="service.html"><span>Services</span></a></li>
                                             <li><a href="service-details.html"><span>Service Details</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="blog.html"><span>Blog</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html"><span>Blog</span></a></li>
-                                            <li><a href="blog-details.html"><span>Blog Details</span></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html"><span>Contact Us</span></a></li>
@@ -556,11 +649,9 @@
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
                         <div class="xb-item--icon">
-                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.46973 0C14.6996 0 18.9395 4.25357 18.9395 9.5C18.9394 14.7464 14.6996 19 9.46973 19C4.24002 18.9998 8.74258e-05 14.7463 0 9.5C0 4.25366 4.23997 0.000150177 9.46973 0ZM8.27441 10.1201L4.02344 15.0771H4.98438L8.70117 10.7422L11.6709 15.0771H14.9131L10.5039 8.64062L14.5586 3.91309H13.5977L10.0771 8.01758L7.26562 3.91309H4.02344L8.27441 10.1201ZM13.5977 14.3848H12.1221L5.33008 4.63867H6.80566L13.5977 14.3848Z" fill="#FFF" />
-                            </svg>
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
-                        <span class="xb-item--name">Twitter</span>
+                        <span class="xb-item--name">WhatsApp</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -573,7 +664,7 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://wa.me/917046067600" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
@@ -593,14 +684,14 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
                         <div class="xb-item--icon">
-                            <i class="fa-brands fa-square-youtube"></i>
+                            <i class="fa-brands fa-instagram"></i>
                         </div>
-                        <span class="xb-item--name">youtube</span>
+                        <span class="xb-item--name">Instagram</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -613,7 +704,7 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"></a>
                 </div>
             </div>
             <div class="xb-footer-bottom">
