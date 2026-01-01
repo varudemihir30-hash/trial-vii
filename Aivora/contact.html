@@ -329,7 +329,7 @@
                                                                                     <span>Follow Us:</span>
                                                                                     <ul class="social_icons_list unordered_list">
                                                                                         <li>
-                                                                                            <a href="#!">
+                                                                                            <a href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
                                                                                             <i class="fab fa-facebook-f"></i>
                                                                                             </a>
                                                                                         </li>
@@ -520,6 +520,122 @@
 
         <!-- contact start -->
         <section class="contact">
+            <style>
+                /* Ensure service dropdown shows all options with proper spacing - Override ALL conflicting styles */
+                .xb-select-field .nice-select.open .list,
+                .xb-select-field .nice-select .list,
+                .xb-contact-form .xb-select-field .nice-select .list {
+                    max-height: 350px !important;
+                    overflow-y: auto !important;
+                    overflow-x: hidden !important;
+                    padding: 8px 0 !important;
+                    padding-top: 8px !important;
+                    padding-bottom: 8px !important;
+                    margin-top: 4px !important;
+                    box-sizing: border-box !important;
+                }
+                .xb-select-field .nice-select .list li,
+                .xb-select-field .nice-select .list > li,
+                .xb-contact-form .xb-select-field .nice-select .list li {
+                    margin: 0 !important;
+                    margin-top: 0 !important;
+                    margin-bottom: 0 !important;
+                    padding: 0 !important;
+                    padding-top: 0 !important;
+                    padding-bottom: 0 !important;
+                    list-style: none !important;
+                    display: block !important;
+                    width: 100% !important;
+                    box-sizing: border-box !important;
+                    position: relative !important;
+                }
+                .xb-select-field .nice-select .list .option,
+                .xb-select-field .nice-select .list li .option,
+                .xb-select-field .nice-select .list > li > .option,
+                .xb-contact-form .xb-select-field .nice-select .list .option {
+                    padding: 12px 18px !important;
+                    padding-left: 18px !important;
+                    padding-right: 18px !important;
+                    padding-top: 12px !important;
+                    padding-bottom: 12px !important;
+                    margin: 4px 8px !important;
+                    margin-top: 4px !important;
+                    margin-bottom: 4px !important;
+                    margin-left: 8px !important;
+                    margin-right: 8px !important;
+                    min-height: 44px !important;
+                    height: auto !important;
+                    line-height: 20px !important;
+                    display: block !important;
+                    align-items: center !important;
+                    border-radius: 5px !important;
+                    transition: all 0.2s ease !important;
+                    cursor: pointer !important;
+                    position: relative !important;
+                    box-sizing: border-box !important;
+                    width: calc(100% - 16px) !important;
+                    font-weight: 500 !important;
+                    color: var(--color-white) !important;
+                }
+                .xb-select-field .nice-select .list .option:hover,
+                .xb-select-field .nice-select .list .option.focus,
+                .xb-select-field .nice-select .list .option.selected.focus,
+                .xb-select-field .nice-select .list li .option:hover,
+                .xb-select-field .nice-select .list li .option.focus,
+                .xb-contact-form .xb-select-field .nice-select .list .option:hover {
+                    background-color: rgba(255, 255, 255, 0.1) !important;
+                    margin: 4px 8px !important;
+                    margin-top: 4px !important;
+                    margin-bottom: 4px !important;
+                }
+                /* Ensure no overlapping - add spacing between options */
+                .xb-select-field .nice-select .list li:not(:last-child) .option {
+                    margin-bottom: 4px !important;
+                }
+                .xb-select-field .nice-select .list::-webkit-scrollbar {
+                    width: 6px;
+                }
+                .xb-select-field .nice-select .list::-webkit-scrollbar-track {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 3px;
+                }
+                .xb-select-field .nice-select .list::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 3px;
+                }
+                .xb-select-field .nice-select .list::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.5);
+                }
+                /* Push down content below when dropdown is open */
+                .xb-select-field .nice-select.open {
+                    margin-bottom: 360px !important;
+                    transition: margin-bottom 0.3s ease !important;
+                }
+                .xb-select-field .nice-select:not(.open) {
+                    margin-bottom: 0 !important;
+                    transition: margin-bottom 0.3s ease !important;
+                }
+                /* Ensure dropdown list is positioned correctly */
+                .xb-select-field .nice-select.open .list {
+                    position: absolute !important;
+                    top: 100% !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    z-index: 999 !important;
+                    margin-top: 4px !important;
+                }
+                /* Responsive adjustments */
+                @media (max-width: 768px) {
+                    .xb-select-field .nice-select.open {
+                        margin-bottom: 300px !important;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .xb-select-field .nice-select.open {
+                        margin-bottom: 280px !important;
+                    }
+                }
+            </style>
             <div class="container">
                 <div class="xb-contact-wrap xb-border bg_img" data-background="assets/img/bg/contact-bg02.png">
                     <div class="xb-contact-form xb-main-contact xb-border">
@@ -562,9 +678,12 @@
                                     <div class="xb-input-field xb-select-field">
                                         <select id="service-select" class="nice-select" required>
                                             <option value="">Select Service*</option>
-                                            <option value="AI - marketing">AI - marketing</option>
-                                            <option value="AI consulting">AI consulting</option>
-                                            <option value="AI chatbot virtual">AI chatbot virtual</option>
+                                            <option value="Resume Writing">Resume Writing</option>
+                                            <option value="LinkedIn Optimization">LinkedIn Optimization</option>
+                                            <option value="Profile Marketing">Profile Marketing</option>
+                                            <option value="Interview Guidance">Interview Guidance</option>
+                                            <option value="Technical Training & Support">Technical Training & Support</option>
+                                            <option value="Full Job Support">Full Job Support</option>
                                         </select>
                                         <img src="assets/img/icon/list-icon.svg" alt="icon">
                                     </div>
@@ -661,7 +780,7 @@
                         <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="#!"></a>
+                    <a class="xb-overlay" href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"></a>
                 </div>
                 <div class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
@@ -727,7 +846,7 @@
             <div class="xb-footer-bottom">
                 <div class="contact-item">
                     <img src="assets/img/icon/location-icon.svg" alt="icon">
-                    <span class="contact-method">4517 Washington, USA</span>
+                    <span class="contact-method">30 N GOULD ST, STE A, USA</span>
                 </div>
                 <div class="contact-item copyright-item">
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
@@ -787,6 +906,26 @@
         const successModal = document.getElementById('contact-success-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
         const modalOverlay = document.querySelector('.xb-modal-overlay');
+        const fileInput = document.getElementById('file-attachment');
+        const fileSpan = fileInput ? fileInput.parentElement.querySelector('span') : null;
+
+        // Handle file upload display
+        if (fileInput && fileSpan) {
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Show the filename
+                    fileSpan.textContent = file.name;
+                    fileSpan.style.color = '#00ff97'; // Green color to indicate success
+                    fileSpan.style.borderColor = '#00ff97';
+                } else {
+                    // Reset to default text
+                    fileSpan.textContent = 'Attach file (optional)...';
+                    fileSpan.style.color = 'rgba(255, 255, 255, 0.5)';
+                    fileSpan.style.borderColor = '#3b4d77';
+                }
+            });
+        }
 
         // Handle form submission
         if (contactForm) {
@@ -822,6 +961,12 @@
                             }
                             // Reset form
                             contactForm.reset();
+                            // Reset file display
+                            if (fileSpan) {
+                                fileSpan.textContent = 'Attach file (optional)...';
+                                fileSpan.style.color = 'rgba(255, 255, 255, 0.5)';
+                                fileSpan.style.borderColor = '#3b4d77';
+                            }
                         })
                         .catch((error) => {
                             alert('Sorry, there was an error sending your message. Please try again later.');

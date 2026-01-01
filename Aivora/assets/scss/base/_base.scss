@@ -22,13 +22,20 @@
 		width: 9px;
 	}
 	.option {
-		line-height: 38px;
-		min-height: 38px;
+		line-height: 22px;
+		min-height: 42px;
+		padding: 10px 18px;
+		margin: 2px 8px;
+		display: flex;
+		align-items: center;
+		border-radius: 5px;
+		transition: all 0.2s ease;
 	}
 	.option:hover, 
 	.option.focus,
 	.option.selected.focus {
-		background-color: rgba(255, 255, 255, 0.05);
+		background-color: rgba(255, 255, 255, 0.1);
+		margin: 2px 8px;
 	}
 	&.open .list {
 		transform: scale(1) translateY(2px);
@@ -36,7 +43,7 @@
 	.list {
 		width: 100%;
 		margin-top: 0;
-		padding: 12px 18px;
+		padding: 8px 0;
 		border-radius: 0 0 5px 5px;
 		-webkit-transform: scale(1) translateY(30px);
         -ms-transform: scale(1) translateY(30px);
@@ -49,18 +56,32 @@
 		transition: all .25s cubic-bezier(.645,.045,.355,1);
 		background-color: #2b3d66;
 		li {
-			margin-right: 0 !important;
-			@include border-radius(5px);
+			margin: 0 !important;
+			padding: 0 !important;
 		}
 		.option {
 			color: var(--color-white);
 			font-weight: 500;
+			padding: 10px 18px;
+			margin: 2px 8px;
+			min-height: 42px;
+			line-height: 22px;
+			display: flex;
+			align-items: center;
+			border-radius: 5px;
+			transition: all 0.2s ease;
 			&.selected {
 				font-weight: 500;
 			}
 			&.selected,
 			&:hover {
 				border: none !important;
+			}
+			&:hover,
+			&.focus,
+			&.selected.focus {
+				background-color: rgba(255, 255, 255, 0.1);
+				margin: 2px 8px;
 			}
 		}
 	}

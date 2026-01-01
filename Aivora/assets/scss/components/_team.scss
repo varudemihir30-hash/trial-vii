@@ -23,14 +23,26 @@
         }
         &--holder {
             margin-top: 22px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        &--author {
+            flex: 1;
+            min-width: 0;
         }
         &--name {
             font-size: 18px;
             letter-spacing: -0.04em;
             text-transform: capitalize;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         &--desig {
             font-size: 16px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.4;
+            display: block;
         }
         &--desig span {
             color: var(--color-primary);
@@ -110,9 +122,31 @@
         &--holder {
             gap: 20px;
             align-items: end;
+            flex-wrap: wrap;
             @include respond(xs) {
                 align-items: center;
             }
+        }
+        &--author {
+            flex: 1;
+            min-width: 0;
+            max-width: calc(100% - 104px);
+            @include respond(lg) {
+                max-width: calc(100% - 94px);
+            }
+            @include respond(xs) {
+                max-width: calc(100% - 74px);
+            }
+        }
+        &--name {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        &--desig {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.5;
+            display: block;
         }
         &--social {
             height: 84px;
