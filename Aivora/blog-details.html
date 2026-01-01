@@ -26,8 +26,9 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
     
-    <!-- Force White Header - Override Glass Effect -->
+    <!-- Liquid Glass Header Effect -->
     <style>
+        /* Liquid Glass Effect for Header - Override main.css white background */
         .header-area .header__wrap,
         #xb-header-area .header__wrap,
         .header-style--one .header__wrap,
@@ -35,20 +36,99 @@
         .header-style--three .header__wrap,
         .xb-header-area-sticky .header__wrap,
         .xb-header-area-sticky.xb-header-fixed .header__wrap {
-            background: #ffffff !important;
-            background-color: #ffffff !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
             background-image: none !important;
+        }
+        /* Ensure header area itself is transparent */
+        .header-area,
+        #xb-header-area {
+            background: transparent !important;
+            background-color: transparent !important;
         }
         .xb-header-area-sticky,
         .xb-header-area-sticky.xb-header-fixed {
-            background: #ffffff !important;
-            background-color: #ffffff !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
         }
-        /* Make menu text black for visibility on white header */
+        /* Override main.css white background rules for sticky header */
+        #xb-header-area .xb-header-area-sticky,
+        #xb-header-area .xb-header-area-sticky.xb-header-fixed {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        }
+        #xb-header-area .xb-header-area-sticky .header__wrap,
+        #xb-header-area .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            background-image: none !important;
+        }
+        /* Override header-style specific white background rules */
+        .header-style--one .xb-header-area-sticky,
+        .header-style--one .xb-header-area-sticky.xb-header-fixed {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        }
+        .header-style--one .xb-header-area-sticky .header__wrap,
+        .header-style--one .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            background-image: none !important;
+        }
+        .header-style--two .xb-header-area-sticky,
+        .header-style--two .xb-header-area-sticky.xb-header-fixed {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        }
+        .header-style--two .xb-header-area-sticky .header__wrap,
+        .header-style--two .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            background-image: none !important;
+        }
+        .header-style--three .xb-header-area-sticky,
+        .header-style--three .xb-header-area-sticky.xb-header-fixed {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        }
+        .header-style--three .xb-header-area-sticky .header__wrap,
+        .header-style--three .xb-header-area-sticky.xb-header-fixed .header__wrap {
+            background: rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            background-image: none !important;
+        }
+
+        /* Make menu text white/light for visibility on glass header */
         .main-menu > ul > li > a,
         .main-menu > ul > li > a span,
         .main-menu > ul > li.menu-item-has-children > a span::after,
@@ -56,14 +136,16 @@
         .main-menu > ul > li.active > a,
         .main-menu > ul > li:hover > a > span::after,
         .main-menu > ul > li.active > a > span::after {
-            color: #000000 !important;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
         }
         /* Company name styling - same font as team names */
         .xb-header-logo .company-name {
             font-family: var(--font-heading) !important;
             font-weight: 600;
             font-size: 26px;
-            color: #000000 !important;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
             margin-left: 0;
             margin-top: 4px;
             margin-bottom: 0;
@@ -85,10 +167,16 @@
             display: inline-block;
             width: 2px;
             height: 70px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.6);
             flex-shrink: 0;
             border-radius: 1px;
             align-self: stretch;
+        }
+        /* Make logo white for glass background */
+        .xb-header-logo img,
+        .xb-logo-mobile img {
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+            -webkit-filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
         }
         @media (max-width: 991px) {
             .xb-header-logo .company-name {
@@ -128,6 +216,50 @@
             opacity: 0 !important;
             visibility: hidden !important;
             display: none !important;
+        }
+        /* Reduce footer VERTEX text size */
+        .xb-footer-heading .title {
+            font-size: 288px !important;
+        }
+        @media only screen and (min-width: 1500px) and (max-width: 1600px) {
+            .xb-footer-heading .title {
+                font-size: 244px !important;
+            }
+        }
+        @media only screen and (min-width: 1200px) and (max-width: 1500px) {
+            .xb-footer-heading .title {
+                font-size: 208px !important;
+            }
+        }
+        @media only screen and (min-width: 1200px) and (max-width: 1300px) {
+            .xb-footer-heading .title {
+                font-size: 181px !important;
+            }
+        }
+        @media (max-width: 1199px) {
+            .xb-footer-heading .title {
+                font-size: 158px !important;
+            }
+        }
+        @media only screen and (max-width: 1023px) {
+            .xb-footer-heading .title {
+                font-size: 152px !important;
+            }
+        }
+        @media (max-width: 991px) {
+            .xb-footer-heading .title {
+                font-size: 123px !important;
+            }
+        }
+        @media only screen and (min-width: 576px) and (max-width: 767px) {
+            .xb-footer-heading .title {
+                font-size: 93px !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .xb-footer-heading .title {
+                font-size: 66px !important;
+            }
         }
     </style>
 </head>
@@ -953,7 +1085,7 @@
         <div class="xb-footer-wrap">
             <div class="xb-footer-heading wow zoomIn" data-wow-delay="0ms" data-wow-duration="600ms">
                 <h1 class="title">Vertex</h1>
-                <a class="mail" href="mailto:vertextechio@domain.com"><img src="assets/img/icon/email-icon.svg" alt="icon">vertextechio@domain.com</a>
+                <a class="mail" href="mailto:info@vertextechio.com"><img src="assets/img/icon/email-icon.svg" alt="icon">info@vertextechio.com</a>
             </div>
             <div class="xb-footer-nav">
                 <div class="xb-footer-nav-item">
@@ -1061,8 +1193,8 @@
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
                 </div>
                 <div class="contact-item">
-                    <a href="callto:+(1)12304528597"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
-                    <a class="contact-method" href="callto:+(1)12304528597">+(1)1230 452 8597</a>
+                    <a href="tel:+1-763-722-9401"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
+                    <a class="contact-method" href="tel:+1-763-722-9401">+1-(763)-722-9401</a>
                 </div>
             </div>
         </div>

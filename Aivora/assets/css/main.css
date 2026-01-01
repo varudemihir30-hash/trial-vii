@@ -2994,17 +2994,15 @@ body[data-aos-easing=ease] [data-aos] {
     transform: scaleY(1); }
 .header-style--one .xb-header-area-sticky {
   padding: 30px 0;
-  background: #ffffff !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important; }
+  /* Glass effect maintained - background set in HTML style block */
+  }
   @media (max-width: 767px) {
     .header-style--one .xb-header-area-sticky {
       padding: 20px 0; } }
   .header-style--one .xb-header-area-sticky .header__wrap {
-    background: #ffffff !important;
-    box-shadow: 0 4px 24px -1px rgba(28, 9, 61, 0.2);
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important; }
+    /* Glass effect maintained - background set in HTML style block */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
 .header-style--two .header__wrap {
   position: relative;
   padding: 0 7px 0 20px;
@@ -3087,21 +3085,19 @@ body[data-aos-easing=ease] [data-aos] {
     .header-style--two .header-right {
       display: none; } }
 .header-style--two .xb-header-area-sticky {
-  box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background-color: #ffffff !important; }
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /* Glass effect maintained - background set in HTML style block */
+  }
   .header-style--two .xb-header-area-sticky .header__wrap {
     border-radius: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     -o-border-radius: 0;
-    box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-    background: #ffffff !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    /* Glass effect maintained - background set in HTML style block */
     background-image: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important; }
+    }
     @media (max-width: 991px) {
       .header-style--two .xb-header-area-sticky .header__wrap {
         padding: 15px 0; } }
@@ -3277,17 +3273,14 @@ Drop Down menu end
   z-index: 3;
   background: transparent !important; }
   
-/* Force white header background - override any glass effects */
+/* Glass effect header - removed white background override */
 .header-area .header__wrap,
 #xb-header-area .header__wrap,
 .header-style--one .header__wrap,
 .header-style--two .header__wrap,
 .header-style--three .header__wrap {
-  background: #ffffff !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background-color: #ffffff !important;
-  background-image: none !important; }
+  /* Glass effect maintained - background set in HTML style block */
+  }
 
 .header-area,
 #xb-header-area {
@@ -3306,24 +3299,22 @@ Drop Down menu end
   -o-transition: 0.6s cubic-bezier(0.23, 0.76, 0.53, 0.99);
   transition: 0.6s cubic-bezier(0.23, 0.76, 0.53, 0.99);
   visibility: hidden;
-  background-color: #ffffff !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important; }
+  /* Glass effect maintained - background set in HTML style block */
+  }
 
 #xb-header-area .xb-header-area-sticky.xb-header-fixed {
   -webkit-transform: translateY(0%);
   -ms-transform: translateY(0%);
   transform: translateY(0%);
   visibility: visible;
-  -webkit-box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  -khtml-box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  -moz-box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  -ms-box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  -o-box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  box-shadow: 0 3px 18px rgba(6, 27, 92, 0.09);
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background-color: #ffffff !important; }
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  -khtml-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  -moz-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  -ms-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  -o-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /* Glass effect maintained - background set in HTML style block */
+  }
 
 .main-menu {
   display: flex;
@@ -4168,7 +4159,10 @@ Drop Down menu end
 .xb-brand-item {
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
-  transition: 0.3s; }
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
   @media (max-width: 767px) {
     .xb-brand-item {
       max-width: 105px; } }

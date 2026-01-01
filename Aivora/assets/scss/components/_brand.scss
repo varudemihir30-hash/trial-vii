@@ -21,6 +21,9 @@
 }
 .xb-brand-item {
     @include transition(.3s);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include respond(xs) {
         max-width: 105px;
     }
