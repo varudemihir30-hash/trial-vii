@@ -34,13 +34,17 @@
 .xb-header-menu {
   position: fixed;
   height: 100vh;
+  height: -webkit-fill-available; /* iOS Safari fix */
   width: 300px;
+  max-width: 85vw; /* Prevent menu from being too wide on small screens */
   top: 0;
   left: 0;
   bottom: 0;
   margin: 0;
   z-index: 1010;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   -webkit-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   -khtml-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   -moz-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -55,6 +59,10 @@
   transform: translateX(-100%);
   visibility: hidden;
   background-color: #11121d;
+  @include respond(xs) {
+    width: 280px;
+    max-width: 90vw;
+  }
 }
 .xb-header-menu.active {
   visibility: visible;
@@ -72,6 +80,9 @@
 }
 .xb-header-menu-scroll {
   padding: 50px 25px 40px;
+  @include respond(xs) {
+    padding: 40px 20px 30px;
+  }
 }
 .xb-header-menu-scroll .xb-close {
   position: absolute;
@@ -104,11 +115,13 @@
 .xb-menu-toggle {
       position:absolute;
       top:10px;
-      height:28px;
-      line-height:28px;
+      height:44px; /* Touch-friendly */
+      min-height:44px;
+      line-height:44px;
       text-align:center;
       right:0;
-      width:28px;
+      width:44px;
+      min-width:44px;
       cursor:pointer;
       font-size:15px;
       -webkit-transition:all .25s cubic-bezier(.645,.045,.355,1);
@@ -124,7 +137,18 @@
       -ms-border-radius:3px;
       -o-border-radius:3px;
       border-radius:3px;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: rgba(0, 255, 151, 0.2);
+      touch-action: manipulation;
+      @include respond(xs) {
+        height: 40px;
+        min-height: 40px;
+        width: 40px;
+        min-width: 40px;
+        line-height: 40px;
+      }
     }
   .xb-menu-toggle:before {
     content: "\f107";
@@ -145,11 +169,20 @@
 .xb-menu-primary li a {
   display: block;
   line-height: 46px;
+  min-height: 44px; /* Touch-friendly minimum height */
+  padding: 0 20px;
   color: var(--color-white);
-  font-size: 14px;
+  font-size: 15px; /* Slightly larger for better readability */
   font-weight: 600;
   text-transform: capitalize;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-tap-highlight-color: rgba(0, 255, 151, 0.2);
+  touch-action: manipulation;
+  @include respond(xs) {
+    font-size: 14px;
+    padding: 0 15px;
+    line-height: 44px;
+  }
 }
 .xb-menu-primary li > a:hover, .xb-menu-primary li > a.current, .xb-menu-primary li.current_page_item > a, .xb-menu-primary li.current-menu-item > a, .xb-menu-primary li.current_page_ancestor > a, .xb-menu-primary li.current-menu-ancestor > a {
   color: var(--color-primary);
@@ -275,20 +308,31 @@
 }
 .xb-nav-mobile {
   color: var(--color-white);
-  height: 40px;
-  width: 40px;
+  height: 44px; /* Touch-friendly minimum */
+  width: 44px;
+  min-height: 44px;
+  min-width: 44px;
   border-radius: 6px;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @include transition(.3s);
   border: 1px solid var(--color-white);
+  -webkit-tap-highlight-color: rgba(0, 255, 151, 0.3);
+  touch-action: manipulation;
+  cursor: pointer;
   @include respond(xs) {
-    height: 35px;
-    width: 35px;
-    
+    height: 40px;
+    width: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    font-size: 16px;
   }
-  &:hover {
+  &:hover, &:active {
 	  color: var(--color-secondary);
     background: var(--color-primary);
     border: 1px solid var(--color-primary);
+    transform: scale(0.95);
   }
 }

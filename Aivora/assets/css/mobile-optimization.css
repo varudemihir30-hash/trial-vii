@@ -1,0 +1,1036 @@
+/*-----------------------------------------------------------------------------------
+    Mobile Optimization CSS
+    Comprehensive mobile styles for all phone browsers
+    Supports: iOS Safari, Android Chrome, Samsung Internet, etc.
+-----------------------------------------------------------------------------------*/
+
+/* ============================================
+   Base Mobile Optimizations
+   ============================================ */
+
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+/* Touch-friendly tap targets (minimum 44x44px) */
+a, button, input[type="button"], input[type="submit"], 
+input[type="file"], select, textarea, .clickable {
+    -webkit-tap-highlight-color: rgba(0, 255, 151, 0.3);
+    tap-highlight-color: rgba(0, 255, 151, 0.3);
+    touch-action: manipulation;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Improve text rendering on mobile */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Prevent text size adjustment on orientation change (iOS) */
+html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* ============================================
+   Mobile Breakpoints
+   ============================================ */
+
+/* Extra Small Devices (phones, 320px and up) */
+@media only screen and (max-width: 575px) {
+    /* Base font size adjustment */
+    body {
+        font-size: 14px;
+        line-height: 24px;
+    }
+    
+    /* Container padding */
+    .container, .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Service items - extra small screens - smaller fonts */
+    .xb-service-item .xb-item--head-item .xb-item--title {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .xb-service-item .xb-item--head-item .xb-item--title a {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Override inline font-size styles on extra small screens */
+    .xb-service-item .xb-item--head-item .xb-item--title a[style*="font-size"] {
+        font-size: 16px !important;
+    }
+    
+    .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.9em"],
+    .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.75em"] {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .xb-service-item .xb-item--content {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        margin-top: 14px !important;
+    }
+    
+    .xb-service-item .xb-item--item {
+        padding: 18px 15px !important;
+    }
+    
+    /* Hide vertical text completely on extra small screens */
+    .xb-service-item .service-vertical-text,
+    .xb-service-item .service-vertical-text *,
+    .xb-service-item.active .service-vertical-text,
+    .xb-service-item.active .service-vertical-text * {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        pointer-events: none !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Hero section mobile optimization */
+    .hero-style {
+        min-height: auto !important;
+        padding-top: 120px !important;
+        padding-bottom: 60px !important;
+    }
+    
+    .hero-content .title {
+        font-size: 32px !important;
+        line-height: 42px !important;
+        letter-spacing: -0.02em !important;
+    }
+    
+    .hero-content .sub-title {
+        font-size: 14px !important;
+        line-height: 22px !important;
+        margin: 10px 0 24px !important;
+    }
+    
+    /* Buttons mobile optimization */
+    .thm-btn, .agency-btn, .chatbot-btn, .custom-btn, .ai-marketing-btn {
+        font-size: 14px !important;
+        padding: 12px 20px !important;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .agency-btn .text {
+        padding: 15px 16px !important;
+    }
+    
+    /* Section titles */
+    .sec-title h2, .sec-title .title {
+        font-size: 28px !important;
+        line-height: 38px !important;
+    }
+    
+    /* Cards and containers */
+    .card, .service-item, .project-item, .blog-item {
+        margin-bottom: 20px;
+    }
+    
+    /* Images */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Forms */
+    input[type="text"], 
+    input[type="email"], 
+    input[type="tel"], 
+    input[type="password"],
+    textarea, select {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        padding: 12px 15px !important;
+        min-height: 44px;
+        width: 100%;
+    }
+    
+    textarea {
+        min-height: 120px;
+    }
+    
+    /* Tables */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    
+    /* Navigation */
+    .header-area {
+        padding: 10px 0;
+    }
+    
+    .xb-nav-mobile {
+        height: 40px;
+        width: 40px;
+        font-size: 16px;
+    }
+    
+    /* Mobile menu */
+    .xb-header-menu {
+        width: 280px;
+    }
+    
+    .xb-menu-primary li a {
+        font-size: 15px;
+        line-height: 50px;
+        padding: 0 20px;
+    }
+    
+    /* Spacing adjustments */
+    .section-padding {
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
+    }
+    
+    /* Grid adjustments */
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    .row > * {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* Small Devices (landscape phones, 576px and up) */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    body {
+        font-size: 15px;
+        line-height: 26px;
+    }
+    
+    .hero-content .title {
+        font-size: 42px !important;
+        line-height: 52px !important;
+    }
+    
+    .hero-content .sub-title {
+        font-size: 16px !important;
+        line-height: 26px !important;
+    }
+    
+    .sec-title h2, .sec-title .title {
+        font-size: 36px !important;
+        line-height: 46px !important;
+    }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    body {
+        font-size: 15px;
+        line-height: 27px;
+    }
+    
+    .hero-content .title {
+        font-size: 48px !important;
+        line-height: 60px !important;
+    }
+}
+
+/* ============================================
+   iOS Safari Specific Fixes
+   ============================================ */
+
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari specific styles */
+    input, textarea, select {
+        font-size: 16px !important; /* Prevents zoom on focus */
+    }
+    
+    /* Fix for iOS Safari viewport height issue */
+    .hero-style {
+        min-height: -webkit-fill-available;
+    }
+    
+    /* Fix sticky header on iOS */
+    .xb-header-area-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+    
+    /* Smooth scrolling for iOS */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ============================================
+   Android Chrome Specific Fixes
+   ============================================ */
+
+/* Fix for Android Chrome address bar */
+@media screen and (max-width: 767px) {
+    .hero-style {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* ============================================
+   Touch Interactions
+   ============================================ */
+
+/* Improve touch feedback */
+button:active, 
+a:active, 
+.btn:active,
+.thm-btn:active,
+.agency-btn:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Disable double-tap zoom on buttons */
+button, .btn, .thm-btn, .agency-btn {
+    touch-action: manipulation;
+}
+
+/* ============================================
+   Landscape Orientation
+   ============================================ */
+
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+    .hero-style {
+        min-height: auto !important;
+        padding-top: 100px !important;
+        padding-bottom: 40px !important;
+    }
+    
+    .hero-content .title {
+        font-size: 36px !important;
+        line-height: 46px !important;
+    }
+    
+    .section-padding {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+/* ============================================
+   Very Small Screens (320px and below)
+   ============================================ */
+
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 13px;
+        line-height: 22px;
+    }
+    
+    .hero-content .title {
+        font-size: 26px !important;
+        line-height: 34px !important;
+    }
+    
+    .container, .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .xb-header-menu {
+        width: 260px;
+    }
+}
+
+/* ============================================
+   Accessibility & Usability
+   ============================================ */
+
+/* Ensure sufficient color contrast */
+@media (prefers-contrast: high) {
+    a, button {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduce motion for users who prefer it - but don't disable completely */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.3s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.2s !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Still allow fadeIn animations but faster */
+    .fadeInUp,
+    .fadeIn {
+        animation-duration: 0.3s !important;
+    }
+}
+
+/* ============================================
+   Form Optimizations
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Contact forms */
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+        font-size: 16px !important;
+        padding: 14px 16px !important;
+        border-radius: 8px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+    /* Select dropdowns */
+    select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        padding-right: 40px !important;
+    }
+    
+    /* Checkboxes and radio buttons */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+    }
+}
+
+/* ============================================
+   Image Optimizations
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Lazy loading images */
+    img[loading="lazy"] {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    img[loading="lazy"].loaded {
+        opacity: 1;
+    }
+    
+    /* Responsive images */
+    .hero-img-container img,
+    .service-item img,
+    .project-item img,
+    .blog-item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}
+
+/* ============================================
+   Navigation & Menu
+   ============================================ */
+
+@media only screen and (max-width: 991px) {
+    /* Header */
+    .header-area .header__wrap {
+        padding: 12px 0 !important;
+    }
+    
+    /* Logo */
+    .header-logo img {
+        max-height: 40px;
+        width: auto;
+    }
+    
+    /* Mobile menu backdrop */
+    .xb-header-menu-backdrop {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Menu items */
+    .xb-menu-primary > li > a {
+        font-size: 16px;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Submenu */
+    .xb-menu-primary .sub-menu li a {
+        font-size: 15px;
+        padding-left: 30px;
+    }
+    
+    /* Hide Ai Agency, Ai Marketing, and Ai Chatbot menu items on mobile */
+    /* These three items appear in the Home submenu - hide them all on mobile */
+    
+    /* Method 1: Hide by href attribute (most reliable) */
+    .xb-menu-primary .sub-menu li a[href="ai-marketing.html"],
+    .xb-menu-primary .sub-menu li a[href="ai-chatbot.html"] {
+        display: none !important;
+    }
+    
+    /* Hide Ai Agency - target the first submenu item under Home that contains "Ai Agency" text */
+    .xb-menu-primary > li:first-child .sub-menu li:first-child a[href="index.html"] {
+        display: none !important;
+    }
+    
+    /* Hide parent li elements for cleaner removal (using :has() for modern browsers) */
+    .xb-menu-primary .sub-menu li:has(a[href="ai-marketing.html"]),
+    .xb-menu-primary .sub-menu li:has(a[href="ai-chatbot.html"]) {
+        display: none !important;
+    }
+    
+    .xb-menu-primary > li:first-child .sub-menu li:first-child:has(a[href="index.html"]) {
+        display: none !important;
+    }
+    
+    /* Hide in desktop menu when on mobile viewport */
+    .main-menu .submenu li a[href="ai-marketing.html"],
+    .main-menu .submenu li a[href="ai-chatbot.html"] {
+        display: none !important;
+    }
+    
+    .main-menu .submenu li:has(a[href="ai-marketing.html"]),
+    .main-menu .submenu li:has(a[href="ai-chatbot.html"]) {
+        display: none !important;
+    }
+    
+    /* Hide "page" menu item from mobile menu */
+    /* Target the menu item with href="#!" which is the "page" menu */
+    .xb-menu-primary > li.menu-item-has-children:has(a[href="#!"]),
+    .xb-menu-primary > li:has(a[href="#!"]) {
+        display: none !important;
+    }
+    
+    /* Fallback: Hide the third menu item with submenu (which is the "page" menu) */
+    .xb-menu-primary > li.menu-item-has-children:nth-child(3) {
+        display: none !important;
+    }
+}
+
+/* Fallback for browsers that don't support :has() - hide all three items */
+@media only screen and (max-width: 991px) {
+    /* Hide the three specific menu items in Home submenu */
+    /* Target the Home menu item's submenu and hide first 3 children */
+    .xb-menu-primary > li.menu-item-has-children:first-child .sub-menu li:nth-child(1),
+    .xb-menu-primary > li.menu-item-has-children:first-child .sub-menu li:nth-child(2),
+    .xb-menu-primary > li.menu-item-has-children:first-child .sub-menu li:nth-child(3) {
+        display: none !important;
+    }
+    
+    /* Also hide in desktop menu */
+    .main-menu .submenu li:nth-child(1),
+    .main-menu .submenu li:nth-child(2),
+    .main-menu .submenu li:nth-child(3) {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   Swiper/Carousel Mobile
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    .swiper-slide {
+        width: 100% !important;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    .swiper-pagination-bullet {
+        width: 8px !important;
+        height: 8px !important;
+    }
+}
+
+/* ============================================
+   Footer Mobile
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    .footer-area {
+        padding: 40px 0 30px !important;
+    }
+    
+    .footer-widget {
+        margin-bottom: 30px;
+    }
+    
+    .footer-widget .title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-widget ul li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-widget ul li a {
+        font-size: 14px;
+    }
+}
+
+/* ============================================
+   Utility Classes for Mobile
+   ============================================ */
+
+.mobile-hidden {
+    display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .mobile-hidden {
+        display: none !important;
+    }
+    
+    .mobile-visible {
+        display: block !important;
+    }
+    
+    .mobile-text-center {
+        text-align: center !important;
+    }
+    
+    .mobile-full-width {
+        width: 100% !important;
+    }
+    
+    .mobile-no-padding {
+        padding: 0 !important;
+    }
+    
+    .mobile-no-margin {
+        margin: 0 !important;
+    }
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Enable animations on mobile but keep them optimized */
+    .wow,
+    [data-wow-duration],
+    [data-wow-delay] {
+        animation-duration: 0.8s !important;
+        animation-fill-mode: both !important;
+    }
+    
+    /* Preserve animation delays but make them shorter */
+    .wow[data-wow-delay="0.1s"],
+    [data-wow-delay="0.1s"] {
+        animation-delay: 0.1s !important;
+    }
+    
+    .wow[data-wow-delay="0.2s"],
+    [data-wow-delay="0.2s"] {
+        animation-delay: 0.15s !important;
+    }
+    
+    .wow[data-wow-delay="0.3s"],
+    [data-wow-delay="0.3s"] {
+        animation-delay: 0.2s !important;
+    }
+    
+    .wow[data-wow-delay="0.4s"],
+    [data-wow-delay="0.4s"] {
+        animation-delay: 0.25s !important;
+    }
+    
+    .wow[data-wow-delay="0.5s"],
+    [data-wow-delay="0.5s"] {
+        animation-delay: 0.3s !important;
+    }
+    
+    .wow[data-wow-delay="0.6s"],
+    [data-wow-delay="0.6s"] {
+        animation-delay: 0.35s !important;
+    }
+    
+    /* Ensure fadeInUp animation works */
+    .fadeInUp {
+        animation-name: fadeInUp !important;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    /* Optimize transforms */
+    * {
+        will-change: auto;
+    }
+    
+    /* Reduce backdrop filters on mobile */
+    .header-area .header__wrap {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+}
+
+/* ============================================
+   Service Items Mobile Optimization
+   ============================================ */
+
+/* Global rule to hide vertical text on all mobile devices */
+@media only screen and (max-width: 991px) {
+    .xb-service-item .service-vertical-text,
+    .xb-service-item .service-vertical-text *,
+    .xb-service-item.active .service-vertical-text,
+    .xb-service-item.active .service-vertical-text * {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        pointer-events: none !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+    }
+    
+    /* Ensure service items don't use absolute positioning that causes overlap on mobile */
+    .xb-service-item .xb-item--head-item {
+        position: relative !important;
+        height: auto !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+    }
+    
+    .xb-service-item .xb-item--content {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: translateY(0) !important;
+    }
+    
+    .xb-service-item.active .xb-item--content {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: translateY(0) !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    /* Ensure service wrap doesn't cause horizontal scroll */
+    .xb-service-wrap {
+        overflow-x: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 0 !important;
+        padding: 20px 15px !important;
+    }
+    
+    /* Prevent any text overflow */
+    .xb-service-item * {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Fix service items spacing and prevent overlap */
+    .xb-service-item {
+        width: 100% !important;
+        flex: none !important;
+        margin-bottom: 24px !important;
+        position: relative !important;
+        opacity: 1 !important;
+        min-height: auto !important;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+    
+    /* Ensure service items don't use absolute positioning that causes overlap */
+    .xb-service-item .xb-item--inner {
+        min-height: auto !important;
+    }
+    
+    /* Remove last item margin */
+    .xb-service-item:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Fix inner wrapper */
+    .xb-service-item .xb-item--inner {
+        position: relative !important;
+        z-index: 1 !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Fix inner content spacing - normal flow */
+    .xb-service-item .xb-item--item {
+        padding: 25px 20px !important;
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        gap: 0 !important;
+        overflow: visible !important;
+        min-height: auto !important;
+    }
+    
+    /* Fix head item - make it relative, not absolute - CRITICAL FIX */
+    .xb-service-item .xb-item--head-item {
+        display: flex !important;
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        padding: 0 !important;
+        padding-left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        top: auto !important;
+        left: auto !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        margin-bottom: 16px !important;
+        z-index: 2 !important;
+        gap: 12px !important;
+    }
+    
+    /* Fix title in head item - smaller font size */
+    .xb-service-item .xb-item--head-item .xb-item--title {
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: auto !important;
+        flex: 1 !important;
+        max-width: calc(100% - 60px) !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        display: block !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Fix title links - override inline styles with smaller size */
+    .xb-service-item .xb-item--head-item .xb-item--title a {
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+        display: block !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Override inline font-size styles on mobile */
+    .xb-service-item .xb-item--head-item .xb-item--title a[style*="font-size"] {
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Specific override for smaller inline font sizes */
+    .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.9em"],
+    .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.75em"] {
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Show icon on mobile */
+    .xb-service-item .xb-item--head-item .xb-item--icon {
+        display: flex !important;
+        position: relative !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        flex-shrink: 0 !important;
+        top: auto !important;
+        right: auto !important;
+        margin-left: 0 !important;
+    }
+    
+    /* Ensure content is visible and properly positioned - normal flow */
+    .xb-service-item .xb-item--content {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        left: auto !important;
+        top: auto !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    /* Fix active state on mobile - keep everything visible and properly spaced */
+    .xb-service-item.active {
+        width: 100% !important;
+        flex: none !important;
+    }
+    
+    .xb-service-item.active .xb-item--head-item {
+        display: flex !important;
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .xb-service-item.active .xb-item--content {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: translateY(0) !important;
+        margin-top: 0 !important;
+        transition-delay: 0s !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure vertical text doesn't cause overlap - COMPLETELY HIDE */
+    .xb-service-item .service-vertical-text,
+    .xb-service-item.active .service-vertical-text {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .xb-service-item .service-vertical-text .xb-item--title,
+    .xb-service-item .service-vertical-text .xb-item--title a {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        pointer-events: none !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    /* Additional fixes to prevent any absolute positioning issues */
+    .xb-service-item .xb-item--item > * {
+        position: relative !important;
+    }
+    
+    /* Ensure title doesn't overlap content - add clear spacing */
+    .xb-service-item .xb-item--head-item + .xb-item--content {
+        clear: both !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Prevent any negative margins that could cause overlap */
+    .xb-service-item .xb-item--head-item,
+    .xb-service-item .xb-item--content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Ensure proper border/separator between items */
+    .xb-service-item:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding-bottom: 0 !important;
+    }
+    
+    /* Fix any potential overflow issues */
+    .xb-service-item,
+    .xb-service-item * {
+        box-sizing: border-box !important;
+    }
+}
+
+/* ============================================
+   Print Styles (Mobile)
+   ============================================ */
+
+@media print {
+    .header-area,
+    .footer-area,
+    .xb-hamburger-menu,
+    .back-to-top {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+}
+
