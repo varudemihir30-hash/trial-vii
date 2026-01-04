@@ -535,10 +535,7 @@ button, .btn, .thm-btn, .agency-btn {
         display: none !important;
     }
     
-    /* Fallback: Hide the third menu item with submenu (which is the "page" menu) */
-    .xb-menu-primary > li.menu-item-has-children:nth-child(3) {
-        display: none !important;
-    }
+    /* Note: Services menu (3rd item) should be visible - removed the rule that was hiding it */
 }
 
 /* Fallback for browsers that don't support :has() - hide all three items */
@@ -1013,6 +1010,897 @@ button, .btn, .thm-btn, .agency-btn {
     .xb-service-item,
     .xb-service-item * {
         box-sizing: border-box !important;
+    }
+}
+
+/* ============================================
+   Hero Section Mobile Optimization (First Page)
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Hero Section Container */
+    .hero.hero-full {
+        min-height: auto !important;
+        padding-top: 100px !important;
+        padding-bottom: 60px !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+    
+    /* Hero Container */
+    .hero .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    /* Hero Content Wrapper */
+    .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Hero Title - "Two Paths, One Purpose, The Peak." */
+    .hero-content .title {
+        font-size: 32px !important;
+        line-height: 1.2 !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.02em !important;
+        margin-bottom: 20px !important;
+        color: #ffffff !important;
+        text-align: left !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Hero Subtitle */
+    .hero-content .sub-title {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+        font-weight: 400 !important;
+        margin-bottom: 32px !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        text-align: left !important;
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Hero Button Container */
+    .hero-content .hero-btn {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-start !important;
+    }
+    
+    /* Hero Button - "Book a Call Now" */
+    .hero-content .hero-btn .thm-btn.agency-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 !important;
+        min-height: 56px !important;
+        background: #00FF97 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        text-decoration: none !important;
+        box-shadow: 0 4px 12px rgba(0, 255, 151, 0.3) !important;
+    }
+    
+    /* Button Text */
+    .hero-content .hero-btn .thm-btn.agency-btn .text {
+        padding: 16px 20px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        flex: 1 !important;
+        text-align: left !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Button Arrow/Icon Container */
+    .hero-content .hero-btn .thm-btn.agency-btn .arrow {
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        background: #00A66F !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 0 12px 12px 0 !important;
+        flex-shrink: 0 !important;
+        position: relative !important;
+    }
+    
+    /* Button Icon */
+    .hero-content .hero-btn .thm-btn.agency-btn .arrow .arrow-icon {
+        width: 20px !important;
+        height: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .hero-content .hero-btn .thm-btn.agency-btn .arrow .arrow-icon i {
+        font-size: 16px !important;
+        color: #ffffff !important;
+    }
+    
+    /* Aurora Background - Ensure it doesn't interfere */
+    .hero .aurora-container {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+    }
+}
+
+/* Extra Small Screens (320px - 575px) */
+@media only screen and (max-width: 575px) {
+    /* Hero Section */
+    .hero.hero-full {
+        padding-top: 80px !important;
+        padding-bottom: 50px !important;
+    }
+    
+    /* Hero Title */
+    .hero-content .title {
+        font-size: 28px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 16px !important;
+    }
+    
+    /* Hero Subtitle */
+    .hero-content .sub-title {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 28px !important;
+    }
+    
+    /* Hero Button */
+    .hero-content .hero-btn .thm-btn.agency-btn {
+        min-height: 52px !important;
+        border-radius: 10px !important;
+    }
+    
+    .hero-content .hero-btn .thm-btn.agency-btn .text {
+        padding: 14px 18px !important;
+        font-size: 13px !important;
+    }
+    
+    .hero-content .hero-btn .thm-btn.agency-btn .arrow {
+        width: 52px !important;
+        height: 52px !important;
+        min-width: 52px !important;
+        border-radius: 0 10px 10px 0 !important;
+    }
+}
+
+/* ============================================
+   Service Section Mobile Optimization (First Page)
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Service Section Container */
+    .service.pt-135 {
+        padding-top: 60px !important;
+        padding-bottom: 40px !important;
+        position: relative !important;
+    }
+    
+    /* Service Container */
+    .service .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    
+    /* Section Title Container */
+    .service .sec-title.custom-sec-title {
+        margin-bottom: 40px !important;
+        padding: 0 !important;
+    }
+    
+    /* Section Title Row */
+    .service .sec-title .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    
+    /* Section Title Column */
+    .service .sec-title .row > [class*="col-"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 24px !important;
+    }
+    
+    /* Section Title - "Comprehensive career support..." */
+    .service .sec-title h2,
+    .service .sec-title h2[style*="font-size"] {
+        font-size: 24px !important;
+        line-height: 1.3 !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        text-align: left !important;
+        margin-bottom: 0 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        letter-spacing: -0.01em !important;
+    }
+    
+    /* Button Container Column */
+    .service .sec-title .text-lg-end {
+        text-align: left !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Button Wrapper */
+    .service .sec-title .xb-heading-btn {
+        width: 100% !important;
+        display: block !important;
+    }
+    
+    /* Service Button - "view more services" */
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 !important;
+        min-height: 56px !important;
+        background: #00FF97 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        text-decoration: none !important;
+        box-shadow: 0 4px 12px rgba(0, 255, 151, 0.3) !important;
+    }
+    
+    /* Service Button Text */
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn .text {
+        padding: 16px 20px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        text-transform: lowercase !important;
+        letter-spacing: 0.5px !important;
+        flex: 1 !important;
+        text-align: left !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Service Button Arrow Container */
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow {
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        background: #00A66F !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 0 12px 12px 0 !important;
+        flex-shrink: 0 !important;
+        position: relative !important;
+    }
+    
+    /* Service Button Icon */
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow .arrow-icon {
+        width: 20px !important;
+        height: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow .arrow-icon svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    
+    /* Service Wrap - Background Container */
+    .service .xb-service-wrap {
+        margin-top: 0 !important;
+        padding: 20px 0 !important;
+    }
+}
+
+/* Extra Small Screens (320px - 575px) */
+@media only screen and (max-width: 575px) {
+    /* Service Section */
+    .service.pt-135 {
+        padding-top: 50px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    /* Section Title */
+    .service .sec-title h2,
+    .service .sec-title h2[style*="font-size"] {
+        font-size: 22px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Service Button */
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn {
+        min-height: 52px !important;
+        border-radius: 10px !important;
+    }
+    
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn .text {
+        padding: 14px 18px !important;
+        font-size: 13px !important;
+    }
+    
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow {
+        width: 52px !important;
+        height: 52px !important;
+        min-width: 52px !important;
+        border-radius: 0 10px 10px 0 !important;
+    }
+}
+
+/* ============================================
+   Button Hover States (Mobile)
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Hero Button Active State */
+    .hero-content .hero-btn .thm-btn.agency-btn:active {
+        transform: scale(0.98) !important;
+        box-shadow: 0 2px 8px rgba(0, 255, 151, 0.4) !important;
+    }
+    
+    /* Service Button Active State */
+    .service .sec-title .xb-heading-btn .thm-btn.agency-btn:active {
+        transform: scale(0.98) !important;
+        box-shadow: 0 2px 8px rgba(0, 255, 151, 0.4) !important;
+    }
+}
+
+/* ============================================
+   Brand Section Mobile Optimization (Fix Logo Overlap)
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Brand Section Container */
+    .brand.pt-170 {
+        padding-top: 60px !important;
+        padding-bottom: 50px !important;
+    }
+    
+    /* Brand Wrap Container */
+    .xb-brand-wrap {
+        padding: 20px 15px 30px !important;
+        overflow: hidden !important;
+    }
+    
+    /* Brand Marquee Container - Disable marquee animation on mobile */
+    .brand-marquee.marquee-left,
+    .brand-marquee {
+        overflow: hidden !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+    
+    /* Disable marquee JavaScript animation on mobile - Handle all possible wrapper classes */
+    .brand-marquee.marquee-left .js-marquee-wrapper,
+    .brand-marquee .js-marquee-wrapper,
+    .brand-marquee > div,
+    .brand-marquee.marquee-left > div {
+        display: flex !important;
+        animation: none !important;
+        -webkit-animation: none !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+        position: relative !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Ensure marquee doesn't duplicate content on mobile */
+    .brand-marquee .js-marquee-wrapper > div:not(:first-child),
+    .brand-marquee > div > div:not(:first-child) {
+        display: none !important;
+    }
+    
+    /* Brand Inner Container - Flex Layout */
+    .xb-brand-inner,
+    .xb-brand-inner.ul_li_between,
+    .brand-marquee .xb-brand-inner,
+    .brand-marquee.marquee-left .xb-brand-inner {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 40px !important;
+        margin-right: 0 !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 10px 0 !important;
+    }
+    
+    /* Brand Item - Individual Logo Container - CRITICAL FIX */
+    .xb-brand-item,
+    .brand-marquee .xb-brand-item,
+    .xb-brand-inner .xb-brand-item {
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        max-width: 120px !important;
+        min-width: 120px !important;
+        width: 120px !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 10px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Brand Item Images - STRONG Override for inline styles */
+    .xb-brand-item img,
+    .brand-marquee .xb-brand-item img,
+    .xb-brand-inner .xb-brand-item img,
+    .xb-brand-item img[style],
+    .xb-brand-item img[style*="height"],
+    .xb-brand-item img[style*="max-width"],
+    .xb-brand-item img[style*="margin"],
+    .xb-brand-item img[style*="width"],
+    .xb-brand-item img[style*="display"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: 75px !important;
+        min-height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+    
+    /* Fix for Morgan Stanley logo with negative margin - STRONG OVERRIDE */
+    .xb-brand-item[style*="align-items: flex-start"],
+    .xb-brand-item[style*="display: flex"],
+    .brand-marquee .xb-brand-item[style*="align-items: flex-start"] {
+        align-items: center !important;
+        justify-content: center !important;
+        display: flex !important;
+        max-width: 120px !important;
+        min-width: 120px !important;
+        width: 120px !important;
+    }
+    
+    .xb-brand-item[style*="align-items: flex-start"] img,
+    .xb-brand-item[style*="align-items: flex-start"] img[style],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="height"],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="-77px"] {
+        margin: 0 auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-height: 75px !important;
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure no negative margins cause overlap - ALL IMAGES */
+    .xb-brand-item img[style*="margin"],
+    .xb-brand-item img[style*="-77px"],
+    .brand-marquee img[style*="margin"],
+    .xb-brand-inner img[style*="margin"] {
+        margin: 0 auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Prevent any absolute positioning */
+    .xb-brand-item,
+    .xb-brand-item * {
+        position: relative !important;
+    }
+}
+
+/* Extra Small Screens (320px - 575px) */
+@media only screen and (max-width: 575px) {
+    /* Brand Wrap */
+    .xb-brand-wrap {
+        padding: 15px 10px 25px !important;
+    }
+    
+    /* Brand Inner - Smaller gap on very small screens */
+    .xb-brand-inner,
+    .brand-marquee .xb-brand-inner {
+        gap: 30px !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Brand Item - Smaller on very small screens */
+    .xb-brand-item,
+    .brand-marquee .xb-brand-item,
+    .xb-brand-inner .xb-brand-item {
+        max-width: 100px !important;
+        min-width: 100px !important;
+        width: 100px !important;
+        padding: 0 8px !important;
+    }
+    
+    /* Brand Item Images - Smaller on very small screens - STRONG OVERRIDE */
+    .xb-brand-item img,
+    .brand-marquee .xb-brand-item img,
+    .xb-brand-inner .xb-brand-item img,
+    .xb-brand-item img[style],
+    .xb-brand-item img[style*="height"],
+    .xb-brand-item img[style*="max-width"],
+    .xb-brand-item img[style*="margin"],
+    .xb-brand-item img[style*="width"] {
+        max-height: 65px !important;
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    .xb-brand-item[style*="align-items: flex-start"] img,
+    .xb-brand-item[style*="align-items: flex-start"] img[style],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="height"],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="-77px"] {
+        max-height: 65px !important;
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* Small Screens (576px - 767px) */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    /* Brand Item - Slightly larger on small screens */
+    .xb-brand-item,
+    .brand-marquee .xb-brand-item,
+    .xb-brand-inner .xb-brand-item {
+        max-width: 130px !important;
+        min-width: 130px !important;
+        width: 130px !important;
+    }
+    
+    /* Brand Item Images - STRONG OVERRIDE */
+    .xb-brand-item img,
+    .brand-marquee .xb-brand-item img,
+    .xb-brand-inner .xb-brand-item img,
+    .xb-brand-item img[style],
+    .xb-brand-item img[style*="height"],
+    .xb-brand-item img[style*="max-width"],
+    .xb-brand-item img[style*="margin"],
+    .xb-brand-item img[style*="width"] {
+        max-height: 85px !important;
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    .xb-brand-item[style*="align-items: flex-start"] img,
+    .xb-brand-item[style*="align-items: flex-start"] img[style],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="height"],
+    .xb-brand-item[style*="align-items: flex-start"] img[style*="-77px"] {
+        max-height: 85px !important;
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* ============================================
+   Brand Section - Prevent Horizontal Scroll
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Brand Section */
+    .brand {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Brand Container */
+    .brand .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Brand Wrap - Prevent overflow */
+    .xb-brand-wrap {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Brand Marquee - Allow horizontal scroll if needed for marquee */
+    .brand-marquee {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Brand Inner - Allow horizontal scroll for marquee effect */
+    .xb-brand-inner {
+        width: max-content !important;
+        min-width: 100% !important;
+    }
+}
+
+/* ============================================
+   Preloader Mobile Optimization (Same as Desktop)
+   ============================================ */
+
+@media only screen and (max-width: 767px) {
+    /* Ensure preloader takes full viewport and prevents layout shift - Same as desktop */
+    .preloader {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important; /* Dynamic viewport height for mobile */
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        display: block !important;
+        z-index: 999999 !important;
+        background-color: var(--color-secondary) !important;
+    }
+    
+    /* Center loader circle perfectly - Same styling as desktop but responsive size */
+    .preloader .loader-circle {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0 !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        width: 160px !important;
+        height: 160px !important;
+        direction: ltr !important;
+        border-radius: 100% !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Loader line mask - Same animation and positioning as desktop */
+    .preloader .loader-line-mask {
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        width: 80px !important;
+        height: 100px !important;
+        margin-left: -80px !important;
+        margin-top: -80px !important;
+        overflow: hidden !important;
+        transform-origin: 80px 80px !important;
+        -webkit-transform-origin: 80px 80px !important;
+        animation: preloaderSpin 1.5s infinite linear !important;
+        -webkit-animation: preloaderSpin 1.5s infinite linear !important;
+    }
+    
+    /* Loader line - Same gradient and styling as desktop */
+    .preloader .loader-line {
+        width: 160px !important;
+        height: 160px !important;
+        border-radius: 50% !important;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0)) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='rgba(255, 255, 255, 0.44)',endColorStr='rgba(255, 255, 255, 0)') !important;
+        background-color: initial !important;
+        position: relative !important;
+    }
+    
+    /* Loader line before pseudo-element - Same as desktop */
+    .preloader .loader-line:before {
+        top: 1px !important;
+        left: 1px !important;
+        right: 1px !important;
+        bottom: 1px !important;
+        z-index: 99 !important;
+        content: '' !important;
+        position: absolute !important;
+        border-radius: inherit !important;
+        background-color: var(--color-secondary) !important;
+    }
+    
+    /* Fix loader logo centering - Same positioning as desktop */
+    .preloader .loader-logo {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        margin: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        text-align: center !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        width: auto !important;
+        max-width: 70px !important;
+        z-index: 100 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Ensure logo image is properly sized and centered - Same as desktop */
+    .preloader .loader-logo img {
+        display: block !important;
+        margin: 0 auto !important;
+        max-width: 70px !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        filter: brightness(0) invert(1) !important;
+        image-rendering: -webkit-optimize-contrast !important;
+        image-rendering: crisp-edges !important;
+        will-change: auto !important;
+        animation: logoGlow 2s ease-in-out infinite !important;
+    }
+    
+    /* Logo glow animation for mobile */
+    @keyframes logoGlow {
+        0%, 100% {
+            filter: brightness(0) invert(1) 
+                    drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) 
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))
+                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.2)) !important;
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+        50% {
+            filter: brightness(0) invert(1)
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+                    drop-shadow(0 0 60px rgba(255, 255, 255, 0.4)) !important;
+            opacity: 1 !important;
+            transform: scale(1.05) !important;
+        }
+    }
+    
+    /* Prevent any layout shifts during load */
+    .preloader,
+    .preloader * {
+        box-sizing: border-box !important;
+        backface-visibility: hidden !important;
+        -webkit-backface-visibility: hidden !important;
+    }
+    
+    /* Ensure preloaderSpin animation is available */
+    @keyframes preloaderSpin {
+        0% {
+            transform: rotate(0) !important;
+            -webkit-transform: rotate(0) !important;
+        }
+        100% {
+            transform: rotate(360deg) !important;
+            -webkit-transform: rotate(360deg) !important;
+        }
+    }
+}
+
+/* Extra small devices - Additional adjustments - Maintain same loader functionality */
+@media only screen and (max-width: 575px) {
+    .preloader .loader-circle {
+        width: 140px !important;
+        height: 140px !important;
+        border-radius: 100% !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Adjust loader line mask for smaller circle */
+    .preloader .loader-line-mask {
+        width: 70px !important;
+        height: 90px !important;
+        margin-left: -70px !important;
+        margin-top: -70px !important;
+        transform-origin: 70px 70px !important;
+        -webkit-transform-origin: 70px 70px !important;
+    }
+    
+    /* Adjust loader line for smaller circle */
+    .preloader .loader-line {
+        width: 140px !important;
+        height: 140px !important;
+    }
+    
+    .preloader .loader-logo {
+        max-width: 60px !important;
+    }
+    
+    .preloader .loader-logo img {
+        max-width: 60px !important;
+        filter: brightness(0) invert(1) !important;
+    }
+}
+
+/* Very small devices - iPhone SE and similar - Maintain same loader functionality */
+@media only screen and (max-width: 375px) {
+    .preloader .loader-circle {
+        width: 120px !important;
+        height: 120px !important;
+        border-radius: 100% !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Adjust loader line mask for smaller circle */
+    .preloader .loader-line-mask {
+        width: 60px !important;
+        height: 80px !important;
+        margin-left: -60px !important;
+        margin-top: -60px !important;
+        transform-origin: 60px 60px !important;
+        -webkit-transform-origin: 60px 60px !important;
+    }
+    
+    /* Adjust loader line for smaller circle */
+    .preloader .loader-line {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .preloader .loader-logo {
+        max-width: 55px !important;
+    }
+    
+    .preloader .loader-logo img {
+        max-width: 55px !important;
+        filter: brightness(0) invert(1) !important;
     }
 }
 

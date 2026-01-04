@@ -12053,21 +12053,46 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
 
 .preloader .loader-logo {
   top: 50%;
-  left: 0;
-  right: 0;
+  left: 50%;
   position: absolute;
   text-align: center;
-  transform: translate(0%, -50%); }
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
 .preloader .loader-logo img {
-  max-width: 60%;
-  filter: brightness(0) invert(1); }
+  max-width: 70px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  animation: logoGlow 2s ease-in-out infinite; }
 
 @keyframes preloaderSpin {
   0% {
     transform: rotate(0); }
   100% {
     transform: rotate(360deg); } }
+
+@keyframes logoGlow {
+  0%, 100% {
+    filter: brightness(0) invert(1) 
+            drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) 
+            drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))
+            drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+    opacity: 1;
+    transform: scale(1); }
+  50% {
+    filter: brightness(0) invert(1)
+            drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
+            drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+            drop-shadow(0 0 60px rgba(255, 255, 255, 0.4));
+    opacity: 1;
+    transform: scale(1.05); } }
 .xb-footer-heading {
   position: relative;
   overflow: visible; }

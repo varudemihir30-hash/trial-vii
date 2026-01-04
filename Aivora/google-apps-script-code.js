@@ -18,34 +18,51 @@
 
 // ⚠️ REPLACE THIS WITH YOUR GOOGLE SHEET ID
 // You can find it in the URL: https://docs.google.com/spreadsheets/d/SHEET_ID_HERE/edit
-const SHEET_ID = 'YOUR_SHEET_ID_HERE';
+const SHEET_ID = '1T5jVjp8OyoZ9MMjXdDELgsmR3aVdwiimoQSXCw2aqVY';
 
 // ⚠️ REPLACE WITH YOUR SHEET NAME (default is usually 'Sheet1')
-const SHEET_NAME = 'Sheet1';
+// If the sheet name doesn't exist, the script will use the first available sheet
+const SHEET_NAME = 'Sheet1'; // Change this to match your actual sheet tab name
 
 /**
  * Handle POST request from contact form
  */
 function doPost(e) {
     try {
-        // Get the active spreadsheet
-        const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
+        // Log incoming request for debugging
+        Logger.log('Received POST request');
+        Logger.log('Parameters: ' + JSON.stringify(e.parameter));
+        Logger.log('PostData: ' + (e.postData ? e.postData.contents : 'none'));
         
-        // If sheet doesn't exist, create it
+        // Get the active spreadsheet
+        const ss = SpreadsheetApp.openById(SHEET_ID);
+        let sheet = ss.getSheetByName(SHEET_NAME);
+        
+        // If sheet doesn't exist, try to get the first sheet or create a new one
         if (!sheet) {
-            const ss = SpreadsheetApp.openById(SHEET_ID);
-            const newSheet = ss.insertSheet(SHEET_NAME);
-            // Add headers if this is a new sheet
-            newSheet.getRange(1, 1, 1, 6).setValues([['Timestamp', 'Name', 'Email', 'Phone', 'Service', 'Message']]);
-            return ContentService.createTextOutput(JSON.stringify({ success: false, error: 'Sheet created. Please try again.' }));
+            Logger.log('Sheet "' + SHEET_NAME + '" not found. Trying to get first sheet...');
+            // Try to get the first sheet
+            sheet = ss.getSheets()[0];
+            if (!sheet) {
+                // If no sheets exist, create one
+                Logger.log('No sheets found. Creating new sheet...');
+                sheet = ss.insertSheet(SHEET_NAME);
+                // Add headers
+                sheet.getRange(1, 1, 1, 6).setValues([['Timestamp', 'Name', 'Email', 'Phone', 'Service', 'Message']]);
+                sheet.getRange(1, 1, 1, 6).setFontWeight('bold');
+                sheet.getRange(1, 1, 1, 6).setBackground('#4285f4');
+                sheet.getRange(1, 1, 1, 6).setFontColor('#ffffff');
+                Logger.log('New sheet created: ' + sheet.getName());
+            } else {
+                Logger.log('Using first available sheet: ' + sheet.getName());
+            }
         }
         
         // Parse the incoming data
         let data;
-        try {
-            data = JSON.parse(e.postData.contents);
-        } catch (err) {
-            // If JSON parsing fails, try form data
+        
+        // First try to get form data (FormData sends as parameters)
+        if (e.parameter && (e.parameter.name || e.parameter.email)) {
             data = {
                 name: e.parameter.name || '',
                 email: e.parameter.email || '',
@@ -54,6 +71,26 @@ function doPost(e) {
                 message: e.parameter.message || '',
                 file: e.parameter.file || 'No file'
             };
+            Logger.log('Using parameter data: ' + JSON.stringify(data));
+        } else if (e.postData && e.postData.contents) {
+            // Try JSON parsing
+            try {
+                data = JSON.parse(e.postData.contents);
+                Logger.log('Using JSON data: ' + JSON.stringify(data));
+            } catch (err) {
+                Logger.log('JSON parsing error: ' + err.toString());
+                // If JSON parsing fails, return error
+                return ContentService.createTextOutput(JSON.stringify({
+                    success: false,
+                    error: 'Invalid data format: ' + err.toString()
+                })).setMimeType(ContentService.MimeType.JSON);
+            }
+        } else {
+            Logger.log('No data received in request');
+            return ContentService.createTextOutput(JSON.stringify({
+                success: false,
+                error: 'No data received'
+            })).setMimeType(ContentService.MimeType.JSON);
         }
         
         // Get current timestamp
@@ -88,6 +125,9 @@ function doPost(e) {
         // Auto-resize columns for better readability
         sheet.autoResizeColumns(1, 6);
         
+        Logger.log('Data saved successfully to row: ' + newRow);
+        Logger.log('Row data: ' + JSON.stringify(rowData));
+        
         // Return success response
         return ContentService.createTextOutput(JSON.stringify({
             success: true,
@@ -96,10 +136,15 @@ function doPost(e) {
         })).setMimeType(ContentService.MimeType.JSON);
         
     } catch (error) {
-        // Return error response
+        // Log the full error for debugging
+        Logger.log('Error in doPost: ' + error.toString());
+        Logger.log('Error stack: ' + error.stack);
+        
+        // Return error response with more details
         return ContentService.createTextOutput(JSON.stringify({
             success: false,
-            error: error.toString()
+            error: error.toString(),
+            message: 'Check the execution log in Google Apps Script for details'
         })).setMimeType(ContentService.MimeType.JSON);
     }
 }

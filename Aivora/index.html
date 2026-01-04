@@ -680,6 +680,183 @@
             }
         }
     </style>
+    
+    <!-- Brand Logo Mobile Fix - Strong Overrides -->
+    <style>
+        @media only screen and (max-width: 767px) {
+            /* Force brand items to have proper spacing and sizing */
+            .brand .xb-brand-item {
+                flex-shrink: 0 !important;
+                flex-grow: 0 !important;
+                width: 120px !important;
+                min-width: 120px !important;
+                max-width: 120px !important;
+                margin-right: 40px !important;
+            }
+            
+            .brand .xb-brand-item img {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                max-height: 75px !important;
+                margin: 0 !important;
+            }
+            
+            /* Fix Morgan Stanley logo negative margin */
+            .brand .xb-brand-item[style*="align-items"] img {
+                margin: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            
+            /* Extra small screens */
+            @media only screen and (max-width: 575px) {
+                .brand .xb-brand-item {
+                    width: 100px !important;
+                    min-width: 100px !important;
+                    max-width: 100px !important;
+                    margin-right: 30px !important;
+                }
+                
+                .brand .xb-brand-item img {
+                    max-height: 65px !important;
+                }
+            }
+            
+            /* Small screens */
+            @media only screen and (min-width: 576px) and (max-width: 767px) {
+                .brand .xb-brand-item {
+                    width: 130px !important;
+                    min-width: 130px !important;
+                    max-width: 130px !important;
+                }
+                
+                .brand .xb-brand-item img {
+                    max-height: 85px !important;
+                }
+            }
+        }
+    </style>
+    
+    <!-- Preloader Fix - Consistent Logo Positioning for Desktop and Mobile -->
+    <style>
+        /* Base preloader logo positioning - Same for all devices */
+        .preloader .loader-logo {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            right: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transform: translate(-50%, -50%) !important;
+            -webkit-transform: translate(-50%, -50%) !important;
+            width: auto !important;
+            max-width: 70px !important;
+            z-index: 100 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        .preloader .loader-logo img {
+            display: block !important;
+            margin: 0 auto !important;
+            max-width: 70px !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain !important;
+            animation: logoGlow 2s ease-in-out infinite !important;
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: brightness(0) invert(1) 
+                        drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) 
+                        drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))
+                        drop-shadow(0 0 30px rgba(255, 255, 255, 0.2)) !important;
+                opacity: 1 !important;
+                transform: scale(1) !important;
+            }
+            50% {
+                filter: brightness(0) invert(1)
+                        drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
+                        drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+                        drop-shadow(0 0 60px rgba(255, 255, 255, 0.4)) !important;
+                opacity: 1 !important;
+                transform: scale(1.05) !important;
+            }
+        }
+        
+        /* Mobile specific adjustments */
+        @media only screen and (max-width: 767px) {
+            .preloader {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                min-height: 100vh !important;
+                min-height: 100dvh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            
+            .preloader .loader-circle {
+                position: absolute !important;
+                top: 50% !important;
+                left: 50% !important;
+                right: auto !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                transform: translate(-50%, -50%) !important;
+                -webkit-transform: translate(-50%, -50%) !important;
+                width: 140px !important;
+                height: 140px !important;
+            }
+            
+            /* Prevent layout shifts */
+            .preloader,
+            .preloader * {
+                box-sizing: border-box !important;
+            }
+        }
+        
+        @media only screen and (max-width: 575px) {
+            .preloader .loader-circle {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            
+            .preloader .loader-logo {
+                max-width: 60px !important;
+            }
+            
+            .preloader .loader-logo img {
+                max-width: 60px !important;
+            }
+        }
+        
+        @media only screen and (max-width: 375px) {
+            .preloader .loader-circle {
+                width: 110px !important;
+                height: 110px !important;
+            }
+            
+            .preloader .loader-logo {
+                max-width: 55px !important;
+            }
+            
+            .preloader .loader-logo img {
+                max-width: 55px !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="ai-agency">
@@ -923,26 +1100,20 @@
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
                             <div class="xb-logo-mobile xb-hide-xl">
                             <a href="index.html" rel="home"><img src="assets/img/logo/vertex-tech-logo.svg" alt=""></a></div>
-                            <div class="xb-header-mobile-search xb-hide-xl">
-                                <form role="search" action="#">
-                                    <input type="text" placeholder="Search..." name="s" class="search-field">
-                                    <button class="search-submit" type="submit"><i class="far fa-search"></i></button>
-                                </form>
-                            </div>
                             <nav class="xb-header-nav">
                                 <ul class="xb-menu-primary clearfix">
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="#"><span>Home</span></a>
-                                       
+                                    <li class="menu-item active">
+                                        <a href="index.html"><span>Home</span></a>
                                     </li>
-                                    <li><a href="about.html"><span>about us</span></a></li>
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="service.html"><span>services</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="service.html"><span>Services</span></a></li>
-                                        </ul>
+                                    <li class="menu-item">
+                                        <a href="about.html"><span>About Us</span></a>
                                     </li>
-                                    <li><a href="contact.html"><span>Contact Us</span></a></li>
+                                    <li class="menu-item">
+                                        <a href="service.html"><span>Services</span></a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="contact.html"><span>Contact Us</span></a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

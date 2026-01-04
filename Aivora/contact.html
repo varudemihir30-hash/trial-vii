@@ -1047,14 +1047,60 @@
                 e.preventDefault();
                 
                 // Get form data
+                const serviceSelect = document.getElementById('service-select');
+                // Handle nice-select plugin - get value directly from select element
+                // nice-select updates the original select's value, so we can use it directly
+                let serviceValue = serviceSelect.value;
+                
+                // If value is empty, try to get from nice-select display
+                if (!serviceValue) {
+                    const niceSelectWrapper = serviceSelect.closest('.xb-select-field');
+                    if (niceSelectWrapper) {
+                        const niceSelect = niceSelectWrapper.querySelector('.nice-select');
+                        if (niceSelect) {
+                            const currentText = niceSelect.querySelector('.current');
+                            if (currentText && currentText.textContent.trim() !== 'Select Service*') {
+                                // Find matching option by text
+                                const options = serviceSelect.options;
+                                for (let i = 0; i < options.length; i++) {
+                                    if (options[i].textContent.trim() === currentText.textContent.trim()) {
+                                        serviceValue = options[i].value;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 const formData = {
                     name: document.getElementById('author-name').value.trim(),
                     email: document.getElementById('author-email').value.trim(),
                     phone: document.getElementById('author-phone').value.trim(),
-                    service: document.getElementById('service-select').value,
+                    service: serviceValue || '',
                     message: document.getElementById('massage').value.trim(),
                     file: document.getElementById('file-attachment').files[0] ? document.getElementById('file-attachment').files[0].name : 'No file'
                 };
+                
+                // Debug: Log form data
+                console.log('Form data being sent:', formData);
+                console.log('Service select value:', serviceSelect.value);
+                console.log('Service select element:', serviceSelect);
+                
+                // Validate required fields
+                if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.message) {
+                    alert('Please fill in all required fields.');
+                    console.error('Validation failed:', {
+                        name: !!formData.name,
+                        email: !!formData.email,
+                        phone: !!formData.phone,
+                        service: !!formData.service,
+                        message: !!formData.message
+                    });
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    return;
+                }
 
                 // Get submit button
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
