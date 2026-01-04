@@ -8,12 +8,31 @@
 	});
 
 	/*------------------------------------------
-	= preloader
+	= preloader - Optimized for faster loading
 	-------------------------------------------*/
 	function preloader() {
-		$('#preloader').fadeOut('slow',function(){
-			$(this).remove();
-		});
+		var $preloader = $('#preloader');
+		
+		// Check if preloader still exists (might have been removed by inline script)
+		if (!$preloader.length) {
+			// Preloader already removed, just ensure body class is removed
+			$('body').removeClass('preloader-active');
+			return;
+		}
+		
+		// Add class to body to prevent scrolling while preloader is visible
+		$('body').addClass('preloader-active');
+		
+		// Show preloader immediately if it exists
+		$preloader.css('display', 'flex');
+		
+		// Fade out faster and remove
+		$preloader.addClass('fade-out');
+		setTimeout(function(){
+			$preloader.remove();
+			// Remove class from body to allow scrolling after preloader is hidden
+			$('body').removeClass('preloader-active');
+		}, 300); // Faster fade out (300ms instead of slow fade)
 	}
 
 	//gasp
