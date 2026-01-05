@@ -749,6 +749,61 @@
                         margin-bottom: 280px !important;
                     }
                 }
+                /* ============================================
+                   Mobile Fix: Prevent Text Overlap with Icons
+                   Fix input field padding on mobile devices (max-width: 768px)
+                   ============================================ */
+                @media only screen and (max-width: 768px) {
+                    /* Contact form input fields - increase left padding to prevent text overlap with icons */
+                    .xb-contact-form .xb-input-field input,
+                    .xb-contact-form .xb-input-field textarea,
+                    .xb-contact-form .xb-massage-field textarea {
+                        padding-left: 56px !important;
+                    }
+                    
+                    /* Ensure labels align properly with increased padding */
+                    .xb-contact-form .xb-input-field label {
+                        left: 56px !important;
+                    }
+                    
+                    /* Keep icons positioned correctly - they remain at left: 20px */
+                    .xb-contact-form .xb-input-field img {
+                        left: 20px !important;
+                        top: 50% !important;
+                        transform: translateY(-50%) !important;
+                    }
+                    
+                    /* Message field icon positioning - ensure it's vertically centered */
+                    .xb-contact-form .xb-massage-field img {
+                        left: 20px !important;
+                        top: 50% !important;
+                        transform: translateY(-50%) !important;
+                    }
+                    
+                    /* Select field - also increase padding for consistency */
+                    .xb-contact-form .xb-select-field .nice-select {
+                        padding-left: 56px !important;
+                    }
+                    
+                    /* Select field icon positioning */
+                    .xb-contact-form .xb-select-field img {
+                        left: 20px !important;
+                        top: 50% !important;
+                        transform: translateY(-50%) !important;
+                    }
+                    
+                    /* File upload field - increase padding */
+                    .xb-contact-form .xb-select-file input {
+                        padding-left: 56px !important;
+                    }
+                    
+                    /* File upload field icon positioning */
+                    .xb-contact-form .xb-select-file img {
+                        left: 20px !important;
+                        top: 50% !important;
+                        transform: translateY(-50%) !important;
+                    }
+                }
             </style>
             <div class="container">
                 <div class="xb-contact-wrap xb-border bg_img" data-background="assets/img/bg/contact-bg02.png">
