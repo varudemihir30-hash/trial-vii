@@ -296,33 +296,132 @@
             visibility: hidden !important;
             display: none !important;
         }
-        /* Header Aurora Background - Mobile Only */
+        /* Mobile menu customizations */
+        @media (max-width: 991px) {
+            /* Hide search bar in mobile menu */
+            .xb-header-mobile-search {
+                display: none !important;
+            }
+            /* Hide toggle arrows in mobile menu */
+            .xb-menu-primary li.menu-item-has-children .xb-menu-toggle,
+            .xb-menu-primary .xb-menu-toggle {
+                display: none !important;
+            }
+            /* Remove spacing after Contact Us */
+            .xb-menu-primary li:last-child {
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            .xb-menu-primary li:last-child a {
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            /* Mobile logo section styling */
+            .xb-logo-mobile {
+                display: flex !important;
+                align-items: center !important;
+                gap: 0 !important;
+                margin-bottom: 20px !important;
+            }
+            .xb-logo-mobile a {
+                display: flex !important;
+                align-items: center !important;
+            }
+            .xb-logo-mobile img {
+                height: 50px !important;
+                width: auto !important;
+                max-width: 200px !important;
+                filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+            }
+            .xb-logo-mobile .logo-divider {
+                display: inline-block !important;
+                width: 1px !important;
+                height: 50px !important;
+                background: rgba(255, 255, 255, 0.8) !important;
+                margin: 0 8px !important;
+            }
+            .xb-logo-mobile .company-name {
+                font-family: var(--font-heading) !important;
+                font-weight: 600 !important;
+                font-size: 26px !important;
+                color: #ffffff !important;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+                white-space: nowrap !important;
+                letter-spacing: -0.04em !important;
+                line-height: 1.2 !important;
+                margin-top: 5px !important;
+            }
+            @media (max-width: 480px) {
+                .xb-logo-mobile .company-name {
+                    font-size: 22px !important;
+                }
+                .xb-logo-mobile img {
+                    height: 40px !important;
+                }
+                .xb-logo-mobile .logo-divider {
+                    height: 40px !important;
+                    margin: 0 6px !important;
+                }
+            }
+        }
+        /* Reduce header logo and company name size when mobile menu is open */
+        @media (max-width: 991px) {
+            body.mobile-menu-active .xb-header-logo img {
+                max-height: 35px !important;
+                width: auto !important;
+                transition: all 0.3s ease !important;
+            }
+            body.mobile-menu-active .xb-header-logo .company-name {
+                font-size: 18px !important;
+                transition: all 0.3s ease !important;
+            }
+            body.mobile-menu-active .xb-header-logo .logo-divider {
+                height: 45px !important;
+                transition: all 0.3s ease !important;
+            }
+            body.mobile-menu-active .xb-header-logo {
+                gap: 8px !important;
+                transition: all 0.3s ease !important;
+            }
+        }
+        /* Header Aurora Background - Removed on Mobile */
         .header-aurora-container {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            overflow: hidden !important;
+            pointer-events: none !important;
+        }
+        .header-aurora-container canvas {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
         }
         @media (max-width: 991px) {
-            /* Make header area position relative for aurora positioning */
+            /* Make header area position relative */
             .header-area,
             #xb-header-area {
                 position: relative !important;
             }
-            .header-aurora-container {
-                display: block !important;
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                z-index: 0 !important;
-                pointer-events: none !important;
-                overflow: hidden !important;
-            }
+            /* Completely hide aurora background on mobile */
+            #header-aurora-container,
+            .header-aurora-container,
+            #header-aurora-container canvas,
             .header-aurora-container canvas {
-                opacity: 0.6 !important;
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                height: 0 !important;
+                width: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
+                overflow: hidden !important;
+                pointer-events: none !important;
+                z-index: -1 !important;
             }
-            /* Ensure header content is above aurora */
+            /* Ensure header content positioning */
             .header-area .xb-header,
             .header-area .header__wrap,
             #xb-header-area .header__wrap,
@@ -331,6 +430,109 @@
                 z-index: 1 !important;
             }
         }
+        /* Mobile Header - Transparent Background (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Remove all backgrounds from header containers */
+            .header-area,
+            #xb-header-area,
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap,
+            .header-style--two .header__wrap,
+            .header-style--three .header__wrap,
+            .xb-header-area-sticky,
+            .xb-header-area-sticky.xb-header-fixed,
+            #xb-header-area .xb-header-area-sticky,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed,
+            .header-style--one .xb-header-area-sticky,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed,
+            .header-style--two .xb-header-area-sticky,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed,
+            .header-style--three .xb-header-area-sticky,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed,
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            #xb-header-area .xb-header-area-sticky .header__wrap,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--one .xb-header-area-sticky .header__wrap,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--two .xb-header-area-sticky .header__wrap,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--three .xb-header-area-sticky .header__wrap,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .xb-header {
+                background: transparent !important;
+                background-color: transparent !important;
+                background-image: none !important;
+            }
+            
+            /* Remove backdrop filters and blur effects */
+            .header-area,
+            #xb-header-area,
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap,
+            .header-style--two .header__wrap,
+            .header-style--three .header__wrap,
+            .xb-header-area-sticky,
+            .xb-header-area-sticky.xb-header-fixed,
+            #xb-header-area .xb-header-area-sticky,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed,
+            .header-style--one .xb-header-area-sticky,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed,
+            .header-style--two .xb-header-area-sticky,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed,
+            .header-style--three .xb-header-area-sticky,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed,
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            #xb-header-area .xb-header-area-sticky .header__wrap,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--one .xb-header-area-sticky .header__wrap,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--two .xb-header-area-sticky .header__wrap,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--three .xb-header-area-sticky .header__wrap,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            
+            /* Remove borders and box shadows */
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap,
+            .header-style--two .header__wrap,
+            .header-style--three .header__wrap,
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            #xb-header-area .xb-header-area-sticky .header__wrap,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--one .xb-header-area-sticky .header__wrap,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--two .xb-header-area-sticky .header__wrap,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed .header__wrap,
+            .header-style--three .xb-header-area-sticky .header__wrap,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                border: none !important;
+                box-shadow: none !important;
+            }
+            
+            /* Remove backgrounds from pseudo-elements */
+            .header-style--two .header__wrap::before,
+            .header-style--two .header__wrap::after,
+            .header-style--two .xb-header-area-sticky .header__wrap::before,
+            .header-style--two .xb-header-area-sticky .header__wrap::after,
+            .header-style--one .header__wrap::before,
+            .header-style--one .header__wrap::after,
+            .header-style--three .header__wrap::before,
+            .header-style--three .header__wrap::after {
+                display: none !important;
+                background: transparent !important;
+                background-image: none !important;
+            }
+        }
+        
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
             font-size: 288px !important;
@@ -1081,9 +1283,12 @@
                     <div class="xb-header-menu">
                         <div class="xb-header-menu-scroll">
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
-                            <div class="xb-logo-mobile xb-hide-xl">
-                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-tech-logo.svg" alt=""></a></div>
-                            <div class="xb-header-mobile-search xb-hide-xl">
+                            <div class="xb-logo-mobile xb-hide-xl" style="display: flex; align-items: center; gap: 0;">
+                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-tech-logo.svg" alt=""></a>
+                            <span class="logo-divider" style="display: inline-block; width: 1px; height: 50px; background: rgba(255, 255, 255, 0.8); margin: 0 8px;"></span>
+                            <span class="company-name" style="font-family: var(--font-heading); font-weight: 600; font-size: 26px; color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); white-space: nowrap; letter-spacing: -0.04em; line-height: 1.2; margin-top: 5px;">Vertex Tech io</span>
+                            </div>
+                            <div class="xb-header-mobile-search xb-hide-xl" style="display: none !important;">
                                 <form role="search" action="#">
                                     <input type="text" placeholder="Search..." name="s" class="search-field">
                                     <button class="search-submit" type="submit"><i class="far fa-search"></i></button>
@@ -1091,16 +1296,12 @@
                             </div>
                             <nav class="xb-header-nav">
                                 <ul class="xb-menu-primary clearfix">
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="#"><span>Home</span></a>
-                                        
+                                    <li class="menu-item">
+                                        <a href="index.html"><span>Home</span></a>
                                     </li>
                                     <li><a href="about.html"><span>about us</span></a></li>
-                                    <li class="menu-item menu-item-has-children">
+                                    <li class="menu-item">
                                         <a href="service.html"><span>services</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="service.html"><span>Services</span></a></li>
-                                        </ul>
                                     </li>
                                     <li><a href="contact.html"><span>Contact Us</span></a></li>
                                 </ul>
@@ -1908,71 +2109,86 @@
             }, 1500);
         });
         
-        // Initialize Header Aurora for Mobile Only
-        function initHeaderAurora() {
-            // Only initialize on mobile devices
-            if (window.innerWidth > 991) {
-                return; // Skip on desktop
-            }
-            
+        // Header Aurora - DISABLED on Mobile
+        // Function to remove/hide header aurora on mobile
+        function removeHeaderAurora() {
             const headerAuroraContainer = document.getElementById('header-aurora-container');
-            if (!headerAuroraContainer) {
-                console.log('Waiting for header-aurora-container...');
-                setTimeout(initHeaderAurora, 100);
-                return;
-            }
-            
-            // Check for OGL
-            let OGL_NS = window.OGL || window.ogl;
-            if (!OGL_NS || !OGL_NS.Renderer || typeof Aurora === 'undefined') {
-                setTimeout(initHeaderAurora, 200);
-                return;
-            }
-            
-            try {
-                const containerRect = headerAuroraContainer.getBoundingClientRect();
-                if (containerRect.width === 0 || containerRect.height === 0) {
-                    setTimeout(initHeaderAurora, 100);
-                    return;
+            if (headerAuroraContainer) {
+                // Destroy any existing instance
+                if (window.headerAuroraInstance) {
+                    try {
+                        if (window.headerAuroraInstance.destroy) {
+                            window.headerAuroraInstance.destroy();
+                        }
+                    } catch (e) {
+                        console.log('Error destroying header aurora:', e);
+                    }
+                    window.headerAuroraInstance = null;
                 }
-                
-                console.log('Initializing Header Aurora for mobile...');
-                window.headerAuroraInstance = new Aurora(headerAuroraContainer, {
-                    colorStops: ['#020f3e', '#1fad7e', '#213e97'],
-                    amplitude: 0.8,
-                    blend: 0.4,
-                    speed: 0.8
-                });
-                console.log('✓ Header Aurora initialized successfully');
-            } catch (error) {
-                console.error('✗ Error initializing Header Aurora:', error);
+                // Hide the container completely
+                headerAuroraContainer.style.display = 'none';
+                headerAuroraContainer.style.visibility = 'hidden';
+                headerAuroraContainer.style.opacity = '0';
+                headerAuroraContainer.style.height = '0';
+                headerAuroraContainer.style.width = '0';
+                headerAuroraContainer.style.position = 'absolute';
+                headerAuroraContainer.style.left = '-9999px';
+                headerAuroraContainer.style.pointerEvents = 'none';
+                // Remove any canvas elements
+                const canvas = headerAuroraContainer.querySelector('canvas');
+                if (canvas) {
+                    canvas.style.display = 'none';
+                    canvas.style.visibility = 'hidden';
+                }
             }
         }
         
-        // Initialize header aurora after hero aurora
-        setTimeout(function() {
-            if (window.OGL && window.OGL.Renderer && typeof Aurora !== 'undefined') {
-                initHeaderAurora();
-            } else {
-                window.addEventListener('load', function() {
-                    setTimeout(initHeaderAurora, 2000);
-                });
+        // Initialize Header Aurora for Mobile Only - DISABLED
+        function initHeaderAurora() {
+            // Aurora background removed from header on mobile - skip initialization
+            // Remove it if it exists
+            if (window.innerWidth <= 991) {
+                removeHeaderAurora();
             }
-        }, 2000);
+            return; // Disabled - aurora removed from header on mobile
+        }
         
-        // Re-initialize on resize if switching to mobile
+        // Remove header aurora on mobile immediately
+        if (window.innerWidth <= 991) {
+            removeHeaderAurora();
+        }
+        
+        // Also remove on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.innerWidth <= 991) {
+                    removeHeaderAurora();
+                }
+            });
+        } else {
+            if (window.innerWidth <= 991) {
+                removeHeaderAurora();
+            }
+        }
+        
+        // Re-check on resize
         let resizeTimeout;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function() {
-                if (window.innerWidth <= 991 && !window.headerAuroraInstance) {
-                    initHeaderAurora();
-                } else if (window.innerWidth > 991 && window.headerAuroraInstance) {
-                    // Clean up on desktop
-                    if (window.headerAuroraInstance.destroy) {
-                        window.headerAuroraInstance.destroy();
+                if (window.innerWidth <= 991) {
+                    // Mobile - remove aurora
+                    removeHeaderAurora();
+                } else {
+                    // Desktop - clean up instance but don't remove container
+                    if (window.headerAuroraInstance) {
+                        try {
+                            if (window.headerAuroraInstance.destroy) {
+                                window.headerAuroraInstance.destroy();
+                            }
+                        } catch (e) {}
+                        window.headerAuroraInstance = null;
                     }
-                    window.headerAuroraInstance = null;
                 }
             }, 300);
         });

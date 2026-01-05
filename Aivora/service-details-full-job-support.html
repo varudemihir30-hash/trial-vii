@@ -300,6 +300,109 @@
             visibility: hidden !important;
             display: none !important;
         }
+        /* Mobile Header - Match About Page (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Ensure glass effect header matches about page on mobile */
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .header-style--one .header__wrap,
+            .header-style--two .header__wrap,
+            .header-style--three .header__wrap,
+            .xb-header-area-sticky .header__wrap,
+            .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                background: rgba(255, 255, 255, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                background-image: none !important;
+            }
+            /* Ensure header area itself is transparent */
+            .header-area,
+            #xb-header-area {
+                background: transparent !important;
+                background-color: transparent !important;
+            }
+            .xb-header-area-sticky,
+            .xb-header-area-sticky.xb-header-fixed {
+                background: rgba(255, 255, 255, 0.05) !important;
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+            /* Override main.css white background rules for sticky header */
+            #xb-header-area .xb-header-area-sticky,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed {
+                background: rgba(255, 255, 255, 0.05) !important;
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+            #xb-header-area .xb-header-area-sticky .header__wrap,
+            #xb-header-area .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                background: rgba(255, 255, 255, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                background-image: none !important;
+            }
+            /* Override header-style specific white background rules */
+            .header-style--one .xb-header-area-sticky,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed {
+                background: rgba(255, 255, 255, 0.05) !important;
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+            .header-style--one .xb-header-area-sticky .header__wrap,
+            .header-style--one .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                background: rgba(255, 255, 255, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                background-image: none !important;
+            }
+            .header-style--two .xb-header-area-sticky,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed {
+                background: rgba(255, 255, 255, 0.05) !important;
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+            .header-style--two .xb-header-area-sticky .header__wrap,
+            .header-style--two .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                background: rgba(255, 255, 255, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                background-image: none !important;
+            }
+            .header-style--three .xb-header-area-sticky,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed {
+                background: rgba(255, 255, 255, 0.05) !important;
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            }
+            .header-style--three .xb-header-area-sticky .header__wrap,
+            .header-style--three .xb-header-area-sticky.xb-header-fixed .header__wrap {
+                background: rgba(255, 255, 255, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                background-image: none !important;
+            }
+        }
+        
         /* Service Details Image Styling */
         .service-details .single-item-image {
             position: relative;
@@ -323,6 +426,41 @@
         }
         .service-details .single-item-image:hover img {
             transform: scale(1.05);
+        }
+        /* CRITICAL FIX: Ensure preloader doesn't block content */
+        #preloader,
+        #preloader.preloader,
+        div#preloader {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            z-index: -1 !important;
+            position: fixed !important;
+            top: -9999px !important;
+            left: -9999px !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        body.preloader-active,
+        body {
+            overflow: auto !important;
+            position: static !important;
+            height: auto !important;
+        }
+        .body_wrap,
+        div.body_wrap {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        main,
+        section {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
@@ -382,13 +520,13 @@
 <!-- backtotop-end -->
 
 <!-- Preloader-Start -->
-<div id="preloader" class="preloader">
+<div id="preloader" class="preloader" style="display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; z-index: -1 !important;">
     <div class="loader-circle">
         <div class="loader-line-mask">
         <div class="loader-line"></div>
         </div>
         <div class="loader-logo">
-        <img src="assets/img/logo/vertex-tech-logo.svg" alt="Site Logo – Vertex Tech Io – >
+        <img src="assets/img/logo/vertex-tech-logo.svg" alt="Site Logo – Vertex Tech Io – AI Agency & Technology HTML Template">
         </div>
     </div>
 </div>
@@ -686,7 +824,7 @@
                                         </div>
                                     </div>
                                     <div class="accordion-item">
-                                        <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_two" aria-expanded="true" aria-controls="collapse_two">
+                                        <div class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collapse_two" aria-expanded="false" aria-controls="collapse_two">
                                         02. Profile Optimization & Marketing
                                         </div>
                                         <div id="collapse_two" class="accordion-collapse collapse show" data-bs-parent="#service_process_faq">
@@ -975,6 +1113,7 @@
 
 <!-- Main custom script -->
 <script src="assets/js/main.js"></script>
+
 
 </body>
 

@@ -1783,6 +1783,23 @@ button, .btn, .thm-btn, .agency-btn {
         pointer-events: none !important;
     }
     
+    /* Header Aurora Background - Completely Remove on Mobile */
+    #header-aurora-container,
+    .header-aurora-container,
+    #header-aurora-container canvas,
+    .header-aurora-container canvas {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        width: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+    }
+    
     /* Remove any spacing between hero section and service section on mobile */
     section.hero.hero-style.pos-rel.hero-full + section.service,
     section.hero.hero-full + section.service,
