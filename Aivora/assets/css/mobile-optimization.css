@@ -1,3 +1,4 @@
+
 /*-----------------------------------------------------------------------------------
     Mobile Optimization CSS
     Comprehensive mobile styles for all phone browsers
@@ -15,6 +16,151 @@ html, body {
     width: 100%;
     max-width: 100%;
     position: relative;
+}
+
+/* ============================================
+   Brand Logo Auto-Scroll Animation Keyframes
+   Infinite horizontal scroll for brand carousel
+   ============================================ */
+
+/* Mobile brand logo scroll - moves left continuously */
+@-webkit-keyframes brandLogoScroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    100% {
+        /* Translate by 50% since logos are duplicated */
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes brandLogoScroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    100% {
+        /* Translate by 50% since logos are duplicated */
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+}
+
+/* ============================================
+   Hero Content - Prevent Text Clipping
+   ============================================ */
+
+/* Ensure hero content containers don't have fixed heights that clip text */
+/* CRITICAL: Remove all height restrictions and ensure overflow is visible */
+.hero.hero-full,
+section.hero.hero-full,
+.hero.hero-style,
+section.hero.hero-style,
+.hero-content,
+.hero-content .title {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+}
+
+/* Override main.css min-height and overflow restrictions on hero-style */
+/* CRITICAL: main.css sets overflow: hidden which clips text - must override */
+@media only screen and (max-width: 991px) {
+    .hero-style {
+        min-height: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+}
+
+/* Override main.css overflow: hidden on all hero sections for mobile */
+@media only screen and (max-width: 767px) {
+    .hero-style,
+    .hero.hero-full,
+    section.hero.hero-full,
+    .hero.hero-style.hero-full,
+    section.hero.hero-style.hero-full {
+        overflow: visible !important;
+    }
+}
+
+/* Ensure hero title wraps naturally and both lines are visible */
+.hero-content .title {
+    line-height: 1.3 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+}
+
+/* Ensure title line spans are block-level for proper line breaks */
+.hero-content .title .title-line-1,
+.hero-content .title .title-line-2 {
+    display: block;
+    width: 100%;
+}
+
+/* ============================================
+   CRITICAL: Prevent Header Overlap on Mobile
+   ============================================ */
+
+/* Move header to the very top - remove all top padding/margin */
+@media only screen and (max-width: 991px) {
+    /* Override inline styles from index.html that add padding */
+    .xb-header-area-sticky,
+    .xb-header-area-sticky.xb-header-fixed,
+    .xb-header-area-sticky[style*="padding"],
+    .xb-header-area-sticky.xb-header-fixed[style*="padding"] {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        top: 0 !important;
+    }
+    
+    /* Ensure header area itself has no top spacing */
+    .header-area,
+    #xb-header-area,
+    .header-area[style*="padding"],
+    #xb-header-area[style*="padding"] {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        top: 0 !important;
+    }
+}
+
+/* Ensure hero section has enough top padding on all mobile devices */
+/* Header is ~75px, padding-top: 160px gives good clearance */
+@media only screen and (max-width: 767px) {
+    /* Target all possible hero section combinations with maximum specificity */
+    .hero-style,
+    section.hero.hero-full,
+    section.hero.hero-style.hero-full,
+    section.hero.hero-style.pos-rel.hero-full,
+    .hero.hero-full,
+    .hero.hero-style.hero-full,
+    .hero.hero-style.pos-rel.hero-full,
+    .body_wrap > main > section.hero.hero-full:first-child,
+    .body_wrap > main > .hero.hero-full:first-child {
+        padding-top: 160px !important;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    /* Extra small screens */
+    .hero-style,
+    section.hero.hero-full,
+    section.hero.hero-style.hero-full,
+    section.hero.hero-style.pos-rel.hero-full,
+    .hero.hero-full,
+    .hero.hero-style.hero-full,
+    .hero.hero-style.pos-rel.hero-full,
+    .body_wrap > main > section.hero.hero-full:first-child,
+    .body_wrap > main > .hero.hero-full:first-child {
+        padding-top: 140px !important;
+    }
 }
 
 /* Touch-friendly tap targets (minimum 44x44px) */
@@ -46,12 +192,70 @@ html {
    Mobile Breakpoints
    ============================================ */
 
+/* ============================================
+   Fix Header Overlap on Mobile - Global Fix
+   ============================================ */
+
+/* Ensure fixed/sticky header doesn't overlap content on all mobile devices */
+@media only screen and (max-width: 991px) {
+    /* When header is fixed/sticky, ensure it's properly positioned at the very top */
+    .xb-header-area-sticky,
+    .xb-header-area-sticky.xb-header-fixed {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        z-index: 999 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    }
+    
+    /* Ensure header area itself is at the top with no spacing */
+    .header-area,
+    #xb-header-area {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        top: 0 !important;
+    }
+    
+    /* Ensure main content area accounts for fixed header height */
+    .body_wrap > main {
+        position: relative !important;
+    }
+    
+    /* First section/hero should have padding to prevent overlap */
+    /* Header is approximately 75px tall on mobile */
+    .body_wrap > main > section:first-child,
+    .body_wrap > main > .hero:first-child,
+    .body_wrap > main > .hero.hero-full:first-child {
+        position: relative !important;
+        padding-top: 160px !important;
+        margin-top: 0 !important;
+    }
+}
+
 /* Extra Small Devices (phones, 320px and up) */
 @media only screen and (max-width: 575px) {
     /* Base font size adjustment */
     body {
         font-size: 14px;
         line-height: 24px;
+    }
+    
+    /* Prevent header overlap - ensure first section has proper top padding */
+    /* Header is approximately 75px tall on mobile */
+    .body_wrap > main > section:first-child,
+    .body_wrap > main > .hero:first-child,
+    .body_wrap > main > .hero.hero-full:first-child,
+    section.hero.hero-full,
+    section.hero.hero-style.hero-full {
+        padding-top: 140px !important;
+        margin-top: 0 !important;
     }
     
     /* Container padding */
@@ -121,9 +325,23 @@ html {
     }
     
     .hero-content .title {
-        font-size: 32px !important;
-        line-height: 42px !important;
+        font-size: clamp(24px, 6vw, 32px) !important;
+        line-height: 1.3 !important;
         letter-spacing: -0.02em !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
     
     .hero-content .sub-title {
@@ -193,6 +411,59 @@ html {
         padding: 10px 0;
     }
     
+    /* Fix header overlap issue - ensure header is properly positioned at the top */
+    .header-area,
+    #xb-header-area {
+        position: relative !important;
+        z-index: 999 !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        top: 0 !important;
+    }
+    
+    /* When header becomes sticky/fixed, ensure content below has proper spacing */
+    /* Remove all top padding/margin to position header at the very top */
+    .xb-header-area-sticky,
+    .xb-header-area-sticky.xb-header-fixed {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        z-index: 999 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Add padding to body_wrap or main to account for fixed header */
+    .body_wrap {
+        padding-top: 0 !important;
+    }
+    
+    /* Ensure main content starts below header - CRITICAL FIX */
+    .body_wrap > main {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* CRITICAL: Ensure first section has enough top padding to clear fixed header */
+    /* Header height: 55px (min-height) + 20px (padding top+bottom) = ~75px */
+    /* Adding extra buffer: 140px total padding-top */
+    .body_wrap > main > section:first-child,
+    .body_wrap > main > .hero:first-child,
+    .body_wrap > main > .hero.hero-full:first-child,
+    .body_wrap > main > .hero.hero-style:first-child {
+        padding-top: 140px !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Also target hero sections specifically */
+    section.hero.hero-full,
+    section.hero.hero-style.hero-full {
+        padding-top: 140px !important;
+    }
+    
     .xb-nav-mobile {
         height: 40px;
         width: 40px;
@@ -236,8 +507,22 @@ html {
     }
     
     .hero-content .title {
-        font-size: 42px !important;
-        line-height: 52px !important;
+        font-size: clamp(28px, 7vw, 42px) !important;
+        line-height: 1.3 !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
     
     .hero-content .sub-title {
@@ -259,8 +544,22 @@ html {
     }
     
     .hero-content .title {
-        font-size: 48px !important;
-        line-height: 60px !important;
+        font-size: clamp(32px, 8vw, 48px) !important;
+        line-height: 1.3 !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
 }
 
@@ -279,10 +578,20 @@ html {
         min-height: -webkit-fill-available;
     }
     
-    /* Fix sticky header on iOS */
+    /* Fix sticky header on iOS - ensure it's at the top */
     .xb-header-area-sticky {
         position: -webkit-sticky;
         position: sticky;
+        top: 0 !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Ensure header area is at top on iOS */
+    .header-area,
+    #xb-header-area {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
     }
     
     /* Smooth scrolling for iOS */
@@ -334,8 +643,22 @@ button, .btn, .thm-btn, .agency-btn {
     }
     
     .hero-content .title {
-        font-size: 36px !important;
-        line-height: 46px !important;
+        font-size: clamp(26px, 6.5vw, 36px) !important;
+        line-height: 1.3 !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
     
     .section-padding {
@@ -355,8 +678,22 @@ button, .btn, .thm-btn, .agency-btn {
     }
     
     .hero-content .title {
-        font-size: 26px !important;
-        line-height: 34px !important;
+        font-size: clamp(20px, 5vw, 26px) !important;
+        line-height: 1.3 !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
     
     .container, .container-fluid {
@@ -601,6 +938,39 @@ button, .btn, .thm-btn, .agency-btn {
     
     .footer-widget ul li a {
         font-size: 14px;
+    }
+    
+    /* Footer Bottom - Align copyright text with address and phone */
+    .xb-footer-bottom .contact-item {
+        justify-content: flex-start !important;
+        padding-left: 16px !important;
+    }
+    
+    /* Copyright item - align left like address and phone */
+    .xb-footer-bottom .copyright-item {
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+    
+    .xb-footer-bottom .copyright-item p {
+        text-align: left !important;
+    }
+}
+
+/* Override center alignment for 576px-767px range */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .xb-footer-bottom .contact-item {
+        justify-content: flex-start !important;
+        padding-left: 16px !important;
+    }
+    
+    .xb-footer-bottom .copyright-item {
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+    
+    .xb-footer-bottom .copyright-item p {
+        text-align: left !important;
     }
 }
 
@@ -1018,42 +1388,131 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
-    /* Hero Section Container */
-    .hero.hero-full {
+    /* CRITICAL FIX: Override main.css padding-top: 150px on .hero-style */
+    /* Header is ~75px, need enough padding to clear it completely */
+    /* Using maximum specificity and !important to override main.css */
+    .hero-style,
+    .hero.hero-style,
+    section.hero-style,
+    section.hero.hero-style,
+    .hero.hero-style.pos-rel,
+    section.hero.hero-style.pos-rel,
+    .hero.hero-style.pos-rel.hero-full,
+    section.hero.hero-style.pos-rel.hero-full,
+    .hero.hero-full,
+    section.hero.hero-full,
+    .hero.hero-style.hero-full,
+    section.hero.hero-style.hero-full,
+    main > section.hero:first-child,
+    main > .hero:first-child {
         min-height: auto !important;
-        padding-top: 100px !important;
+        height: auto !important;
+        max-height: none !important;
+        padding-top: 160px !important;
         padding-bottom: 60px !important;
         position: relative !important;
-        overflow: hidden !important;
+        overflow: visible !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Ensure body has proper spacing when header is fixed */
+    body {
+        padding-top: 0 !important;
+    }
+    
+    /* Add margin-top to main content area to prevent header overlap */
+    main {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Ensure first section after header has proper spacing - CRITICAL FIX */
+    /* Header is ~75px, padding-top: 160px gives proper clearance */
+    .body_wrap > main > section:first-child,
+    .body_wrap > main > .hero:first-child,
+    .body_wrap > main > .hero.hero-full:first-child,
+    .body_wrap > main > section.hero:first-child,
+    .body_wrap > main > section.hero.hero-full:first-child {
+        margin-top: 0 !important;
+        padding-top: 160px !important;
+    }
+    
+    /* Also target hero-style class specifically with all possible combinations */
+    .hero.hero-style.hero-full,
+    section.hero.hero-full,
+    section.hero.hero-style.hero-full,
+    .hero.hero-style.pos-rel.hero-full,
+    section.hero.hero-style.pos-rel.hero-full {
+        padding-top: 160px !important;
     }
     
     /* Hero Container */
+    /* Ensure proper z-index - header is 999, hero content should be below but visible */
     .hero .container {
         padding-left: 20px !important;
         padding-right: 20px !important;
         position: relative !important;
         z-index: 1 !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure hero section itself doesn't conflict with header z-index */
+    .hero.hero-full,
+    section.hero.hero-full,
+    .hero.hero-style.hero-full,
+    section.hero.hero-style.hero-full {
+        z-index: 0 !important;
+        position: relative !important;
     }
     
     /* Hero Content Wrapper */
+    /* Added padding-top to create additional space and prevent header overlap */
+    /* Removed fixed heights to prevent text clipping */
+    /* Ensure overflow visible so text is never clipped */
     .hero-content {
         width: 100% !important;
         max-width: 100% !important;
         padding: 0 !important;
+        padding-top: 20px !important;
         margin: 0 !important;
+        margin-top: 0 !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
     }
     
-    /* Hero Title - "Two Paths, One Purpose, The Peak." */
+    /* Hero Title - "Two Paths, One Purpose." / "The Peak." */
+    /* Responsive font sizing with clamp() for safe scaling on all screen sizes */
+    /* Proper line-height (1.3) to prevent line collision, natural wrapping enabled */
+    /* Overflow visible to ensure text is never clipped */
     .hero-content .title {
-        font-size: 32px !important;
-        line-height: 1.2 !important;
+        font-size: clamp(24px, 6vw, 32px) !important;
+        line-height: 1.3 !important;
         font-weight: 700 !important;
         letter-spacing: -0.02em !important;
+        margin-top: 0 !important;
         margin-bottom: 20px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         color: #ffffff !important;
         text-align: left !important;
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
     
     /* Hero Subtitle */
@@ -1124,16 +1583,24 @@ button, .btn, .thm-btn, .agency-btn {
     
     /* Button Icon */
     .hero-content .hero-btn .thm-btn.agency-btn .arrow .arrow-icon {
-        width: 20px !important;
-        height: 20px !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        background: #000000 !important;
+        border-radius: 50% !important;
+        border: 2px solid #000000 !important;
+        padding: 0 !important;
     }
     
     .hero-content .hero-btn .thm-btn.agency-btn .arrow .arrow-icon i {
-        font-size: 16px !important;
+        font-size: 14px !important;
         color: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     /* Aurora Background - Ensure it doesn't interfere */
@@ -1150,17 +1617,69 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Extra Small Screens (320px - 575px) */
 @media only screen and (max-width: 575px) {
-    /* Hero Section */
-    .hero.hero-full {
-        padding-top: 80px !important;
+    /* Hero Section - padding to clear fixed header (~75px) */
+    .hero-style,
+    .hero.hero-style,
+    section.hero-style,
+    .hero.hero-full,
+    section.hero.hero-full,
+    .hero.hero-style.hero-full,
+    section.hero.hero-style.hero-full,
+    .hero.hero-style.pos-rel.hero-full,
+    section.hero.hero-style.pos-rel.hero-full {
+        padding-top: 140px !important;
         padding-bottom: 50px !important;
+        min-height: auto !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
     }
     
-    /* Hero Title */
+    /* Ensure first section after header has proper spacing on extra small screens */
+    .body_wrap > main > section:first-child,
+    .body_wrap > main > .hero:first-child,
+    .body_wrap > main > .hero.hero-full:first-child {
+        padding-top: 140px !important;
+    }
+    
+    /* Also target hero-style class specifically */
+    .hero.hero-style.hero-full,
+    section.hero.hero-full {
+        padding-top: 140px !important;
+    }
+    
+    /* Hero Content Wrapper - Add padding on extra small screens too */
+    .hero-content {
+        padding-top: 50px !important;
+    }
+    
+    /* Hero Title - Extra margin on small screens */
     .hero-content .title {
-        font-size: 28px !important;
-        line-height: 1.2 !important;
+        margin-top: 50px !important;
+    }
+    
+    /* Hero Title - Extra Small Screens */
+    /* Responsive font sizing with clamp() for safe scaling */
+    /* Proper line-height (1.3) to prevent line collision, natural wrapping enabled */
+    .hero-content .title {
+        font-size: clamp(22px, 5.5vw, 28px) !important;
+        line-height: 1.3 !important;
         margin-bottom: 16px !important;
+        margin-top: 0 !important;
+        white-space: normal !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Ensure title line spans display properly on extra small screens */
+    .hero-content .title .title-line-1,
+    .hero-content .title .title-line-2 {
+        display: block !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        overflow: visible !important;
     }
     
     /* Hero Subtitle */
@@ -1392,7 +1911,12 @@ button, .btn, .thm-btn, .agency-btn {
         overflow: hidden !important;
     }
     
-    /* Brand Marquee Container - Disable marquee animation on mobile */
+    /* ============================================
+       BRAND LOGO AUTO-SCROLL CAROUSEL - MOBILE
+       Infinite horizontal scrolling animation
+       ============================================ */
+    
+    /* Brand Marquee Container - Overflow hidden for seamless loop */
     .brand-marquee.marquee-left,
     .brand-marquee {
         overflow: hidden !important;
@@ -1400,7 +1924,7 @@ button, .btn, .thm-btn, .agency-btn {
         position: relative !important;
     }
     
-    /* Disable marquee JavaScript animation on mobile - Handle all possible wrapper classes */
+    /* Override JS marquee wrapper - use CSS animation instead */
     .brand-marquee.marquee-left .js-marquee-wrapper,
     .brand-marquee .js-marquee-wrapper,
     .brand-marquee > div,
@@ -1411,18 +1935,17 @@ button, .btn, .thm-btn, .agency-btn {
         transform: none !important;
         -webkit-transform: none !important;
         position: relative !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        width: auto !important;
+        overflow: visible !important;
     }
     
-    /* Ensure marquee doesn't duplicate content on mobile */
+    /* Hide JS-generated duplicate content (we use HTML duplicates) */
     .brand-marquee .js-marquee-wrapper > div:not(:first-child),
     .brand-marquee > div > div:not(:first-child) {
         display: none !important;
     }
     
-    /* Brand Inner Container - Flex Layout */
+    /* Brand Inner Container - AUTO-SCROLL ANIMATION TRACK */
     .xb-brand-inner,
     .xb-brand-inner.ul_li_between,
     .brand-marquee .xb-brand-inner,
@@ -1431,15 +1954,18 @@ button, .btn, .thm-btn, .agency-btn {
         align-items: center !important;
         justify-content: flex-start !important;
         gap: 40px !important;
-        margin-right: 0 !important;
         flex-wrap: nowrap !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        /* Animation track needs explicit width for seamless loop */
+        /* 10 items × 120px + 10 gaps × 40px = 1600px total */
+        /* We translate by 50% (800px) since logos are duplicated */
+        width: max-content !important;
         padding: 10px 0 !important;
+        /* Auto-scroll animation - 20s for smooth mobile readability */
+        animation: brandLogoScroll 20s linear infinite !important;
+        -webkit-animation: brandLogoScroll 20s linear infinite !important;
     }
     
-    /* Brand Item - Individual Logo Container - CRITICAL FIX */
+    /* Brand Item - Individual Logo Container */
     .xb-brand-item,
     .brand-marquee .xb-brand-item,
     .xb-brand-inner .xb-brand-item {
@@ -1458,7 +1984,7 @@ button, .btn, .thm-btn, .agency-btn {
         box-sizing: border-box !important;
     }
     
-    /* Brand Item Images - STRONG Override for inline styles */
+    /* Brand Item Images - Override inline styles */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
     .xb-brand-inner .xb-brand-item img,
@@ -1479,7 +2005,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 !important;
     }
     
-    /* Fix for Morgan Stanley logo with negative margin - STRONG OVERRIDE */
+    /* Fix for Morgan Stanley logo with negative margin */
     .xb-brand-item[style*="align-items: flex-start"],
     .xb-brand-item[style*="display: flex"],
     .brand-marquee .xb-brand-item[style*="align-items: flex-start"] {
@@ -1507,7 +2033,7 @@ button, .btn, .thm-btn, .agency-btn {
         max-width: 100% !important;
     }
     
-    /* Ensure no negative margins cause overlap - ALL IMAGES */
+    /* Ensure no negative margins cause overlap */
     .xb-brand-item img[style*="margin"],
     .xb-brand-item img[style*="-77px"],
     .brand-marquee img[style*="margin"],
@@ -1533,11 +2059,14 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 15px 10px 25px !important;
     }
     
-    /* Brand Inner - Smaller gap on very small screens */
+    /* Brand Inner - Smaller gap and SLOWER animation for readability */
     .xb-brand-inner,
-    .brand-marquee .xb-brand-inner {
+    .brand-marquee .xb-brand-inner,
+    .brand-marquee.marquee-left .xb-brand-inner {
         gap: 30px !important;
-        margin-right: 0 !important;
+        /* Slower animation on small screens for better readability (25s) */
+        animation: brandLogoScroll 25s linear infinite !important;
+        -webkit-animation: brandLogoScroll 25s linear infinite !important;
     }
     
     /* Brand Item - Smaller on very small screens */
@@ -1550,7 +2079,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 8px !important;
     }
     
-    /* Brand Item Images - Smaller on very small screens - STRONG OVERRIDE */
+    /* Brand Item Images - Smaller on very small screens */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
     .xb-brand-inner .xb-brand-item img,
@@ -1585,6 +2114,16 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Small Screens (576px - 767px) */
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+    /* Brand Inner - Slightly faster animation on larger mobile screens */
+    .xb-brand-inner,
+    .brand-marquee .xb-brand-inner,
+    .brand-marquee.marquee-left .xb-brand-inner {
+        gap: 40px !important;
+        /* 18s animation for slightly larger screens */
+        animation: brandLogoScroll 18s linear infinite !important;
+        -webkit-animation: brandLogoScroll 18s linear infinite !important;
+    }
+    
     /* Brand Item - Slightly larger on small screens */
     .xb-brand-item,
     .brand-marquee .xb-brand-item,
@@ -1594,7 +2133,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 130px !important;
     }
     
-    /* Brand Item Images - STRONG OVERRIDE */
+    /* Brand Item Images */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
     .xb-brand-inner .xb-brand-item img,
@@ -1624,6 +2163,56 @@ button, .btn, .thm-btn, .agency-btn {
         margin-bottom: 0 !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
+    }
+}
+
+/* Tablet Screens (768px - 991px) - Also enable CSS auto-scroll */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* Brand Marquee Container */
+    .brand-marquee.marquee-left,
+    .brand-marquee {
+        overflow: hidden !important;
+    }
+    
+    /* Override JS marquee for tablets too */
+    .brand-marquee.marquee-left .js-marquee-wrapper,
+    .brand-marquee .js-marquee-wrapper {
+        animation: none !important;
+        -webkit-animation: none !important;
+    }
+    
+    .brand-marquee .js-marquee-wrapper > div:not(:first-child) {
+        display: none !important;
+    }
+    
+    /* Brand Inner - CSS animation for tablets (faster since larger screen) */
+    .xb-brand-inner,
+    .brand-marquee .xb-brand-inner,
+    .brand-marquee.marquee-left .xb-brand-inner {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        width: max-content !important;
+        gap: 50px !important;
+        /* 15s animation for tablets */
+        animation: brandLogoScroll 15s linear infinite !important;
+        -webkit-animation: brandLogoScroll 15s linear infinite !important;
+    }
+    
+    /* Brand Item - Larger on tablets */
+    .xb-brand-item,
+    .brand-marquee .xb-brand-item {
+        max-width: 150px !important;
+        min-width: 150px !important;
+        width: 150px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .xb-brand-item img,
+    .xb-brand-item img[style] {
+        max-height: 100px !important;
+        height: auto !important;
+        width: 100% !important;
+        margin: 0 auto !important;
     }
 }
 
@@ -1801,6 +2390,175 @@ button, .btn, .thm-btn, .agency-btn {
     
     .preloader .loader-logo img {
         max-width: 80px !important;
+    }
+}
+
+/* ============================================
+   Service Details Page Responsive Styles
+   ============================================ */
+
+/* Service Details Section - Mobile Optimization */
+@media (max-width: 991px) {
+    .service-details .details-content-title {
+        font-size: 28px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .service-details .service-process-wrap {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+    
+    .service-details .service_process_faq {
+        margin-top: 30px;
+    }
+    
+    .service-details .accordion-button {
+        font-size: 16px !important;
+        padding: 15px 20px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .service-details .accordion-body {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        padding: 15px 20px !important;
+    }
+    
+    .service-details .content_layer_group li {
+        font-size: 14px !important;
+        padding: 12px 15px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .service-details .services-outcome-wrap {
+        margin-top: 50px !important;
+    }
+    
+    .service-details .service-outcome-list li {
+        font-size: 14px !important;
+        padding: 12px 0 !important;
+        line-height: 1.5 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .service-details .details-content-title {
+        font-size: 24px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .service-details .service-process-wrap {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    
+    .service-details .service_process_faq {
+        margin-top: 20px;
+    }
+    
+    .service-details .accordion-button {
+        font-size: 15px !important;
+        padding: 12px 15px !important;
+        line-height: 1.3 !important;
+    }
+    
+    .service-details .accordion-body {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+        padding: 12px 15px !important;
+    }
+    
+    .service-details .content_layer_group {
+        margin-top: 30px !important;
+    }
+    
+    .service-details .content_layer_group li {
+        font-size: 13px !important;
+        padding: 10px 12px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .service-details .services-outcome-wrap {
+        margin-top: 40px !important;
+    }
+    
+    .service-details .service-outcome-list {
+        margin-top: 25px !important;
+    }
+    
+    .service-details .service-outcome-list li {
+        font-size: 13px !important;
+        padding: 10px 0 !important;
+        line-height: 1.5 !important;
+    }
+    
+    .service-details .service-outcome-list li span {
+        margin-right: 10px !important;
+        flex-shrink: 0;
+    }
+    
+    /* Ensure breadcrumb title is readable on mobile */
+    .breadcrumb__title {
+        font-size: 28px !important;
+        line-height: 1.2 !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .service-details .details-content-title {
+        font-size: 22px !important;
+        line-height: 1.2 !important;
+    }
+    
+    .service-details .accordion-button {
+        font-size: 14px !important;
+        padding: 10px 12px !important;
+    }
+    
+    .service-details .accordion-body {
+        font-size: 12px !important;
+        padding: 10px 12px !important;
+    }
+    
+    .service-details .content_layer_group li {
+        font-size: 12px !important;
+        padding: 8px 10px !important;
+    }
+    
+    .service-details .service-outcome-list li {
+        font-size: 12px !important;
+    }
+    
+    .breadcrumb__title {
+        font-size: 24px !important;
+    }
+}
+
+/* Ensure service details content is properly spaced on all devices */
+.service-details .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 992px) {
+    .service-details .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* ============================================
+   Desktop - Pause Brand Animation on Hover
+   ============================================ */
+
+@media only screen and (min-width: 992px) {
+    /* Desktop: Keep JS marquee working, but add hover-pause for CSS fallback */
+    .brand-marquee:hover .xb-brand-inner {
+        animation-play-state: paused !important;
+        -webkit-animation-play-state: paused !important;
     }
 }
 

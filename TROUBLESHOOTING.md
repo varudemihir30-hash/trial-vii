@@ -147,3 +147,7 @@ If you're seeing authentication prompts, make sure:
 - Google Apps Script Execution Log
 - Google Apps Script Logger (View → Logs)
 
+
+
+
+

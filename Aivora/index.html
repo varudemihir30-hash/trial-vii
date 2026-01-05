@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/mobile-optimization.css">
+    <link rel="stylesheet" href="assets/css/desktop-fixes.css">
     
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -285,6 +286,15 @@
             color: #ffffff !important;
             opacity: 0.9;
         }
+        /* Ensure breadcrumb title uses website's existing font */
+        .breadcrumb__title {
+            font-family: var(--font-heading) !important;
+        }
+        /* Add underline on hover for breadcrumb title */
+        .breadcrumb__title:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
         /* Disable Services dropdown menu hover effect */
         .main-menu > ul > li.megamenu:hover > .submenu {
             opacity: 0 !important;
@@ -295,48 +305,6 @@
             opacity: 0 !important;
             visibility: hidden !important;
             display: none !important;
-        }
-        /* Service section alignment */
-        .service .sec-title {
-            text-align: left;
-        }
-        .service .sec-title .row {
-            align-items: flex-end;
-        }
-        .service .sec-title .sub-title {
-            display: block;
-            margin-bottom: 15px;
-        }
-        .service .sec-title .title {
-            margin-bottom: 0;
-            text-align: left;
-        }
-        .service .xb-heading-btn {
-            margin-top: 0;
-        }
-        .service .sec-title .title.title-grouped {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-        .service .sec-title .title.title-grouped .line-group {
-            display: block;
-            line-height: 1.2;
-            margin-bottom: 0.3em;
-        }
-        .service .sec-title .title.title-grouped .line-group:last-child {
-            margin-bottom: 0;
-        }
-        @media (max-width: 991px) {
-            .service .sec-title .col-lg-6 {
-                margin-bottom: 30px;
-            }
-            .service .sec-title .col-lg-6.text-lg-end {
-                text-align: left !important;
-            }
-            .service .sec-title .title {
-                text-align: left;
-            }
         }
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
@@ -830,11 +798,11 @@
                     <div class="main-menu__wrap  navbar navbar-expand-lg p-0">
                         <nav class="main-menu collapse navbar-collapse">
                             <ul>
-                                <li class="menu-item-has-children active">
+                                <li class="menu-item-has-children">
                                     <a href="index.html"><span>Home</span></a>
-                                    
+                                   
                                 </li>
-                                <li class=""><a href="about.html"><span>About Us</span></a></li>
+                                <li><a href="about.html"><span>About Us</span></a></li>
                                 <li class="menu-item-has-children megamenu">
                                     <a href="service.html"><span>Services</span></a>
                                     <ul class="submenu">
@@ -970,46 +938,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-xl-3 col-lg-4">
-                                                                <div class="megamenu_case">
-                                                                    <div class="xb-item--inner">
-                                                                        <div class="xb-item--img">
-                                                                            <img src="assets/img/service/img21.png" alt="image">
-                                                                        </div>
-                                                                        <div class="xb-item--holder">
-                                                                            <h3 class="xb-item--title">General AI projects..</h3>
-                                                                            <p class="xb-item--text">We deliver AI solutions streamline operations, boost efficiency.</p>
-                                                                            <a class="thm-btn agency-btn megamenu-btn" href="project.html">
-                                                                                <span class="text">
-                                                                                    read more project
-                                                                                </span>
-                                                                                <span class="arrow">
-                                                                                    <span class="arrow-icon">
-                                                                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                        <rect x="5.22852" y="17.3296" width="17.888" height="2.27149" transform="rotate(-40.2798 5.22852 17.3296)" fill="white" />
-                                                                                        <rect x="7.75781" y="6.25635" width="2.27149" height="2.27149" transform="rotate(-40.2798 7.75781 6.25635)" fill="white" />
-                                                                                        <rect x="10.959" y="6.52002" width="2.27149" height="2.27149" transform="rotate(-40.2798 10.959 6.52002)" fill="white" />
-                                                                                        <rect x="14.1562" y="6.78516" width="2.27149" height="2.27149" transform="rotate(-40.2798 14.1562 6.78516)" fill="white" />
-                                                                                        <rect x="17.0957" y="10.25" width="2.27149" height="2.27149" transform="rotate(-40.2798 17.0957 10.25)" fill="white" />
-                                                                                        <rect x="16.832" y="13.4517" width="2.27149" height="2.27149" transform="rotate(-40.2798 16.832 13.4517)" fill="white" />
-                                                                                        <rect x="16.5684" y="16.6538" width="2.27149" height="2.27149" transform="rotate(-40.2798 16.5684 16.6538)" fill="white" />
-                                                                                        </svg>
-                                                                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                        <rect x="5.22852" y="17.3296" width="17.888" height="2.27149" transform="rotate(-40.2798 5.22852 17.3296)" fill="white" />
-                                                                                        <rect x="7.75781" y="6.25635" width="2.27149" height="2.27149" transform="rotate(-40.2798 7.75781 6.25635)" fill="white" />
-                                                                                        <rect x="10.959" y="6.52002" width="2.27149" height="2.27149" transform="rotate(-40.2798 10.959 6.52002)" fill="white" />
-                                                                                        <rect x="14.1562" y="6.78516" width="2.27149" height="2.27149" transform="rotate(-40.2798 14.1562 6.78516)" fill="white" />
-                                                                                        <rect x="17.0957" y="10.25" width="2.27149" height="2.27149" transform="rotate(-40.2798 17.0957 10.25)" fill="white" />
-                                                                                        <rect x="16.832" y="13.4517" width="2.27149" height="2.27149" transform="rotate(-40.2798 16.832 13.4517)" fill="white" />
-                                                                                        <rect x="16.5684" y="16.6538" width="2.27149" height="2.27149" transform="rotate(-40.2798 16.5684 16.6538)" fill="white" />
-                                                                                        </svg>
-                                                                                    </span>
-                                                                                </span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1033,20 +961,26 @@
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
                             <div class="xb-logo-mobile xb-hide-xl">
                             <a href="index.html" rel="home"><img src="assets/img/logo/vertex-tech-logo.svg" alt=""></a></div>
+                            <div class="xb-header-mobile-search xb-hide-xl">
+                                <form role="search" action="#">
+                                    <input type="text" placeholder="Search..." name="s" class="search-field">
+                                    <button class="search-submit" type="submit"><i class="far fa-search"></i></button>
+                                </form>
+                            </div>
                             <nav class="xb-header-nav">
                                 <ul class="xb-menu-primary clearfix">
-                                    <li class="menu-item active">
-                                        <a href="index.html"><span>Home</span></a>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="#"><span>Home</span></a>
+                                        
                                     </li>
-                                    <li class="menu-item">
-                                        <a href="about.html"><span>About Us</span></a>
+                                    <li><a href="about.html"><span>about us</span></a></li>
+                                    <li class="menu-item menu-item-has-children">
+                                        <a href="service.html"><span>services</span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="service.html"><span>Services</span></a></li>
+                                        </ul>
                                     </li>
-                                    <li class="menu-item">
-                                        <a href="service.html"><span>Services</span></a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="contact.html"><span>Contact Us</span></a>
-                                    </li>
+                                    <li><a href="contact.html"><span>Contact Us</span></a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -1063,24 +997,26 @@
     <!-- main area start -->
     <main>
        <!-- hero start -->
-<section class="hero hero-style pos-rel hero-full" style="position: relative;">
+<section class="hero hero-style pos-rel hero-full">
     <!-- Aurora Background -->
     <div id="aurora-container" class="aurora-container"></div>
     
-    <div class="container" style="position: relative; z-index: 1;">
+    <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-9 col-md-9">
                 <div class="hero-content">
-                    <h2 class="title scale-animation wow">Two Paths,<br>One Purpose, The Peak.</h2>
+                    <h2 class="title scale-animation wow">
+                        Two Paths,<br>
+                        One Purpose , The Peak.
+                    </h2>
 
                     <p class="sub-title scale-animation wow">
-                        Where preparation meets real career outcomes.
-                        We guide, train, and support you until you land your full-time role.
+                        Where preparation meets real career outcomes. We guide, train, and support you until you land your full-time role.
                     </p>
 
                     <div class="hero-btn scale-animation wow">
                         <a class="thm-btn agency-btn" href="tel:+17637229401">
-                            <span class="text">Book a Call Now</span>
+                            <span class="text">BOOK A CALL NOW</span>
                             <span class="arrow">
                                 <span class="arrow-icon">
                                     <i class="fas fa-phone"></i>
