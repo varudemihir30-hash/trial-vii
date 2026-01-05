@@ -117,6 +117,7 @@ section.hero.hero-style,
         padding-top: 0 !important;
         padding-bottom: 0 !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         top: 0 !important;
     }
     
@@ -126,14 +127,34 @@ section.hero.hero-style,
     .header-area[style*="padding"],
     #xb-header-area[style*="padding"] {
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         padding-top: 0 !important;
+        padding-bottom: 0 !important;
         top: 0 !important;
+    }
+    
+    /* Show logo divider line on mobile - same as desktop */
+    .xb-header-logo .logo-divider {
+        display: inline-block !important;
+        visibility: visible !important;
+        width: 2px !important;
+        height: 55px !important;
+        background: rgba(255, 255, 255, 0.6) !important;
+        flex-shrink: 0 !important;
+        border-radius: 1px !important;
+        align-self: stretch !important;
+        opacity: 1 !important;
+    }
+    
+    /* Adjust gap when divider is shown */
+    .xb-header-logo {
+        gap: 10px !important;
     }
 }
 
 /* Ensure hero section has enough top padding on all mobile devices */
-/* Header is ~75px, padding-top: 160px gives good clearance */
-@media only screen and (max-width: 767px) {
+/* Header is ~55px on mobile, set padding to match header height exactly - no extra space */
+@media only screen and (max-width: 768px) {
     /* Target all possible hero section combinations with maximum specificity */
     .hero-style,
     section.hero.hero-full,
@@ -144,7 +165,16 @@ section.hero.hero-style,
     .hero.hero-style.pos-rel.hero-full,
     .body_wrap > main > section.hero.hero-full:first-child,
     .body_wrap > main > .hero.hero-full:first-child {
-        padding-top: 160px !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Add minimal padding-top only to hero content container, not the section */
+    .hero.hero-full .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-full .container,
+    section.hero.hero-style.hero-full .container {
+        padding-top: 60px !important;
     }
 }
 
@@ -159,7 +189,21 @@ section.hero.hero-style,
     .hero.hero-style.pos-rel.hero-full,
     .body_wrap > main > section.hero.hero-full:first-child,
     .body_wrap > main > .hero.hero-full:first-child {
-        padding-top: 140px !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Add minimal padding-top only to hero content container - minimal for upper positioning */
+    .hero.hero-full .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-full .container,
+    section.hero.hero-style.hero-full .container {
+        padding-top: 5px !important;
+    }
+    
+    /* Align hero row content to top */
+    .hero .row {
+        align-items: flex-start !important;
     }
 }
 
@@ -210,6 +254,7 @@ html {
         padding-top: 0 !important;
         padding-bottom: 0 !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         background: rgba(255, 255, 255, 0.05) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
@@ -219,7 +264,9 @@ html {
     .header-area,
     #xb-header-area {
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         padding-top: 0 !important;
+        padding-bottom: 0 !important;
         top: 0 !important;
     }
     
@@ -228,14 +275,21 @@ html {
         position: relative !important;
     }
     
-    /* First section/hero should have padding to prevent overlap */
-    /* Header is approximately 75px tall on mobile */
+    /* First section/hero should have NO padding-top - padding is on container instead */
+    /* Header is approximately 55px tall on mobile */
     .body_wrap > main > section:first-child,
     .body_wrap > main > .hero:first-child,
     .body_wrap > main > .hero.hero-full:first-child {
         position: relative !important;
-        padding-top: 160px !important;
+        padding-top: 0 !important;
         margin-top: 0 !important;
+    }
+    
+    /* Add padding-top to hero container instead of section */
+    .body_wrap > main > section:first-child .container,
+    .body_wrap > main > .hero:first-child .container,
+    .body_wrap > main > .hero.hero-full:first-child .container {
+        padding-top: 55px !important;
     }
 }
 
@@ -247,15 +301,24 @@ html {
         line-height: 24px;
     }
     
-    /* Prevent header overlap - ensure first section has proper top padding */
-    /* Header is approximately 75px tall on mobile */
+    /* Prevent header overlap - remove padding from section, add to container */
+    /* Header is approximately 55px tall on mobile */
     .body_wrap > main > section:first-child,
     .body_wrap > main > .hero:first-child,
     .body_wrap > main > .hero.hero-full:first-child,
     section.hero.hero-full,
     section.hero.hero-style.hero-full {
-        padding-top: 140px !important;
+        padding-top: 0 !important;
         margin-top: 0 !important;
+    }
+    
+    /* Add padding-top to container instead - minimal for upper positioning */
+    .body_wrap > main > section:first-child .container,
+    .body_wrap > main > .hero:first-child .container,
+    .body_wrap > main > .hero.hero-full:first-child .container,
+    section.hero.hero-full .container,
+    section.hero.hero-style.hero-full .container {
+        padding-top: 60px !important;
     }
     
     /* Container padding */
@@ -320,8 +383,19 @@ html {
     /* Hero section mobile optimization */
     .hero-style {
         min-height: auto !important;
-        padding-top: 120px !important;
-        padding-bottom: 60px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Add padding-top to hero container instead - minimal for upper positioning */
+    .hero-style .container {
+        padding-top: 5px !important;
+    }
+    
+    /* Align hero row content to top */
+    .hero .row {
+        align-items: flex-start !important;
     }
     
     .hero-content .title {
@@ -417,7 +491,9 @@ html {
         position: relative !important;
         z-index: 999 !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         padding-top: 0 !important;
+        padding-bottom: 0 !important;
         top: 0 !important;
     }
     
@@ -434,6 +510,7 @@ html {
         padding-top: 0 !important;
         padding-bottom: 0 !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
     
     /* Add padding to body_wrap or main to account for fixed header */
@@ -447,21 +524,31 @@ html {
         margin-top: 0 !important;
     }
     
-    /* CRITICAL: Ensure first section has enough top padding to clear fixed header */
-    /* Header height: 55px (min-height) + 20px (padding top+bottom) = ~75px */
-    /* Adding extra buffer: 140px total padding-top */
+    /* CRITICAL: Remove padding-top from section, add to container instead */
+    /* Header height: 55px (min-height) on mobile */
     .body_wrap > main > section:first-child,
     .body_wrap > main > .hero:first-child,
     .body_wrap > main > .hero.hero-full:first-child,
     .body_wrap > main > .hero.hero-style:first-child {
-        padding-top: 140px !important;
+        padding-top: 0 !important;
         margin-top: 0 !important;
     }
     
     /* Also target hero sections specifically */
     section.hero.hero-full,
     section.hero.hero-style.hero-full {
-        padding-top: 140px !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Add padding-top to containers instead - minimal for upper positioning */
+    .body_wrap > main > section:first-child .container,
+    .body_wrap > main > .hero:first-child .container,
+    .body_wrap > main > .hero.hero-full:first-child .container,
+    .body_wrap > main > .hero.hero-style:first-child .container,
+    section.hero.hero-full .container,
+    section.hero.hero-style.hero-full .container {
+        padding-top: 60px !important;
     }
     
     .xb-nav-mobile {
@@ -605,10 +692,18 @@ html {
    ============================================ */
 
 /* Fix for Android Chrome address bar */
+/* OVERRIDDEN: Mobile hero should not use full viewport height - content should be at top */
 @media screen and (max-width: 767px) {
-    .hero-style {
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
+    .hero-style,
+    .hero.hero-style,
+    section.hero-style,
+    .hero.hero-full,
+    section.hero.hero-full,
+    .hero.hero-style.hero-full,
+    section.hero.hero-style.hero-full {
+        min-height: auto !important;
+        height: auto !important;
+        max-height: none !important;
     }
 }
 
@@ -1139,7 +1234,7 @@ button, .btn, .thm-btn, .agency-btn {
         flex-direction: column !important;
         height: auto !important;
         gap: 0 !important;
-        padding: 20px 15px !important;
+        padding: 0 15px !important;
     }
     
     /* Prevent any text overflow */
@@ -1170,6 +1265,11 @@ button, .btn, .thm-btn, .agency-btn {
     /* Remove last item margin */
     .xb-service-item:last-child {
         margin-bottom: 0 !important;
+    }
+    
+    /* Remove top margin from first service item */
+    .xb-service-item:first-child {
+        margin-top: 0 !important;
     }
     
     /* Fix inner wrapper */
@@ -1387,9 +1487,9 @@ button, .btn, .thm-btn, .agency-btn {
    Hero Section Mobile Optimization (First Page)
    ============================================ */
 
-@media only screen and (max-width: 767px) {
-    /* CRITICAL FIX: Override main.css padding-top: 150px on .hero-style */
-    /* Header is ~75px, need enough padding to clear it completely */
+@media only screen and (max-width: 768px) {
+    /* CRITICAL FIX: Remove padding-top from hero sections - add to container instead */
+    /* Header is ~55px on mobile - padding goes on container, not section */
     /* Using maximum specificity and !important to override main.css */
     .hero-style,
     .hero.hero-style,
@@ -1408,11 +1508,31 @@ button, .btn, .thm-btn, .agency-btn {
         min-height: auto !important;
         height: auto !important;
         max-height: none !important;
-        padding-top: 160px !important;
-        padding-bottom: 60px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         position: relative !important;
         overflow: visible !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Add padding-top to hero containers instead - minimal for upper positioning */
+    /* Header is ~55px on mobile - reduced padding to bring content closer to header */
+    .hero-style .container,
+    .hero.hero-style .container,
+    section.hero-style .container,
+    section.hero.hero-style .container,
+    .hero.hero-style.pos-rel .container,
+    section.hero.hero-style.pos-rel .container,
+    .hero.hero-style.pos-rel.hero-full .container,
+    section.hero.hero-style.pos-rel.hero-full .container,
+    .hero.hero-full .container,
+    section.hero.hero-full .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-style.hero-full .container,
+    main > section.hero:first-child .container,
+    main > .hero:first-child .container {
+        padding-top: 50px !important;
     }
     
     /* Ensure body has proper spacing when header is fixed */
@@ -1426,15 +1546,15 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
     }
     
-    /* Ensure first section after header has proper spacing - CRITICAL FIX */
-    /* Header is ~75px, padding-top: 160px gives proper clearance */
+    /* Ensure first section after header has NO padding-top - add to container instead */
+    /* Header is ~55px on mobile */
     .body_wrap > main > section:first-child,
     .body_wrap > main > .hero:first-child,
     .body_wrap > main > .hero.hero-full:first-child,
     .body_wrap > main > section.hero:first-child,
     .body_wrap > main > section.hero.hero-full:first-child {
         margin-top: 0 !important;
-        padding-top: 160px !important;
+        padding-top: 0 !important;
     }
     
     /* Also target hero-style class specifically with all possible combinations */
@@ -1443,17 +1563,53 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-style.hero-full,
     .hero.hero-style.pos-rel.hero-full,
     section.hero.hero-style.pos-rel.hero-full {
-        padding-top: 160px !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Add padding-top to containers instead - minimal for upper positioning */
+    /* Header is ~55px on mobile - reduced padding to bring content closer to header */
+    .body_wrap > main > section:first-child .container,
+    .body_wrap > main > .hero:first-child .container,
+    .body_wrap > main > .hero.hero-full:first-child .container,
+    .body_wrap > main > section.hero:first-child .container,
+    .body_wrap > main > section.hero.hero-full:first-child .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-full .container,
+    section.hero.hero-style.hero-full .container,
+    .hero.hero-style.pos-rel.hero-full .container,
+    section.hero.hero-style.pos-rel.hero-full .container {
+        padding-top: 50px !important;
     }
     
     /* Hero Container */
     /* Ensure proper z-index - header is 999, hero content should be below but visible */
+    /* Reduced padding-top to bring content closer to header */
     .hero .container {
         padding-left: 20px !important;
         padding-right: 20px !important;
+        padding-top: 50px !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
         position: relative !important;
         z-index: 1 !important;
         overflow: visible !important;
+    }
+    
+    /* Hero Row - remove bottom spacing and align content to top (not center) */
+    /* CRITICAL: Change vertical alignment from center to flex-start for mobile */
+    .hero .row,
+    .hero.hero-full .row,
+    section.hero.hero-full .row,
+    .hero.hero-style .row,
+    section.hero.hero-style .row {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
     }
     
     /* Ensure hero section itself doesn't conflict with header z-index */
@@ -1466,16 +1622,18 @@ button, .btn, .thm-btn, .agency-btn {
     }
     
     /* Hero Content Wrapper */
-    /* Added padding-top to create additional space and prevent header overlap */
+    /* Remove all padding and margins to position content at the top */
     /* Removed fixed heights to prevent text clipping */
     /* Ensure overflow visible so text is never clipped */
     .hero-content {
         width: 100% !important;
         max-width: 100% !important;
         padding: 0 !important;
-        padding-top: 20px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         margin: 0 !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         height: auto !important;
         min-height: auto !important;
         max-height: none !important;
@@ -1492,7 +1650,7 @@ button, .btn, .thm-btn, .agency-btn {
         font-weight: 700 !important;
         letter-spacing: -0.02em !important;
         margin-top: 0 !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 12px !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
         color: #ffffff !important;
@@ -1520,7 +1678,10 @@ button, .btn, .thm-btn, .agency-btn {
         font-size: 15px !important;
         line-height: 1.6 !important;
         font-weight: 400 !important;
-        margin-bottom: 32px !important;
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         color: rgba(255, 255, 255, 0.9) !important;
         text-align: left !important;
         max-width: 100% !important;
@@ -1532,9 +1693,16 @@ button, .btn, .thm-btn, .agency-btn {
     .hero-content .hero-btn {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         width: 100% !important;
         display: flex !important;
         justify-content: flex-start !important;
+    }
+    
+    /* Reduce spacing after hero button to bring service section closer */
+    .hero-content .hero-btn .thm-btn.agency-btn {
+        margin-bottom: 0 !important;
     }
     
     /* Hero Button - "Book a Call Now" */
@@ -1545,6 +1713,7 @@ button, .btn, .thm-btn, .agency-btn {
         align-items: center !important;
         justify-content: space-between !important;
         padding: 0 !important;
+        margin: 0 !important;
         min-height: 56px !important;
         background: #00FF97 !important;
         border-radius: 12px !important;
@@ -1613,11 +1782,45 @@ button, .btn, .thm-btn, .agency-btn {
         z-index: 0 !important;
         pointer-events: none !important;
     }
+    
+    /* Remove any spacing between hero section and service section on mobile */
+    section.hero.hero-style.pos-rel.hero-full + section.service,
+    section.hero.hero-full + section.service,
+    .hero.hero-style.pos-rel.hero-full + section.service,
+    .hero.hero-full + section.service {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* Remove spacing from service section container and wrap */
+    section.hero.hero-style.pos-rel.hero-full + section.service .container,
+    section.hero.hero-full + section.service .container,
+    .hero.hero-style.pos-rel.hero-full + section.service .container,
+    .hero.hero-full + section.service .container {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    section.hero.hero-style.pos-rel.hero-full + section.service .xb-service-wrap,
+    section.hero.hero-full + section.service .xb-service-wrap,
+    .hero.hero-style.pos-rel.hero-full + section.service .xb-service-wrap,
+    .hero.hero-full + section.service .xb-service-wrap {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Pull service section closer to hero button - increased negative margin */
+    section.hero.hero-style.pos-rel.hero-full + section.service,
+    section.hero.hero-full + section.service,
+    .hero.hero-style.pos-rel.hero-full + section.service,
+    .hero.hero-full + section.service {
+        margin-top: -30px !important;
+    }
 }
 
 /* Extra Small Screens (320px - 575px) */
 @media only screen and (max-width: 575px) {
-    /* Hero Section - padding to clear fixed header (~75px) */
+    /* Hero Section - remove padding-top from section, add to container instead */
     .hero-style,
     .hero.hero-style,
     section.hero-style,
@@ -1627,35 +1830,73 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-style.hero-full,
     .hero.hero-style.pos-rel.hero-full,
     section.hero.hero-style.pos-rel.hero-full {
-        padding-top: 140px !important;
-        padding-bottom: 50px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
         min-height: auto !important;
         height: auto !important;
         max-height: none !important;
         overflow: visible !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
     
-    /* Ensure first section after header has proper spacing on extra small screens */
+    /* Ensure first section after header has NO padding-top */
     .body_wrap > main > section:first-child,
     .body_wrap > main > .hero:first-child,
     .body_wrap > main > .hero.hero-full:first-child {
-        padding-top: 140px !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
     }
     
     /* Also target hero-style class specifically */
     .hero.hero-style.hero-full,
     section.hero.hero-full {
-        padding-top: 140px !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
     }
     
-    /* Hero Content Wrapper - Add padding on extra small screens too */
-    .hero-content {
+    /* Add padding-top to containers instead - minimal for upper positioning */
+    /* Header is ~55px on mobile - reduced padding to bring content closer to header */
+    .hero-style .container,
+    .hero.hero-style .container,
+    section.hero-style .container,
+    .hero.hero-full .container,
+    section.hero.hero-full .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-style.hero-full .container,
+    .hero.hero-style.pos-rel.hero-full .container,
+    section.hero.hero-style.pos-rel.hero-full .container,
+    .body_wrap > main > section:first-child .container,
+    .body_wrap > main > .hero:first-child .container,
+    .body_wrap > main > .hero.hero-full:first-child .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-full .container {
         padding-top: 50px !important;
     }
     
-    /* Hero Title - Extra margin on small screens */
+    /* Hero Row - align content to top on extra small screens (not center) */
+    .hero .row,
+    .hero.hero-full .row,
+    section.hero.hero-full .row,
+    .hero.hero-style .row,
+    section.hero.hero-style .row {
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* Hero Content Wrapper - Remove extra padding on extra small screens */
+    .hero-content {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Hero Title - Remove extra margin on small screens */
     .hero-content .title {
-        margin-top: 50px !important;
+        margin-top: 0 !important;
     }
     
     /* Hero Title - Extra Small Screens */
@@ -1715,15 +1956,27 @@ button, .btn, .thm-btn, .agency-btn {
 @media only screen and (max-width: 767px) {
     /* Service Section Container */
     .service.pt-135 {
-        padding-top: 60px !important;
+        padding-top: 0 !important;
         padding-bottom: 40px !important;
         position: relative !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Further reduce top spacing for service section when it follows hero */
+    section.hero.hero-style.pos-rel.hero-full + section.service.pt-135,
+    section.hero.hero-full + section.service.pt-135,
+    .hero.hero-style.pos-rel.hero-full + section.service.pt-135,
+    .hero.hero-full + section.service.pt-135 {
+        padding-top: 0 !important;
+        margin-top: -30px !important;
     }
     
     /* Service Container */
     .service .container {
         padding-left: 20px !important;
         padding-right: 20px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
     }
     
     /* Section Title Container */
@@ -1837,7 +2090,21 @@ button, .btn, .thm-btn, .agency-btn {
     /* Service Wrap - Background Container */
     .service .xb-service-wrap {
         margin-top: 0 !important;
-        padding: 20px 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Pull service section closer to hero button on extra small screens - increased negative margin */
+    section.hero.hero-style.pos-rel.hero-full + section.service,
+    section.hero.hero-full + section.service,
+    .hero.hero-style.pos-rel.hero-full + section.service,
+    .hero.hero-full + section.service {
+        margin-top: -30px !important;
+    }
+    
+    /* Ensure first service item has no top margin */
+    .service .xb-service-wrap .xb-service-item:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
     }
 }
 
@@ -1845,8 +2112,25 @@ button, .btn, .thm-btn, .agency-btn {
 @media only screen and (max-width: 575px) {
     /* Service Section */
     .service.pt-135 {
-        padding-top: 50px !important;
+        padding-top: 0 !important;
         padding-bottom: 30px !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Service Container - remove top padding */
+    .service .container {
+        padding-top: 0 !important;
+    }
+    
+    /* Service Wrap - remove top padding */
+    .service .xb-service-wrap {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Remove top margin from first service item */
+    .xb-service-item:first-child {
+        margin-top: 0 !important;
     }
     
     /* Section Title */
@@ -2262,6 +2546,215 @@ button, .btn, .thm-btn, .agency-btn {
    Preloader Mobile Optimization - Simplified Vertex Logo Loader
    ============================================ */
 
+/* Logo glow-up entrance animation for all mobile devices */
+@keyframes logoGlowUp {
+    0% {
+        opacity: 0 !important;
+        transform: scale(0.8) !important;
+        -webkit-transform: scale(0.8) !important;
+        filter: brightness(0) invert(1) !important;
+    }
+    50% {
+        opacity: 0.7 !important;
+        transform: scale(1.05) !important;
+        -webkit-transform: scale(1.05) !important;
+        filter: brightness(0) invert(1) !important;
+    }
+    100% {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+        -webkit-transform: scale(1) !important;
+        filter: brightness(0) invert(1) !important;
+    }
+}
+
+/* Logo wrapper glow animation - applied to container */
+@keyframes logoWrapperGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
+                drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
+                drop-shadow(0 0 60px rgba(255, 255, 255, 0.4))
+                drop-shadow(0 0 80px rgba(255, 255, 255, 0.3)) !important;
+    }
+    50% {
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
+                drop-shadow(0 0 90px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 120px rgba(255, 255, 255, 0.5))
+                drop-shadow(0 0 150px rgba(255, 255, 255, 0.4)) !important;
+    }
+}
+
+/* Enhanced logo glow animation for all mobile devices */
+@keyframes vertexLogoGlow {
+    0%, 100% {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+        -webkit-transform: scale(1) !important;
+    }
+    50% {
+        opacity: 1 !important;
+        transform: scale(1.05) !important;
+        -webkit-transform: scale(1.05) !important;
+    }
+}
+
+/* Glow pulse animation for background effect */
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.5 !important;
+        transform: translate(-50%, -50%) scale(0.95) !important;
+        -webkit-transform: translate(-50%, -50%) scale(0.95) !important;
+    }
+    50% {
+        opacity: 0.9 !important;
+        transform: translate(-50%, -50%) scale(1.15) !important;
+        -webkit-transform: translate(-50%, -50%) scale(1.15) !important;
+    }
+}
+
+/* Outer glow pulse animation */
+@keyframes glowPulseOuter {
+    0%, 100% {
+        opacity: 0.3 !important;
+        transform: translate(-50%, -50%) scale(0.9) !important;
+        -webkit-transform: translate(-50%, -50%) scale(0.9) !important;
+    }
+    50% {
+        opacity: 0.6 !important;
+        transform: translate(-50%, -50%) scale(1.2) !important;
+        -webkit-transform: translate(-50%, -50%) scale(1.2) !important;
+    }
+}
+
+/* Tablet devices (768px - 991px) - Glowing logo loader */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* Prevent body scroll when preloader is visible */
+    body.preloader-active {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        touch-action: none !important;
+        -webkit-overflow-scrolling: none !important;
+    }
+    
+    /* Ensure preloader takes full viewport */
+    .preloader {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        width: 100vw !important;
+        height: 100% !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        max-height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 999999 !important;
+        background-color: var(--color-secondary) !important;
+        touch-action: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        opacity: 1 !important;
+        transition: opacity 0.3s ease-out !important;
+    }
+    
+    .preloader.fade-out {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Center loader logo */
+    .preloader .loader-logo {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 120px !important;
+        height: 120px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) !important;
+        animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
+    }
+    
+    /* Glow background effect */
+    .preloader .loader-logo::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        width: 160px !important;
+        height: 160px !important;
+        border-radius: 50% !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 30%, transparent 70%) !important;
+        opacity: 0 !important;
+        animation: glowPulse 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulse 2s ease-in-out infinite 0.8s !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+    }
+    
+    /* Outer glow effect */
+    .preloader .loader-logo::after {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        width: 200px !important;
+        height: 200px !important;
+        border-radius: 50% !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%) !important;
+        opacity: 0 !important;
+        animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+    }
+    
+    /* Ensure logo image is properly sized and glowing */
+    .preloader .loader-logo img {
+        position: relative !important;
+        z-index: 1 !important;
+        display: block !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 120px !important;
+        height: auto !important;
+        object-fit: contain !important;
+        filter: brightness(0) invert(1) !important;
+        image-rendering: -webkit-optimize-contrast !important;
+        image-rendering: crisp-edges !important;
+        will-change: transform, filter, opacity !important;
+        opacity: 0 !important;
+        transform: scale(0.8) !important;
+        -webkit-transform: scale(0.8) !important;
+        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
+    }
+    
+    /* Prevent any layout shifts during load */
+    .preloader,
+    .preloader * {
+        box-sizing: border-box !important;
+        backface-visibility: hidden !important;
+        -webkit-backface-visibility: hidden !important;
+    }
+}
+
+/* Mobile devices (up to 767px) - Glowing logo loader */
 @media only screen and (max-width: 767px) {
     /* Prevent body scroll when preloader is visible */
     body.preloader-active {
@@ -2318,10 +2811,53 @@ button, .btn, .thm-btn, .agency-btn {
         height: 100px !important;
         margin: 0 !important;
         padding: 0 !important;
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) !important;
+        animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
+    }
+    
+    /* Glow background effect */
+    .preloader .loader-logo::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        width: 140px !important;
+        height: 140px !important;
+        border-radius: 50% !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 30%, transparent 70%) !important;
+        opacity: 0 !important;
+        animation: glowPulse 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulse 2s ease-in-out infinite 0.8s !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+    }
+    
+    /* Outer glow effect */
+    .preloader .loader-logo::after {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        width: 180px !important;
+        height: 180px !important;
+        border-radius: 50% !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%) !important;
+        opacity: 0 !important;
+        animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
     }
     
     /* Ensure logo image is properly sized and glowing */
     .preloader .loader-logo img {
+        position: relative !important;
+        z-index: 1 !important;
         display: block !important;
         margin: 0 auto !important;
         width: 100% !important;
@@ -2331,34 +2867,14 @@ button, .btn, .thm-btn, .agency-btn {
         filter: brightness(0) invert(1) !important;
         image-rendering: -webkit-optimize-contrast !important;
         image-rendering: crisp-edges !important;
-        will-change: transform, filter !important;
-        animation: vertexLogoGlow 2s ease-in-out infinite !important;
-        -webkit-animation: vertexLogoGlow 2s ease-in-out infinite !important;
+        will-change: transform, filter, opacity !important;
+        opacity: 0 !important;
+        transform: scale(0.8) !important;
+        -webkit-transform: scale(0.8) !important;
+        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
     }
     
-    /* Enhanced logo glow animation for mobile */
-    @keyframes vertexLogoGlow {
-        0%, 100% {
-            filter: brightness(0) invert(1) 
-                    drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)) 
-                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.4))
-                    drop-shadow(0 0 45px rgba(255, 255, 255, 0.3))
-                    drop-shadow(0 0 60px rgba(255, 255, 255, 0.2)) !important;
-            opacity: 1 !important;
-            transform: scale(1) !important;
-            -webkit-transform: scale(1) !important;
-        }
-        50% {
-            filter: brightness(0) invert(1)
-                    drop-shadow(0 0 25px rgba(255, 255, 255, 0.9)) 
-                    drop-shadow(0 0 50px rgba(255, 255, 255, 0.7))
-                    drop-shadow(0 0 75px rgba(255, 255, 255, 0.5))
-                    drop-shadow(0 0 100px rgba(255, 255, 255, 0.4)) !important;
-            opacity: 1 !important;
-            transform: scale(1.08) !important;
-            -webkit-transform: scale(1.08) !important;
-        }
-    }
     
     /* Prevent any layout shifts during load */
     .preloader,

@@ -30,14 +30,13 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/mobile-optimization.css">
-    <link rel="stylesheet" href="assets/css/desktop-fixes.css">
     
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Liquid Glass Header Effect -->
+    <!-- Liquid Glass Effect for Header - Override main.css white background -->
     <style>
         /* Liquid Glass Effect for Header - Override main.css white background */
         .header-area .header__wrap,
@@ -286,15 +285,6 @@
             color: #ffffff !important;
             opacity: 0.9;
         }
-        /* Ensure breadcrumb title uses website's existing font */
-        .breadcrumb__title {
-            font-family: var(--font-heading) !important;
-        }
-        /* Add underline on hover for breadcrumb title */
-        .breadcrumb__title:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
         /* Disable Services dropdown menu hover effect */
         .main-menu > ul > li.megamenu:hover > .submenu {
             opacity: 0 !important;
@@ -305,6 +295,41 @@
             opacity: 0 !important;
             visibility: hidden !important;
             display: none !important;
+        }
+        /* Header Aurora Background - Mobile Only */
+        .header-aurora-container {
+            display: none !important;
+        }
+        @media (max-width: 991px) {
+            /* Make header area position relative for aurora positioning */
+            .header-area,
+            #xb-header-area {
+                position: relative !important;
+            }
+            .header-aurora-container {
+                display: block !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                z-index: 0 !important;
+                pointer-events: none !important;
+                overflow: hidden !important;
+            }
+            .header-aurora-container canvas {
+                opacity: 0.6 !important;
+            }
+            /* Ensure header content is above aurora */
+            .header-area .xb-header,
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .xb-header {
+                position: relative !important;
+                z-index: 1 !important;
+            }
         }
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
@@ -457,18 +482,36 @@
             }
         }
         
-        /* Hero Section - Limit Aurora Background */
-        .hero.hero-full {
-            min-height: 100vh;
-            max-height: 100vh;
-            overflow: hidden;
-            position: relative;
+        /* Hero Section - Limit Aurora Background - Desktop/Tablet Only */
+        @media (min-width: 769px) {
+            .hero.hero-full {
+                min-height: 100vh;
+                max-height: 100vh;
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .aurora-container {
+                height: 100% !important;
+                max-height: 100vh !important;
+                overflow: hidden !important;
+            }
         }
         
-        .aurora-container {
-            height: 100% !important;
-            max-height: 100vh !important;
-            overflow: hidden !important;
+        /* Mobile - Aurora container follows content height */
+        @media (max-width: 768px) {
+            .hero.hero-full {
+                min-height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                position: relative;
+            }
+            
+            .aurora-container {
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
         }
         
         /* Service Section Background Control */
@@ -656,9 +699,9 @@
             .brand .xb-brand-item {
                 flex-shrink: 0 !important;
                 flex-grow: 0 !important;
-                width: 120px !important;
-                min-width: 120px !important;
-                max-width: 120px !important;
+                width: 140px !important;
+                min-width: 140px !important;
+                max-width: 140px !important;
                 margin-right: 40px !important;
             }
             
@@ -666,7 +709,7 @@
                 width: 100% !important;
                 max-width: 100% !important;
                 height: auto !important;
-                max-height: 75px !important;
+                max-height: 90px !important;
                 margin: 0 !important;
             }
             
@@ -689,20 +732,20 @@
                 }
                 
                 .brand .xb-brand-item img {
-                    max-height: 65px !important;
+                    max-height: 78px !important;
                 }
             }
             
             /* Small screens */
             @media only screen and (min-width: 576px) and (max-width: 767px) {
                 .brand .xb-brand-item {
-                    width: 130px !important;
-                    min-width: 130px !important;
-                    max-width: 130px !important;
+                    width: 150px !important;
+                    min-width: 150px !important;
+                    max-width: 150px !important;
                 }
                 
                 .brand .xb-brand-item img {
-                    max-height: 85px !important;
+                    max-height: 100px !important;
                 }
             }
         }
@@ -721,6 +764,83 @@
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
+        }
+        /* Hero Section Full Viewport Height - Desktop/Tablet Only */
+        @media (min-width: 769px) {
+            section.hero.hero-style.pos-rel.hero-full,
+            .hero.hero-style.pos-rel.hero-full {
+                min-height: 100vh !important;
+                height: 100vh !important;
+                display: flex !important;
+                align-items: center !important;
+                position: relative !important;
+                overflow: hidden !important;
+            }
+            /* Hero container vertical centering */
+            section.hero.hero-style.pos-rel.hero-full .container,
+            .hero.hero-style.pos-rel.hero-full .container {
+                height: 100% !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+        }
+        
+        /* Mobile Hero Section - Content-Based Height, Top-Aligned */
+        @media (max-width: 768px) {
+            section.hero.hero-style.pos-rel.hero-full,
+            .hero.hero-style.pos-rel.hero-full {
+                min-height: auto !important;
+                height: auto !important;
+                max-height: none !important;
+                display: block !important;
+                align-items: flex-start !important;
+                position: relative !important;
+                overflow: visible !important;
+                padding-bottom: 40px !important;
+            }
+            /* Hero container - top-aligned, content-based */
+            section.hero.hero-style.pos-rel.hero-full .container,
+            .hero.hero-style.pos-rel.hero-full .container {
+                height: auto !important;
+                display: block !important;
+                align-items: flex-start !important;
+                padding-bottom: 0 !important;
+            }
+        }
+        /* Remove blank space between hero button and service section - Desktop/Tablet */
+        @media (min-width: 769px) {
+            section#services.service.pt-135 {
+                padding-top: 0px !important;
+            }
+            /* Additional rule to ensure minimal spacing on desktop/tablet */
+            section.hero.hero-style.pos-rel.hero-full + section#services.service,
+            section.hero.hero-full + section#services.service {
+                padding-top: 0px !important;
+                margin-top: -80px !important;
+            }
+        }
+        
+        /* Mobile - Add reasonable spacing between hero CTA and services section */
+        @media (max-width: 768px) {
+            section#services.service.pt-135 {
+                padding-top: 50px !important;
+            }
+            section.hero.hero-style.pos-rel.hero-full + section#services.service,
+            section.hero.hero-full + section#services.service {
+                padding-top: 50px !important;
+                margin-top: 0 !important;
+            }
+        }
+        /* Hide service section on desktop view - show only first page/hero */
+        @media (min-width: 992px) {
+            section#services.service {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
         }
     </style>
 </head>
@@ -783,10 +903,12 @@
 </div>
 <!-- Preloader-end -->
 
-<div class="body_wrap">
+<div class="body_wrap o-clip">
 
     <!-- header start -->
     <header id="xb-header-area" class="header-area header-style--one header-transparent is-sticky"> 
+        <!-- Aurora Background for Mobile -->
+        <div id="header-aurora-container" class="header-aurora-container"></div>
         <div class="xb-header stricky">
             <div class="container mxw-1650">
                 <div class="header__wrap ul_li_between">
@@ -1032,53 +1154,9 @@
 <!-- hero end -->
 
 <!-- service start -->
-<section id="services" class="service pt-135 bg_img" data-background="assets/img/bg/footer-bg02.png">
+<section id="services" class="service pt-135">
     <div class="container">
-        <div class="row justify-content-center">
-                    <div class="col-lg-11">
-                        <div class="sec-title custom-sec-title xb-sec-padding">
-                            <div class="row align-items-end">
-                                <div class="col-lg-6">
-                                    <h2 style="font-size: 42px;">
-                                        Comprehensive career support designed to help you secure a full-time role in the U.S.
-                                    </h2>
-                                </div>
-                                <div class="col-lg-6 text-lg-end">
-                                    <div class="xb-heading-btn d-inline-block">
-                                        <a class="thm-btn agency-btn" href="service.html">
-                                            <span class="text">
-                                                view more services
-                                            </span>
-                                            <span class="arrow">
-                                                <span class="arrow-icon">
-                                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="5.06592" y="19.9785" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06592 19.9785)" fill="white" />
-                                                        <rect x="7.97095" y="7.24463" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97095 7.24463)" fill="white" />
-                                                        <rect x="11.6523" y="7.54834" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6523 7.54834)" fill="white" />
-                                                        <rect x="15.334" y="7.85205" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.334 7.85205)" fill="white" />
-                                                        <rect x="18.7119" y="11.8374" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7119 11.8374)" fill="white" />
-                                                        <rect x="18.4084" y="15.52" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4084 15.52)" fill="white" />
-                                                        <rect x="18.104" y="19.2012" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.104 19.2012)" fill="white" />
-                                                        </svg>
-                                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="5.06592" y="19.9785" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06592 19.9785)" fill="white" />
-                                                        <rect x="7.97095" y="7.24463" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97095 7.24463)" fill="white" />
-                                                        <rect x="11.6523" y="7.54834" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6523 7.54834)" fill="white" />
-                                                        <rect x="15.334" y="7.85205" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.334 7.85205)" fill="white" />
-                                                        <rect x="18.7119" y="11.8374" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7119 11.8374)" fill="white" />
-                                                        <rect x="18.4084" y="15.52" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4084 15.52)" fill="white" />
-                                                        <rect x="18.104" y="19.2012" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.104 19.2012)" fill="white" />
-                                                        </svg>
-                                                    </span>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
             </div>
             <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg-new.png">
                 <div class="xb-service-item xb-border xb-mouseenter active wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="0.6s">
@@ -1106,9 +1184,9 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html" style="font-size: 0.9em;">LinkedIn Optimization</a>
+                                    <a href="service-details-linkedin-optimization.html" style="font-size: 0.9em;">LinkedIn Optimization</a>
                                 </h3>
-                                <a class="xb-item--icon" href="service-details.html">
+                                <a class="xb-item--icon" href="service-details-linkedin-optimization.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
@@ -1116,7 +1194,7 @@
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html" style="font-size: 0.9em;">LinkedIn Optimization</a>
+                                <a href="service-details-linkedin-optimization.html" style="font-size: 0.9em;">LinkedIn Optimization</a>
                             </h3>
                         </div>
                     </div>
@@ -1126,9 +1204,9 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">Profile Marketing</a>
+                                    <a href="service-details-profile-marketing.html">Profile Marketing</a>
                                 </h3>
-                                <a class="xb-item--icon" href="service-details.html">
+                                <a class="xb-item--icon" href="service-details-profile-marketing.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
@@ -1136,7 +1214,7 @@
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">Profile Marketing</a>
+                                <a href="service-details-profile-marketing.html">Profile Marketing</a>
                             </h3>
                         </div>
                     </div>
@@ -1146,9 +1224,9 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">Interview Guidance</a>
+                                    <a href="service-details-interview-guidance.html">Interview Guidance</a>
                                 </h3>
-                                <a class="xb-item--icon" href="service-details.html">
+                                <a class="xb-item--icon" href="service-details-interview-guidance.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
@@ -1156,7 +1234,7 @@
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">Interview Guidance</a>
+                                <a href="service-details-interview-guidance.html">Interview Guidance</a>
                             </h3>
                         </div>
                     </div>
@@ -1166,9 +1244,9 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html" style="font-size: 0.75em;">Technical Training & Support</a>
+                                    <a href="service-details-technical-training.html" style="font-size: 0.75em;">Technical Training & Support</a>
                                 </h3>
-                                <a class="xb-item--icon" href="service-details.html">
+                                <a class="xb-item--icon" href="service-details-technical-training.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
@@ -1176,7 +1254,7 @@
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html" style="font-size: 0.75em;">Technical Training & Support</a>
+                                <a href="service-details-technical-training.html" style="font-size: 0.75em;">Technical Training & Support</a>
                             </h3>
                         </div>
                     </div>
@@ -1186,9 +1264,9 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details.html">Full Job Support</a>
+                                    <a href="service-details-full-job-support.html">Full Job Support</a>
                                 </h3>
-                                <a class="xb-item--icon" href="service-details.html">
+                                <a class="xb-item--icon" href="service-details-full-job-support.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
                                 </a>
                             </div>
@@ -1196,7 +1274,7 @@
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details.html">Full Job Support</a>
+                                <a href="service-details-full-job-support.html">Full Job Support</a>
                             </h3>
                         </div>
                     </div>
@@ -1215,34 +1293,52 @@
                         <div class="brand-marquee marquee-left">
                             <div class="xb-brand-inner ul_li_between">
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item" style="display: flex; align-items: flex-start; justify-content: center;">
-                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: -77px 0 0 0; object-fit: contain; align-self: flex-start;">
+                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: -77px 0 0 0; object-fit: contain; align-self: flex-start;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item" style="display: flex; align-items: flex-start; justify-content: center;">
-                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: -77px 0 0 0; object-fit: contain; align-self: flex-start;">
+                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: -77px 0 0 0; object-fit: contain; align-self: flex-start;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 126px; max-width: 280px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
                                 </div>
                             </div>
                         </div>
@@ -1517,8 +1613,8 @@
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
                 </div>
                 <div class="contact-item">
-                    <a href="tel:+1-763-722-9401"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
-                    <a class="contact-method" href="tel:+1-763-722-9401">+1-(763)-722-9401</a>
+                    <a href="tel:+1763-722-9401"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
+                    <a class="contact-method" href="tel:+1763-722-9401">+1(763)-722-9401</a>
                 </div>
             </div>
         </div>
@@ -1810,6 +1906,75 @@
                     initAurora();
                 }
             }, 1500);
+        });
+        
+        // Initialize Header Aurora for Mobile Only
+        function initHeaderAurora() {
+            // Only initialize on mobile devices
+            if (window.innerWidth > 991) {
+                return; // Skip on desktop
+            }
+            
+            const headerAuroraContainer = document.getElementById('header-aurora-container');
+            if (!headerAuroraContainer) {
+                console.log('Waiting for header-aurora-container...');
+                setTimeout(initHeaderAurora, 100);
+                return;
+            }
+            
+            // Check for OGL
+            let OGL_NS = window.OGL || window.ogl;
+            if (!OGL_NS || !OGL_NS.Renderer || typeof Aurora === 'undefined') {
+                setTimeout(initHeaderAurora, 200);
+                return;
+            }
+            
+            try {
+                const containerRect = headerAuroraContainer.getBoundingClientRect();
+                if (containerRect.width === 0 || containerRect.height === 0) {
+                    setTimeout(initHeaderAurora, 100);
+                    return;
+                }
+                
+                console.log('Initializing Header Aurora for mobile...');
+                window.headerAuroraInstance = new Aurora(headerAuroraContainer, {
+                    colorStops: ['#020f3e', '#1fad7e', '#213e97'],
+                    amplitude: 0.8,
+                    blend: 0.4,
+                    speed: 0.8
+                });
+                console.log('✓ Header Aurora initialized successfully');
+            } catch (error) {
+                console.error('✗ Error initializing Header Aurora:', error);
+            }
+        }
+        
+        // Initialize header aurora after hero aurora
+        setTimeout(function() {
+            if (window.OGL && window.OGL.Renderer && typeof Aurora !== 'undefined') {
+                initHeaderAurora();
+            } else {
+                window.addEventListener('load', function() {
+                    setTimeout(initHeaderAurora, 2000);
+                });
+            }
+        }, 2000);
+        
+        // Re-initialize on resize if switching to mobile
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                if (window.innerWidth <= 991 && !window.headerAuroraInstance) {
+                    initHeaderAurora();
+                } else if (window.innerWidth > 991 && window.headerAuroraInstance) {
+                    // Clean up on desktop
+                    if (window.headerAuroraInstance.destroy) {
+                        window.headerAuroraInstance.destroy();
+                    }
+                    window.headerAuroraInstance = null;
+                }
+            }, 300);
         });
     })();
 </script>

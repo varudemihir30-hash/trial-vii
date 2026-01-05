@@ -44,7 +44,7 @@
         flex-direction: row !important;
         align-items: center !important;
         justify-content: space-between !important;
-        padding: 15px 30px !important;
+        padding: 15px 25px !important;
         min-height: 70px !important;
         height: 70px !important;
         border-radius: 0 !important;
@@ -265,7 +265,7 @@
     
     .xb-header-area-sticky .header__wrap,
     .xb-header-area-sticky.xb-header-fixed .header__wrap {
-        padding: 15px 30px !important;
+        padding: 15px 25px !important;
         min-height: 70px !important;
         height: 70px !important;
         background: rgba(255, 255, 255, 0.1) !important;
