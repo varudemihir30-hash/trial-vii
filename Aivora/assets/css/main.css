@@ -11765,7 +11765,8 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
   -o-transform: translateX(0%);
   transform: translateX(0%); }
 
-.xb-header-menu.active + .xb-header-menu-backdrop {
+.xb-header-menu.active + .xb-header-menu-backdrop,
+.xb-header-menu-backdrop.active {
   opacity: 1;
   visibility: visible; }
 
@@ -11995,7 +11996,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
     border: 1px solid var(--color-primary); }
 
 /*----------------------------------------*/
-/*  preloader - Simplified Vertex Logo Loader
+/*  preloader - Enhanced Glowing Vertex Logo Loader
 /*----------------------------------------*/
 .preloader {
   top: 0;
@@ -12009,7 +12010,8 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
   align-items: center;
   justify-content: center;
   opacity: 1;
-  transition: opacity 0.3s ease-out; }
+  transition: opacity 0.3s ease-out;
+  overflow: hidden; }
 
 .preloader.fade-out {
   opacity: 0;
@@ -12023,19 +12025,19 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
   width: 120px;
   height: 120px;
   filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
-  animation: logoWrapperGlow 2s ease-in-out infinite 0.8s; }
+  animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s; }
   .preloader .loader-logo::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 30%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.2) 50%, transparent 75%);
     opacity: 0;
-    animation: glowPulse 2s ease-in-out infinite 0.8s;
+    animation: glowPulse 2.5s ease-in-out infinite 0.8s;
     pointer-events: none;
     z-index: 0; }
   .preloader .loader-logo::after {
@@ -12044,12 +12046,12 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 70%);
     opacity: 0;
-    animation: glowPulseOuter 2s ease-in-out infinite 0.8s;
+    animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s;
     pointer-events: none;
     z-index: -1; }
 
@@ -12061,62 +12063,66 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
   height: auto;
   display: block;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
   will-change: filter, transform, opacity;
   opacity: 0;
   transform: scale(0.8);
-  animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s; }
+  animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s; }
 
 @keyframes logoGlowUp {
   0% {
     opacity: 0;
     transform: scale(0.8);
-    filter: brightness(0) invert(1); }
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
   50% {
-    opacity: 0.7;
-    transform: scale(1.05);
-    filter: brightness(0) invert(1); }
+    opacity: 0.8;
+    transform: scale(1.08);
+    filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255, 255, 255, 1)); }
   100% {
     opacity: 1;
     transform: scale(1);
-    filter: brightness(0) invert(1); } }
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); } }
 
 @keyframes logoWrapperGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
-            drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
-            drop-shadow(0 0 60px rgba(255, 255, 255, 0.4))
-            drop-shadow(0 0 80px rgba(255, 255, 255, 0.3)); }
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 1)) 
+            drop-shadow(0 0 50px rgba(255, 255, 255, 0.9))
+            drop-shadow(0 0 75px rgba(255, 255, 255, 0.7))
+            drop-shadow(0 0 100px rgba(255, 255, 255, 0.5))
+            drop-shadow(0 0 125px rgba(255, 255, 255, 0.4)); }
   50% {
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)) 
-            drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
-            drop-shadow(0 0 90px rgba(255, 255, 255, 0.7))
-            drop-shadow(0 0 120px rgba(255, 255, 255, 0.5))
-            drop-shadow(0 0 150px rgba(255, 255, 255, 0.4)); } }
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 1)) 
+            drop-shadow(0 0 80px rgba(255, 255, 255, 1))
+            drop-shadow(0 0 120px rgba(255, 255, 255, 0.9))
+            drop-shadow(0 0 160px rgba(255, 255, 255, 0.7))
+            drop-shadow(0 0 200px rgba(255, 255, 255, 0.6))
+            drop-shadow(0 0 240px rgba(255, 255, 255, 0.4)); } }
 
 @keyframes glowPulse {
   0%, 100% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(0.95); }
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.9); }
   50% {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(1.15); } }
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2); } }
 
 @keyframes glowPulseOuter {
   0%, 100% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(0.9); }
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(0.85); }
   50% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1.2); } }
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.3); } }
 
 @keyframes vertexLogoGlow {
   0%, 100% {
     transform: scale(1);
-    opacity: 1; }
+    opacity: 1;
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); }
   50% {
-    transform: scale(1.05);
-    opacity: 1; } }
+    transform: scale(1.08);
+    opacity: 1;
+    filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255, 255, 255, 1)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.7)); } }
 .xb-footer-heading {
   position: relative;
   overflow: visible; }

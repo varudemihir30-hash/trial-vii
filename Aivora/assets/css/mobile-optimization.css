@@ -193,12 +193,13 @@ section.hero.hero-style,
         margin-top: 0 !important;
     }
     
-    /* Add minimal padding-top only to hero content container - minimal for upper positioning */
+    /* Add padding-top to hero content container to account for fixed header height */
+    /* Header is ~55px on mobile - add padding so hero content starts below header */
     .hero.hero-full .container,
     .hero.hero-style.hero-full .container,
     section.hero.hero-full .container,
     section.hero.hero-style.hero-full .container {
-        padding-top: 5px !important;
+        padding-top: 70px !important;
     }
     
     /* Align hero row content to top */
@@ -285,11 +286,12 @@ html {
         margin-top: 0 !important;
     }
     
-    /* Add padding-top to hero container instead of section */
+    /* Remove padding-top from hero container - page starts from absolute top (mobile only) */
+    /* Note: This only applies to max-width: 768px and below via the more specific rule above */
     .body_wrap > main > section:first-child .container,
     .body_wrap > main > .hero:first-child .container,
     .body_wrap > main > .hero.hero-full:first-child .container {
-        padding-top: 55px !important;
+        /* Overridden by max-width: 768px rule above */
     }
 }
 
@@ -312,7 +314,8 @@ html {
         margin-top: 0 !important;
     }
     
-    /* Add padding-top to container instead - minimal for upper positioning */
+    /* Add padding-top to container to account for fixed header height */
+    /* Header is ~55px on mobile - add padding so hero content starts below header */
     .body_wrap > main > section:first-child .container,
     .body_wrap > main > .hero:first-child .container,
     .body_wrap > main > .hero.hero-full:first-child .container,
@@ -541,14 +544,15 @@ html {
         margin-top: 0 !important;
     }
     
-    /* Add padding-top to containers instead - minimal for upper positioning */
+    /* Remove padding-top from containers - page starts from absolute top (mobile only) */
+    /* Note: This only applies to max-width: 768px and below via the more specific rule above */
     .body_wrap > main > section:first-child .container,
     .body_wrap > main > .hero:first-child .container,
     .body_wrap > main > .hero.hero-full:first-child .container,
     .body_wrap > main > .hero.hero-style:first-child .container,
     section.hero.hero-full .container,
     section.hero.hero-style.hero-full .container {
-        padding-top: 60px !important;
+        padding-top: 0 !important;
     }
     
     .xb-nav-mobile {
@@ -910,6 +914,15 @@ button, .btn, .thm-btn, .agency-btn {
     /* Mobile menu backdrop */
     .xb-header-menu-backdrop {
         background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Prevent body scroll when mobile menu is open */
+    body.mobile-menu-active {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        touch-action: none !important;
     }
     
     /* Menu items */
@@ -1488,6 +1501,130 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 768px) {
+    /* ============================================
+       MOBILE: Remove ALL top offsets - Start from absolute top
+       ============================================ */
+    
+    /* Remove all top padding/margin from html and body */
+    html {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+        scroll-padding-top: 0 !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Remove top offsets from body_wrap */
+    .body_wrap {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Ensure main starts at top with no offset */
+    main {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* CRITICAL FIX: Change header from fixed to sticky on mobile */
+    /* This keeps it visible but doesn't break layout flow */
+    .header-area,
+    #xb-header-area,
+    .xb-header-area-sticky,
+    .xb-header-area-sticky.xb-header-fixed {
+        position: sticky !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+        z-index: 999 !important;
+    }
+    
+    /* Ensure first section/hero section starts at top: 0 with NO padding */
+    .body_wrap > main > section:first-child,
+    .body_wrap > main > .hero:first-child,
+    .body_wrap > main > .hero.hero-full:first-child,
+    .body_wrap > main > section.hero:first-child,
+    .body_wrap > main > section.hero.hero-full:first-child,
+    main > section.hero:first-child,
+    main > .hero:first-child,
+    section.hero.hero-style.pos-rel.hero-full,
+    section.hero.hero-style.hero-full,
+    .hero.hero-style.pos-rel.hero-full,
+    .hero.hero-style.hero-full,
+    section.hero.hero-full,
+    .hero.hero-full {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+        position: relative !important;
+        top: 0 !important;
+    }
+    
+    /* Add padding-top to hero containers to account for fixed header height */
+    /* Hero container - padding will be set dynamically by JS */
+    /* Initial padding is minimal, JS will measure header and apply proper value */
+    .body_wrap > main > section:first-child .container,
+    .body_wrap > main > .hero:first-child .container,
+    .body_wrap > main > .hero.hero-full:first-child .container,
+    .body_wrap > main > section.hero:first-child .container,
+    .body_wrap > main > section.hero.hero-full:first-child .container,
+    main > section.hero:first-child .container,
+    main > .hero:first-child .container,
+    section.hero.hero-style.pos-rel.hero-full .container,
+    section.hero.hero-style.hero-full .container,
+    .hero.hero-style.pos-rel.hero-full .container,
+    .hero.hero-style.hero-full .container,
+    section.hero.hero-full .container,
+    .hero.hero-full .container,
+    .hero .container {
+        padding-top: 20px !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Ensure aurora container starts at top: 0 */
+    .aurora-container,
+    #aurora-container,
+    .hero .aurora-container,
+    .hero #aurora-container,
+    section.hero .aurora-container,
+    section.hero #aurora-container {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* Force hero content to stay in normal document flow */
+    .hero-content {
+        position: static !important;
+        transform: none !important;
+        top: auto !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    /* Remove any positioning that pulls this content upward */
+    .hero-content .title,
+    .hero-content .sub-title,
+    .hero-content .hero-btn,
+    .scale-animation {
+        position: static !important;
+        transform: none !important;
+        top: auto !important;
+        margin-top: 0 !important;
+        opacity: 1 !important;
+    }
+    
+    /* ============================================
+       END: Mobile top offset removal
+       ============================================ */
+    
     /* CRITICAL FIX: Remove padding-top from hero sections - add to container instead */
     /* Header is ~55px on mobile - padding goes on container, not section */
     /* Using maximum specificity and !important to override main.css */
@@ -1516,8 +1653,8 @@ button, .btn, .thm-btn, .agency-btn {
         margin-bottom: 0 !important;
     }
     
-    /* Add padding-top to hero containers instead - minimal for upper positioning */
-    /* Header is ~55px on mobile - reduced padding to bring content closer to header */
+    /* Add padding-top to hero containers to account for fixed header height */
+    /* Header is ~55px on mobile - add padding so hero content starts below header */
     .hero-style .container,
     .hero.hero-style .container,
     section.hero-style .container,
@@ -1532,7 +1669,7 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-style.hero-full .container,
     main > section.hero:first-child .container,
     main > .hero:first-child .container {
-        padding-top: 50px !important;
+        padding-top: 70px !important;
     }
     
     /* Ensure body has proper spacing when header is fixed */
@@ -1567,8 +1704,8 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
     }
     
-    /* Add padding-top to containers instead - minimal for upper positioning */
-    /* Header is ~55px on mobile - reduced padding to bring content closer to header */
+    /* Add padding-top to containers to account for fixed header height */
+    /* Header is ~55px on mobile - add padding so hero content starts below header */
     .body_wrap > main > section:first-child .container,
     .body_wrap > main > .hero:first-child .container,
     .body_wrap > main > .hero.hero-full:first-child .container,
@@ -1579,16 +1716,16 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-style.hero-full .container,
     .hero.hero-style.pos-rel.hero-full .container,
     section.hero.hero-style.pos-rel.hero-full .container {
-        padding-top: 50px !important;
+        padding-top: 60px !important;
     }
     
     /* Hero Container */
     /* Ensure proper z-index - header is 999, hero content should be below but visible */
-    /* Reduced padding-top to bring content closer to header */
+    /* Add padding-top to account for fixed header height */
     .hero .container {
         padding-left: 20px !important;
         padding-right: 20px !important;
-        padding-top: 50px !important;
+        padding-top: 60px !important;
         padding-bottom: 0 !important;
         margin-bottom: 0 !important;
         margin-top: 0 !important;
@@ -1872,8 +2009,8 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
     }
     
-    /* Add padding-top to containers instead - minimal for upper positioning */
-    /* Header is ~55px on mobile - reduced padding to bring content closer to header */
+    /* Add padding-top to containers to account for fixed header height */
+    /* Header is ~55px on mobile - add padding so hero content starts below header */
     .hero-style .container,
     .hero.hero-style .container,
     section.hero-style .container,
@@ -1888,7 +2025,7 @@ button, .btn, .thm-btn, .agency-btn {
     .body_wrap > main > .hero.hero-full:first-child .container,
     .hero.hero-style.hero-full .container,
     section.hero.hero-full .container {
-        padding-top: 50px !important;
+        padding-top: 60px !important;
     }
     
     /* Hero Row - align content to top on extra small screens (not center) */
@@ -2699,8 +2836,8 @@ button, .btn, .thm-btn, .agency-btn {
         margin: 0 !important;
         padding: 0 !important;
         filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) !important;
-        animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
+        animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
     }
     
     /* Glow background effect */
@@ -2711,13 +2848,13 @@ button, .btn, .thm-btn, .agency-btn {
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         -webkit-transform: translate(-50%, -50%) !important;
-        width: 160px !important;
-        height: 160px !important;
+        width: 180px !important;
+        height: 180px !important;
         border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 30%, transparent 70%) !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.2) 50%, transparent 75%) !important;
         opacity: 0 !important;
-        animation: glowPulse 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: glowPulse 2s ease-in-out infinite 0.8s !important;
+        animation: glowPulse 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulse 2.5s ease-in-out infinite 0.8s !important;
         pointer-events: none !important;
         z-index: 0 !important;
     }
@@ -2730,13 +2867,13 @@ button, .btn, .thm-btn, .agency-btn {
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         -webkit-transform: translate(-50%, -50%) !important;
-        width: 200px !important;
-        height: 200px !important;
+        width: 240px !important;
+        height: 240px !important;
         border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%) !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 70%) !important;
         opacity: 0 !important;
-        animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
+        animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s !important;
         pointer-events: none !important;
         z-index: -1 !important;
     }
@@ -2751,15 +2888,15 @@ button, .btn, .thm-btn, .agency-btn {
         max-width: 120px !important;
         height: auto !important;
         object-fit: contain !important;
-        filter: brightness(0) invert(1) !important;
+        filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) !important;
         image-rendering: -webkit-optimize-contrast !important;
         image-rendering: crisp-edges !important;
         will-change: transform, filter, opacity !important;
         opacity: 0 !important;
         transform: scale(0.8) !important;
         -webkit-transform: scale(0.8) !important;
-        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
+        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
     }
     
     /* Prevent any layout shifts during load */
@@ -2829,8 +2966,8 @@ button, .btn, .thm-btn, .agency-btn {
         margin: 0 !important;
         padding: 0 !important;
         filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) !important;
-        animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: logoWrapperGlow 2s ease-in-out infinite 0.8s !important;
+        animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
     }
     
     /* Glow background effect */
@@ -2841,13 +2978,13 @@ button, .btn, .thm-btn, .agency-btn {
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         -webkit-transform: translate(-50%, -50%) !important;
-        width: 140px !important;
-        height: 140px !important;
+        width: 150px !important;
+        height: 150px !important;
         border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 30%, transparent 70%) !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.2) 50%, transparent 75%) !important;
         opacity: 0 !important;
-        animation: glowPulse 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: glowPulse 2s ease-in-out infinite 0.8s !important;
+        animation: glowPulse 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulse 2.5s ease-in-out infinite 0.8s !important;
         pointer-events: none !important;
         z-index: 0 !important;
     }
@@ -2860,13 +2997,13 @@ button, .btn, .thm-btn, .agency-btn {
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         -webkit-transform: translate(-50%, -50%) !important;
-        width: 180px !important;
-        height: 180px !important;
+        width: 200px !important;
+        height: 200px !important;
         border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%) !important;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 70%) !important;
         opacity: 0 !important;
-        animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: glowPulseOuter 2s ease-in-out infinite 0.8s !important;
+        animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s !important;
         pointer-events: none !important;
         z-index: -1 !important;
     }
@@ -2881,15 +3018,15 @@ button, .btn, .thm-btn, .agency-btn {
         max-width: 100px !important;
         height: auto !important;
         object-fit: contain !important;
-        filter: brightness(0) invert(1) !important;
+        filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
         image-rendering: -webkit-optimize-contrast !important;
         image-rendering: crisp-edges !important;
         will-change: transform, filter, opacity !important;
         opacity: 0 !important;
         transform: scale(0.8) !important;
         -webkit-transform: scale(0.8) !important;
-        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
-        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2s ease-in-out infinite 0.8s !important;
+        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
+        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
     }
     
     
@@ -3149,6 +3286,45 @@ button, .btn, .thm-btn, .agency-btn {
     .brand-marquee:hover .xb-brand-inner {
         animation-play-state: paused !important;
         -webkit-animation-play-state: paused !important;
+    }
+}
+
+/* ============================================
+   Mobile - Hide Custom Cursor (Green Moving Dot)
+   ============================================ */
+
+@media only screen and (max-width: 768px) {
+    /* Hide the custom cursor dot on mobile devices */
+    .cb-cursor,
+    .cb-cursor:before,
+    .cb-cursor:after,
+    .cb-cursor-text,
+    .cb-cursor.-visible,
+    .cb-cursor.-active,
+    .cb-cursor.-pointer,
+    .cb-cursor.-text,
+    .cb-cursor.-normal,
+    .cb-cursor.-inverse,
+    .cb-cursor.-exclusion,
+    .cb-cursor.-opaque,
+    .cb-cursor.-lg,
+    .cb-cursor.-hidden {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        transform: none !important;
+    }
+    
+    /* Ensure cursor doesn't appear even if JS initializes it */
+    body .cb-cursor,
+    body .cb-cursor * {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
 }
 

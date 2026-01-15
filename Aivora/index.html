@@ -317,52 +317,6 @@
                 padding-bottom: 0 !important;
             }
             /* Mobile logo section styling */
-            .xb-logo-mobile {
-                display: flex !important;
-                align-items: center !important;
-                gap: 0 !important;
-                margin-bottom: 20px !important;
-            }
-            .xb-logo-mobile a {
-                display: flex !important;
-                align-items: center !important;
-            }
-            .xb-logo-mobile img {
-                height: 50px !important;
-                width: auto !important;
-                max-width: 200px !important;
-                filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
-            }
-            .xb-logo-mobile .logo-divider {
-                display: inline-block !important;
-                width: 1px !important;
-                height: 50px !important;
-                background: rgba(255, 255, 255, 0.8) !important;
-                margin: 0 8px !important;
-            }
-            .xb-logo-mobile .company-name {
-                font-family: var(--font-heading) !important;
-                font-weight: 600 !important;
-                font-size: 26px !important;
-                color: #ffffff !important;
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-                white-space: nowrap !important;
-                letter-spacing: -0.04em !important;
-                line-height: 1.2 !important;
-                margin-top: 5px !important;
-            }
-            @media (max-width: 480px) {
-                .xb-logo-mobile .company-name {
-                    font-size: 22px !important;
-                }
-                .xb-logo-mobile img {
-                    height: 40px !important;
-                }
-                .xb-logo-mobile .logo-divider {
-                    height: 40px !important;
-                    margin: 0 6px !important;
-                }
-            }
         }
         /* Reduce header logo and company name size when mobile menu is open */
         @media (max-width: 991px) {
@@ -700,19 +654,100 @@
             }
         }
         
-        /* Mobile - Aurora container follows content height */
+        /* Mobile - Sticky header prevents layout overlap */
         @media (max-width: 768px) {
-            .hero.hero-full {
+            /* Remove ALL top offsets - start from absolute top */
+            html {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+                scroll-padding-top: 0 !important;
+            }
+            body {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            .body_wrap {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            main {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* CRITICAL FIX: Change header from fixed to sticky on mobile */
+            /* This keeps it visible but doesn't break layout flow */
+            .header-area,
+            #xb-header-area,
+            .xb-header-area-sticky,
+            .xb-header-area-sticky.xb-header-fixed {
+                position: sticky !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 999 !important;
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Hero section starts in normal flow */
+            .hero.hero-full,
+            section.hero.hero-full,
+            .hero.hero-style.hero-full,
+            section.hero.hero-style.hero-full,
+            .hero.hero-style.pos-rel.hero-full,
+            section.hero.hero-style.pos-rel.hero-full {
                 min-height: auto !important;
                 max-height: none !important;
                 overflow: visible !important;
-                position: relative;
+                position: relative !important;
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+                top: 0 !important;
             }
             
-            .aurora-container {
+            /* Force hero content to stay in normal document flow */
+            .hero-content {
+                position: static !important;
+                transform: none !important;
+                top: auto !important;
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+
+            /* Remove any positioning that pulls content upward */
+            .hero-content .title,
+            .hero-content .sub-title,
+            .hero-content .hero-btn,
+            .scale-animation {
+                position: static !important;
+                transform: none !important;
+                top: auto !important;
+                margin-top: 0 !important;
+                opacity: 1 !important;
+            }
+
+            /* Hero container - padding will be set dynamically by JS */
+            .hero.hero-full .container,
+            section.hero.hero-full .container,
+            .hero.hero-style.hero-full .container,
+            section.hero.hero-style.hero-full .container,
+            .hero.hero-style.pos-rel.hero-full .container,
+            section.hero.hero-style.pos-rel.hero-full .container {
+                padding-top: 20px !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Aurora container at top: 0 */
+            .aurora-container,
+            #aurora-container {
                 height: auto !important;
                 max-height: none !important;
                 overflow: visible !important;
+                position: absolute !important;
+                top: 0 !important;
+                padding-top: 0 !important;
+                margin-top: 0 !important;
             }
         }
         
@@ -1045,47 +1080,274 @@
             }
         }
     </style>
+    
+    <!-- Preloader Visibility Fix -->
+    <style>
+        #preloader.preloader {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 999999 !important;
+            background-color: #00020f !important;
+            background: #00020f !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        #preloader .loader-logo {
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 120px !important;
+            height: 120px !important;
+        }
+        #preloader .loader-logo img {
+            width: 100% !important;
+            max-width: 120px !important;
+            height: auto !important;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 255, 255, 1)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 75px rgba(255, 255, 255, 0.7)) !important;
+            transform: scale(1) !important;
+            animation: logoGlowPulse 2s ease-in-out infinite !important;
+        }
+        @keyframes logoGlowPulse {
+            0%, 100% {
+                filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 255, 255, 1)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 75px rgba(255, 255, 255, 0.7)) !important;
+                transform: scale(1) !important;
+            }
+            50% {
+                filter: brightness(0) invert(1) drop-shadow(0 0 40px rgba(255, 255, 255, 1)) drop-shadow(0 0 80px rgba(255, 255, 255, 1)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.9)) !important;
+                transform: scale(1.08) !important;
+            }
+        }
+        /* Hide body content until preloader is done */
+        body.preloader-active .body_wrap {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        body:not(.preloader-active) .body_wrap {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transition: opacity 0.5s ease-in !important;
+        }
+    </style>
 </head>
 
 <body class="ai-agency">
+
+<!-- Preloader-Start -->
+<div id="preloader" class="preloader" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100vw !important; height: 100vh !important; display: flex !important; align-items: center !important; justify-content: center !important; opacity: 1 !important; visibility: visible !important; z-index: 999999 !important; background-color: #00020f !important; background: #00020f !important; margin: 0 !important; padding: 0 !important;">
+    <div class="loader-logo" style="position: relative !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 120px !important; height: 120px !important;">
+        <img src="assets/img/logo/vertex-tech-logo.svg" alt="Vertex Tech Io Logo" loading="eager" style="width: 100% !important; max-width: 120px !important; height: auto !important; display: block !important; opacity: 1 !important; visibility: visible !important; filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255, 255, 255, 1)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.6)) !important; transform: scale(1) !important;">
+    </div>
+</div>
+<!-- Preloader-end -->
+
 <script>
-    // Show loader immediately and prevent body scroll
+    // Universal Preloader with Glowing Logo - Shows on every page load and navigation
     (function() {
-        // Add preloader-active class immediately
-        document.body.classList.add('preloader-active');
-        
-        // Ensure preloader is visible immediately
-        var preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.style.display = 'flex';
-            preloader.style.opacity = '1';
+        // Function to show preloader with glowing effect
+        function showPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (!preloader) {
+                // Create preloader if it doesn't exist
+                preloader = document.createElement('div');
+                preloader.id = 'preloader';
+                preloader.className = 'preloader';
+                preloader.innerHTML = '<div class="loader-logo" style="position: relative !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 120px !important; height: 120px !important;"><img src="assets/img/logo/vertex-tech-logo.svg" alt="Vertex Tech Io Logo" loading="eager" style="width: 100% !important; max-width: 120px !important; height: auto !important; display: block !important; opacity: 1 !important; visibility: visible !important; filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 255, 255, 1)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 75px rgba(255, 255, 255, 0.7)) !important; transform: scale(1) !important; animation: logoGlowPulse 2s ease-in-out infinite !important;"></div>';
+                document.body.insertBefore(preloader, document.body.firstChild);
+            }
+            
+            // Add preloader-active class immediately
+            document.body.classList.add('preloader-active');
+            
+            // Hide body content immediately
+            var bodyWrap = document.querySelector('.body_wrap');
+            if (bodyWrap) {
+                bodyWrap.style.opacity = '0';
+                bodyWrap.style.visibility = 'hidden';
+                bodyWrap.style.pointerEvents = 'none';
+            }
+            
+            // Ensure preloader is visible immediately with glowing effect
+            preloader.style.cssText = 'position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100vw !important; height: 100vh !important; display: flex !important; align-items: center !important; justify-content: center !important; opacity: 1 !important; visibility: visible !important; z-index: 999999 !important; background-color: #00020f !important; background: #00020f !important; margin: 0 !important; padding: 0 !important;';
+            
+            // Ensure logo is visible and glowing
+            var logoImg = preloader.querySelector('img');
+            if (logoImg) {
+                logoImg.style.cssText = 'width: 100% !important; max-width: 120px !important; height: auto !important; display: block !important; opacity: 1 !important; visibility: visible !important; filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 255, 255, 1)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 75px rgba(255, 255, 255, 0.7)) !important; transform: scale(1) !important; animation: logoGlowPulse 2s ease-in-out infinite !important;';
+            }
         }
         
-        // Hide loader when DOM is ready (faster than window load)
+        // Function to hide preloader
+        function hidePreloader() {
+            var preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('fade-out');
+                setTimeout(function() {
+                    // Show body content
+                    var bodyWrap = document.querySelector('.body_wrap');
+                    if (bodyWrap) {
+                        bodyWrap.style.opacity = '1';
+                        bodyWrap.style.visibility = 'visible';
+                        bodyWrap.style.pointerEvents = 'auto';
+                    }
+                    preloader.remove();
+                    document.body.classList.remove('preloader-active');
+                }, 300);
+            }
+        }
+        
+        // Track if preloader has been initialized to prevent duplicate shows
+        var preloaderInitialized = false;
+        
+        // Function to initialize and show preloader
+        function initPreloader() {
+            if (preloaderInitialized) return;
+            preloaderInitialized = true;
+            
+            // Show preloader immediately
+            showPreloader();
+            
+            // Hide loader when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(function() {
+                        hidePreloader();
+                        preloaderInitialized = false; // Reset for next page load
+                    }, 2000); // Show for 2 seconds to ensure visibility
+                });
+            } else {
+                // DOM already loaded - still show preloader for a moment
+                setTimeout(function() {
+                    hidePreloader();
+                    preloaderInitialized = false; // Reset for next page load
+                }, 2000);
+            }
+        }
+        
+        // Show preloader immediately on page load/reload - ALWAYS
+        initPreloader();
+        
+        // Ensure preloader shows on every reload (including hard reload)
+        window.addEventListener('beforeunload', function() {
+            // Reset flag so preloader shows on next load
+            preloaderInitialized = false;
+        });
+        
+        // Show preloader on every page show (including reloads from cache)
+        window.addEventListener('pageshow', function(e) {
+            // Always show preloader on page show (reload, back/forward, etc.)
+            if (!preloaderInitialized) {
+                initPreloader();
+            }
+        });
+        
+        // Show preloader on link clicks (page navigation)
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('a');
+            if (link && link.href) {
+                // Skip anchor links, javascript links, and same page
+                if (link.href.includes('#') && !link.href.match(/^https?:\/\//)) {
+                    return; // Anchor link, skip
+                }
+                if (link.href.includes('javascript:') || link.href === '#' || link.href === window.location.href) {
+                    return; // JavaScript link or same page, skip
+                }
+                
+                // Check if it's an internal link
+                try {
+                    var linkUrl = new URL(link.href, window.location.origin);
+                    var currentUrl = new URL(window.location.href);
+                    if (linkUrl.origin === currentUrl.origin && linkUrl.pathname !== currentUrl.pathname) {
+                        // Internal navigation to different page - show preloader
+                        e.preventDefault();
+                        showPreloader();
+                        // Navigate after a brief delay to show the preloader
+                        setTimeout(function() {
+                            window.location.href = link.href;
+                        }, 100);
+                    }
+                } catch(err) {
+                    // Invalid URL, ignore
+                }
+            }
+        });
+        
+        // Note: pageshow handler moved above to handle all page shows including reloads
+        
+        // Ensure glowing animation keyframes are always available
+        if (!document.getElementById('preloader-glow-animation')) {
+            var style = document.createElement('style');
+            style.id = 'preloader-glow-animation';
+            style.textContent = '@keyframes logoGlowPulse { 0%, 100% { filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 255, 255, 1)) drop-shadow(0 0 50px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 75px rgba(255, 255, 255, 0.7)) !important; transform: scale(1) !important; } 50% { filter: brightness(0) invert(1) drop-shadow(0 0 40px rgba(255, 255, 255, 1)) drop-shadow(0 0 80px rgba(255, 255, 255, 1)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.9)) !important; transform: scale(1.08) !important; } }';
+            document.head.appendChild(style);
+        }
+    })();
+</script>
+
+<script>
+    // Dynamic header height adjustment for mobile - prevents overlap
+    (function() {
+        function adjustHeroContentPadding() {
+            // Only run on mobile devices (max-width: 768px)
+            if (window.innerWidth <= 768) {
+                const header = document.querySelector('#xb-header-area');
+                const heroContainers = document.querySelectorAll('.hero.hero-full .container, section.hero.hero-full .container, .hero.hero-style.hero-full .container, section.hero.hero-style.hero-full .container, .hero.hero-style.pos-rel.hero-full .container, section.hero.hero-style.pos-rel.hero-full .container');
+                
+                if (header && heroContainers.length > 0) {
+                    // Measure actual header height
+                    const headerHeight = header.offsetHeight;
+                    
+                    // Add some safe spacing (20px)
+                    const safePadding = headerHeight + 20;
+                    
+                    // Apply to all hero containers
+                    heroContainers.forEach(function(container) {
+                        container.style.paddingTop = safePadding + 'px';
+                    });
+                    
+                    console.log('Mobile header height adjusted:', safePadding + 'px');
+                }
+            }
+        }
+        
+        // Run on page load
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    if (preloader) {
-                        preloader.classList.add('fade-out');
-                        setTimeout(function() {
-                            preloader.remove();
-                            document.body.classList.remove('preloader-active');
-                        }, 300);
-                    }
-                }, 500); // Minimum 500ms display time for smooth UX
+                // Wait a bit for styles to be applied
+                setTimeout(adjustHeroContentPadding, 100);
+                // Run again after animations might have completed
+                setTimeout(adjustHeroContentPadding, 1000);
             });
         } else {
-            // DOM already loaded
-            setTimeout(function() {
-                if (preloader) {
-                    preloader.classList.add('fade-out');
-                    setTimeout(function() {
-                        preloader.remove();
-                        document.body.classList.remove('preloader-active');
-                    }, 300);
-                }
-            }, 500);
+            setTimeout(adjustHeroContentPadding, 100);
+            setTimeout(adjustHeroContentPadding, 1000);
         }
+        
+        // Run on window resize (debounced)
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(adjustHeroContentPadding, 250);
+        });
+        
+        // Run on orientation change (mobile devices)
+        window.addEventListener('orientationchange', function() {
+            setTimeout(adjustHeroContentPadding, 300);
+        });
     })();
 </script>
 
@@ -1096,14 +1358,6 @@
     </a>
 </div>
 <!-- backtotop-end -->
-
-<!-- Preloader-Start -->
-<div id="preloader" class="preloader">
-    <div class="loader-logo">
-        <img src="assets/img/logo/vertex-tech-logo.svg" alt="Vertex Tech Io Logo" loading="eager">
-    </div>
-</div>
-<!-- Preloader-end -->
 
 <div class="body_wrap o-clip">
 
@@ -1283,17 +1537,8 @@
                     <div class="xb-header-menu">
                         <div class="xb-header-menu-scroll">
                             <div class="xb-menu-close xb-hide-xl xb-close"></div>
-                            <div class="xb-logo-mobile xb-hide-xl" style="display: flex; align-items: center; gap: 0;">
-                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-tech-logo.svg" alt=""></a>
-                            <span class="logo-divider" style="display: inline-block; width: 1px; height: 50px; background: rgba(255, 255, 255, 0.8); margin: 0 8px;"></span>
-                            <span class="company-name" style="font-family: var(--font-heading); font-weight: 600; font-size: 26px; color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); white-space: nowrap; letter-spacing: -0.04em; line-height: 1.2; margin-top: 5px;">Vertex Tech io</span>
-                            </div>
-                            <div class="xb-header-mobile-search xb-hide-xl" style="display: none !important;">
-                                <form role="search" action="#">
-                                    <input type="text" placeholder="Search..." name="s" class="search-field">
-                                    <button class="search-submit" type="submit"><i class="far fa-search"></i></button>
-                                </form>
-                            </div>
+                            <div class="xb-logo-mobile xb-hide-xl">
+                            <a href="index.html" rel="home"><img src="assets/img/logo/vertex-tech-logo.svg" alt=""></a></div>
                             <nav class="xb-header-nav">
                                 <ul class="xb-menu-primary clearfix">
                                     <li class="menu-item">
@@ -1808,7 +2053,7 @@
             <div class="xb-footer-bottom">
                 <div class="contact-item">
                     <img src="assets/img/icon/location-icon.svg" alt="icon">
-                    <span class="contact-method">30 N GOULD ST,STE A, SHERIDAN,WY,82801</span>
+                    <span class="contact-method">30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
                 </div>
                 <div class="contact-item copyright-item">
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
