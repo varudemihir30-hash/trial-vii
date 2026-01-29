@@ -213,7 +213,10 @@ void main() {
       const height = this.container.offsetHeight;
       this.renderer.setSize(width, height);
       if (this.program) {
-        this.program.uniforms.uResolution.value = [width, height];
+        // Mobile Zoom Hack: Pass larger resolution to shader to zoom in the noise/gradient
+        const isMobile = window.innerWidth < 768;
+        const scaleFactor = isMobile ? 3.0 : 1.0; // Zoom 3x on mobile
+        this.program.uniforms.uResolution.value = [width * scaleFactor, height * scaleFactor];
       }
     };
     window.addEventListener('resize', this.resize);

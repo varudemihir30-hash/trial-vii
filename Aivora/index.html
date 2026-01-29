@@ -455,40 +455,8 @@
             opacity: 0 !important;
         }
 
-        @media (max-width: 991px) {
+        /* Mobile header and aurora styles removed to allow main.css overrides */
 
-            /* Make header area position relative */
-            .header-area,
-            #xb-header-area {
-                position: relative !important;
-            }
-
-            /* Completely hide aurora background on mobile */
-            #header-aurora-container,
-            .header-aurora-container,
-            #header-aurora-container canvas,
-            .header-aurora-container canvas {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                height: 0 !important;
-                width: 0 !important;
-                position: absolute !important;
-                left: -9999px !important;
-                overflow: hidden !important;
-                pointer-events: none !important;
-                z-index: -1 !important;
-            }
-
-            /* Ensure header content positioning */
-            .header-area .xb-header,
-            .header-area .header__wrap,
-            #xb-header-area .header__wrap,
-            .xb-header {
-                position: relative !important;
-                z-index: 1 !important;
-            }
-        }
 
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
@@ -603,6 +571,97 @@
             left: 0;
             width: 100%;
             z-index: 999;
+        }
+
+        /* --- CRITICAL MOBILE FIXES [INJECTED & UPDATED] --- */
+        @media (max-width: 991px) {
+
+            /* 1. HEADER - TAKE OUT OF FLOW (Key to removing gap) */
+            .header-area,
+            #xb-header-area {
+                position: absolute !important;
+                /* Overlays hero instead of pushing it down */
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: 0 !important;
+                margin-bottom: 0 !important;
+                z-index: 999 !important;
+                background: transparent !important;
+            }
+
+            /* Inner header content */
+            .xb-header,
+            .header__wrap {
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+
+            .xb-header-area.sticky {
+                position: fixed !important;
+                background: rgba(10, 10, 10, 0.8) !important;
+                backdrop-filter: blur(8px);
+            }
+
+            /* 2. AURORA - BIG & FIXED & BLENDED */
+            #aurora-container,
+            .aurora-container {
+                display: block !important;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 120vh !important;
+                z-index: -5 !important;
+                /* Zoom + Move UP */
+                transform: scale(2.0) translateY(-15%);
+                transform-origin: center center;
+                opacity: 1 !important;
+                /* BLEND EFFECT: Blur to mix colors, Saturate to keep them rich */
+                filter: blur(20px) saturate(120%);
+            }
+
+            .header-aurora-container {
+                display: none !important;
+            }
+
+            /* 3. HERO - TIGHTER SPACING */
+            .hero,
+            .hero-full {
+                margin-top: 0 !important;
+                padding-top: 110px !important;
+                /* Reduced padding for "little gap" */
+                background: transparent !important;
+                z-index: 1 !important;
+            }
+
+            /* 4. RESET PAGE SPACING */
+            html,
+            body,
+            .body_wrap {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+
+            /* 5. CLOSE BUTTON */
+            .xb-menu-close,
+            .xb-close-menu,
+            .xb-menu-toggle.xb-close,
+            .xb-nav-mobile-button.xb-close {
+                position: fixed !important;
+                top: 25px !important;
+                right: 25px !important;
+                z-index: 2147483647 !important;
+                display: flex !important;
+                width: 40px !important;
+                height: 40px !important;
+                background: rgba(255, 255, 255, 0.2) !important;
+                border-radius: 50% !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+            }
         }
     </style>
 
@@ -1353,58 +1412,8 @@
         })();
     </script>
 
-    <script>
-        // Dynamic header height adjustment for mobile - prevents overlap
-        (function () {
-            function adjustHeroContentPadding() {
-                // Only run on mobile devices (max-width: 768px)
-                if (window.innerWidth <= 768) {
-                    const header = document.querySelector('#xb-header-area');
-                    const heroContainers = document.querySelectorAll('.hero.hero-full .container, section.hero.hero-full .container, .hero.hero-style.hero-full .container, section.hero.hero-style.hero-full .container, .hero.hero-style.pos-rel.hero-full .container, section.hero.hero-style.pos-rel.hero-full .container');
+    <!-- Mobile dynamic padding script removed -->
 
-                    if (header && heroContainers.length > 0) {
-                        // Measure actual header height
-                        const headerHeight = header.offsetHeight;
-
-                        // Add some safe spacing (20px)
-                        const safePadding = headerHeight + 20;
-
-                        // Apply to all hero containers
-                        heroContainers.forEach(function (container) {
-                            container.style.paddingTop = safePadding + 'px';
-                        });
-
-                        console.log('Mobile header height adjusted:', safePadding + 'px');
-                    }
-                }
-            }
-
-            // Run on page load
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Wait a bit for styles to be applied
-                    setTimeout(adjustHeroContentPadding, 100);
-                    // Run again after animations might have completed
-                    setTimeout(adjustHeroContentPadding, 1000);
-                });
-            } else {
-                setTimeout(adjustHeroContentPadding, 100);
-                setTimeout(adjustHeroContentPadding, 1000);
-            }
-
-            // Run on window resize (debounced)
-            let resizeTimer;
-            window.addEventListener('resize', function () {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(adjustHeroContentPadding, 250);
-            });
-
-            // Run on orientation change (mobile devices)
-            window.addEventListener('orientationchange', function () {
-                setTimeout(adjustHeroContentPadding, 300);
-            });
-        })();
-    </script>
 
     <!-- backtotop-start -->
     <div class="xb-backtotop">
@@ -2714,90 +2723,8 @@
                 }, 1500);
             });
 
-            // Header Aurora - DISABLED on Mobile
-            // Function to remove/hide header aurora on mobile
-            function removeHeaderAurora() {
-                const headerAuroraContainer = document.getElementById('header-aurora-container');
-                if (headerAuroraContainer) {
-                    // Destroy any existing instance
-                    if (window.headerAuroraInstance) {
-                        try {
-                            if (window.headerAuroraInstance.destroy) {
-                                window.headerAuroraInstance.destroy();
-                            }
-                        } catch (e) {
-                            console.log('Error destroying header aurora:', e);
-                        }
-                        window.headerAuroraInstance = null;
-                    }
-                    // Hide the container completely
-                    headerAuroraContainer.style.display = 'none';
-                    headerAuroraContainer.style.visibility = 'hidden';
-                    headerAuroraContainer.style.opacity = '0';
-                    headerAuroraContainer.style.height = '0';
-                    headerAuroraContainer.style.width = '0';
-                    headerAuroraContainer.style.position = 'absolute';
-                    headerAuroraContainer.style.left = '-9999px';
-                    headerAuroraContainer.style.pointerEvents = 'none';
-                    // Remove any canvas elements
-                    const canvas = headerAuroraContainer.querySelector('canvas');
-                    if (canvas) {
-                        canvas.style.display = 'none';
-                        canvas.style.visibility = 'hidden';
-                    }
-                }
-            }
-
-            // Initialize Header Aurora for Mobile Only - DISABLED
-            function initHeaderAurora() {
-                // Aurora background removed from header on mobile - skip initialization
-                // Remove it if it exists
-                if (window.innerWidth <= 991) {
-                    removeHeaderAurora();
-                }
-                return; // Disabled - aurora removed from header on mobile
-            }
-
-            // Remove header aurora on mobile immediately
-            if (window.innerWidth <= 991) {
-                removeHeaderAurora();
-            }
-
-            // Also remove on DOM ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function () {
-                    if (window.innerWidth <= 991) {
-                        removeHeaderAurora();
-                    }
-                });
-            } else {
-                if (window.innerWidth <= 991) {
-                    removeHeaderAurora();
-                }
-            }
-
-            // Re-check on resize
-            let resizeTimeout;
-            window.addEventListener('resize', function () {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function () {
-                    if (window.innerWidth <= 991) {
-                        // Mobile - remove aurora
-                        removeHeaderAurora();
-                    } else {
-                        // Desktop - clean up instance but don't remove container
-                        if (window.headerAuroraInstance) {
-                            try {
-                                if (window.headerAuroraInstance.destroy) {
-                                    window.headerAuroraInstance.destroy();
-                                }
-                            } catch (e) { }
-                            window.headerAuroraInstance = null;
-                        }
-                    }
-                }, 300);
-            });
         })();
+
     </script>
 
     <!-- Team Image Reveal Initialization -->
