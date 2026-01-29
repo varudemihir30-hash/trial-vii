@@ -1,16 +1,17 @@
 /**
  * Aurora Component - Vanilla JavaScript version
- * Converted from React component
+ * Adapted from ReactBits React component
  */
 
 class Aurora {
   constructor(container, options = {}) {
     this.container = container;
     this.options = {
-      colorStops: options.colorStops || ['#5227FF', '#7cff67', '#5227FF'],
+      // Keep existing colors as requested
+      colorStops: options.colorStops || ['#020f3e', '#1fad7e', '#213e97'],
       amplitude: options.amplitude || 1.0,
       blend: options.blend || 0.5,
-      speed: options.speed || 0.5,
+      speed: options.speed || 1.0,
       ...options
     };
 
@@ -18,235 +19,71 @@ class Aurora {
     this.renderer = null;
     this.program = null;
     this.mesh = null;
-    this.startTime = performance.now();
+
+    // Store propsRef equivalent for the animation loop
+    this.propsRef = this.options;
 
     this.init();
   }
 
   init() {
-    if (!this.container) {
-      console.error('Aurora: Container not found');
-      return;
-    }
+    if (!this.container) return;
 
-    // Check if OGL is available (handle ES module default export)
-    let OGL_NS = window.OGL;
-    
-    // ES modules might export as default
-    if (OGL_NS && OGL_NS.default) {
-      OGL_NS = OGL_NS.default;
-      window.OGL = OGL_NS; // Update reference
-    }
-    
-    // If still not found, try to find it
+    // Check if OGL is available
+    let OGL_NS = window.OGL || window.ogl;
     if (!OGL_NS) {
-      // Check common variations
-      OGL_NS = window.ogl || window.OGL_NS;
-      
-      // Search window for OGL-like objects
-      if (!OGL_NS) {
-        for (let key in window) {
-          if (key.toLowerCase().includes('ogl') && 
-              typeof window[key] === 'object' && 
-              window[key] !== null) {
-            // Check if it has Renderer (might be default export)
-            let candidate = window[key];
-            if (candidate.default && candidate.default.Renderer) {
-              OGL_NS = candidate.default;
-            } else if (candidate.Renderer) {
-              OGL_NS = candidate;
-            }
-            
-            if (OGL_NS && OGL_NS.Renderer) {
-              window.OGL = OGL_NS; // Cache it
-              break;
-            }
-          }
+      // Try to find it in window
+      for (let key in window) {
+        if (key.toLowerCase().includes('ogl') && window[key]?.Renderer) {
+          OGL_NS = window[key];
+          break;
         }
       }
     }
-    
-    if (!OGL_NS || typeof OGL_NS.Renderer === 'undefined') {
-      console.error('Aurora: OGL library not loaded. Please include OGL from CDN.');
-      console.error('window.OGL:', window.OGL);
+
+    if (!OGL_NS) {
+      console.error('Aurora: OGL not found');
       return;
     }
 
-    console.log('Aurora: Initializing with OGL', OGL_NS);
+    const { Renderer, Program, Mesh, Color, Triangle } = OGL_NS;
 
-    // Create renderer
     try {
-      this.renderer = new OGL_NS.Renderer({
+      this.renderer = new Renderer({
         alpha: true,
         premultipliedAlpha: true,
         antialias: true
       });
-    } catch (error) {
-      console.error('Aurora: Failed to create renderer', error);
+    } catch (e) {
+      console.error('Aurora: Renderer init failed', e);
       return;
     }
-    
-    const gl = this.renderer.gl;
-    
-    if (!gl) {
-      console.error('Aurora: WebGL context not available');
-      return;
-    }
-    
-    console.log('Aurora: Renderer created, WebGL context:', gl);
 
+    const gl = this.renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.backgroundColor = 'transparent';
 
-    // Setup canvas
-    const canvas = this.renderer.gl.canvas;
-    canvas.style.display = 'block';
+    // Explicitly handle canvas style
+    const canvas = gl.canvas;
+    canvas.style.backgroundColor = 'transparent';
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.position = 'absolute';
     canvas.style.top = '0';
     canvas.style.left = '0';
-    canvas.style.opacity = '1';
-    canvas.style.visibility = 'visible';
-    canvas.style.zIndex = '0';
-    
-    // Make sure container is properly positioned
-    this.container.style.position = 'absolute';
-    this.container.style.top = '0';
-    this.container.style.left = '0';
-    this.container.style.width = '100%';
-    this.container.style.height = '100%';
-    this.container.style.zIndex = '0';
-    this.container.style.pointerEvents = 'none';
-    this.container.style.background = 'transparent';
-    this.container.style.overflow = 'visible';
-    
+    canvas.style.zIndex = '-1'; // Ensure it is behind content if index is managed
+
     this.container.appendChild(canvas);
-    
-    // Resize handler
-    this.resizeHandler = () => this.resize();
-    this.resize();
-    window.addEventListener('resize', this.resizeHandler);
 
-    // Create geometry
-    const geometry = new OGL_NS.Triangle(gl);
-    // Remove uv attribute if it exists
-    if (geometry.attributes.uv) {
-      delete geometry.attributes.uv;
-    }
-
-    // Convert color stops to RGB arrays
-    const colorStopsArray = this.options.colorStops.map(hex => {
-      const c = new OGL_NS.Color(hex);
-      return [c.r, c.g, c.b];
-    });
-
-    // Create program
-    this.program = new OGL_NS.Program(gl, {
-      vertex: this.vertexShader,
-      fragment: this.fragmentShader,
-      uniforms: {
-        uTime: { value: 0 },
-        uAmplitude: { value: this.options.amplitude },
-        uColorStops: { value: colorStopsArray },
-        uResolution: { value: [this.container.offsetWidth, this.container.offsetHeight] },
-        uBlend: { value: this.options.blend }
-      }
-    });
-
-    this.mesh = new OGL_NS.Mesh(gl, { geometry, program: this.program });
-
-    // Start animation
-    console.log('Aurora: Starting animation loop');
-    this.animate();
-  }
-
-  resize() {
-    if (!this.renderer || !this.container) return;
-    
-    // Get container dimensions
-    const width = this.container.offsetWidth || window.innerWidth;
-    const height = this.container.offsetHeight || window.innerHeight;
-    
-    if (width === 0 || height === 0) {
-      console.warn('Aurora: Container has zero dimensions', { width, height });
-      return;
-    }
-    
-    this.renderer.setSize(width, height);
-    
-    if (this.program && this.program.uniforms && this.program.uniforms.uResolution) {
-      this.program.uniforms.uResolution.value = [width, height];
-    }
-    
-    console.log('Aurora: Resized', { width, height });
-  }
-
-  animate() {
-    this.animateId = requestAnimationFrame(() => this.animate());
-    
-    const t = performance.now() * 0.01;
-    const time = t * (this.options.speed || 0.5) * 0.1;
-    
-    if (this.program && this.program.uniforms) {
-      this.program.uniforms.uTime.value = time;
-      this.program.uniforms.uAmplitude.value = this.options.amplitude ?? 1.0;
-      this.program.uniforms.uBlend.value = this.options.blend ?? 0.5;
-      
-      // Update color stops if they changed
-      const stops = this.options.colorStops ?? ['#5227FF', '#7cff67', '#5227FF'];
-      const OGL_NS = window.OGL || window.ogl;
-      if (OGL_NS && OGL_NS.Color) {
-        this.program.uniforms.uColorStops.value = stops.map(hex => {
-          const c = new OGL_NS.Color(hex);
-          return [c.r, c.g, c.b];
-        });
-      }
-    }
-
-    if (this.renderer && this.mesh) {
-      this.renderer.render({ scene: this.mesh });
-    }
-  }
-
-  updateOptions(newOptions) {
-    this.options = { ...this.options, ...newOptions };
-  }
-
-  destroy() {
-    if (this.animateId) {
-      cancelAnimationFrame(this.animateId);
-      this.animateId = null;
-    }
-    if (this.resizeHandler) {
-      window.removeEventListener('resize', this.resizeHandler);
-    }
-    if (this.container && this.renderer && this.renderer.gl && this.renderer.gl.canvas) {
-      try {
-        this.container.removeChild(this.renderer.gl.canvas);
-      } catch (e) {
-        // Canvas might already be removed
-      }
-      const gl = this.renderer.gl;
-      if (gl.getExtension('WEBGL_lose_context')) {
-        gl.getExtension('WEBGL_lose_context').loseContext();
-      }
-    }
-  }
-
-  get vertexShader() {
-    return `
-attribute vec2 position;
+    const VERT = `#version 300 es
+in vec2 position;
 void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }
 `;
-  }
 
-  get fragmentShader() {
-    return `
+    const FRAG = `#version 300 es
 precision highp float;
 
 uniform float uTime;
@@ -254,6 +91,8 @@ uniform float uAmplitude;
 uniform vec3 uColorStops[3];
 uniform vec2 uResolution;
 uniform float uBlend;
+
+out vec4 fragColor;
 
 vec3 permute(vec3 x) {
   return mod(((x * 34.0) + 1.0) * x, 289.0);
@@ -299,46 +138,137 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
-vec3 getColorFromRamp(float factor) {
-  vec3 color0 = uColorStops[0];
-  vec3 color1 = uColorStops[1];
-  vec3 color2 = uColorStops[2];
-  
-  if (factor <= 0.5) {
-    float t = factor / 0.5;
-    return mix(color0, color1, t);
-  } else {
-    float t = (factor - 0.5) / 0.5;
-    return mix(color1, color2, t);
-  }
+struct ColorStop {
+  vec3 color;
+  float position;
+};
+
+#define COLOR_RAMP(colors, factor, finalColor) {              \
+  int index = 0;                                            \
+  for (int i = 0; i < 2; i++) {                               \
+     ColorStop currentColor = colors[i];                    \
+     bool isInBetween = currentColor.position <= factor;    \
+     index = int(mix(float(index), float(i), float(isInBetween))); \
+  }                                                         \
+  ColorStop currentColor = colors[index];                   \
+  ColorStop nextColor = colors[index + 1];                  \
+  float range = nextColor.position - currentColor.position; \
+  float lerpFactor = (factor - currentColor.position) / range; \
+  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
 }
 
 void main() {
   vec2 uv = gl_FragCoord.xy / uResolution;
   
-  // uv.y = 0 is bottom, uv.y = 1 is top
-  // We want aurora to start from top, so we use uv.y directly (1.0 = top, 0.0 = bottom)
-  float yPosition = uv.y;
+  ColorStop colors[3];
+  colors[0] = ColorStop(uColorStops[0], 0.0);
+  colors[1] = ColorStop(uColorStops[1], 0.5);
+  colors[2] = ColorStop(uColorStops[2], 1.0);
   
-  vec3 rampColor = getColorFromRamp(uv.x);
+  vec3 rampColor;
+  COLOR_RAMP(colors, uv.x, rampColor);
   
   float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
-  // Start from top: use yPosition (1.0 = top) so effect begins at top of container
-  // Adjust calculation to make aurora visible from the top (upper part of screen)
-  height = ((1.0 - yPosition) * 2.5 - height + 0.3);
-  float intensity = 0.7 * height;
+  height = (uv.y * 2.0 - height + 0.2);
+  float intensity = 0.6 * height;
   
-  // Move midPoint to top area (0.15 = 15% from top, which means effect starts at top)
-  // Lower values = closer to top, higher values = closer to bottom
-  float midPoint = 0.15;
-  float auroraAlpha = smoothstep(midPoint - uBlend * 0.6, midPoint + uBlend * 0.4, intensity);
+  float midPoint = 0.20;
+  float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
   
   vec3 auroraColor = intensity * rampColor;
   
-  gl_FragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
+  fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
 }
 `;
+
+    const geometry = new Triangle(gl);
+    if (geometry.attributes.uv) {
+      delete geometry.attributes.uv;
+    }
+
+    const colorStopsArray = this.options.colorStops.map(hex => {
+      const c = new Color(hex);
+      return [c.r, c.g, c.b];
+    });
+
+    this.program = new Program(gl, {
+      vertex: VERT,
+      fragment: FRAG,
+      uniforms: {
+        uTime: { value: 0 },
+        uAmplitude: { value: this.options.amplitude },
+        uColorStops: { value: colorStopsArray },
+        uResolution: { value: [this.container.offsetWidth, this.container.offsetHeight] },
+        uBlend: { value: this.options.blend }
+      }
+    });
+
+    this.mesh = new Mesh(gl, { geometry, program: this.program });
+
+    // Resize handler
+    this.resize = () => {
+      if (!this.container) return;
+      const width = this.container.offsetWidth;
+      const height = this.container.offsetHeight;
+      this.renderer.setSize(width, height);
+      if (this.program) {
+        this.program.uniforms.uResolution.value = [width, height];
+      }
+    };
+    window.addEventListener('resize', this.resize);
+    this.resize();
+
+    // Start Animation Loop
+    this.animate(0);
+  }
+
+  animate(t) {
+    this.animateId = requestAnimationFrame((time) => this.animate(time));
+
+    // Match React component update logic: t * 0.01
+    const time = t * 0.01;
+    const speed = this.options.speed || 1.0;
+
+    if (this.program) {
+      this.program.uniforms.uTime.value = time * speed * 0.1;
+      this.program.uniforms.uAmplitude.value = this.propsRef.amplitude ?? 1.0;
+      this.program.uniforms.uBlend.value = this.propsRef.blend ?? 0.5;
+
+      const stops = this.propsRef.colorStops;
+      if (window.OGL || window.ogl) {
+        const Color = (window.OGL || window.ogl).Color;
+        this.program.uniforms.uColorStops.value = stops.map(hex => {
+          const c = new Color(hex);
+          return [c.r, c.g, c.b];
+        });
+      }
+    }
+
+    if (this.renderer && this.mesh) {
+      this.renderer.render({ scene: this.mesh });
+    }
+  }
+
+  updateOptions(newOptions) {
+    this.options = { ...this.options, ...newOptions };
+    this.propsRef = this.options;
+  }
+
+  destroy() {
+    if (this.animateId) {
+      cancelAnimationFrame(this.animateId);
+    }
+    window.removeEventListener('resize', this.resize);
+
+    if (this.container && this.renderer && this.renderer.gl && this.renderer.gl.canvas) {
+      if (this.container.contains(this.renderer.gl.canvas)) {
+        this.container.removeChild(this.renderer.gl.canvas);
+      }
+
+      const gl = this.renderer.gl;
+      const ext = gl.getExtension('WEBGL_lose_context');
+      if (ext) ext.loseContext();
+    }
   }
 }
-
