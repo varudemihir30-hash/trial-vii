@@ -316,15 +316,24 @@ vec3 getColorFromRamp(float factor) {
 void main() {
   vec2 uv = gl_FragCoord.xy / uResolution;
   
+  // Invert y-coordinate so aurora starts from top (header bottom)
+  // uv.y = 0 is bottom, uv.y = 1 is top
+  // We want aurora to start from top, so we invert: top becomes 1.0, bottom becomes 0.0
+  float invertedY = 1.0 - uv.y;
+  
   vec3 rampColor = getColorFromRamp(uv.x);
   
   float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
-  height = (uv.y * 2.0 - height + 0.2);
-  float intensity = 0.6 * height;
+  // Start from top: use invertedY so effect begins at top of container
+  // Adjust calculation to make aurora visible from the top
+  height = (invertedY * 2.5 - height + 0.3);
+  float intensity = 0.7 * height;
   
-  float midPoint = 0.20;
-  float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+  // Move midPoint to top area (0.85 = 85% from bottom, which is 15% from top)
+  // This makes the aurora appear starting from near the top
+  float midPoint = 0.85;
+  float auroraAlpha = smoothstep(midPoint - uBlend * 0.6, midPoint + uBlend * 0.4, intensity);
   
   vec3 auroraColor = intensity * rampColor;
   

@@ -74,7 +74,8 @@
   -o-transform: translateX(0%);
   transform: translateX(0%);
 }
-.xb-header-menu.active + .xb-header-menu-backdrop {
+.xb-header-menu.active + .xb-header-menu-backdrop,
+.xb-header-menu-backdrop.active {
   opacity: 1;
   visibility: visible;
 }

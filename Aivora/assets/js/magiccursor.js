@@ -123,5 +123,14 @@ class Cursor {
         this.visibleInt = setTimeout(() => this.visible = false, this.options.visibleTimeout);
     }
 }
-// Init cursor
-const cursor = new Cursor();
+
+// Check if device is mobile/tablet before initializing cursor
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (window.innerWidth <= 768);
+}
+
+// Init cursor only on desktop devices (not mobile)
+if (!isMobileDevice()) {
+    const cursor = new Cursor();
+}

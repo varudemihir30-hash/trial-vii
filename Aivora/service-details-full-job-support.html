@@ -271,6 +271,29 @@
                 width: 2px;
             }
         }
+        @media (max-width: 768px) {
+            .xb-header-logo {
+                display: inline-flex;
+                align-items: center;
+                gap: 0;
+                height: auto;
+                align-self: center;
+            }
+            .xb-header-logo .logo-divider {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .xb-header-logo a.logo1,
+            .xb-header-logo img,
+            .xb-header-logo .company-name {
+                margin: 0 !important;
+                padding: 0 !important;
+                vertical-align: middle;
+            }
+        }
         /* Increase header size */
         .header-area .header__wrap,
         #xb-header-area .header__wrap,
@@ -352,109 +375,6 @@
             visibility: hidden !important;
             display: none !important;
         }
-        /* Mobile Header - Match About Page (max-width: 768px) */
-        @media (max-width: 768px) {
-            /* Ensure glass effect header matches about page on mobile */
-            .header-area .header__wrap,
-            #xb-header-area .header__wrap,
-            .header-style--one .header__wrap,
-            .header-style--two .header__wrap,
-            .header-style--three .header__wrap,
-            .xb-header-area-sticky .header__wrap,
-            .xb-header-area-sticky.xb-header-fixed .header__wrap {
-                background: rgba(255, 255, 255, 0.1) !important;
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-                background-image: none !important;
-            }
-            /* Ensure header area itself is transparent */
-            .header-area,
-            #xb-header-area {
-                background: transparent !important;
-                background-color: transparent !important;
-            }
-            .xb-header-area-sticky,
-            .xb-header-area-sticky.xb-header-fixed {
-                background: rgba(255, 255, 255, 0.05) !important;
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            }
-            /* Override main.css white background rules for sticky header */
-            #xb-header-area .xb-header-area-sticky,
-            #xb-header-area .xb-header-area-sticky.xb-header-fixed {
-                background: rgba(255, 255, 255, 0.05) !important;
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            }
-            #xb-header-area .xb-header-area-sticky .header__wrap,
-            #xb-header-area .xb-header-area-sticky.xb-header-fixed .header__wrap {
-                background: rgba(255, 255, 255, 0.1) !important;
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-                background-image: none !important;
-            }
-            /* Override header-style specific white background rules */
-            .header-style--one .xb-header-area-sticky,
-            .header-style--one .xb-header-area-sticky.xb-header-fixed {
-                background: rgba(255, 255, 255, 0.05) !important;
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            }
-            .header-style--one .xb-header-area-sticky .header__wrap,
-            .header-style--one .xb-header-area-sticky.xb-header-fixed .header__wrap {
-                background: rgba(255, 255, 255, 0.1) !important;
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-                background-image: none !important;
-            }
-            .header-style--two .xb-header-area-sticky,
-            .header-style--two .xb-header-area-sticky.xb-header-fixed {
-                background: rgba(255, 255, 255, 0.05) !important;
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            }
-            .header-style--two .xb-header-area-sticky .header__wrap,
-            .header-style--two .xb-header-area-sticky.xb-header-fixed .header__wrap {
-                background: rgba(255, 255, 255, 0.1) !important;
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-                background-image: none !important;
-            }
-            .header-style--three .xb-header-area-sticky,
-            .header-style--three .xb-header-area-sticky.xb-header-fixed {
-                background: rgba(255, 255, 255, 0.05) !important;
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            }
-            .header-style--three .xb-header-area-sticky .header__wrap,
-            .header-style--three .xb-header-area-sticky.xb-header-fixed .header__wrap {
-                background: rgba(255, 255, 255, 0.1) !important;
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-                background-image: none !important;
-            }
-        }
-        
         /* Service Details Image Styling */
         .service-details .single-item-image {
             position: relative;

@@ -159,15 +159,21 @@
 			$(this).closest('.menu-item').find('> .sub-menu').slideToggle();
 		}
 	});
-	$(".xb-nav-mobile").on('click', function () {
+	$(".xb-nav-mobile").on('click', function (e) {
+		e.preventDefault();
+		e.stopPropagation();
 		$(this).toggleClass('active');
 		$('.xb-header-menu').toggleClass('active');
+		$('.xb-header-menu-backdrop').toggleClass('active');
 		$('body').toggleClass('mobile-menu-active');
 	});
 
-	$(".xb-menu-close, .xb-header-menu-backdrop").on('click', function () {
-		$(this).removeClass('active');
+	$(".xb-menu-close, .xb-header-menu-backdrop").on('click', function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		$('.xb-nav-mobile').removeClass('active');
 		$('.xb-header-menu').removeClass('active');
+		$('.xb-header-menu-backdrop').removeClass('active');
 		$('body').removeClass('mobile-menu-active');
 	});
 

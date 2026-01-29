@@ -212,7 +212,6 @@ section.hero.hero-style,
 a, button, input[type="button"], input[type="submit"], 
 input[type="file"], select, textarea, .clickable {
     -webkit-tap-highlight-color: rgba(0, 255, 151, 0.3);
-    tap-highlight-color: rgba(0, 255, 151, 0.3);
     touch-action: manipulation;
     min-height: 44px;
     min-width: 44px;
@@ -288,11 +287,7 @@ html {
     
     /* Remove padding-top from hero container - page starts from absolute top (mobile only) */
     /* Note: This only applies to max-width: 768px and below via the more specific rule above */
-    .body_wrap > main > section:first-child .container,
-    .body_wrap > main > .hero:first-child .container,
-    .body_wrap > main > .hero.hero-full:first-child .container {
-        /* Overridden by max-width: 768px rule above */
-    }
+    /* Rules are handled by the more specific max-width: 768px media query above */
 }
 
 /* Extra Small Devices (phones, 320px and up) */
@@ -1543,6 +1538,52 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
         z-index: 999 !important;
     }
+
+    /* Mobile header brand: inline logo + text, no divider */
+    .xb-header-logo {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0 !important;
+        height: auto !important;
+        align-self: center !important;
+    }
+    .xb-header-logo .logo-divider {
+        display: inline-block !important;
+        width: 1px !important;
+        height: 28px !important;
+        margin: 0 10px !important;
+        padding: 0 !important;
+        background: rgba(255, 255, 255, 0.6) !important;
+        border-radius: 1px !important;
+        align-self: center !important;
+    }
+    .xb-header-logo a.logo1,
+    .xb-header-logo img,
+    .xb-header-logo .company-name {
+        margin: 0 !important;
+        padding: 0 !important;
+        vertical-align: middle !important;
+    }
+    .xb-header-logo a.logo1 {
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    /* Mobile header: ensure a single clean border line */
+    .header-area,
+    #xb-header-area,
+    .xb-header {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .header-area .header__wrap,
+    #xb-header-area .header__wrap,
+    .header-style--one .header__wrap,
+    .xb-header-area-sticky .header__wrap,
+    .xb-header-area-sticky.xb-header-fixed .header__wrap {
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        box-shadow: none !important;
+    }
     
     /* Ensure first section/hero section starts at top: 0 with NO padding */
     .body_wrap > main > section:first-child,
@@ -2739,6 +2780,16 @@ button, .btn, .thm-btn, .agency-btn {
     }
 }
 
+/* Mobile-specific subtle logo wrapper glow - much simpler and cleaner */
+@keyframes logoWrapperGlowMobile {
+    0%, 100% {
+        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5)) !important;
+    }
+    50% {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7)) !important;
+    }
+}
+
 /* Enhanced logo glow animation for all mobile devices */
 @keyframes vertexLogoGlow {
     0%, 100% {
@@ -2955,7 +3006,7 @@ button, .btn, .thm-btn, .agency-btn {
         pointer-events: none !important;
     }
     
-    /* Center loader logo */
+    /* Center loader logo - Mobile optimized with subtle glow */
     .preloader .loader-logo {
         position: relative !important;
         display: flex !important;
@@ -2965,51 +3016,29 @@ button, .btn, .thm-btn, .agency-btn {
         height: 100px !important;
         margin: 0 !important;
         padding: 0 !important;
-        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)) !important;
-        animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
-        -webkit-animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
+        filter: none !important;
+        animation: none !important;
+        -webkit-animation: none !important;
     }
     
-    /* Glow background effect */
+    /* Remove background glow effects on mobile - they look bad */
     .preloader .loader-logo::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        -webkit-transform: translate(-50%, -50%) !important;
-        width: 150px !important;
-        height: 150px !important;
-        border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.2) 50%, transparent 75%) !important;
-        opacity: 0 !important;
-        animation: glowPulse 2.5s ease-in-out infinite 0.8s !important;
-        -webkit-animation: glowPulse 2.5s ease-in-out infinite 0.8s !important;
-        pointer-events: none !important;
-        z-index: 0 !important;
+        display: none !important;
+        content: none !important;
     }
     
-    /* Outer glow effect */
+    /* Remove outer glow effect on mobile */
     .preloader .loader-logo::after {
-        content: '' !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        -webkit-transform: translate(-50%, -50%) !important;
-        width: 200px !important;
-        height: 200px !important;
-        border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, transparent 70%) !important;
-        opacity: 0 !important;
-        animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s !important;
-        -webkit-animation: glowPulseOuter 2.5s ease-in-out infinite 0.8s !important;
-        pointer-events: none !important;
-        z-index: -1 !important;
+        display: none !important;
+        content: none !important;
     }
     
-    /* Ensure logo image is properly sized and glowing */
-    .preloader .loader-logo img {
+    /* Ensure logo image is properly sized with subtle glow for mobile */
+    /* Override inline styles with more specific selector */
+    .preloader .loader-logo img,
+    .preloader img[src*="vertex-tech-logo"],
+    #preloader .loader-logo img,
+    #preloader img[src*="vertex-tech-logo"] {
         position: relative !important;
         z-index: 1 !important;
         display: block !important;
@@ -3018,15 +3047,32 @@ button, .btn, .thm-btn, .agency-btn {
         max-width: 100px !important;
         height: auto !important;
         object-fit: contain !important;
-        filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
+        filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
         image-rendering: -webkit-optimize-contrast !important;
         image-rendering: crisp-edges !important;
-        will-change: transform, filter, opacity !important;
+        will-change: opacity !important;
         opacity: 0 !important;
-        transform: scale(0.8) !important;
-        -webkit-transform: scale(0.8) !important;
-        animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
-        -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
+        transform: scale(0.9) !important;
+        -webkit-transform: scale(0.9) !important;
+        animation: logoGlowUp 0.8s ease-out forwards !important;
+        -webkit-animation: logoGlowUp 0.8s ease-out forwards !important;
+    }
+    
+    /* Override any inline style filters on mobile */
+    .preloader .loader-logo img[style*="filter"],
+    .preloader img[style*="filter"],
+    #preloader .loader-logo img[style*="filter"],
+    #preloader img[style*="filter"] {
+        filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
+    }
+    
+    /* Override any inline style animations on mobile */
+    .preloader .loader-logo img[style*="animation"],
+    .preloader img[style*="animation"],
+    #preloader .loader-logo img[style*="animation"],
+    #preloader img[style*="animation"] {
+        animation: logoGlowUp 0.8s ease-out forwards !important;
+        -webkit-animation: logoGlowUp 0.8s ease-out forwards !important;
     }
     
     
@@ -3048,6 +3094,7 @@ button, .btn, .thm-btn, .agency-btn {
     
     .preloader .loader-logo img {
         max-width: 90px !important;
+        filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.35)) !important;
     }
 }
 
@@ -3060,6 +3107,7 @@ button, .btn, .thm-btn, .agency-btn {
     
     .preloader .loader-logo img {
         max-width: 80px !important;
+        filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.3)) !important;
     }
 }
 
