@@ -231,18 +231,50 @@
 
         @media (max-width: 767px) {
             .xb-header-logo .company-name {
-                font-size: 20px;
-                margin-left: 0;
-                margin-top: 2px;
+                font-size: 19px;
+                margin-left: 15px !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                position: relative !important;
+            }
+
+            /* The "Handmade" Divider Line */
+            .xb-header-logo .company-name::before {
+                content: "" !important;
+                position: absolute !important;
+                left: -12px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                width: 1.5px !important;
+                height: 32px !important;
+                /* Increased to match logo height */
+                background: rgba(255, 255, 255, 0.4) !important;
+                display: block !important;
             }
 
             .xb-header-logo {
-                gap: 8px;
+                gap: 0 !important;
+                height: 100% !important;
+                display: flex !important;
+                align-items: center !important;
             }
 
+            .xb-header-logo a {
+                display: flex !important;
+                align-items: center !important;
+            }
+
+            .xb-header-logo img {
+                height: 32px !important;
+                width: auto !important;
+            }
+
+            /* Kill the old divider */
+            .logo-divider,
             .xb-header-logo .logo-divider {
                 display: none !important;
-                /* Remove secondary vertical line on mobile */
             }
         }
 
@@ -984,17 +1016,17 @@
             .brand .xb-brand-item {
                 flex-shrink: 0 !important;
                 flex-grow: 0 !important;
-                width: 140px !important;
-                min-width: 140px !important;
-                max-width: 140px !important;
-                margin-right: 40px !important;
+                width: 100px !important;
+                min-width: 100px !important;
+                max-width: 100px !important;
+                margin-right: 30px !important;
             }
 
             .brand .xb-brand-item img {
                 width: 100% !important;
                 max-width: 100% !important;
                 height: auto !important;
-                max-height: 120px !important;
+                max-height: 80px !important;
                 margin: 0 !important;
                 object-fit: contain !important;
             }
@@ -1003,27 +1035,27 @@
             /* Extra small screens */
             @media only screen and (max-width: 575px) {
                 .brand .xb-brand-item {
-                    width: 120px !important;
-                    min-width: 120px !important;
-                    max-width: 120px !important;
-                    margin-right: 30px !important;
+                    width: 90px !important;
+                    min-width: 90px !important;
+                    max-width: 90px !important;
+                    margin-right: 20px !important;
                 }
 
                 .brand .xb-brand-item img {
-                    max-height: 100px !important;
+                    max-height: 60px !important;
                 }
             }
 
             /* Small screens */
             @media only screen and (min-width: 576px) and (max-width: 767px) {
                 .brand .xb-brand-item {
-                    width: 160px !important;
-                    min-width: 160px !important;
-                    max-width: 160px !important;
+                    width: 120px !important;
+                    min-width: 120px !important;
+                    max-width: 120px !important;
                 }
 
                 .brand .xb-brand-item img {
-                    max-height: 120px !important;
+                    max-height: 90px !important;
                 }
             }
         }
@@ -1037,8 +1069,8 @@
             .brand .xb-brand-item img,
             .brand-marquee .xb-brand-item img,
             .xb-brand-inner .xb-brand-item img {
-                height: 220px !important;
-                max-width: 450px !important;
+                height: 110px !important;
+                max-width: 250px !important;
                 width: auto !important;
                 object-fit: contain !important;
                 margin: 0 auto !important;
@@ -1047,8 +1079,8 @@
             /* Remove any special styling for Morgan Stanley logo */
             .brand .xb-brand-item[style*="align-items"] img,
             .brand .xb-brand-item[style*="display: flex"] img {
-                height: 220px !important;
-                max-width: 450px !important;
+                height: 110px !important;
+                max-width: 250px !important;
                 margin: 0 auto !important;
             }
 
@@ -1335,11 +1367,13 @@
             #xb-header-area .header__wrap {
                 border-radius: 100px !important;
                 overflow: visible !important;
-                /* Fix: Prevent icon cutoff */
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-                min-height: 60px !important;
+                min-height: 70px !important;
+                /* Increased to prevent hamburger cutoff */
                 padding: 10px 20px !important;
+                display: flex !important;
+                align-items: center !important;
             }
 
             .header-bar-mobile,
@@ -2597,7 +2631,7 @@
                 try {
                     console.log('Initializing Aurora v1.5 with OGL:', OGL_LIB.version || 'unknown');
                     window.auroraInstance = new Aurora(auroraContainer, {
-                        colorStops: ["#00074d", "#1fad7e", "#3b0066"],
+                        colorStops: ["#00074d", "#1fad7e", "#00074d"],
                         blend: 0.5,
                         amplitude: 1.0,
                         speed: 1.0
