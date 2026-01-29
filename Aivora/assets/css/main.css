@@ -5884,6 +5884,11 @@ Drop Down menu end
   margin: 0 !important;
 }
 
+.xb-brand-item img.brand-logo-small {
+  height: 55px !important;
+  /* Smaller size for Coca-Cola and HP */
+}
+
 @media (max-width: 767px) {
   .xb-brand-item {
     max-width: 105px;
