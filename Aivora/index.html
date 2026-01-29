@@ -1330,20 +1330,29 @@
 
             #xb-header-area,
             .header-area {
+                position: fixed !important;
                 top: 15px !important;
-                left: 10px !important;
-                right: 10px !important;
-                width: calc(100% - 20px) !important;
+                left: 12px !important;
+                right: 12px !important;
+                width: calc(100% - 24px) !important;
                 margin: 0 auto !important;
-                z-index: 1000 !important;
+                z-index: 9999 !important;
+                background: transparent !important;
             }
 
             .header-area .header__wrap,
             #xb-header-area .header__wrap {
+                padding: 5px 15px !important;
                 border-radius: 100px !important;
-                overflow: hidden !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .header-area .logo img {
+                max-height: 35px !important;
             }
         }
 
