@@ -316,7 +316,7 @@
 				centeredSlides: false,
 				watchOverflow: true,
 				autoplay: {
-					delay: isMobile ? 6000 : 500, // Much slower autoplay on mobile (6 seconds vs 0.5 seconds)
+					delay: isMobile ? 6000 : 3000, // Much slower autoplay on mobile (6 seconds vs 3 seconds)
 					disableOnInteraction: false,
 					pauseOnMouseEnter: false,
 					stopOnLastSlide: false,
@@ -363,7 +363,7 @@
 						var isMobileNow = window.innerWidth <= 768;
 						if (this.autoplay && this.autoplay.running) {
 							this.autoplay.stop();
-							this.params.autoplay.delay = isMobileNow ? 6000 : 500;
+							this.params.autoplay.delay = isMobileNow ? 6000 : 3000;
 							this.params.speed = isMobileNow ? 1500 : 500;
 							setTimeout(function() {
 								if (this.autoplay && typeof this.autoplay.start === 'function') {
