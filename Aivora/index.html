@@ -1325,6 +1325,28 @@
             margin-top: 0 !important;
         }
 
+        /* Floating Mobile Nav bar */
+        @media (max-width: 768px) {
+
+            #xb-header-area,
+            .header-area {
+                top: 15px !important;
+                left: 10px !important;
+                right: 10px !important;
+                width: calc(100% - 20px) !important;
+                margin: 0 auto !important;
+                z-index: 1000 !important;
+            }
+
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap {
+                border-radius: 100px !important;
+                overflow: hidden !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            }
+        }
+
         /* Keep the glass effect on header */
         .header__wrap {
             background: rgba(255, 255, 255, 0.05) !important;
