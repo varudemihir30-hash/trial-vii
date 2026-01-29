@@ -133,7 +133,7 @@ section.hero.hero-style,
         top: 0 !important;
     }
     
-    /* Show logo divider line on mobile - same as desktop */
+    /* Show logo divider line on mobile */
     .xb-header-logo .logo-divider {
         display: inline-block !important;
         visibility: visible !important;
@@ -1549,13 +1549,15 @@ button, .btn, .thm-btn, .agency-btn {
     }
     .xb-header-logo .logo-divider {
         display: inline-block !important;
-        width: 1px !important;
-        height: 28px !important;
-        margin: 0 10px !important;
-        padding: 0 !important;
+        visibility: visible !important;
+        width: 2px !important;
+        height: 50px !important;
         background: rgba(255, 255, 255, 0.6) !important;
+        flex-shrink: 0 !important;
         border-radius: 1px !important;
         align-self: center !important;
+        margin: 0 8px !important;
+        opacity: 1 !important;
     }
     .xb-header-logo a.logo1,
     .xb-header-logo img,
@@ -2463,7 +2465,7 @@ button, .btn, .thm-btn, .agency-btn {
         box-sizing: border-box !important;
     }
     
-    /* Brand Item Images - Override inline styles */
+    /* Brand Item Images - Override inline styles - Uniform sizing */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
     .xb-brand-inner .xb-brand-item img,
@@ -2476,7 +2478,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
-        max-height: 75px !important;
+        max-height: 120px !important;
         min-height: auto !important;
         object-fit: contain !important;
         display: block !important;
@@ -2484,7 +2486,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 !important;
     }
     
-    /* Fix for Morgan Stanley logo with negative margin */
+    /* Fix for Morgan Stanley logo - ensure uniform size */
     .xb-brand-item[style*="align-items: flex-start"],
     .xb-brand-item[style*="display: flex"],
     .brand-marquee .xb-brand-item[style*="align-items: flex-start"] {
@@ -2506,7 +2508,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin-bottom: 0 !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        max-height: 75px !important;
+        max-height: 120px !important;
         height: auto !important;
         width: 100% !important;
         max-width: 100% !important;
@@ -2558,7 +2560,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 8px !important;
     }
     
-    /* Brand Item Images - Smaller on very small screens */
+    /* Brand Item Images - Uniform sizing on very small screens */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
     .xb-brand-inner .xb-brand-item img,
@@ -2567,11 +2569,12 @@ button, .btn, .thm-btn, .agency-btn {
     .xb-brand-item img[style*="max-width"],
     .xb-brand-item img[style*="margin"],
     .xb-brand-item img[style*="width"] {
-        max-height: 65px !important;
+        max-height: 100px !important;
         height: auto !important;
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 auto !important;
+        object-fit: contain !important;
     }
     
     .xb-brand-item[style*="align-items: flex-start"] img,
@@ -2579,7 +2582,7 @@ button, .btn, .thm-btn, .agency-btn {
     .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="height"],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="-77px"] {
-        max-height: 65px !important;
+        max-height: 100px !important;
         height: auto !important;
         width: 100% !important;
         max-width: 100% !important;
@@ -2612,7 +2615,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 130px !important;
     }
     
-    /* Brand Item Images */
+    /* Brand Item Images - Uniform sizing on small screens */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
     .xb-brand-inner .xb-brand-item img,
@@ -2621,11 +2624,12 @@ button, .btn, .thm-btn, .agency-btn {
     .xb-brand-item img[style*="max-width"],
     .xb-brand-item img[style*="margin"],
     .xb-brand-item img[style*="width"] {
-        max-height: 85px !important;
+        max-height: 120px !important;
         height: auto !important;
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 auto !important;
+        object-fit: contain !important;
     }
     
     .xb-brand-item[style*="align-items: flex-start"] img,
@@ -2633,7 +2637,7 @@ button, .btn, .thm-btn, .agency-btn {
     .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="height"],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="-77px"] {
-        max-height: 85px !important;
+        max-height: 120px !important;
         height: auto !important;
         width: 100% !important;
         max-width: 100% !important;

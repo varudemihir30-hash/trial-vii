@@ -585,7 +585,9 @@ span {
 .ul_li_right>li,
 .ul_li_center>li,
 .ul_li_between>li {
+  float: left;
   list-style: none;
+  display: inline-block;
 }
 
 .ul_li {
@@ -3897,18 +3899,6 @@ body[data-aos-easing=ease] [data-aos] {
   }
 }
 
-@keyframes marquee-4 {
-  from {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-
-  to {
-    -webkit-transform: translateX(-400%);
-    transform: translateX(-400%);
-  }
-}
-
 @keyframes marquee-3 {
   from {
     -webkit-transform: translateX(0);
@@ -5876,14 +5866,6 @@ Drop Down menu end
   justify-content: center;
 }
 
-.xb-brand-item img {
-  height: 110px !important;
-  width: auto !important;
-  max-width: 380px !important;
-  object-fit: contain !important;
-  margin: 0 !important;
-}
-
 @media (max-width: 767px) {
   .xb-brand-item {
     max-width: 105px;
@@ -5897,7 +5879,6 @@ Drop Down menu end
 .xb-brand-inner {
   gap: 80px;
   margin-right: 80px;
-  flex-wrap: nowrap !important;
 }
 
 @media (max-width: 767px) {
@@ -18933,7 +18914,8 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 
 /* .service-row-title a:hover {
       color: var(--color-primary); } */
-
+}
+}
 
 .service-row-title.service-title-rotated {
   transform: rotate(90deg);
@@ -19410,305 +19392,3 @@ body {
 }
 
 /*# sourceMappingURL=main.css.map */
-/* =========================================
-   MOBILE OPTIMIZATIONS (USER REQUESTED)
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* Fix Mobile Menu Height/Cutoff */
-    .xb-header-menu-scroll {
-        height: 100vh !important;
-        max-height: 100vh !important;
-        overflow-y: auto !important;
-        padding-bottom: 100px !important; /* Extra space for scrolling */
-    }
-
-    .xb-header-menu-backdrop {
-        height: 100vh !important;
-    }
-
-    /* Fix Aurora Background on Mobile */
-    .aurora-container {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        z-index: -1 !important;
-    }
-    
-    .hero {
-        background: transparent !important; /* Ensure hero doesn't hide aurora */
-    }
-
-    /* Fix Header Alignment/Gap */
-    .xb-header-area {
-        top: 0 !important;
-        padding-top: 10px !important;
-    }
-    
-    .header__wrap {
-        padding: 10px 15px !important;
-    }
-}
-
-@media (max-width: 767px) {
-    /* Hero Content Sizing */
-    .hero .title {
-        font-size: 32px !important;
-        line-height: 1.2 !important;
-        margin-bottom: 15px !important;
-    }
-    
-    .hero .sub-title {
-        font-size: 16px !important;
-        margin-bottom: 25px !important;
-    }
-
-    /* Hero Button Sizing */
-    .hero-btn .thm-btn {
-        padding: 12px 25px !important;
-        font-size: 14px !important;
-        min-height: 50px !important;
-    }
-    
-    .hero-btn .thm-btn .arrow-icon {
-        width: 30px !important;
-        height: 30px !important;
-        line-height: 30px !important;
-    }
-
-    /* Remove Blank Space at Top */
-    .hero {
-        padding-top: 100px !important; /* Adjust based on header height */
-        padding-bottom: 50px !important;
-    }
-    
-    /* Ensure Header is Compact */
-    .xb-header .header__wrap {
-         min-height: 60px !important;
-    }
-}
-
-/* =========================================
-   MOBILE ADJUSTMENTS (AURORA POSITION & SPACING)
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* Shift Aurora UP to cover the blank space under navbar */
-    .aurora-container {
-        top: -15% !important;     /* Pulls the canvas up */
-        height: 130vh !important; /* Increases height so bottom isn't lost */
-        width: 100% !important;
-    }
-
-    /* Add space above the navbar */
-    .xb-header-area {
-        padding-top: 25px !important;
-    }
-    
-    /* Adjust Hero padding to account for header space */
-    .hero {
-        padding-top: 140px !important;
-    }
-}
-
-/* =========================================
-   MOBILE MENU CLOSE BUTTON FIX
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* Ensure the close button is visible and not cut off */
-    .xb-menu-close,
-    .xb-header-menu .xb-menu-close,
-    .xb-close-menu {
-        top: 25px !important;
-        right: 25px !important;
-        z-index: 9999 !important;
-        position: absolute !important;
-        display: block !important;
-        width: 40px !important;
-        height: 40px !important;
-        line-height: 40px !important;
-        text-align: center !important;
-        background: rgba(255,255,255,0.1);
-        border-radius: 50%;
-    }
-    
-    /* Adjust menu padding to prevent overlap with close button */
-    .xb-header-menu-scroll {
-        padding-top: 80px !important;
-    }
-}
-
-/* =========================================
-   MOBILE HEADER FIXES (TRANSPARENCY & SPACING)
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* FORCE header to be transparent so Aurora shows through */
-    .xb-header-area, 
-    .header-area,
-    .xb-header {
-        background: transparent !important;
-        background-color: transparent !important;
-        box-shadow: none !important;
-        backdrop-filter: none !important; /* Remove blur at top if causing issues */
-    }
-
-    /* Only apply background/blur when sticky */
-    .xb-header-area.sticky {
-        background: rgba(12, 12, 12, 0.8) !important; /* Dark semi-transparent when scrolling */
-        backdrop-filter: blur(10px) !important;
-    }
-
-    /* Remove any bottom margin/padding that creates the 'blank space' */
-    .xb-header-area {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-    }
-    
-    /* Pull Hero UP further to ensure overlap */
-    .hero {
-        padding-top: 100px !important; /* Reduced from 140px to pull content up */
-        margin-top: -20px !important; /* Negative margin to bridge gap */
-    }
-
-    /* Ensure the Aurora container is definitely behind the header */
-    .aurora-container {
-        top: 0 !important; /* Reset to 0 to align with top of viewport */
-        z-index: -1 !important;
-    }
-}
-
-/* =========================================
-   MOBILE MENU CLOSE BUTTON - CRITICAL FIX
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* Pull the close button well inside the menu area */
-    .xb-menu-close,
-    .xb-header-menu .xb-menu-close,
-    .xb-close-menu,
-    .xb-menu-toggle.xb-close {
-        top: 20px !important;    /* Bring it down from the top edge */
-        right: 20px !important;  /* Bring it in from the right edge */
-        position: absolute !important;
-        z-index: 10000 !important;
-        
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        
-        width: 35px !important;
-        height: 35px !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        border-radius: 50% !important;
-        color: #fff !important;
-        font-size: 16px !important;
-        line-height: 1 !important;
-    }
-    
-    /* Ensure the menu header (where logo might be) has room */
-    .xb-header-menu .xb-header-menu-scroll {
-        padding-top: 80px !important;
-    }
-}
-
-/* =========================================
-   FINAL MOBILE FIXES (CLOSE BUTTON & HEADER)
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* 1. FORCE CLOSE BUTTON VISIBILITY & POSITION */
-    /* Target every possible selector for the close button */
-    .xb-menu-close, 
-    .xb-close-menu,
-    .xb-nav-mobile-button.xb-close,
-    .xb-header-menu .xb-menu-toggle {
-        position: absolute !important;
-        top: 25px !important;
-        right: 25px !important;
-        z-index: 2147483647 !important; /* Max Z-Index */
-        display: flex !important;
-        width: 40px !important;
-        height: 40px !important;
-        color: #ffffff !important;
-        background: rgba(255, 255, 255, 0.15) !important;
-        border-radius: 50% !important;
-        align-items: center !important;
-        justify-content: center !important;
-        margin: 0 !important;
-        transform: none !important;
-    }
-
-    /* 2. NUCLEAR OPTION FOR HEADER BACKGROUND - REMOVE BLACK BAR */
-    .xb-header,
-    .header-area,
-    .xb-header-area,
-    .xb-header-area.sticky {
-        background: transparent !important;
-        background-color: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-    
-    /* Only blur on sticky if strictly needed, otherwise keep transparent */
-    .xb-header-area.sticky {
-         background: rgba(10, 10, 10, 0.6) !important;
-         backdrop-filter: blur(8px);
-    }
-
-    /* 3. PULL HERO UP TO COVER GAP */
-    .hero {
-        margin-top: -110px !important; /* Pull hero strictly up under header */
-        padding-top: 130px !important; /* Add padding to push text down to safe area */
-        z-index: 1 !important;
-        position: relative !important;
-    }
-
-    /* Ensure Aurora is securely at the back and top */
-    .aurora-container {
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 120vh !important;
-        z-index: 0 !important;
-        position: fixed !important;
-        transform: scale(1.1); /* Minimal CSS scale boost */
-    }
-}
-
-/* =========================================
-   FINAL LAYERING FIX (AURORA BEHIND HEADER)
-   ========================================= */
-
-@media (max-width: 991px) {
-    /* STRICTLY place Aurora at the very back */
-    #aurora-container, .aurora-container {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        z-index: -5 !important; /* Negative Z-Index to stay behind everything */
-        pointer-events: none !important;
-    }
-
-    /* Transparent Header that sits ON TOP */
-    .xb-header-area {
-        position: sticky !important;
-        top: 0 !important;
-        width: 100% !important;
-        z-index: 999 !important;
-        background: transparent !important; /* See-through */
-    }
-    
-    /* Ensure content is readable above aurora */
-    .hero {
-        position: relative !important;
-        z-index: 1 !important;
-        background: transparent !important;
-    }
-}

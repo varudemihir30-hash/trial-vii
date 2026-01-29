@@ -4,7 +4,7 @@
 	$(window).on('load', function () {
 		preloader();
 		wowAnimation();
-
+		
 	});
 
 	/*------------------------------------------
@@ -12,23 +12,23 @@
 	-------------------------------------------*/
 	function preloader() {
 		var $preloader = $('#preloader');
-
+		
 		// Check if preloader still exists (might have been removed by inline script)
 		if (!$preloader.length) {
 			// Preloader already removed, just ensure body class is removed
 			$('body').removeClass('preloader-active');
 			return;
 		}
-
+		
 		// Add class to body to prevent scrolling while preloader is visible
 		$('body').addClass('preloader-active');
-
+		
 		// Show preloader immediately if it exists
 		$preloader.css('display', 'flex');
-
+		
 		// Fade out faster and remove
 		$preloader.addClass('fade-out');
-		setTimeout(function () {
+		setTimeout(function(){
 			$preloader.remove();
 			// Remove class from body to allow scrolling after preloader is hidden
 			$('body').removeClass('preloader-active');
@@ -39,7 +39,7 @@
 	gsap.config({
 		nullTargetWarn: false,
 	});
-
+	
 	/*------------------------------------------
 	= back to top
 	-------------------------------------------*/
@@ -49,7 +49,7 @@
 		} else {
 			$('.xb-backtotop').removeClass('active');
 		}
-	});
+	});  
 	$(function () {
 		$(".scroll").on('click', function () {
 			$("html,body").animate({ scrollTop: 0 }, "slow");
@@ -225,21 +225,21 @@
 	}
 
 	if ($(".xbo_trigger").length) {
-		var odo = $(".xbo_trigger");
-		odo.each(function () {
-			var countNumber = $(this).attr("data-count");
-			var odometerInstance = new Odometer({
-				el: this,
-				value: 0,
-				format: 'd',
-			});
-			odometerInstance.render();
-			odometerInstance.update(countNumber);
-		});
-		$('.xbo_trigger').appear();
-		$(document.body).on('appear', '.xboh', function (e) {
-		});
-	}
+        var odo = $(".xbo_trigger");
+        odo.each(function () {
+            var countNumber = $(this).attr("data-count");
+            var odometerInstance = new Odometer({
+                el: this,
+                value: 0,
+                format: 'd',
+            });
+            odometerInstance.render();
+            odometerInstance.update(countNumber);
+        });
+        $('.xbo_trigger').appear();
+        $(document.body).on('appear', '.xboh', function (e) {
+        });
+    }
 
 	/*------------------------------------------
 	= isotop
@@ -293,7 +293,7 @@
 	requestAnimationFrame(raf);
 
 
-
+	
 	/*------------------------------------------
 	= testimonial slide
 	-------------------------------------------*/
@@ -304,24 +304,23 @@
 			if (testimonialSliderEl.swiper) {
 				testimonialSliderEl.swiper.destroy(true, true);
 			}
-
+			
 			// Detect if mobile device
 			var isMobile = window.innerWidth <= 768;
-
+			
 			var testimonialSlider = new Swiper(".xb-testimonial-slider", {
 				loop: true,
-				speed: isMobile ? 1500 : 1500, // Smoother transition (1.5s)
+				speed: isMobile ? 1500 : 1000, // Slower transition speed
 				spaceBetween: 30,
 				slidesPerView: 5,
 				centeredSlides: false,
-				allowTouchMove: false, // Disable manual sliding as requested
-				grabCursor: false,
+				watchOverflow: true,
 				autoplay: {
-					delay: isMobile ? 6000 : 3000,
+					delay: isMobile ? 6000 : 3000, // Slower autoplay (3 seconds between slides)
 					disableOnInteraction: false,
 					pauseOnMouseEnter: false,
 					stopOnLastSlide: false,
-					waitForTransition: true
+					waitForTransition: false
 				},
 				breakpoints: {
 					'1700': {
@@ -344,29 +343,29 @@
 					},
 				},
 				on: {
-					init: function () {
+					init: function() {
 						// Force autoplay to start immediately after initialization
 						var self = this;
-						setTimeout(function () {
+						setTimeout(function() {
 							if (self.autoplay && typeof self.autoplay.start === 'function') {
 								self.autoplay.start();
 							}
 						}, 200);
 					},
-					autoplayStart: function () {
+					autoplayStart: function() {
 						// Ensure autoplay is running
 						if (this.autoplay && !this.autoplay.running) {
 							this.autoplay.start();
 						}
 					},
-					resize: function () {
+					resize: function() {
 						// Update autoplay delay when window is resized
 						var isMobileNow = window.innerWidth <= 768;
 						if (this.autoplay && this.autoplay.running) {
 							this.autoplay.stop();
 							this.params.autoplay.delay = isMobileNow ? 6000 : 3000;
-							this.params.speed = isMobileNow ? 1500 : 1500;
-							setTimeout(function () {
+							this.params.speed = isMobileNow ? 1500 : 1000;
+							setTimeout(function() {
 								if (this.autoplay && typeof this.autoplay.start === 'function') {
 									this.autoplay.start();
 								}
@@ -375,12 +374,12 @@
 					}
 				}
 			});
-
+			
 			// Store reference globally
 			window.testimonialSlider = testimonialSlider;
-
+			
 			// Force start autoplay after a short delay
-			setTimeout(function () {
+			setTimeout(function() {
 				if (testimonialSlider && testimonialSlider.autoplay) {
 					if (typeof testimonialSlider.autoplay.start === 'function') {
 						testimonialSlider.autoplay.start();
@@ -389,14 +388,14 @@
 			}, 500);
 		}
 	}
-
+	
 	// Initialize on document ready
-	$(document).ready(function () {
+	$(document).ready(function() {
 		initTestimonialSlider();
 	});
-
+	
 	// Also initialize on window load as backup
-	$(window).on('load', function () {
+	$(window).on('load', function() {
 		setTimeout(initTestimonialSlider, 100);
 	});
 
@@ -502,7 +501,7 @@
 	});
 
 	var swiper2 = new Swiper(".ai-testimonial-slider-img", {
-		loop: true,
+		loop: true, 
 		spaceBetween: 0,
 		slidesPerView: 1,
 		navigation: {
@@ -578,7 +577,7 @@
 			}
 		});
 	}
-
+	
 	/*------------------------------------------
 	= marquee
 	-------------------------------------------*/
@@ -590,7 +589,7 @@
 		duplicated: true,
 		pauseOnHover: false,
 		startVisible: true,
-	});
+	});	
 	$('.marquee-right').marquee({
 		duration: 30000,
 		gap: 0,
@@ -599,54 +598,54 @@
 		duplicated: true,
 		pauseOnHover: false,
 		startVisible: true,
-	});
+	});	
 
 	/*------------------------------------------
 	= Language Select
 	-------------------------------------------*/
-	const locales = ["en-GB", "ar-SA", "zh-CN", "de-DE", "es-ES", "fr-FR", "hi-IN", "it-IT", "in-ID", "ja-JP", "ko-KR", "nl-NL", "no-NO", "pl-PL", "pt-BR", "sv-SE", "fi-FI", "th-TH", "tr-TR", "uk-UA", "vi-VN", "ru-RU", "he-IL"];
+	const locales = ["en-GB","ar-SA","zh-CN","de-DE","es-ES","fr-FR","hi-IN","it-IT","in-ID","ja-JP","ko-KR","nl-NL","no-NO","pl-PL","pt-BR","sv-SE","fi-FI","th-TH","tr-TR","uk-UA","vi-VN","ru-RU","he-IL"];
 
 	function getFlagSrc(countryCode) {
 		return /^[A-Z]{2}$/.test(countryCode)
-			? `https://flagsapi.com/${countryCode.toUpperCase()}/shiny/64.png`
-			: "";
+		? `https://flagsapi.com/${countryCode.toUpperCase()}/shiny/64.png`
+		: "";
 	}
 
 	$(document).ready(function () {
 		function setSelectedLocale(locale) {
-			const intlLocale = new Intl.Locale(locale);
+		const intlLocale = new Intl.Locale(locale);
 
-			const $dropdownContent = $("#language_dropdown > ul");
-			$dropdownContent.empty();
+		const $dropdownContent = $("#language_dropdown > ul");
+		$dropdownContent.empty();
 
-			const otherLocales = locales.filter(loc => loc !== locale);
-			$.each(otherLocales, function (index, otherLocale) {
-				const otherIntlLocale = new Intl.Locale(otherLocale);
-				const otherLangName = new Intl.DisplayNames([otherLocale], { type: "language" }).of(otherIntlLocale.language);
+		const otherLocales = locales.filter(loc => loc !== locale);
+		$.each(otherLocales, function (index, otherLocale) {
+			const otherIntlLocale = new Intl.Locale(otherLocale);
+			const otherLangName = new Intl.DisplayNames([otherLocale], { type: "language" }).of(otherIntlLocale.language);
 
-				const $listEl = $("<li>").html(`${otherLangName} <img src="${getFlagSrc(otherIntlLocale.region)}" />`);
-				$listEl.val(otherLocale);
+			const $listEl = $("<li>").html(`${otherLangName} <img src="${getFlagSrc(otherIntlLocale.region)}" />`);
+			$listEl.val(otherLocale);
 
-				$listEl.on("mousedown", function () {
-					setSelectedLocale(otherLocale);
-				});
-
-				$dropdownContent.append($listEl);
+			$listEl.on("mousedown", function () {
+			setSelectedLocale(otherLocale);
 			});
 
-			$("#language_active_btn").html(`<span><img src="${getFlagSrc(intlLocale.region)}" /></span> <i class="fa-solid fa-angle-down"></i>`);
+			$dropdownContent.append($listEl);
+		});
+
+		$("#language_active_btn").html(`<span><img src="${getFlagSrc(intlLocale.region)}" /></span> <i class="fa-solid fa-angle-down"></i>`);
 		}
 
 		setSelectedLocale(locales[0]);
 
 		const browserLang = new Intl.Locale(navigator.language).language;
 		$.each(locales, function (index, locale) {
-			const localeLang = new Intl.Locale(locale).language;
-			if (localeLang === browserLang) {
-				setSelectedLocale(locale);
-				return false; // Break loop
-			}
-		});
+		const localeLang = new Intl.Locale(locale).language;
+		if (localeLang === browserLang) {
+			setSelectedLocale(locale);
+		return false; // Break loop
+		}
+	});
 	});
 
 	/*------------------------------------------
@@ -655,45 +654,45 @@
 	document.addEventListener("DOMContentLoaded", function () {
 		const xbProcessItem = document.querySelectorAll(".xb-process-item");
 		const processStep = document.querySelectorAll(".xb-process-step");
-
+		
 		const options = {
 			root: null,
 			threshold: 0.5
 		};
-
+	
 		let observer = new IntersectionObserver(function (entries) {
 			entries.forEach(entry => {
 				if (entry.isIntersecting) {
 					let index = Array.from(xbProcessItem).indexOf(entry.target);
-
+	
 					xbProcessItem.forEach(item => item.classList.remove('active'));
 					processStep.forEach(item => item.classList.remove('active'));
-
+	
 					xbProcessItem[index].classList.add('active');
 					processStep[index].classList.add('active');
 				}
 			});
 		}, options);
-
+	
 		xbProcessItem.forEach(item => {
 			observer.observe(item);
 		});
-
+	
 	});
 
 	/*------------------------------------------
 	= pricing Toggle btn
 	-------------------------------------------*/
-	function priceToggle() {
+	function priceToggle(){
 		const toggleBtn = document.getElementById('price-toggle-btn');
 		const time = document.getElementById('time');
 		const dollarPrice = document.getElementById('dollar-price');
-
+	
 		if (!toggleBtn || !time || !dollarPrice) return;
-
+	
 		toggleBtn.addEventListener('click', function () {
 			const isActive = this.classList.toggle('active');
-
+	
 			if (isActive) {
 				dollarPrice.innerText = dollarPrice.dataset.priceYear || '';
 				time.innerText = time.dataset.timeYear || '';
@@ -708,17 +707,17 @@
 	/*------------------------------------------
 	= Text reveal With Scroll 
 	-------------------------------------------*/
-	if ($('.xb-text-reveal').length) {
+	if($('.xb-text-reveal').length) {
 		var textheading = $(".xb-text-reveal");
 
-		if (textheading.length == 0) return; gsap.registerPlugin(SplitText); textheading.each(function (index, el) {
-
-			el.split = new SplitText(el, {
+		if(textheading.length == 0) return; gsap.registerPlugin(SplitText); textheading.each(function(index, el) {
+			
+			el.split = new SplitText(el, { 
 				type: "lines,words,chars",
 				linesClass: "split-line"
 			});
-
-			if ($(el).hasClass('xb-text-reveal')) {
+			
+			if( $(el).hasClass('xb-text-reveal') ){
 				gsap.set(el.split.chars, {
 					opacity: .3,
 					x: "-7",
@@ -739,14 +738,14 @@
 				duration: .7,
 				stagger: 0.2,
 			});
-
+			
 		});
 	}
 
 	/*------------------------------------------
 	= project section animation
 	-------------------------------------------*/
-	function ptojectScale() {
+	function ptojectScale(){
 		let tl = gsap.timeline();
 		let pr = gsap.matchMedia();
 		pr.add("(min-width: 767px)", () => {
@@ -777,7 +776,7 @@
 	= auto tab class change animation
 	-------------------------------------------*/
 	document.addEventListener("DOMContentLoaded", function () {
-		let tabs = document.querySelectorAll('.xb-video-nav .nav-link');
+		let tabs = document.querySelectorAll('.xb-video-nav .nav-link'); 
 		if (!tabs.length) return;
 
 		let index = 0;
@@ -885,48 +884,48 @@
 	= project sticky 
 	-------------------------------------------*/
 	document.addEventListener("DOMContentLoaded", function () {
-		const items = document.querySelectorAll(".xb-project-item");
-		const paginations = document.querySelectorAll(".xb-project-pagination li");
+    const items = document.querySelectorAll(".xb-project-item");
+    const paginations = document.querySelectorAll(".xb-project-pagination li");
 
-		if (!items.length || !paginations.length) return;
+    if (!items.length || !paginations.length) return;
 
-		items.forEach((item) => {
-			item.style.transition = "opacity 0.6s ease";
-			item.style.opacity = "1";
-		});
+    items.forEach((item) => {
+        item.style.transition = "opacity 0.6s ease";
+        item.style.opacity = "1";
+    });
 
-		function updateActive() {
-			let indexToActivate = 0;
-			let triggerLine = window.innerHeight * 0.3;
+    function updateActive() {
+        let indexToActivate = 0;
+        let triggerLine = window.innerHeight * 0.3; 
 
-			items.forEach((item, index) => {
-				const rect = item.getBoundingClientRect();
-				if (rect.top <= triggerLine) {
-					indexToActivate = index;
-				}
-			});
+        items.forEach((item, index) => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top <= triggerLine) {
+                indexToActivate = index;
+            }
+        });
 
-			// pagination update
-			paginations.forEach((el) => el.classList.remove("active"));
-			if (paginations[indexToActivate]) {
-				paginations[indexToActivate].classList.add("active");
-			}
+        // pagination update
+        paginations.forEach((el) => el.classList.remove("active"));
+        if (paginations[indexToActivate]) {
+            paginations[indexToActivate].classList.add("active");
+        }
 
-			// fade effect
-			items.forEach((item, i) => {
-				if (i === indexToActivate) {
-					item.style.opacity = "1";
-				} else if (i < indexToActivate) {
-					item.style.opacity = "0.3";
-				} else {
-					item.style.opacity = "1";
-				}
-			});
-		}
+        // fade effect
+        items.forEach((item, i) => {
+            if (i === indexToActivate) {
+                item.style.opacity = "1"; 
+            } else if (i < indexToActivate) {
+                item.style.opacity = "0.3";
+            } else {
+                item.style.opacity = "1"; 
+            }
+        });
+    }
 
-		window.addEventListener("scroll", updateActive);
-		updateActive();
-	});
+    window.addEventListener("scroll", updateActive);
+    updateActive();
+});
 
 
 
@@ -936,28 +935,28 @@
 	/*------------------------------------------
 	= Mega Menu Positioning
 	-------------------------------------------*/
-	$(document).ready(function () {
+	$(document).ready(function() {
 		// Don't initialize mega menu on service pages
 		if ($('body').hasClass('service-page')) {
 			return;
 		}
-
+		
 		function positionMegaMenu() {
-			$('.main-menu > ul > li.megamenu').each(function () {
+			$('.main-menu > ul > li.megamenu').each(function() {
 				var $menuItem = $(this);
 				var $submenu = $menuItem.find('.submenu');
 				var $megaWrapper = $submenu.find('.mega_menu_wrapper');
-
+				
 				if ($megaWrapper.length) {
-					$menuItem.on('mouseenter', function () {
+					$menuItem.on('mouseenter', function() {
 						var menuItemOffset = $menuItem.offset();
 						var menuItemHeight = $menuItem.outerHeight();
 						var headerHeight = $('.xb-header').outerHeight() || 0;
 						var scrollTop = $(window).scrollTop();
-
+						
 						// Calculate top position
 						var topPosition = menuItemOffset.top + menuItemHeight - scrollTop;
-
+						
 						// Position the mega menu wrapper
 						$megaWrapper.css({
 							'top': topPosition + 'px',
@@ -965,15 +964,15 @@
 							'right': '0',
 							'margin': '0 auto'
 						});
-
+						
 						// Show the submenu
 						$submenu.css({
 							'opacity': '1',
 							'visibility': 'visible'
 						});
 					});
-
-					$menuItem.on('mouseleave', function () {
+					
+					$menuItem.on('mouseleave', function() {
 						$submenu.css({
 							'opacity': '0',
 							'visibility': 'hidden'
@@ -982,23 +981,23 @@
 				}
 			});
 		}
-
+		
 		positionMegaMenu();
-
+		
 		// Reposition on scroll and resize
-		$(window).on('scroll resize', function () {
-			$('.main-menu > ul > li.megamenu').each(function () {
+		$(window).on('scroll resize', function() {
+			$('.main-menu > ul > li.megamenu').each(function() {
 				var $menuItem = $(this);
 				var $submenu = $menuItem.find('.submenu');
 				var $megaWrapper = $submenu.find('.mega_menu_wrapper');
-
+				
 				if ($megaWrapper.length && $submenu.is(':visible')) {
 					var menuItemOffset = $menuItem.offset();
 					var menuItemHeight = $menuItem.outerHeight();
 					var scrollTop = $(window).scrollTop();
-
+					
 					var topPosition = menuItemOffset.top + menuItemHeight - scrollTop;
-
+					
 					$megaWrapper.css({
 						'top': topPosition + 'px'
 					});

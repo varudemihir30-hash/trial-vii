@@ -217,8 +217,15 @@
             }
 
             .xb-header-logo .logo-divider {
-                height: 65px;
-                width: 2px;
+                display: inline-block !important;
+                visibility: visible !important;
+                width: 2px !important;
+                height: 65px !important;
+                background: rgba(255, 255, 255, 0.6) !important;
+                flex-shrink: 0 !important;
+                border-radius: 1px !important;
+                align-self: stretch !important;
+                opacity: 1 !important;
             }
         }
 
@@ -234,8 +241,15 @@
             }
 
             .xb-header-logo .logo-divider {
-                height: 55px;
-                width: 2px;
+                display: inline-block !important;
+                visibility: visible !important;
+                width: 2px !important;
+                height: 65px !important;
+                background: rgba(255, 255, 255, 0.6) !important;
+                flex-shrink: 0 !important;
+                border-radius: 1px !important;
+                align-self: stretch !important;
+                opacity: 1 !important;
             }
         }
 
@@ -378,8 +392,11 @@
             }
 
             body.mobile-menu-active .xb-header-logo .logo-divider {
+                display: inline-block !important;
+                visibility: visible !important;
                 height: 45px !important;
-                transition: all 0.3s ease !important;
+                width: 2px !important;
+                opacity: 1 !important;
             }
 
             body.mobile-menu-active .xb-header-logo {
@@ -455,8 +472,40 @@
             opacity: 0 !important;
         }
 
-        /* Mobile header and aurora styles removed to allow main.css overrides */
+        @media (max-width: 991px) {
 
+            /* Make header area position relative */
+            .header-area,
+            #xb-header-area {
+                position: relative !important;
+            }
+
+            /* Completely hide aurora background on mobile */
+            #header-aurora-container,
+            .header-aurora-container,
+            #header-aurora-container canvas,
+            .header-aurora-container canvas {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                height: 0 !important;
+                width: 0 !important;
+                position: absolute !important;
+                left: -9999px !important;
+                overflow: hidden !important;
+                pointer-events: none !important;
+                z-index: -1 !important;
+            }
+
+            /* Ensure header content positioning */
+            .header-area .xb-header,
+            .header-area .header__wrap,
+            #xb-header-area .header__wrap,
+            .xb-header {
+                position: relative !important;
+                z-index: 1 !important;
+            }
+        }
 
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
@@ -571,97 +620,6 @@
             left: 0;
             width: 100%;
             z-index: 999;
-        }
-
-        /* --- CRITICAL MOBILE FIXES [INJECTED & UPDATED] --- */
-        @media (max-width: 991px) {
-
-            /* 1. HEADER - TAKE OUT OF FLOW (Key to removing gap) */
-            .header-area,
-            #xb-header-area {
-                position: absolute !important;
-                /* Overlays hero instead of pushing it down */
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: auto !important;
-                min-height: 0 !important;
-                margin-bottom: 0 !important;
-                z-index: 999 !important;
-                background: transparent !important;
-            }
-
-            /* Inner header content */
-            .xb-header,
-            .header__wrap {
-                background: transparent !important;
-                box-shadow: none !important;
-            }
-
-            .xb-header-area.sticky {
-                position: fixed !important;
-                background: rgba(10, 10, 10, 0.8) !important;
-                backdrop-filter: blur(8px);
-            }
-
-            /* 2. AURORA - BIG & FIXED & BLENDED */
-            #aurora-container,
-            .aurora-container {
-                display: block !important;
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100vw !important;
-                height: 120vh !important;
-                z-index: -5 !important;
-                /* Zoom + Move UP */
-                transform: scale(2.0) translateY(-15%);
-                transform-origin: center center;
-                opacity: 1 !important;
-                /* BLEND EFFECT: Blur to mix colors, Saturate to keep them rich */
-                filter: blur(20px) saturate(120%);
-            }
-
-            .header-aurora-container {
-                display: none !important;
-            }
-
-            /* 3. HERO - TIGHTER SPACING */
-            .hero,
-            .hero-full {
-                margin-top: 0 !important;
-                padding-top: 110px !important;
-                /* Reduced padding for "little gap" */
-                background: transparent !important;
-                z-index: 1 !important;
-            }
-
-            /* 4. RESET PAGE SPACING */
-            html,
-            body,
-            .body_wrap {
-                margin-top: 0 !important;
-                padding-top: 0 !important;
-            }
-
-            /* 5. CLOSE BUTTON */
-            .xb-menu-close,
-            .xb-close-menu,
-            .xb-menu-toggle.xb-close,
-            .xb-nav-mobile-button.xb-close {
-                position: fixed !important;
-                top: 25px !important;
-                right: 25px !important;
-                z-index: 2147483647 !important;
-                display: flex !important;
-                width: 40px !important;
-                height: 40px !important;
-                background: rgba(255, 255, 255, 0.2) !important;
-                border-radius: 50% !important;
-                align-items: center !important;
-                justify-content: center !important;
-                margin: 0 !important;
-            }
         }
     </style>
 
@@ -1040,44 +998,82 @@
                 width: 100% !important;
                 max-width: 100% !important;
                 height: auto !important;
-                max-height: 90px !important;
+                max-height: 120px !important;
                 margin: 0 !important;
+                object-fit: contain !important;
             }
 
-            /* Fix Morgan Stanley logo negative margin */
+            /* Fix Morgan Stanley logo negative margin - ensure uniform size */
             .brand .xb-brand-item[style*="align-items"] img {
                 margin: 0 !important;
                 margin-top: 0 !important;
                 margin-bottom: 0 !important;
                 margin-left: 0 !important;
                 margin-right: 0 !important;
+                max-height: 120px !important;
             }
 
             /* Extra small screens */
             @media only screen and (max-width: 575px) {
                 .brand .xb-brand-item {
-                    width: 100px !important;
-                    min-width: 100px !important;
-                    max-width: 100px !important;
+                    width: 120px !important;
+                    min-width: 120px !important;
+                    max-width: 120px !important;
                     margin-right: 30px !important;
                 }
 
                 .brand .xb-brand-item img {
-                    max-height: 78px !important;
+                    max-height: 100px !important;
                 }
             }
 
             /* Small screens */
             @media only screen and (min-width: 576px) and (max-width: 767px) {
                 .brand .xb-brand-item {
-                    width: 150px !important;
-                    min-width: 150px !important;
-                    max-width: 150px !important;
+                    width: 160px !important;
+                    min-width: 160px !important;
+                    max-width: 160px !important;
                 }
 
                 .brand .xb-brand-item img {
-                    max-height: 100px !important;
+                    max-height: 120px !important;
                 }
+            }
+        }
+    </style>
+
+    <!-- Brand Logo Uniform Sizing - Desktop -->
+    <style>
+        /* Ensure all brand logos have the same size on desktop */
+        @media (min-width: 768px) {
+
+            .brand .xb-brand-item img,
+            .brand-marquee .xb-brand-item img,
+            .xb-brand-inner .xb-brand-item img {
+                height: 220px !important;
+                max-width: 450px !important;
+                width: auto !important;
+                object-fit: contain !important;
+                margin: 0 auto !important;
+            }
+
+            /* Remove any special styling for Morgan Stanley logo */
+            .brand .xb-brand-item[style*="align-items"] img,
+            .brand .xb-brand-item[style*="display: flex"] img {
+                height: 220px !important;
+                max-width: 450px !important;
+                margin: 0 auto !important;
+            }
+
+            /* Verizon logo - larger size */
+            .brand .xb-brand-item img[src*="verizon-removebg-preview"],
+            .brand-marquee .xb-brand-item img[src*="verizon-removebg-preview"],
+            .xb-brand-inner .xb-brand-item img[src*="verizon-removebg-preview"] {
+                height: 280px !important;
+                max-width: 550px !important;
+                width: auto !important;
+                object-fit: contain !important;
+                margin: 0 auto !important;
             }
         }
     </style>
@@ -1412,8 +1408,58 @@
         })();
     </script>
 
-    <!-- Mobile dynamic padding script removed -->
+    <script>
+        // Dynamic header height adjustment for mobile - prevents overlap
+        (function () {
+            function adjustHeroContentPadding() {
+                // Only run on mobile devices (max-width: 768px)
+                if (window.innerWidth <= 768) {
+                    const header = document.querySelector('#xb-header-area');
+                    const heroContainers = document.querySelectorAll('.hero.hero-full .container, section.hero.hero-full .container, .hero.hero-style.hero-full .container, section.hero.hero-style.hero-full .container, .hero.hero-style.pos-rel.hero-full .container, section.hero.hero-style.pos-rel.hero-full .container');
 
+                    if (header && heroContainers.length > 0) {
+                        // Measure actual header height
+                        const headerHeight = header.offsetHeight;
+
+                        // Add some safe spacing (20px)
+                        const safePadding = headerHeight + 20;
+
+                        // Apply to all hero containers
+                        heroContainers.forEach(function (container) {
+                            container.style.paddingTop = safePadding + 'px';
+                        });
+
+                        console.log('Mobile header height adjusted:', safePadding + 'px');
+                    }
+                }
+            }
+
+            // Run on page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Wait a bit for styles to be applied
+                    setTimeout(adjustHeroContentPadding, 100);
+                    // Run again after animations might have completed
+                    setTimeout(adjustHeroContentPadding, 1000);
+                });
+            } else {
+                setTimeout(adjustHeroContentPadding, 100);
+                setTimeout(adjustHeroContentPadding, 1000);
+            }
+
+            // Run on window resize (debounced)
+            let resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(adjustHeroContentPadding, 250);
+            });
+
+            // Run on orientation change (mobile devices)
+            window.addEventListener('orientationchange', function () {
+                setTimeout(adjustHeroContentPadding, 300);
+            });
+        })();
+    </script>
 
     <!-- backtotop-start -->
     <div class="xb-backtotop">
@@ -1881,7 +1927,8 @@
                 <div class="xb-item--item">
                     <div class="xb-item--head-item">
                         <h3 class="xb-item--title border-effect">
-                            <a href="service-details-interview-guidance.html">Interview Guidance</a>
+                            <a href="service-details-interview-guidance.html" style="white-space: nowrap;">Interview
+                                Guidance</a>
                         </h3>
                         <a class="xb-item--icon" href="service-details-interview-guidance.html">
                             <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
@@ -1892,7 +1939,8 @@
                 </div>
                 <div class="service-vertical-text">
                     <h3 class="xb-item--title">
-                        <a href="service-details-interview-guidance.html">Interview Guidance</a>
+                        <a href="service-details-interview-guidance.html" style="white-space: nowrap;">Interview
+                            Guidance</a>
                     </h3>
                 </div>
             </div>
@@ -1957,58 +2005,68 @@
                         <div class="xb-brand-inner ul_li_between">
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo"
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/wallmart.png" alt="Walmart logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo"
+                                    style="display: block; width: auto; height: 280px; max-width: 550px; margin: 0 auto; object-fit: contain;">
                             </div>
-
-
-
+                            <div class="xb-brand-item">
+                                <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo"
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                            </div>
+                            <div class="xb-brand-item">
+                                <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo"
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                            </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo"
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
                                 <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/wallmart.png" alt="Walmart logo"
-                                    style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo"
+                                    style="display: block; width: auto; height: 280px; max-width: 550px; margin: 0 auto; object-fit: contain;">
                             </div>
-
-
-
+                            <div class="xb-brand-item">
+                                <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo"
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                            </div>
+                            <div class="xb-brand-item">
+                                <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo"
+                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2032,109 +2090,6 @@
         </div>
         <div class="xb-testimonial-slider">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "The team took the time to understand my profile and career goals before starting the
-                                process. Their resume improvements, interview guidance, and regular follow‑ups made the
-                                entire job search more organized and manageable."
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Bony Patel</h3>
-                                    <span class="xb-item--desig">CNC Machinist - Cretex</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "The team provided clear guidance from resume optimization to interview preparation.
-                                Their structured process and regular updates made the job search much less stressful,
-                                and I felt supported at every step."
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Keval Gajera</h3>
-                                    <span class="xb-item--desig">RMS - service engineer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "What I appreciated most was the transparency. Everything was clearly explained—from
-                                services to timelines. The support was consistent and professional throughout my job
-                                search journey."
-
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Kenil Nisar</h3>
-                                    <span class="xb-item--desig">Morgan stanley - financial analyst </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "My resume and LinkedIn profile were completely transformed to match U.S. hiring
-                                standards. The interview guidance was practical and helped me approach interviews with
-                                much more confidence."
-
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Sahaj Patel</h3>
-                                    <span class="xb-item--desig">Coca Cola - Frontend Engineer </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "This is not just resume help—they provide complete job support. From profile marketing
-                                to interview updates, the team stayed involved until the final outcome."
-
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Harsh Patel</h3>
-                                    <span class="xb-item--desig">verizon - backend developer </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "If you’re serious about finding a full‑time role and want proper guidance, this team
-                                delivers. Their candidate‑first approach and continuous support really stand out."
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Disha Patel</h3>
-                                    <span class="xb-item--desig">Full Stack Developer - Optimoz</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="swiper-slide">
                     <div class="xb-testimonial-item">
                         <div class="xb-item--inner xb-border">
@@ -2723,8 +2678,90 @@
                 }, 1500);
             });
 
-        })();
+            // Header Aurora - DISABLED on Mobile
+            // Function to remove/hide header aurora on mobile
+            function removeHeaderAurora() {
+                const headerAuroraContainer = document.getElementById('header-aurora-container');
+                if (headerAuroraContainer) {
+                    // Destroy any existing instance
+                    if (window.headerAuroraInstance) {
+                        try {
+                            if (window.headerAuroraInstance.destroy) {
+                                window.headerAuroraInstance.destroy();
+                            }
+                        } catch (e) {
+                            console.log('Error destroying header aurora:', e);
+                        }
+                        window.headerAuroraInstance = null;
+                    }
+                    // Hide the container completely
+                    headerAuroraContainer.style.display = 'none';
+                    headerAuroraContainer.style.visibility = 'hidden';
+                    headerAuroraContainer.style.opacity = '0';
+                    headerAuroraContainer.style.height = '0';
+                    headerAuroraContainer.style.width = '0';
+                    headerAuroraContainer.style.position = 'absolute';
+                    headerAuroraContainer.style.left = '-9999px';
+                    headerAuroraContainer.style.pointerEvents = 'none';
+                    // Remove any canvas elements
+                    const canvas = headerAuroraContainer.querySelector('canvas');
+                    if (canvas) {
+                        canvas.style.display = 'none';
+                        canvas.style.visibility = 'hidden';
+                    }
+                }
+            }
 
+            // Initialize Header Aurora for Mobile Only - DISABLED
+            function initHeaderAurora() {
+                // Aurora background removed from header on mobile - skip initialization
+                // Remove it if it exists
+                if (window.innerWidth <= 991) {
+                    removeHeaderAurora();
+                }
+                return; // Disabled - aurora removed from header on mobile
+            }
+
+            // Remove header aurora on mobile immediately
+            if (window.innerWidth <= 991) {
+                removeHeaderAurora();
+            }
+
+            // Also remove on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (window.innerWidth <= 991) {
+                        removeHeaderAurora();
+                    }
+                });
+            } else {
+                if (window.innerWidth <= 991) {
+                    removeHeaderAurora();
+                }
+            }
+
+            // Re-check on resize
+            let resizeTimeout;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function () {
+                    if (window.innerWidth <= 991) {
+                        // Mobile - remove aurora
+                        removeHeaderAurora();
+                    } else {
+                        // Desktop - clean up instance but don't remove container
+                        if (window.headerAuroraInstance) {
+                            try {
+                                if (window.headerAuroraInstance.destroy) {
+                                    window.headerAuroraInstance.destroy();
+                                }
+                            } catch (e) { }
+                            window.headerAuroraInstance = null;
+                        }
+                    }
+                }, 300);
+            });
+        })();
     </script>
 
     <!-- Team Image Reveal Initialization -->
