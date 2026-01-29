@@ -310,13 +310,13 @@
 			
 			var testimonialSlider = new Swiper(".xb-testimonial-slider", {
 				loop: true,
-				speed: isMobile ? 1500 : 500, // Much slower transition on mobile
+				speed: isMobile ? 1500 : 1000, // Slower transition speed
 				spaceBetween: 30,
 				slidesPerView: 5,
 				centeredSlides: false,
 				watchOverflow: true,
 				autoplay: {
-					delay: isMobile ? 6000 : 500, // Much slower autoplay on mobile (6 seconds vs 0.5 seconds)
+					delay: isMobile ? 6000 : 3000, // Slower autoplay (3 seconds between slides)
 					disableOnInteraction: false,
 					pauseOnMouseEnter: false,
 					stopOnLastSlide: false,
@@ -363,8 +363,8 @@
 						var isMobileNow = window.innerWidth <= 768;
 						if (this.autoplay && this.autoplay.running) {
 							this.autoplay.stop();
-							this.params.autoplay.delay = isMobileNow ? 6000 : 500;
-							this.params.speed = isMobileNow ? 1500 : 500;
+							this.params.autoplay.delay = isMobileNow ? 6000 : 3000;
+							this.params.speed = isMobileNow ? 1500 : 1000;
 							setTimeout(function() {
 								if (this.autoplay && typeof this.autoplay.start === 'function') {
 									this.autoplay.start();

@@ -197,8 +197,15 @@
                 gap: 10px;
             }
             .xb-header-logo .logo-divider {
-                height: 65px;
-                width: 2px;
+                display: inline-block !important;
+                visibility: visible !important;
+                width: 2px !important;
+                height: 65px !important;
+                background: rgba(255, 255, 255, 0.6) !important;
+                flex-shrink: 0 !important;
+                border-radius: 1px !important;
+                align-self: stretch !important;
+                opacity: 1 !important;
             }
         }
         @media (max-width: 767px) {
@@ -211,8 +218,15 @@
                 gap: 8px;
             }
             .xb-header-logo .logo-divider {
-                height: 55px;
-                width: 2px;
+                display: inline-block !important;
+                visibility: visible !important;
+                width: 2px !important;
+                height: 65px !important;
+                background: rgba(255, 255, 255, 0.6) !important;
+                flex-shrink: 0 !important;
+                border-radius: 1px !important;
+                align-self: stretch !important;
+                opacity: 1 !important;
             }
         }
         /* Increase header size */
@@ -330,8 +344,11 @@
                 transition: all 0.3s ease !important;
             }
             body.mobile-menu-active .xb-header-logo .logo-divider {
+                display: inline-block !important;
+                visibility: visible !important;
                 height: 45px !important;
-                transition: all 0.3s ease !important;
+                width: 2px !important;
+                opacity: 1 !important;
             }
             body.mobile-menu-active .xb-header-logo {
                 gap: 8px !important;
@@ -887,44 +904,81 @@
                 width: 100% !important;
                 max-width: 100% !important;
                 height: auto !important;
-                max-height: 90px !important;
+                max-height: 120px !important;
                 margin: 0 !important;
+                object-fit: contain !important;
             }
             
-            /* Fix Morgan Stanley logo negative margin */
+            /* Fix Morgan Stanley logo negative margin - ensure uniform size */
             .brand .xb-brand-item[style*="align-items"] img {
                 margin: 0 !important;
                 margin-top: 0 !important;
                 margin-bottom: 0 !important;
                 margin-left: 0 !important;
                 margin-right: 0 !important;
+                max-height: 120px !important;
             }
             
             /* Extra small screens */
             @media only screen and (max-width: 575px) {
                 .brand .xb-brand-item {
-                    width: 100px !important;
-                    min-width: 100px !important;
-                    max-width: 100px !important;
+                    width: 120px !important;
+                    min-width: 120px !important;
+                    max-width: 120px !important;
                     margin-right: 30px !important;
                 }
                 
                 .brand .xb-brand-item img {
-                    max-height: 78px !important;
+                    max-height: 100px !important;
                 }
             }
             
             /* Small screens */
             @media only screen and (min-width: 576px) and (max-width: 767px) {
                 .brand .xb-brand-item {
-                    width: 150px !important;
-                    min-width: 150px !important;
-                    max-width: 150px !important;
+                    width: 160px !important;
+                    min-width: 160px !important;
+                    max-width: 160px !important;
                 }
                 
                 .brand .xb-brand-item img {
-                    max-height: 100px !important;
+                    max-height: 120px !important;
                 }
+            }
+        }
+    </style>
+    
+    <!-- Brand Logo Uniform Sizing - Desktop -->
+    <style>
+        /* Ensure all brand logos have the same size on desktop */
+        @media (min-width: 768px) {
+            .brand .xb-brand-item img,
+            .brand-marquee .xb-brand-item img,
+            .xb-brand-inner .xb-brand-item img {
+                height: 220px !important;
+                max-width: 450px !important;
+                width: auto !important;
+                object-fit: contain !important;
+                margin: 0 auto !important;
+            }
+            
+            /* Remove any special styling for Morgan Stanley logo */
+            .brand .xb-brand-item[style*="align-items"] img,
+            .brand .xb-brand-item[style*="display: flex"] img {
+                height: 220px !important;
+                max-width: 450px !important;
+                margin: 0 auto !important;
+            }
+            
+            /* Verizon logo - larger size */
+            .brand .xb-brand-item img[src*="verizon-removebg-preview"],
+            .brand-marquee .xb-brand-item img[src*="verizon-removebg-preview"],
+            .xb-brand-inner .xb-brand-item img[src*="verizon-removebg-preview"] {
+                height: 280px !important;
+                max-width: 550px !important;
+                width: auto !important;
+                object-fit: contain !important;
+                margin: 0 auto !important;
             }
         }
     </style>
@@ -1611,7 +1665,7 @@
                         <div class="xb-item--item">
                             <div class="xb-item--head-item">
                                 <h3 class="xb-item--title border-effect">
-                                    <a href="service-details-interview-guidance.html">Interview Guidance</a>
+                                    <a href="service-details-interview-guidance.html" style="white-space: nowrap;">Interview Guidance</a>
                                 </h3>
                                 <a class="xb-item--icon" href="service-details-interview-guidance.html">
                                     <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
@@ -1621,7 +1675,7 @@
                         </div>
                         <div class="service-vertical-text">
                             <h3 class="xb-item--title">
-                                <a href="service-details-interview-guidance.html">Interview Guidance</a>
+                                <a href="service-details-interview-guidance.html" style="white-space: nowrap;">Interview Guidance</a>
                             </h3>
                         </div>
                     </div>
@@ -1680,52 +1734,52 @@
                         <div class="brand-marquee marquee-left">
                             <div class="xb-brand-inner ul_li_between">
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
-                                </div>
-                                <div class="xb-brand-item" style="display: flex; align-items: flex-start; justify-content: center;">
-                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: -77px 0 0 0; object-fit: contain; align-self: flex-start;">
+                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo" style="display: block; width: auto; height: 280px; max-width: 550px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
-                                </div>
-                                <div class="xb-brand-item" style="display: flex; align-items: flex-start; justify-content: center;">
-                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: -77px 0 0 0; object-fit: contain; align-self: flex-start;">
+                                    <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo" style="display: block; width: auto; height: 200px; max-width: 400px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                                 <div class="xb-brand-item">
-                                    <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo" style="display: block; width: auto; height: 150px; max-width: 320px; margin: 0 auto; object-fit: contain;">
+                                    <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo" style="display: block; width: auto; height: 280px; max-width: 550px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                </div>
+                                <div class="xb-brand-item">
+                                    <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo" style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
                                 </div>
                             </div>
                         </div>
