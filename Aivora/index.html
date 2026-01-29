@@ -792,13 +792,16 @@
             /* Aurora container at top: 0 */
             .aurora-container,
             #aurora-container {
-                height: auto !important;
+                height: 100% !important;
                 max-height: none !important;
                 overflow: visible !important;
                 position: absolute !important;
                 top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
                 padding-top: 0 !important;
                 margin-top: 0 !important;
+                z-index: 0 !important;
             }
         }
 
@@ -1003,15 +1006,6 @@
                 object-fit: contain !important;
             }
 
-            /* Fix Morgan Stanley logo negative margin - ensure uniform size */
-            .brand .xb-brand-item[style*="align-items"] img {
-                margin: 0 !important;
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-                max-height: 120px !important;
-            }
 
             /* Extra small screens */
             @media only screen and (max-width: 575px) {
@@ -1065,16 +1059,6 @@
                 margin: 0 auto !important;
             }
 
-            /* Verizon logo - larger size */
-            .brand .xb-brand-item img[src*="verizon-removebg-preview"],
-            .brand-marquee .xb-brand-item img[src*="verizon-removebg-preview"],
-            .xb-brand-inner .xb-brand-item img[src*="verizon-removebg-preview"] {
-                height: 280px !important;
-                max-width: 550px !important;
-                width: auto !important;
-                object-fit: contain !important;
-                margin: 0 auto !important;
-            }
         }
     </style>
 
@@ -1250,6 +1234,104 @@
             transition: opacity 0.5s ease-in !important;
         }
     </style>
+    <style>
+        /* Aurora Background Integration */
+        #aurora-container {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 1000px !important;
+            z-index: 0 !important;
+            pointer-events: none !important;
+            overflow: hidden !important;
+            background: #00020f !important;
+        }
+
+        /* Make everything above Aurora transparent */
+        .body_wrap {
+            background: transparent !important;
+        }
+
+        .hero,
+        .hero-style,
+        .xb-header-area-sticky,
+        #xb-header-area {
+            background: transparent !important;
+            background-color: transparent !important;
+            background-image: none !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        /* Optimal Upward Fit for Hero Content */
+        .hero-style,
+        section.hero.hero-style.pos-rel.hero-full,
+        .hero.hero-style.pos-rel.hero-full {
+            display: flex !important;
+            align-items: flex-start !important;
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+            min-height: auto !important;
+            /* Content-based height on mobile */
+        }
+
+        /* Desktop Only: Full-screen landing */
+        @media (min-width: 992px) {
+
+            .hero-style,
+            section.hero.hero-style.pos-rel.hero-full,
+            .hero.hero-style.pos-rel.hero-full {
+                min-height: 100vh !important;
+            }
+        }
+
+        .hero-style .container,
+        section.hero.hero-style.pos-rel.hero-full .container {
+            align-items: flex-start !important;
+            padding-top: 100px !important;
+            /* Desktop spacing */
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+        }
+
+        /* Mobile Fixes: Eliminate side-gap and bottom spacing */
+        @media (max-width: 768px) {
+
+            .hero-style .container,
+            section.hero.hero-style.pos-rel.hero-full .container {
+                padding-top: 80px !important;
+                /* Tighter on mobile */
+                padding-bottom: 20px !important;
+            }
+
+            #aurora-container {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                left: 0 !important;
+                overflow: hidden !important;
+            }
+
+            body,
+            html {
+                overflow-x: hidden !important;
+                width: 100% !important;
+            }
+        }
+
+        .hero-content {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        /* Keep the glass effect on header */
+        .header__wrap {
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+        }
+    </style>
 </head>
 
 <body class="ai-agency">
@@ -1421,8 +1503,8 @@
                         // Measure actual header height
                         const headerHeight = header.offsetHeight;
 
-                        // Add some safe spacing (20px)
-                        const safePadding = headerHeight + 20;
+                        // Add matching padding (+10px safe gap)
+                        const safePadding = headerHeight + 10;
 
                         // Apply to all hero containers
                         heroContainers.forEach(function (container) {
@@ -1470,6 +1552,8 @@
     <!-- backtotop-end -->
 
     <div class="body_wrap o-clip">
+        <!-- Aurora Background -->
+        <div id="aurora-container"></div>
 
         <!-- header start -->
         <header id="xb-header-area" class="header-area header-style--one header-transparent is-sticky">
@@ -1813,11 +1897,9 @@
         <main>
             <!-- hero start -->
             <section class="hero hero-style pos-rel hero-full">
-                <!-- Aurora Background -->
-                <div id="aurora-container" class="aurora-container"></div>
 
                 <div class="container">
-                    <div class="row align-items-center">
+                    <div class="row align-items-start">
                         <div class="col-lg-9 col-md-9">
                             <div class="hero-content">
                                 <h2 class="title scale-animation wow">
@@ -1852,7 +1934,7 @@
                 <div class="container">
                 </div>
     </div>
-    <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg-new.png">
+    <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg.png">
         <div class="xb-service-item xb-border xb-mouseenter active wow fadeInUp" data-wow-delay="0.1s"
             data-wow-duration="0.6s">
             <div class="xb-item--inner">
@@ -2004,68 +2086,41 @@
                     <div class="brand-marquee marquee-left">
                         <div class="xb-brand-inner ul_li_between">
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo"
-                                    style="display: block; width: auto; height: 280px; max-width: 550px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/wallmart.png" alt="Walmart logo">
+                            </div>
+                            <!-- Duplicated for Marquee Loop -->
+                            <div class="xb-brand-item">
+                                <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo">
                             </div>
                             <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-12.png" alt="Morgan Stanley logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/verizon-removebg-preview.png" alt="Verizon logo"
-                                    style="display: block; width: auto; height: 280px; max-width: 550px; margin: 0 auto; object-fit: contain;">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/optimuz-removebg-preview.png" alt="Optimuz logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-14.png" alt="Brand logo"
-                                    style="display: block; width: auto; height: 220px; max-width: 450px; margin: 0 auto; object-fit: contain;">
+                                <img src="assets/img/brand/wallmart.png" alt="Walmart logo">
                             </div>
                         </div>
                     </div>
@@ -2423,52 +2478,56 @@
     <script src="assets/js/lenis.js"></script>
     <script src="assets/js/magiccursor.js"></script>
 
-    <!-- OGL Library for Galaxy - ES Module approach -->
-    <script type="module" id="ogl-loader">
-        (async function () {
-            // Import OGL using ES modules from jsdelivr
-            try {
-                const OGLModule = await import('https://cdn.jsdelivr.net/npm/ogl@0.0.79/src/index.js');
-
-                // Handle default export or named exports
-                const OGL = OGLModule.default || OGLModule;
-
-                // Expose OGL globally
-                window.OGL = OGL;
-                console.log('✓ OGL loaded via ES module');
-                console.log('OGL object:', OGL);
-                console.log('✓ OGL.Renderer:', typeof OGL.Renderer);
-                console.log('✓ OGL.Program:', typeof OGL.Program);
-                console.log('✓ OGL.Mesh:', typeof OGL.Mesh);
-                console.log('✓ OGL.Triangle:', typeof OGL.Triangle);
-                console.log('✓ OGL.Color:', typeof OGL.Color);
-
-                // Dispatch event to signal OGL is ready
-                window.dispatchEvent(new CustomEvent('ogl-loaded', { detail: OGL }));
-            } catch (error) {
-                console.error('✗ Failed to load OGL from jsdelivr:', error);
-
-                // Try alternative CDN
-                try {
-                    console.log('Trying Skypack CDN...');
-                    const OGLModule = await import('https://cdn.skypack.dev/ogl@0.0.79');
-                    const OGL = OGLModule.default || OGLModule;
-                    window.OGL = OGL;
-                    console.log('✓ OGL loaded via Skypack');
-                    console.log('OGL object:', OGL);
-                    window.dispatchEvent(new CustomEvent('ogl-loaded', { detail: OGL }));
-                } catch (error2) {
-                    console.error('✗ All OGL loading methods failed');
-                    console.error('jsdelivr error:', error);
-                    console.error('Skypack error:', error2);
-                    window.dispatchEvent(new CustomEvent('ogl-load-failed', { detail: { error, error2 } }));
+    <!-- OGL Library for Aurora - Robust Multi-source Loading -->
+    <script src="https://cdn.jsdelivr.net/npm/ogl/dist/ogl.umd.js"></script>
+    <script>
+        (function () {
+            if (!window.ogl && !window.OGL) {
+                console.log('jsDelivr failed, trying unpkg...');
+                var s = document.createElement('script');
+                s.src = "https://unpkg.com/ogl/dist/ogl.umd.js";
+                document.head.appendChild(s);
+            }
+        })();
+    </script>
+    <style>
+        /* Debug border for aurora container - will remove after fix */
+        .aurora-container {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    <script>
+        (function () {
+            function checkOGL() {
+                // OGL UMD usually exports as window.ogl
+                if (window.ogl) {
+                    window.OGL = window.ogl;
+                    return true;
                 }
+                return !!window.OGL;
+            }
+
+            if (checkOGL()) {
+                console.log('✓ OGL ready');
+            } else {
+                console.log('Waiting for OGL...');
+                let attempts = 0;
+                const interval = setInterval(function () {
+                    attempts++;
+                    if (checkOGL() || attempts > 20) {
+                        clearInterval(interval);
+                        if (checkOGL()) {
+                            console.log('✓ OGL found');
+                            window.dispatchEvent(new CustomEvent('ogl-loaded'));
+                        }
+                    }
+                }, 100);
             }
         })();
     </script>
 
     <!-- Aurora Component -->
-    <script src="assets/js/aurora.js"></script>
+    <script src="assets/js/aurora.js?v=1.6"></script>
 
     <!-- Main custom script -->
     <script src="assets/js/main.js"></script>
@@ -2477,289 +2536,65 @@
     <script>
         (function () {
             let initAttempts = 0;
-            const maxAttempts = 50; // 5 seconds max wait
+            const maxAttempts = 100; // Increased to 10 seconds
 
             function initAurora() {
                 initAttempts++;
-                if (initAttempts > maxAttempts) {
-                    console.warn('Aurora initialization timeout. OGL or Aurora class may not be loaded.');
-                    console.log('OGL check:', {
-                        windowOGL: typeof window.OGL,
-                        windowOgl: typeof window.ogl,
-                        Aurora: typeof Aurora,
-                        OGLRenderer: window.OGL ? typeof window.OGL.Renderer : 'N/A'
-                    });
-
-                    // Last attempt: try to manually check
-                    if (typeof Aurora !== 'undefined' && window.OGL && window.OGL.Renderer) {
-                        console.log('Force initializing despite timeout...');
-                        // Continue with initialization
-                    } else {
-                        return;
-                    }
-                }
 
                 const auroraContainer = document.getElementById('aurora-container');
-                if (!auroraContainer) {
-                    console.log('Waiting for aurora-container...');
-                    setTimeout(initAurora, 100);
-                    return;
-                }
+                const OGL_LIB = window.OGL || window.ogl;
+                const hasOGL = OGL_LIB && (OGL_LIB.Renderer || (OGL_LIB.ogl && OGL_LIB.ogl.Renderer));
+                const hasAurora = typeof Aurora !== 'undefined';
 
-                // Check for OGL (handle different export formats)
-                let OGL_NS = window.OGL;
-
-                // Try to find OGL in window
-                if (!OGL_NS || !OGL_NS.Renderer) {
-                    OGL_NS = window.ogl;
-                }
-
-                if (!OGL_NS || !OGL_NS.Renderer) {
-                    for (let key in window) {
-                        if (key.toLowerCase().includes('ogl') &&
-                            typeof window[key] === 'object' &&
-                            window[key] !== null &&
-                            window[key].Renderer) {
-                            OGL_NS = window[key];
-                            window.OGL = OGL_NS;
-                            break;
-                        }
-                    }
-                }
-
-                if (!OGL_NS || typeof OGL_NS.Renderer === 'undefined') {
-                    console.log('Waiting for OGL library... (attempt ' + initAttempts + ')');
-                    setTimeout(initAurora, 200);
-                    return;
-                }
-
-                console.log('✓ OGL found:', OGL_NS);
-
-                // Wait for Aurora class to be available
-                if (typeof Aurora === 'undefined') {
-                    console.log('Waiting for Aurora class...');
-                    setTimeout(initAurora, 100);
-                    return;
-                }
-
-                console.log('All dependencies loaded, initializing Aurora...');
-
-                // Initialize Aurora with custom settings
-                try {
-                    // Ensure container has dimensions
-                    const containerRect = auroraContainer.getBoundingClientRect();
-                    const heroSection = auroraContainer.closest('.hero');
-                    const heroRect = heroSection ? heroSection.getBoundingClientRect() : null;
-
-                    console.log('=== Aurora Initialization Debug ===');
-                    console.log('Aurora container dimensions:', {
-                        width: containerRect.width,
-                        height: containerRect.height,
-                        offsetWidth: auroraContainer.offsetWidth,
-                        offsetHeight: auroraContainer.offsetHeight,
-                        top: containerRect.top,
-                        left: containerRect.left
+                if (initAttempts > maxAttempts) {
+                    console.warn('Aurora initialization timeout. State:', {
+                        container: !!auroraContainer,
+                        ogl: !!OGL_LIB,
+                        hasRenderer: !!(OGL_LIB && (OGL_LIB.Renderer || (OGL_LIB.ogl && OGL_LIB.ogl.Renderer))),
+                        auroraClass: hasAurora
                     });
+                    return;
+                }
 
-                    if (heroRect) {
-                        console.log('Hero section dimensions:', {
-                            width: heroRect.width,
-                            height: heroRect.height,
-                            offsetWidth: heroSection.offsetWidth,
-                            offsetHeight: heroSection.offsetHeight
+                if (!auroraContainer || !hasOGL || !hasAurora) {
+                    if (initAttempts % 10 === 0) {
+                        console.log('Still waiting for Aurora dependencies...', {
+                            attempt: initAttempts,
+                            container: !!auroraContainer,
+                            ogl: hasOGL,
+                            aurora: hasAurora
                         });
                     }
+                    setTimeout(initAurora, 100);
+                    return;
+                }
 
-                    // Check WebGL support
-                    const testCanvas = document.createElement('canvas');
-                    const testGl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
-                    if (!testGl) {
-                        console.error('✗ WebGL is not supported in this browser');
-                    } else {
-                        console.log('✓ WebGL is supported');
-                    }
-
-                    if (containerRect.width === 0 || containerRect.height === 0) {
-                        console.warn('Aurora container has zero dimensions, waiting...');
-                        setTimeout(initAurora, 100);
-                        return;
-                    }
-
-                    // Verify OGL has required classes
-                    if (!OGL_NS.Renderer || !OGL_NS.Program || !OGL_NS.Mesh || !OGL_NS.Triangle || !OGL_NS.Color) {
-                        console.error('✗ OGL missing required classes:', {
-                            Renderer: !!OGL_NS.Renderer,
-                            Program: !!OGL_NS.Program,
-                            Mesh: !!OGL_NS.Mesh,
-                            Triangle: !!OGL_NS.Triangle,
-                            Color: !!OGL_NS.Color
-                        });
-                        setTimeout(initAurora, 200);
-                        return;
-                    }
-
-                    console.log('✓ All checks passed, initializing Aurora...');
+                try {
+                    console.log('Initializing Aurora v1.5 with OGL:', OGL_LIB.version || 'unknown');
                     window.auroraInstance = new Aurora(auroraContainer, {
-                        colorStops: ['#020f3e', '#1fad7e', '#213e97'],
-                        amplitude: 1.0,
+                        colorStops: ["#00074d", "#1fad7e", "#3b0066"],
                         blend: 0.5,
+                        amplitude: 1.0,
                         speed: 1.0
                     });
-                    console.log('✓ Aurora initialized successfully', window.auroraInstance);
-
-                    // Verify canvas was created
-                    setTimeout(function () {
-                        const canvas = auroraContainer.querySelector('canvas');
-                        if (canvas) {
-                            console.log('✓ Canvas found in container:', {
-                                width: canvas.width,
-                                height: canvas.height,
-                                styleWidth: canvas.style.width,
-                                styleHeight: canvas.style.height,
-                                visible: canvas.offsetWidth > 0 && canvas.offsetHeight > 0
-                            });
-                        } else {
-                            console.error('✗ Canvas not found in container!');
-                        }
-                    }, 500);
+                    console.log('✓ Aurora initialized successfully');
                 } catch (error) {
-                    console.error('✗ Error initializing Aurora:', error);
-                    console.error('Error stack:', error.stack);
+                    console.error('✗ Aurora initialization error:', error);
                 }
             }
 
-            // Wait for OGL to load first
-            function startInit() {
-                // Check if OGL is ready
-                if (window.OGL && window.OGL.Renderer) {
-                    setTimeout(function () {
-                        const heroSection = document.querySelector('.hero.hero-full');
-                        if (heroSection) {
-                            const rect = heroSection.getBoundingClientRect();
-                            console.log('Hero section dimensions:', rect);
-                        }
-                        initAurora();
-                    }, 300);
-                } else {
-                    // Wait for OGL to load
-                    console.log('Waiting for OGL to load...');
-                    window.addEventListener('ogl-loaded', function () {
-                        console.log('OGL loaded event received');
-                        setTimeout(function () {
-                            initAurora();
-                        }, 300);
-                    }, { once: true });
-
-                    // Fallback: try after delay
-                    setTimeout(function () {
-                        if (window.OGL && window.OGL.Renderer) {
-                            initAurora();
-                        } else {
-                            console.log('OGL still not loaded, will keep trying...');
-                            setTimeout(startInit, 500);
-                        }
-                    }, 2000);
-                }
-            }
-
+            // Start initialization
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', startInit);
+                document.addEventListener('DOMContentLoaded', initAurora);
             } else {
-                startInit();
+                initAurora();
             }
 
-            // Also try on window load as backup
+            // Backup initialization on window load
             window.addEventListener('load', function () {
                 setTimeout(function () {
-                    if (!window.auroraInstance && window.OGL && window.OGL.Renderer) {
-                        console.log('Retrying Aurora initialization on window load');
-                        initAurora();
-                    }
-                }, 1500);
-            });
-
-            // Header Aurora - DISABLED on Mobile
-            // Function to remove/hide header aurora on mobile
-            function removeHeaderAurora() {
-                const headerAuroraContainer = document.getElementById('header-aurora-container');
-                if (headerAuroraContainer) {
-                    // Destroy any existing instance
-                    if (window.headerAuroraInstance) {
-                        try {
-                            if (window.headerAuroraInstance.destroy) {
-                                window.headerAuroraInstance.destroy();
-                            }
-                        } catch (e) {
-                            console.log('Error destroying header aurora:', e);
-                        }
-                        window.headerAuroraInstance = null;
-                    }
-                    // Hide the container completely
-                    headerAuroraContainer.style.display = 'none';
-                    headerAuroraContainer.style.visibility = 'hidden';
-                    headerAuroraContainer.style.opacity = '0';
-                    headerAuroraContainer.style.height = '0';
-                    headerAuroraContainer.style.width = '0';
-                    headerAuroraContainer.style.position = 'absolute';
-                    headerAuroraContainer.style.left = '-9999px';
-                    headerAuroraContainer.style.pointerEvents = 'none';
-                    // Remove any canvas elements
-                    const canvas = headerAuroraContainer.querySelector('canvas');
-                    if (canvas) {
-                        canvas.style.display = 'none';
-                        canvas.style.visibility = 'hidden';
-                    }
-                }
-            }
-
-            // Initialize Header Aurora for Mobile Only - DISABLED
-            function initHeaderAurora() {
-                // Aurora background removed from header on mobile - skip initialization
-                // Remove it if it exists
-                if (window.innerWidth <= 991) {
-                    removeHeaderAurora();
-                }
-                return; // Disabled - aurora removed from header on mobile
-            }
-
-            // Remove header aurora on mobile immediately
-            if (window.innerWidth <= 991) {
-                removeHeaderAurora();
-            }
-
-            // Also remove on DOM ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function () {
-                    if (window.innerWidth <= 991) {
-                        removeHeaderAurora();
-                    }
-                });
-            } else {
-                if (window.innerWidth <= 991) {
-                    removeHeaderAurora();
-                }
-            }
-
-            // Re-check on resize
-            let resizeTimeout;
-            window.addEventListener('resize', function () {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function () {
-                    if (window.innerWidth <= 991) {
-                        // Mobile - remove aurora
-                        removeHeaderAurora();
-                    } else {
-                        // Desktop - clean up instance but don't remove container
-                        if (window.headerAuroraInstance) {
-                            try {
-                                if (window.headerAuroraInstance.destroy) {
-                                    window.headerAuroraInstance.destroy();
-                                }
-                            } catch (e) { }
-                            window.headerAuroraInstance = null;
-                        }
-                    }
-                }, 300);
+                    if (!window.auroraInstance) initAurora();
+                }, 1000);
             });
         })();
     </script>

@@ -4703,13 +4703,7 @@ Drop Down menu end
 }
 
 /* Glass effect header - removed white background override */
-.header-area .header__wrap,
-#xb-header-area .header__wrap,
-.header-style--one .header__wrap,
-.header-style--two .header__wrap,
-.header-style--three .header__wrap {
-  /* Glass effect maintained - background set in HTML style block */
-}
+
 
 .header-area,
 #xb-header-area {
