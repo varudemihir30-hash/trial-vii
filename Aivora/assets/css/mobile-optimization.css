@@ -1,4 +1,3 @@
-
 /*-----------------------------------------------------------------------------------
     Mobile Optimization CSS
     Comprehensive mobile styles for all phone browsers
@@ -10,7 +9,8 @@
    ============================================ */
 
 /* Prevent horizontal scroll */
-html, body {
+html,
+body {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     width: 100%;
@@ -29,6 +29,7 @@ html, body {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
+
     100% {
         /* Translate by 50% since logos are duplicated */
         -webkit-transform: translateX(-50%);
@@ -41,6 +42,7 @@ html, body {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
+
     100% {
         /* Translate by 50% since logos are duplicated */
         -webkit-transform: translateX(-50%);
@@ -79,6 +81,7 @@ section.hero.hero-style,
 
 /* Override main.css overflow: hidden on all hero sections for mobile */
 @media only screen and (max-width: 767px) {
+
     .hero-style,
     .hero.hero-full,
     section.hero.hero-full,
@@ -109,6 +112,7 @@ section.hero.hero-style,
 
 /* Move header to the very top - remove all top padding/margin */
 @media only screen and (max-width: 991px) {
+
     /* Override inline styles from index.html that add padding */
     .xb-header-area-sticky,
     .xb-header-area-sticky.xb-header-fixed,
@@ -120,7 +124,7 @@ section.hero.hero-style,
         margin-bottom: 0 !important;
         top: 0 !important;
     }
-    
+
     /* Ensure header area itself has no top spacing */
     .header-area,
     #xb-header-area,
@@ -132,7 +136,7 @@ section.hero.hero-style,
         padding-bottom: 0 !important;
         top: 0 !important;
     }
-    
+
     /* Show logo divider line on mobile */
     .xb-header-logo .logo-divider {
         display: inline-block !important;
@@ -145,7 +149,7 @@ section.hero.hero-style,
         align-self: stretch !important;
         opacity: 1 !important;
     }
-    
+
     /* Adjust gap when divider is shown */
     .xb-header-logo {
         gap: 10px !important;
@@ -155,6 +159,7 @@ section.hero.hero-style,
 /* Ensure hero section has enough top padding on all mobile devices */
 /* Header is ~55px on mobile, set padding to match header height exactly - no extra space */
 @media only screen and (max-width: 768px) {
+
     /* Target all possible hero section combinations with maximum specificity */
     .hero-style,
     section.hero.hero-full,
@@ -163,12 +168,12 @@ section.hero.hero-style,
     .hero.hero-full,
     .hero.hero-style.hero-full,
     .hero.hero-style.pos-rel.hero-full,
-    .body_wrap > main > section.hero.hero-full:first-child,
-    .body_wrap > main > .hero.hero-full:first-child {
+    .body_wrap>main>section.hero.hero-full:first-child,
+    .body_wrap>main>.hero.hero-full:first-child {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Add minimal padding-top only to hero content container, not the section */
     .hero.hero-full .container,
     .hero.hero-style.hero-full .container,
@@ -179,6 +184,7 @@ section.hero.hero-style,
 }
 
 @media only screen and (max-width: 575px) {
+
     /* Extra small screens */
     .hero-style,
     section.hero.hero-full,
@@ -187,12 +193,12 @@ section.hero.hero-style,
     .hero.hero-full,
     .hero.hero-style.hero-full,
     .hero.hero-style.pos-rel.hero-full,
-    .body_wrap > main > section.hero.hero-full:first-child,
-    .body_wrap > main > .hero.hero-full:first-child {
+    .body_wrap>main>section.hero.hero-full:first-child,
+    .body_wrap>main>.hero.hero-full:first-child {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Add padding-top to hero content container to account for fixed header height */
     /* Header is ~55px on mobile - add padding so hero content starts below header */
     .hero.hero-full .container,
@@ -201,7 +207,7 @@ section.hero.hero-style,
     section.hero.hero-style.hero-full .container {
         padding-top: 70px !important;
     }
-    
+
     /* Align hero row content to top */
     .hero .row {
         align-items: flex-start !important;
@@ -209,8 +215,14 @@ section.hero.hero-style,
 }
 
 /* Touch-friendly tap targets (minimum 44x44px) */
-a, button, input[type="button"], input[type="submit"], 
-input[type="file"], select, textarea, .clickable {
+a,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="file"],
+select,
+textarea,
+.clickable {
     -webkit-tap-highlight-color: rgba(0, 255, 151, 0.3);
     touch-action: manipulation;
     min-height: 44px;
@@ -242,49 +254,57 @@ html {
 
 /* Ensure fixed/sticky header doesn't overlap content on all mobile devices */
 @media only screen and (max-width: 991px) {
-    /* When header is fixed/sticky, ensure it's properly positioned at the very top */
-    .xb-header-area-sticky,
-    .xb-header-area-sticky.xb-header-fixed {
-        position: fixed !important;
+
+    /* CRITICAL: Add top spacing to header on mobile */
+    /* Use relative positioning so margin-top creates space above header */
+    .header-area,
+    #xb-header-area,
+    .header-area.header-transparent,
+    #xb-header-area.header-transparent {
+        position: relative !important;
+        margin: 0 !important;
+        margin-top: 24px !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
         top: 0 !important;
+    }
+
+    /* When header becomes sticky, add top spacing */
+    /* CRITICAL: Use maximum specificity to override inline styles on all pages */
+    .xb-header-area-sticky,
+    .xb-header-area-sticky.xb-header-fixed,
+    #xb-header-area .xb-header-area-sticky,
+    #xb-header-area .xb-header-area-sticky.xb-header-fixed,
+    .header-area .xb-header-area-sticky,
+    .header-area .xb-header-area-sticky.xb-header-fixed {
+        position: sticky !important;
+        top: 24px !important;
         left: 0 !important;
         right: 0 !important;
         width: 100% !important;
         z-index: 999 !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
         background: rgba(255, 255, 255, 0.05) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
     }
-    
-    /* Ensure header area itself is at the top with no spacing */
-    .header-area,
-    #xb-header-area {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        top: 0 !important;
-    }
-    
+
     /* Ensure main content area accounts for fixed header height */
-    .body_wrap > main {
+    .body_wrap>main {
         position: relative !important;
     }
-    
+
     /* First section/hero should have NO padding-top - padding is on container instead */
     /* Header is approximately 55px tall on mobile */
-    .body_wrap > main > section:first-child,
-    .body_wrap > main > .hero:first-child,
-    .body_wrap > main > .hero.hero-full:first-child {
+    .body_wrap>main>section:first-child,
+    .body_wrap>main>.hero:first-child,
+    .body_wrap>main>.hero.hero-full:first-child {
         position: relative !important;
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Remove padding-top from hero container - page starts from absolute top (mobile only) */
     /* Note: This only applies to max-width: 768px and below via the more specific rule above */
     /* Rules are handled by the more specific max-width: 768px media query above */
@@ -292,71 +312,73 @@ html {
 
 /* Extra Small Devices (phones, 320px and up) */
 @media only screen and (max-width: 575px) {
+
     /* Base font size adjustment */
     body {
         font-size: 14px;
         line-height: 24px;
     }
-    
+
     /* Prevent header overlap - remove padding from section, add to container */
     /* Header is approximately 55px tall on mobile */
-    .body_wrap > main > section:first-child,
-    .body_wrap > main > .hero:first-child,
-    .body_wrap > main > .hero.hero-full:first-child,
+    .body_wrap>main>section:first-child,
+    .body_wrap>main>.hero:first-child,
+    .body_wrap>main>.hero.hero-full:first-child,
     section.hero.hero-full,
     section.hero.hero-style.hero-full {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Add padding-top to container to account for fixed header height */
     /* Header is ~55px on mobile - add padding so hero content starts below header */
-    .body_wrap > main > section:first-child .container,
-    .body_wrap > main > .hero:first-child .container,
-    .body_wrap > main > .hero.hero-full:first-child .container,
+    .body_wrap>main>section:first-child .container,
+    .body_wrap>main>.hero:first-child .container,
+    .body_wrap>main>.hero.hero-full:first-child .container,
     section.hero.hero-full .container,
     section.hero.hero-style.hero-full .container {
         padding-top: 60px !important;
     }
-    
+
     /* Container padding */
-    .container, .container-fluid {
+    .container,
+    .container-fluid {
         padding-left: 15px;
         padding-right: 15px;
     }
-    
+
     /* Service items - extra small screens - smaller fonts */
     .xb-service-item .xb-item--head-item .xb-item--title {
         font-size: 16px !important;
         line-height: 1.4 !important;
     }
-    
+
     .xb-service-item .xb-item--head-item .xb-item--title a {
         font-size: 16px !important;
         line-height: 1.4 !important;
     }
-    
+
     /* Override inline font-size styles on extra small screens */
     .xb-service-item .xb-item--head-item .xb-item--title a[style*="font-size"] {
         font-size: 16px !important;
     }
-    
+
     .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.9em"],
     .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.75em"] {
         font-size: 16px !important;
         line-height: 1.4 !important;
     }
-    
+
     .xb-service-item .xb-item--content {
         font-size: 13px !important;
         line-height: 1.5 !important;
         margin-top: 14px !important;
     }
-    
+
     .xb-service-item .xb-item--item {
         padding: 18px 15px !important;
     }
-    
+
     /* Hide vertical text completely on extra small screens */
     .xb-service-item .service-vertical-text,
     .xb-service-item .service-vertical-text *,
@@ -377,7 +399,7 @@ html {
         margin: 0 !important;
         padding: 0 !important;
     }
-    
+
     /* Hero section mobile optimization */
     .hero-style {
         min-height: auto !important;
@@ -385,17 +407,17 @@ html {
         padding-bottom: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Add padding-top to hero container instead - minimal for upper positioning */
     .hero-style .container {
         padding-top: 5px !important;
     }
-    
+
     /* Align hero row content to top */
     .hero .row {
         align-items: flex-start !important;
     }
-    
+
     .hero-content .title {
         font-size: clamp(24px, 6vw, 32px) !important;
         line-height: 1.3 !important;
@@ -406,7 +428,7 @@ html {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -415,15 +437,19 @@ html {
         line-height: 1.3 !important;
         overflow: visible !important;
     }
-    
+
     .hero-content .sub-title {
         font-size: 14px !important;
         line-height: 22px !important;
         margin: 10px 0 24px !important;
     }
-    
+
     /* Buttons mobile optimization */
-    .thm-btn, .agency-btn, .chatbot-btn, .custom-btn, .ai-marketing-btn {
+    .thm-btn,
+    .agency-btn,
+    .chatbot-btn,
+    .custom-btn,
+    .ai-marketing-btn {
         font-size: 14px !important;
         padding: 12px 20px !important;
         min-height: 44px;
@@ -431,45 +457,68 @@ html {
         align-items: center;
         justify-content: center;
     }
-    
+
     .agency-btn .text {
         padding: 15px 16px !important;
     }
-    
+
+    /* Add spacing between hero button and stats cards on mobile */
+    .hero-content .hero-btn,
+    .hero .hero-btn,
+    .hero-style .hero-btn {
+        margin-bottom: 32px !important;
+    }
+
+    /* Add top margin to first stats card/counter item */
+    .hero .xb-counter,
+    .hero-style .xb-counter,
+    .hero .counter-item:first-child,
+    .hero-style .counter-item:first-child,
+    .hero .xb-item:first-child,
+    .hero-style .xb-item:first-child {
+        margin-top: 24px !important;
+    }
+
     /* Section titles */
-    .sec-title h2, .sec-title .title {
+    .sec-title h2,
+    .sec-title .title {
         font-size: 28px !important;
         line-height: 38px !important;
     }
-    
+
     /* Cards and containers */
-    .card, .service-item, .project-item, .blog-item {
+    .card,
+    .service-item,
+    .project-item,
+    .blog-item {
         margin-bottom: 20px;
     }
-    
+
     /* Images */
     img {
         max-width: 100%;
         height: auto;
         display: block;
     }
-    
+
     /* Forms */
-    input[type="text"], 
-    input[type="email"], 
-    input[type="tel"], 
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
     input[type="password"],
-    textarea, select {
-        font-size: 16px !important; /* Prevents zoom on iOS */
+    textarea,
+    select {
+        font-size: 16px !important;
+        /* Prevents zoom on iOS */
         padding: 12px 15px !important;
         min-height: 44px;
         width: 100%;
     }
-    
+
     textarea {
         min-height: 120px;
     }
-    
+
     /* Tables */
     table {
         display: block;
@@ -477,109 +526,113 @@ html {
         -webkit-overflow-scrolling: touch;
         white-space: nowrap;
     }
-    
+
     /* Navigation */
     .header-area {
         padding: 10px 0;
     }
-    
-    /* Fix header overlap issue - ensure header is properly positioned at the top */
+
+    /* Fix header overlap issue - ensure header has proper top spacing */
     .header-area,
-    #xb-header-area {
+    #xb-header-area,
+    .header-area.header-transparent,
+    #xb-header-area.header-transparent {
         position: relative !important;
         z-index: 999 !important;
-        margin-top: 0 !important;
+        margin: 0 !important;
+        margin-top: 24px !important;
         margin-bottom: 0 !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
+        padding: 0 !important;
         top: 0 !important;
     }
-    
-    /* When header becomes sticky/fixed, ensure content below has proper spacing */
-    /* Remove all top padding/margin to position header at the very top */
+
+    /* When header becomes sticky/fixed, add top spacing */
+    /* CRITICAL: Use maximum specificity to override inline styles on all pages */
     .xb-header-area-sticky,
-    .xb-header-area-sticky.xb-header-fixed {
-        position: fixed !important;
-        top: 0 !important;
+    .xb-header-area-sticky.xb-header-fixed,
+    #xb-header-area .xb-header-area-sticky,
+    #xb-header-area .xb-header-area-sticky.xb-header-fixed,
+    .header-area .xb-header-area-sticky,
+    .header-area .xb-header-area-sticky.xb-header-fixed {
+        position: sticky !important;
+        top: 24px !important;
         left: 0 !important;
         right: 0 !important;
         width: 100% !important;
         z-index: 999 !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
-    
+
     /* Add padding to body_wrap or main to account for fixed header */
     .body_wrap {
         padding-top: 0 !important;
     }
-    
+
     /* Ensure main content starts below header - CRITICAL FIX */
-    .body_wrap > main {
+    .body_wrap>main {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* CRITICAL: Remove padding-top from section, add to container instead */
     /* Header height: 55px (min-height) on mobile */
-    .body_wrap > main > section:first-child,
-    .body_wrap > main > .hero:first-child,
-    .body_wrap > main > .hero.hero-full:first-child,
-    .body_wrap > main > .hero.hero-style:first-child {
+    .body_wrap>main>section:first-child,
+    .body_wrap>main>.hero:first-child,
+    .body_wrap>main>.hero.hero-full:first-child,
+    .body_wrap>main>.hero.hero-style:first-child {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Also target hero sections specifically */
     section.hero.hero-full,
     section.hero.hero-style.hero-full {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Remove padding-top from containers - page starts from absolute top (mobile only) */
     /* Note: This only applies to max-width: 768px and below via the more specific rule above */
-    .body_wrap > main > section:first-child .container,
-    .body_wrap > main > .hero:first-child .container,
-    .body_wrap > main > .hero.hero-full:first-child .container,
-    .body_wrap > main > .hero.hero-style:first-child .container,
+    .body_wrap>main>section:first-child .container,
+    .body_wrap>main>.hero:first-child .container,
+    .body_wrap>main>.hero.hero-full:first-child .container,
+    .body_wrap>main>.hero.hero-style:first-child .container,
     section.hero.hero-full .container,
     section.hero.hero-style.hero-full .container {
         padding-top: 0 !important;
     }
-    
+
     .xb-nav-mobile {
         height: 40px;
         width: 40px;
         font-size: 16px;
     }
-    
+
     /* Mobile menu */
     .xb-header-menu {
         width: 280px;
     }
-    
+
     .xb-menu-primary li a {
         font-size: 15px;
         line-height: 50px;
         padding: 0 20px;
     }
-    
+
     /* Spacing adjustments */
     .section-padding {
         padding-top: 50px !important;
         padding-bottom: 50px !important;
     }
-    
+
     /* Grid adjustments */
     .row {
         margin-left: -10px;
         margin-right: -10px;
     }
-    
-    .row > * {
+
+    .row>* {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -591,7 +644,7 @@ html {
         font-size: 15px;
         line-height: 26px;
     }
-    
+
     .hero-content .title {
         font-size: clamp(28px, 7vw, 42px) !important;
         line-height: 1.3 !important;
@@ -601,7 +654,7 @@ html {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -610,13 +663,14 @@ html {
         line-height: 1.3 !important;
         overflow: visible !important;
     }
-    
+
     .hero-content .sub-title {
         font-size: 16px !important;
         line-height: 26px !important;
     }
-    
-    .sec-title h2, .sec-title .title {
+
+    .sec-title h2,
+    .sec-title .title {
         font-size: 36px !important;
         line-height: 46px !important;
     }
@@ -628,7 +682,7 @@ html {
         font-size: 15px;
         line-height: 27px;
     }
-    
+
     .hero-content .title {
         font-size: clamp(32px, 8vw, 48px) !important;
         line-height: 1.3 !important;
@@ -638,7 +692,7 @@ html {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -654,16 +708,20 @@ html {
    ============================================ */
 
 @supports (-webkit-touch-callout: none) {
+
     /* iOS Safari specific styles */
-    input, textarea, select {
-        font-size: 16px !important; /* Prevents zoom on focus */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+        /* Prevents zoom on focus */
     }
-    
+
     /* Fix for iOS Safari viewport height issue */
     .hero-style {
         min-height: -webkit-fill-available;
     }
-    
+
     /* Fix sticky header on iOS - ensure it's at the top */
     .xb-header-area-sticky {
         position: -webkit-sticky;
@@ -672,14 +730,14 @@ html {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Ensure header area is at top on iOS */
     .header-area,
     #xb-header-area {
         margin-top: 0 !important;
         padding-top: 0 !important;
     }
-    
+
     /* Smooth scrolling for iOS */
     * {
         -webkit-overflow-scrolling: touch;
@@ -693,6 +751,7 @@ html {
 /* Fix for Android Chrome address bar */
 /* OVERRIDDEN: Mobile hero should not use full viewport height - content should be at top */
 @media screen and (max-width: 767px) {
+
     .hero-style,
     .hero.hero-style,
     section.hero-style,
@@ -711,8 +770,8 @@ html {
    ============================================ */
 
 /* Improve touch feedback */
-button:active, 
-a:active, 
+button:active,
+a:active,
 .btn:active,
 .thm-btn:active,
 .agency-btn:active {
@@ -721,7 +780,10 @@ a:active,
 }
 
 /* Disable double-tap zoom on buttons */
-button, .btn, .thm-btn, .agency-btn {
+button,
+.btn,
+.thm-btn,
+.agency-btn {
     touch-action: manipulation;
 }
 
@@ -735,7 +797,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding-top: 100px !important;
         padding-bottom: 40px !important;
     }
-    
+
     .hero-content .title {
         font-size: clamp(26px, 6.5vw, 36px) !important;
         line-height: 1.3 !important;
@@ -745,7 +807,7 @@ button, .btn, .thm-btn, .agency-btn {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -754,7 +816,7 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         overflow: visible !important;
     }
-    
+
     .section-padding {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
@@ -770,7 +832,7 @@ button, .btn, .thm-btn, .agency-btn {
         font-size: 13px;
         line-height: 22px;
     }
-    
+
     .hero-content .title {
         font-size: clamp(20px, 5vw, 26px) !important;
         line-height: 1.3 !important;
@@ -780,7 +842,7 @@ button, .btn, .thm-btn, .agency-btn {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -789,12 +851,13 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         overflow: visible !important;
     }
-    
-    .container, .container-fluid {
+
+    .container,
+    .container-fluid {
         padding-left: 10px;
         padding-right: 10px;
     }
-    
+
     .xb-header-menu {
         width: 260px;
     }
@@ -806,13 +869,16 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Ensure sufficient color contrast */
 @media (prefers-contrast: high) {
-    a, button {
+
+    a,
+    button {
         border: 2px solid currentColor;
     }
 }
 
 /* Reduce motion for users who prefer it - but don't disable completely */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -821,7 +887,7 @@ button, .btn, .thm-btn, .agency-btn {
         transition-duration: 0.2s !important;
         scroll-behavior: auto !important;
     }
-    
+
     /* Still allow fadeIn animations but faster */
     .fadeInUp,
     .fadeIn {
@@ -834,6 +900,7 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Contact forms */
     .contact-form input,
     .contact-form textarea,
@@ -845,7 +912,7 @@ button, .btn, .thm-btn, .agency-btn {
         -moz-appearance: none;
         appearance: none;
     }
-    
+
     /* Select dropdowns */
     select {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
@@ -853,7 +920,7 @@ button, .btn, .thm-btn, .agency-btn {
         background-position: right 15px center;
         padding-right: 40px !important;
     }
-    
+
     /* Checkboxes and radio buttons */
     input[type="checkbox"],
     input[type="radio"] {
@@ -869,16 +936,17 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Lazy loading images */
     img[loading="lazy"] {
         opacity: 0;
         transition: opacity 0.3s;
     }
-    
+
     img[loading="lazy"].loaded {
         opacity: 1;
     }
-    
+
     /* Responsive images */
     .hero-img-container img,
     .service-item img,
@@ -895,22 +963,23 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 991px) {
+
     /* Header */
     .header-area .header__wrap {
         padding: 12px 0 !important;
     }
-    
+
     /* Logo */
     .header-logo img {
         max-height: 40px;
         width: auto;
     }
-    
+
     /* Mobile menu backdrop */
     .xb-header-menu-backdrop {
         background-color: rgba(0, 0, 0, 0.7);
     }
-    
+
     /* Prevent body scroll when mobile menu is open */
     body.mobile-menu-active {
         overflow: hidden !important;
@@ -919,75 +988,76 @@ button, .btn, .thm-btn, .agency-btn {
         height: 100% !important;
         touch-action: none !important;
     }
-    
+
     /* Menu items */
-    .xb-menu-primary > li > a {
+    .xb-menu-primary>li>a {
         font-size: 16px;
         padding: 12px 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
-    
+
     /* Submenu */
     .xb-menu-primary .sub-menu li a {
         font-size: 15px;
         padding-left: 30px;
     }
-    
+
     /* Hide Ai Agency, Ai Marketing, and Ai Chatbot menu items on mobile */
     /* These three items appear in the Home submenu - hide them all on mobile */
-    
+
     /* Method 1: Hide by href attribute (most reliable) */
     .xb-menu-primary .sub-menu li a[href="ai-marketing.html"],
     .xb-menu-primary .sub-menu li a[href="ai-chatbot.html"] {
         display: none !important;
     }
-    
+
     /* Hide Ai Agency - target the first submenu item under Home that contains "Ai Agency" text */
-    .xb-menu-primary > li:first-child .sub-menu li:first-child a[href="index.html"] {
+    .xb-menu-primary>li:first-child .sub-menu li:first-child a[href="index.html"] {
         display: none !important;
     }
-    
+
     /* Hide parent li elements for cleaner removal (using :has() for modern browsers) */
     .xb-menu-primary .sub-menu li:has(a[href="ai-marketing.html"]),
     .xb-menu-primary .sub-menu li:has(a[href="ai-chatbot.html"]) {
         display: none !important;
     }
-    
-    .xb-menu-primary > li:first-child .sub-menu li:first-child:has(a[href="index.html"]) {
+
+    .xb-menu-primary>li:first-child .sub-menu li:first-child:has(a[href="index.html"]) {
         display: none !important;
     }
-    
+
     /* Hide in desktop menu when on mobile viewport */
     .main-menu .submenu li a[href="ai-marketing.html"],
     .main-menu .submenu li a[href="ai-chatbot.html"] {
         display: none !important;
     }
-    
+
     .main-menu .submenu li:has(a[href="ai-marketing.html"]),
     .main-menu .submenu li:has(a[href="ai-chatbot.html"]) {
         display: none !important;
     }
-    
+
     /* Hide "page" menu item from mobile menu */
     /* Target the menu item with href="#!" which is the "page" menu */
-    .xb-menu-primary > li.menu-item-has-children:has(a[href="#!"]),
-    .xb-menu-primary > li:has(a[href="#!"]) {
+    .xb-menu-primary>li.menu-item-has-children:has(a[href="#!"]),
+    .xb-menu-primary>li:has(a[href="#!"]) {
         display: none !important;
     }
-    
+
     /* Note: Services menu (3rd item) should be visible - removed the rule that was hiding it */
 }
 
 /* Fallback for browsers that don't support :has() - hide all three items */
 @media only screen and (max-width: 991px) {
+
     /* Hide the three specific menu items in Home submenu */
     /* Target the Home menu item's submenu and hide first 3 children */
-    .xb-menu-primary > li.menu-item-has-children:first-child .sub-menu li:nth-child(1),
-    .xb-menu-primary > li.menu-item-has-children:first-child .sub-menu li:nth-child(2),
-    .xb-menu-primary > li.menu-item-has-children:first-child .sub-menu li:nth-child(3) {
+    .xb-menu-primary>li.menu-item-has-children:first-child .sub-menu li:nth-child(1),
+    .xb-menu-primary>li.menu-item-has-children:first-child .sub-menu li:nth-child(2),
+    .xb-menu-primary>li.menu-item-has-children:first-child .sub-menu li:nth-child(3) {
         display: none !important;
     }
-    
+
     /* Also hide in desktop menu */
     .main-menu .submenu li:nth-child(1),
     .main-menu .submenu li:nth-child(2),
@@ -1004,13 +1074,13 @@ button, .btn, .thm-btn, .agency-btn {
     .swiper-slide {
         width: 100% !important;
     }
-    
+
     .swiper-button-next,
     .swiper-button-prev {
         width: 36px !important;
         height: 36px !important;
     }
-    
+
     .swiper-pagination-bullet {
         width: 8px !important;
         height: 8px !important;
@@ -1025,36 +1095,36 @@ button, .btn, .thm-btn, .agency-btn {
     .footer-area {
         padding: 40px 0 30px !important;
     }
-    
+
     .footer-widget {
         margin-bottom: 30px;
     }
-    
+
     .footer-widget .title {
         font-size: 18px;
         margin-bottom: 15px;
     }
-    
+
     .footer-widget ul li {
         margin-bottom: 10px;
     }
-    
+
     .footer-widget ul li a {
         font-size: 14px;
     }
-    
+
     /* Footer Bottom - Align copyright text with address and phone */
     .xb-footer-bottom .contact-item {
         justify-content: flex-start !important;
         padding-left: 16px !important;
     }
-    
+
     /* Copyright item - align left like address and phone */
     .xb-footer-bottom .copyright-item {
         justify-content: flex-start !important;
         text-align: left !important;
     }
-    
+
     .xb-footer-bottom .copyright-item p {
         text-align: left !important;
     }
@@ -1066,12 +1136,12 @@ button, .btn, .thm-btn, .agency-btn {
         justify-content: flex-start !important;
         padding-left: 16px !important;
     }
-    
+
     .xb-footer-bottom .copyright-item {
         justify-content: flex-start !important;
         text-align: left !important;
     }
-    
+
     .xb-footer-bottom .copyright-item p {
         text-align: left !important;
     }
@@ -1089,23 +1159,23 @@ button, .btn, .thm-btn, .agency-btn {
     .mobile-hidden {
         display: none !important;
     }
-    
+
     .mobile-visible {
         display: block !important;
     }
-    
+
     .mobile-text-center {
         text-align: center !important;
     }
-    
+
     .mobile-full-width {
         width: 100% !important;
     }
-    
+
     .mobile-no-padding {
         padding: 0 !important;
     }
-    
+
     .mobile-no-margin {
         margin: 0 !important;
     }
@@ -1116,6 +1186,7 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Enable animations on mobile but keep them optimized */
     .wow,
     [data-wow-duration],
@@ -1123,59 +1194,60 @@ button, .btn, .thm-btn, .agency-btn {
         animation-duration: 0.8s !important;
         animation-fill-mode: both !important;
     }
-    
+
     /* Preserve animation delays but make them shorter */
     .wow[data-wow-delay="0.1s"],
     [data-wow-delay="0.1s"] {
         animation-delay: 0.1s !important;
     }
-    
+
     .wow[data-wow-delay="0.2s"],
     [data-wow-delay="0.2s"] {
         animation-delay: 0.15s !important;
     }
-    
+
     .wow[data-wow-delay="0.3s"],
     [data-wow-delay="0.3s"] {
         animation-delay: 0.2s !important;
     }
-    
+
     .wow[data-wow-delay="0.4s"],
     [data-wow-delay="0.4s"] {
         animation-delay: 0.25s !important;
     }
-    
+
     .wow[data-wow-delay="0.5s"],
     [data-wow-delay="0.5s"] {
         animation-delay: 0.3s !important;
     }
-    
+
     .wow[data-wow-delay="0.6s"],
     [data-wow-delay="0.6s"] {
         animation-delay: 0.35s !important;
     }
-    
+
     /* Ensure fadeInUp animation works */
     .fadeInUp {
         animation-name: fadeInUp !important;
     }
-    
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
             transform: translate3d(0, 40px, 0);
         }
+
         to {
             opacity: 1;
             transform: translate3d(0, 0, 0);
         }
     }
-    
+
     /* Optimize transforms */
     * {
         will-change: auto;
     }
-    
+
     /* Reduce backdrop filters on mobile */
     .header-area .header__wrap {
         backdrop-filter: blur(10px) !important;
@@ -1189,6 +1261,7 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Global rule to hide vertical text on all mobile devices */
 @media only screen and (max-width: 991px) {
+
     .xb-service-item .service-vertical-text,
     .xb-service-item .service-vertical-text *,
     .xb-service-item.active .service-vertical-text,
@@ -1209,7 +1282,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 !important;
         transform: none !important;
     }
-    
+
     /* Ensure service items don't use absolute positioning that causes overlap on mobile */
     .xb-service-item .xb-item--head-item {
         position: relative !important;
@@ -1218,14 +1291,14 @@ button, .btn, .thm-btn, .agency-btn {
         top: auto !important;
         left: auto !important;
     }
-    
+
     .xb-service-item .xb-item--content {
         position: relative !important;
         top: auto !important;
         left: auto !important;
         transform: translateY(0) !important;
     }
-    
+
     .xb-service-item.active .xb-item--content {
         position: relative !important;
         top: auto !important;
@@ -1235,6 +1308,7 @@ button, .btn, .thm-btn, .agency-btn {
 }
 
 @media only screen and (max-width: 767px) {
+
     /* Ensure service wrap doesn't cause horizontal scroll */
     .xb-service-wrap {
         overflow-x: hidden !important;
@@ -1244,13 +1318,13 @@ button, .btn, .thm-btn, .agency-btn {
         gap: 0 !important;
         padding: 0 15px !important;
     }
-    
+
     /* Prevent any text overflow */
     .xb-service-item * {
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
     }
-    
+
     /* Fix service items spacing and prevent overlap */
     .xb-service-item {
         width: 100% !important;
@@ -1264,22 +1338,22 @@ button, .btn, .thm-btn, .agency-btn {
         overflow: visible !important;
         padding: 0 !important;
     }
-    
+
     /* Ensure service items don't use absolute positioning that causes overlap */
     .xb-service-item .xb-item--inner {
         min-height: auto !important;
     }
-    
+
     /* Remove last item margin */
     .xb-service-item:last-child {
         margin-bottom: 0 !important;
     }
-    
+
     /* Remove top margin from first service item */
     .xb-service-item:first-child {
         margin-top: 0 !important;
     }
-    
+
     /* Fix inner wrapper */
     .xb-service-item .xb-item--inner {
         position: relative !important;
@@ -1288,7 +1362,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100% !important;
         height: auto !important;
     }
-    
+
     /* Fix inner content spacing - normal flow */
     .xb-service-item .xb-item--item {
         padding: 25px 20px !important;
@@ -1301,7 +1375,7 @@ button, .btn, .thm-btn, .agency-btn {
         overflow: visible !important;
         min-height: auto !important;
     }
-    
+
     /* Fix head item - make it relative, not absolute - CRITICAL FIX */
     .xb-service-item .xb-item--head-item {
         display: flex !important;
@@ -1322,7 +1396,7 @@ button, .btn, .thm-btn, .agency-btn {
         z-index: 2 !important;
         gap: 12px !important;
     }
-    
+
     /* Fix title in head item - smaller font size */
     .xb-service-item .xb-item--head-item .xb-item--title {
         font-size: 18px !important;
@@ -1338,7 +1412,7 @@ button, .btn, .thm-btn, .agency-btn {
         display: block !important;
         font-weight: 600 !important;
     }
-    
+
     /* Fix title links - override inline styles with smaller size */
     .xb-service-item .xb-item--head-item .xb-item--title a {
         font-size: 18px !important;
@@ -1348,20 +1422,20 @@ button, .btn, .thm-btn, .agency-btn {
         overflow-wrap: break-word !important;
         font-weight: 600 !important;
     }
-    
+
     /* Override inline font-size styles on mobile */
     .xb-service-item .xb-item--head-item .xb-item--title a[style*="font-size"] {
         font-size: 18px !important;
         line-height: 1.4 !important;
     }
-    
+
     /* Specific override for smaller inline font sizes */
     .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.9em"],
     .xb-service-item .xb-item--head-item .xb-item--title a[style*="0.75em"] {
         font-size: 18px !important;
         line-height: 1.4 !important;
     }
-    
+
     /* Show icon on mobile */
     .xb-service-item .xb-item--head-item .xb-item--icon {
         display: flex !important;
@@ -1374,7 +1448,7 @@ button, .btn, .thm-btn, .agency-btn {
         right: auto !important;
         margin-left: 0 !important;
     }
-    
+
     /* Ensure content is visible and properly positioned - normal flow */
     .xb-service-item .xb-item--content {
         position: relative !important;
@@ -1394,13 +1468,13 @@ button, .btn, .thm-btn, .agency-btn {
         overflow-wrap: break-word !important;
         color: rgba(255, 255, 255, 0.9) !important;
     }
-    
+
     /* Fix active state on mobile - keep everything visible and properly spaced */
     .xb-service-item.active {
         width: 100% !important;
         flex: none !important;
     }
-    
+
     .xb-service-item.active .xb-item--head-item {
         display: flex !important;
         position: relative !important;
@@ -1409,7 +1483,7 @@ button, .btn, .thm-btn, .agency-btn {
         transform: translateY(0) !important;
         margin-bottom: 16px !important;
     }
-    
+
     .xb-service-item.active .xb-item--content {
         position: relative !important;
         left: auto !important;
@@ -1419,7 +1493,7 @@ button, .btn, .thm-btn, .agency-btn {
         transition-delay: 0s !important;
         max-width: 100% !important;
     }
-    
+
     /* Ensure vertical text doesn't cause overlap - COMPLETELY HIDE */
     .xb-service-item .service-vertical-text,
     .xb-service-item.active .service-vertical-text {
@@ -1438,7 +1512,7 @@ button, .btn, .thm-btn, .agency-btn {
         transition: none !important;
         animation: none !important;
     }
-    
+
     .xb-service-item .service-vertical-text .xb-item--title,
     .xb-service-item .service-vertical-text .xb-item--title a {
         display: none !important;
@@ -1459,31 +1533,31 @@ button, .btn, .thm-btn, .agency-btn {
         transition: none !important;
         animation: none !important;
     }
-    
+
     /* Additional fixes to prevent any absolute positioning issues */
-    .xb-service-item .xb-item--item > * {
+    .xb-service-item .xb-item--item>* {
         position: relative !important;
     }
-    
+
     /* Ensure title doesn't overlap content - add clear spacing */
-    .xb-service-item .xb-item--head-item + .xb-item--content {
+    .xb-service-item .xb-item--head-item+.xb-item--content {
         clear: both !important;
         margin-top: 0 !important;
     }
-    
+
     /* Prevent any negative margins that could cause overlap */
     .xb-service-item .xb-item--head-item,
     .xb-service-item .xb-item--content {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-    
+
     /* Ensure proper border/separator between items */
     .xb-service-item:not(:last-child) {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
         padding-bottom: 0 !important;
     }
-    
+
     /* Fix any potential overflow issues */
     .xb-service-item,
     .xb-service-item * {
@@ -1499,31 +1573,31 @@ button, .btn, .thm-btn, .agency-btn {
     /* ============================================
        MOBILE: Remove ALL top offsets - Start from absolute top
        ============================================ */
-    
+
     /* Remove all top padding/margin from html and body */
     html {
         padding-top: 0 !important;
         margin-top: 0 !important;
         scroll-padding-top: 0 !important;
     }
-    
+
     body {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Remove top offsets from body_wrap */
     .body_wrap {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Ensure main starts at top with no offset */
     main {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* CRITICAL FIX: Change header from fixed to sticky on mobile */
     /* This keeps it visible but doesn't break layout flow */
     .header-area,
@@ -1547,6 +1621,7 @@ button, .btn, .thm-btn, .agency-btn {
         height: auto !important;
         align-self: center !important;
     }
+
     .xb-header-logo .logo-divider {
         display: inline-block !important;
         visibility: visible !important;
@@ -1559,6 +1634,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin: 0 8px !important;
         opacity: 1 !important;
     }
+
     .xb-header-logo a.logo1,
     .xb-header-logo img,
     .xb-header-logo .company-name {
@@ -1566,6 +1642,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 !important;
         vertical-align: middle !important;
     }
+
     .xb-header-logo a.logo1 {
         display: inline-flex !important;
         align-items: center !important;
@@ -1578,6 +1655,7 @@ button, .btn, .thm-btn, .agency-btn {
         border: none !important;
         box-shadow: none !important;
     }
+
     .header-area .header__wrap,
     #xb-header-area .header__wrap,
     .header-style--one .header__wrap,
@@ -1586,15 +1664,15 @@ button, .btn, .thm-btn, .agency-btn {
         border: 1px solid rgba(255, 255, 255, 0.2) !important;
         box-shadow: none !important;
     }
-    
+
     /* Ensure first section/hero section starts at top: 0 with NO padding */
-    .body_wrap > main > section:first-child,
-    .body_wrap > main > .hero:first-child,
-    .body_wrap > main > .hero.hero-full:first-child,
-    .body_wrap > main > section.hero:first-child,
-    .body_wrap > main > section.hero.hero-full:first-child,
-    main > section.hero:first-child,
-    main > .hero:first-child,
+    .body_wrap>main>section:first-child,
+    .body_wrap>main>.hero:first-child,
+    .body_wrap>main>.hero.hero-full:first-child,
+    .body_wrap>main>section.hero:first-child,
+    .body_wrap>main>section.hero.hero-full:first-child,
+    main>section.hero:first-child,
+    main>.hero:first-child,
     section.hero.hero-style.pos-rel.hero-full,
     section.hero.hero-style.hero-full,
     .hero.hero-style.pos-rel.hero-full,
@@ -1606,17 +1684,17 @@ button, .btn, .thm-btn, .agency-btn {
         position: relative !important;
         top: 0 !important;
     }
-    
+
     /* Add padding-top to hero containers to account for fixed header height */
     /* Hero container - padding will be set dynamically by JS */
     /* Initial padding is minimal, JS will measure header and apply proper value */
-    .body_wrap > main > section:first-child .container,
-    .body_wrap > main > .hero:first-child .container,
-    .body_wrap > main > .hero.hero-full:first-child .container,
-    .body_wrap > main > section.hero:first-child .container,
-    .body_wrap > main > section.hero.hero-full:first-child .container,
-    main > section.hero:first-child .container,
-    main > .hero:first-child .container,
+    .body_wrap>main>section:first-child .container,
+    .body_wrap>main>.hero:first-child .container,
+    .body_wrap>main>.hero.hero-full:first-child .container,
+    .body_wrap>main>section.hero:first-child .container,
+    .body_wrap>main>section.hero.hero-full:first-child .container,
+    main>section.hero:first-child .container,
+    main>.hero:first-child .container,
     section.hero.hero-style.pos-rel.hero-full .container,
     section.hero.hero-style.hero-full .container,
     .hero.hero-style.pos-rel.hero-full .container,
@@ -1627,7 +1705,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding-top: 20px !important;
         margin-top: 0 !important;
     }
-    
+
     /* Ensure aurora container starts at top: 0 */
     .aurora-container,
     #aurora-container,
@@ -1663,11 +1741,11 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
         opacity: 1 !important;
     }
-    
+
     /* ============================================
        END: Mobile top offset removal
        ============================================ */
-    
+
     /* CRITICAL FIX: Remove padding-top from hero sections - add to container instead */
     /* Header is ~55px on mobile - padding goes on container, not section */
     /* Using maximum specificity and !important to override main.css */
@@ -1683,8 +1761,8 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-full,
     .hero.hero-style.hero-full,
     section.hero.hero-style.hero-full,
-    main > section.hero:first-child,
-    main > .hero:first-child {
+    main>section.hero:first-child,
+    main>.hero:first-child {
         min-height: auto !important;
         height: auto !important;
         max-height: none !important;
@@ -1695,7 +1773,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
-    
+
     /* Add padding-top to hero containers to account for fixed header height */
     /* Header is ~55px on mobile - add padding so hero content starts below header */
     .hero-style .container,
@@ -1710,33 +1788,33 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-full .container,
     .hero.hero-style.hero-full .container,
     section.hero.hero-style.hero-full .container,
-    main > section.hero:first-child .container,
-    main > .hero:first-child .container {
+    main>section.hero:first-child .container,
+    main>.hero:first-child .container {
         padding-top: 70px !important;
     }
-    
+
     /* Ensure body has proper spacing when header is fixed */
     body {
         padding-top: 0 !important;
     }
-    
+
     /* Add margin-top to main content area to prevent header overlap */
     main {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Ensure first section after header has NO padding-top - add to container instead */
     /* Header is ~55px on mobile */
-    .body_wrap > main > section:first-child,
-    .body_wrap > main > .hero:first-child,
-    .body_wrap > main > .hero.hero-full:first-child,
-    .body_wrap > main > section.hero:first-child,
-    .body_wrap > main > section.hero.hero-full:first-child {
+    .body_wrap>main>section:first-child,
+    .body_wrap>main>.hero:first-child,
+    .body_wrap>main>.hero.hero-full:first-child,
+    .body_wrap>main>section.hero:first-child,
+    .body_wrap>main>section.hero.hero-full:first-child {
         margin-top: 0 !important;
         padding-top: 0 !important;
     }
-    
+
     /* Also target hero-style class specifically with all possible combinations */
     .hero.hero-style.hero-full,
     section.hero.hero-full,
@@ -1746,14 +1824,14 @@ button, .btn, .thm-btn, .agency-btn {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Add padding-top to containers to account for fixed header height */
     /* Header is ~55px on mobile - add padding so hero content starts below header */
-    .body_wrap > main > section:first-child .container,
-    .body_wrap > main > .hero:first-child .container,
-    .body_wrap > main > .hero.hero-full:first-child .container,
-    .body_wrap > main > section.hero:first-child .container,
-    .body_wrap > main > section.hero.hero-full:first-child .container,
+    .body_wrap>main>section:first-child .container,
+    .body_wrap>main>.hero:first-child .container,
+    .body_wrap>main>.hero.hero-full:first-child .container,
+    .body_wrap>main>section.hero:first-child .container,
+    .body_wrap>main>section.hero.hero-full:first-child .container,
     .hero.hero-style.hero-full .container,
     section.hero.hero-full .container,
     section.hero.hero-style.hero-full .container,
@@ -1761,7 +1839,7 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-style.pos-rel.hero-full .container {
         padding-top: 60px !important;
     }
-    
+
     /* Hero Container */
     /* Ensure proper z-index - header is 999, hero content should be below but visible */
     /* Add padding-top to account for fixed header height */
@@ -1776,7 +1854,7 @@ button, .btn, .thm-btn, .agency-btn {
         z-index: 1 !important;
         overflow: visible !important;
     }
-    
+
     /* Hero Row - remove bottom spacing and align content to top (not center) */
     /* CRITICAL: Change vertical alignment from center to flex-start for mobile */
     .hero .row,
@@ -1791,7 +1869,7 @@ button, .btn, .thm-btn, .agency-btn {
         align-items: flex-start !important;
         justify-content: flex-start !important;
     }
-    
+
     /* Ensure hero section itself doesn't conflict with header z-index */
     .hero.hero-full,
     section.hero.hero-full,
@@ -1800,7 +1878,7 @@ button, .btn, .thm-btn, .agency-btn {
         z-index: 0 !important;
         position: relative !important;
     }
-    
+
     /* Hero Content Wrapper */
     /* Remove all padding and margins to position content at the top */
     /* Removed fixed heights to prevent text clipping */
@@ -1819,7 +1897,7 @@ button, .btn, .thm-btn, .agency-btn {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Hero Title - "Two Paths, One Purpose." / "The Peak." */
     /* Responsive font sizing with clamp() for safe scaling on all screen sizes */
     /* Proper line-height (1.3) to prevent line collision, natural wrapping enabled */
@@ -1843,7 +1921,7 @@ button, .btn, .thm-btn, .agency-btn {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -1852,7 +1930,7 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         overflow: visible !important;
     }
-    
+
     /* Hero Subtitle */
     .hero-content .sub-title {
         font-size: 15px !important;
@@ -1868,7 +1946,7 @@ button, .btn, .thm-btn, .agency-btn {
         word-wrap: break-word !important;
         overflow-wrap: break-word !important;
     }
-    
+
     /* Hero Button Container */
     .hero-content .hero-btn {
         margin-top: 0 !important;
@@ -1879,17 +1957,17 @@ button, .btn, .thm-btn, .agency-btn {
         display: flex !important;
         justify-content: flex-start !important;
     }
-    
+
     /* Reduce spacing after hero button to bring service section closer */
     .hero-content .hero-btn .thm-btn.agency-btn {
         margin-bottom: 0 !important;
     }
-    
+
     /* Hero Button - "Book a Call Now" */
     .hero-content .hero-btn .thm-btn.agency-btn {
-        width: 100% !important;
-        max-width: 100% !important;
-        display: flex !important;
+        width: auto !important;
+        max-width: 280px !important;
+        display: inline-flex !important;
         align-items: center !important;
         justify-content: space-between !important;
         padding: 0 !important;
@@ -1902,7 +1980,7 @@ button, .btn, .thm-btn, .agency-btn {
         text-decoration: none !important;
         box-shadow: 0 4px 12px rgba(0, 255, 151, 0.3) !important;
     }
-    
+
     /* Button Text */
     .hero-content .hero-btn .thm-btn.agency-btn .text {
         padding: 16px 20px !important;
@@ -1915,7 +1993,7 @@ button, .btn, .thm-btn, .agency-btn {
         text-align: left !important;
         white-space: nowrap !important;
     }
-    
+
     /* Button Arrow/Icon Container */
     .hero-content .hero-btn .thm-btn.agency-btn .arrow {
         width: 56px !important;
@@ -1929,7 +2007,7 @@ button, .btn, .thm-btn, .agency-btn {
         flex-shrink: 0 !important;
         position: relative !important;
     }
-    
+
     /* Button Icon */
     .hero-content .hero-btn .thm-btn.agency-btn .arrow .arrow-icon {
         width: 36px !important;
@@ -1943,7 +2021,7 @@ button, .btn, .thm-btn, .agency-btn {
         border: 2px solid #000000 !important;
         padding: 0 !important;
     }
-    
+
     .hero-content .hero-btn .thm-btn.agency-btn .arrow .arrow-icon i {
         font-size: 14px !important;
         color: #ffffff !important;
@@ -1951,7 +2029,7 @@ button, .btn, .thm-btn, .agency-btn {
         align-items: center !important;
         justify-content: center !important;
     }
-    
+
     /* Aurora Background - Ensure it doesn't interfere */
     .hero .aurora-container {
         position: absolute !important;
@@ -1962,7 +2040,7 @@ button, .btn, .thm-btn, .agency-btn {
         z-index: 0 !important;
         pointer-events: none !important;
     }
-    
+
     /* Header Aurora Background - Completely Remove on Mobile */
     #header-aurora-container,
     .header-aurora-container,
@@ -1979,44 +2057,45 @@ button, .btn, .thm-btn, .agency-btn {
         pointer-events: none !important;
         z-index: -1 !important;
     }
-    
+
     /* Remove any spacing between hero section and service section on mobile */
-    section.hero.hero-style.pos-rel.hero-full + section.service,
-    section.hero.hero-full + section.service,
-    .hero.hero-style.pos-rel.hero-full + section.service,
-    .hero.hero-full + section.service {
+    section.hero.hero-style.pos-rel.hero-full+section.service,
+    section.hero.hero-full+section.service,
+    .hero.hero-style.pos-rel.hero-full+section.service,
+    .hero.hero-full+section.service {
         margin-top: 0 !important;
         padding-top: 0 !important;
     }
-    
+
     /* Remove spacing from service section container and wrap */
-    section.hero.hero-style.pos-rel.hero-full + section.service .container,
-    section.hero.hero-full + section.service .container,
-    .hero.hero-style.pos-rel.hero-full + section.service .container,
-    .hero.hero-full + section.service .container {
+    section.hero.hero-style.pos-rel.hero-full+section.service .container,
+    section.hero.hero-full+section.service .container,
+    .hero.hero-style.pos-rel.hero-full+section.service .container,
+    .hero.hero-full+section.service .container {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
-    section.hero.hero-style.pos-rel.hero-full + section.service .xb-service-wrap,
-    section.hero.hero-full + section.service .xb-service-wrap,
-    .hero.hero-style.pos-rel.hero-full + section.service .xb-service-wrap,
-    .hero.hero-full + section.service .xb-service-wrap {
+
+    section.hero.hero-style.pos-rel.hero-full+section.service .xb-service-wrap,
+    section.hero.hero-full+section.service .xb-service-wrap,
+    .hero.hero-style.pos-rel.hero-full+section.service .xb-service-wrap,
+    .hero.hero-full+section.service .xb-service-wrap {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Pull service section closer to hero button - increased negative margin */
-    section.hero.hero-style.pos-rel.hero-full + section.service,
-    section.hero.hero-full + section.service,
-    .hero.hero-style.pos-rel.hero-full + section.service,
-    .hero.hero-full + section.service {
+    section.hero.hero-style.pos-rel.hero-full+section.service,
+    section.hero.hero-full+section.service,
+    .hero.hero-style.pos-rel.hero-full+section.service,
+    .hero.hero-full+section.service {
         margin-top: -30px !important;
     }
 }
 
 /* Extra Small Screens (320px - 575px) */
 @media only screen and (max-width: 575px) {
+
     /* Hero Section - remove padding-top from section, add to container instead */
     .hero-style,
     .hero.hero-style,
@@ -2036,22 +2115,22 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
-    
+
     /* Ensure first section after header has NO padding-top */
-    .body_wrap > main > section:first-child,
-    .body_wrap > main > .hero:first-child,
-    .body_wrap > main > .hero.hero-full:first-child {
+    .body_wrap>main>section:first-child,
+    .body_wrap>main>.hero:first-child,
+    .body_wrap>main>.hero.hero-full:first-child {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Also target hero-style class specifically */
     .hero.hero-style.hero-full,
     section.hero.hero-full {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Add padding-top to containers to account for fixed header height */
     /* Header is ~55px on mobile - add padding so hero content starts below header */
     .hero-style .container,
@@ -2063,14 +2142,14 @@ button, .btn, .thm-btn, .agency-btn {
     section.hero.hero-style.hero-full .container,
     .hero.hero-style.pos-rel.hero-full .container,
     section.hero.hero-style.pos-rel.hero-full .container,
-    .body_wrap > main > section:first-child .container,
-    .body_wrap > main > .hero:first-child .container,
-    .body_wrap > main > .hero.hero-full:first-child .container,
+    .body_wrap>main>section:first-child .container,
+    .body_wrap>main>.hero:first-child .container,
+    .body_wrap>main>.hero.hero-full:first-child .container,
     .hero.hero-style.hero-full .container,
     section.hero.hero-full .container {
         padding-top: 60px !important;
     }
-    
+
     /* Hero Row - align content to top on extra small screens (not center) */
     .hero .row,
     .hero.hero-full .row,
@@ -2082,7 +2161,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
         padding-top: 0 !important;
     }
-    
+
     /* Hero Content Wrapper - Remove extra padding on extra small screens */
     .hero-content {
         padding-top: 0 !important;
@@ -2090,12 +2169,12 @@ button, .btn, .thm-btn, .agency-btn {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
-    
+
     /* Hero Title - Remove extra margin on small screens */
     .hero-content .title {
         margin-top: 0 !important;
     }
-    
+
     /* Hero Title - Extra Small Screens */
     /* Responsive font sizing with clamp() for safe scaling */
     /* Proper line-height (1.3) to prevent line collision, natural wrapping enabled */
@@ -2110,7 +2189,7 @@ button, .btn, .thm-btn, .agency-btn {
         max-height: none !important;
         overflow: visible !important;
     }
-    
+
     /* Ensure title line spans display properly on extra small screens */
     .hero-content .title .title-line-1,
     .hero-content .title .title-line-2 {
@@ -2119,25 +2198,25 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         overflow: visible !important;
     }
-    
+
     /* Hero Subtitle */
     .hero-content .sub-title {
         font-size: 14px !important;
         line-height: 1.5 !important;
         margin-bottom: 28px !important;
     }
-    
+
     /* Hero Button */
     .hero-content .hero-btn .thm-btn.agency-btn {
         min-height: 52px !important;
         border-radius: 10px !important;
     }
-    
+
     .hero-content .hero-btn .thm-btn.agency-btn .text {
         padding: 14px 18px !important;
         font-size: 13px !important;
     }
-    
+
     .hero-content .hero-btn .thm-btn.agency-btn .arrow {
         width: 52px !important;
         height: 52px !important;
@@ -2151,6 +2230,7 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Service Section Container */
     .service.pt-135 {
         padding-top: 0 !important;
@@ -2158,16 +2238,16 @@ button, .btn, .thm-btn, .agency-btn {
         position: relative !important;
         margin-top: 0 !important;
     }
-    
+
     /* Further reduce top spacing for service section when it follows hero */
-    section.hero.hero-style.pos-rel.hero-full + section.service.pt-135,
-    section.hero.hero-full + section.service.pt-135,
-    .hero.hero-style.pos-rel.hero-full + section.service.pt-135,
-    .hero.hero-full + section.service.pt-135 {
+    section.hero.hero-style.pos-rel.hero-full+section.service.pt-135,
+    section.hero.hero-full+section.service.pt-135,
+    .hero.hero-style.pos-rel.hero-full+section.service.pt-135,
+    .hero.hero-full+section.service.pt-135 {
         padding-top: 0 !important;
         margin-top: -30px !important;
     }
-    
+
     /* Service Container */
     .service .container {
         padding-left: 20px !important;
@@ -2175,13 +2255,13 @@ button, .btn, .thm-btn, .agency-btn {
         padding-top: 0 !important;
         padding-bottom: 0 !important;
     }
-    
+
     /* Section Title Container */
     .service .sec-title.custom-sec-title {
         margin-bottom: 40px !important;
         padding: 0 !important;
     }
-    
+
     /* Section Title Row */
     .service .sec-title .row {
         margin-left: 0 !important;
@@ -2189,16 +2269,16 @@ button, .btn, .thm-btn, .agency-btn {
         flex-direction: column !important;
         align-items: flex-start !important;
     }
-    
+
     /* Section Title Column */
-    .service .sec-title .row > [class*="col-"] {
+    .service .sec-title .row>[class*="col-"] {
         padding-left: 0 !important;
         padding-right: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
         margin-bottom: 24px !important;
     }
-    
+
     /* Section Title - "Comprehensive career support..." */
     .service .sec-title h2,
     .service .sec-title h2[style*="font-size"] {
@@ -2212,20 +2292,20 @@ button, .btn, .thm-btn, .agency-btn {
         overflow-wrap: break-word !important;
         letter-spacing: -0.01em !important;
     }
-    
+
     /* Button Container Column */
     .service .sec-title .text-lg-end {
         text-align: left !important;
         width: 100% !important;
         margin-top: 0 !important;
     }
-    
+
     /* Button Wrapper */
     .service .sec-title .xb-heading-btn {
         width: 100% !important;
         display: block !important;
     }
-    
+
     /* Service Button - "view more services" */
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn {
         width: 100% !important;
@@ -2242,7 +2322,7 @@ button, .btn, .thm-btn, .agency-btn {
         text-decoration: none !important;
         box-shadow: 0 4px 12px rgba(0, 255, 151, 0.3) !important;
     }
-    
+
     /* Service Button Text */
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn .text {
         padding: 16px 20px !important;
@@ -2255,7 +2335,7 @@ button, .btn, .thm-btn, .agency-btn {
         text-align: left !important;
         white-space: nowrap !important;
     }
-    
+
     /* Service Button Arrow Container */
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow {
         width: 56px !important;
@@ -2269,7 +2349,7 @@ button, .btn, .thm-btn, .agency-btn {
         flex-shrink: 0 !important;
         position: relative !important;
     }
-    
+
     /* Service Button Icon */
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow .arrow-icon {
         width: 20px !important;
@@ -2278,26 +2358,26 @@ button, .btn, .thm-btn, .agency-btn {
         align-items: center !important;
         justify-content: center !important;
     }
-    
+
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow .arrow-icon svg {
         width: 20px !important;
         height: 20px !important;
     }
-    
+
     /* Service Wrap - Background Container */
     .service .xb-service-wrap {
         margin-top: 0 !important;
         padding: 0 !important;
     }
-    
+
     /* Pull service section closer to hero button on extra small screens - increased negative margin */
-    section.hero.hero-style.pos-rel.hero-full + section.service,
-    section.hero.hero-full + section.service,
-    .hero.hero-style.pos-rel.hero-full + section.service,
-    .hero.hero-full + section.service {
+    section.hero.hero-style.pos-rel.hero-full+section.service,
+    section.hero.hero-full+section.service,
+    .hero.hero-style.pos-rel.hero-full+section.service,
+    .hero.hero-full+section.service {
         margin-top: -30px !important;
     }
-    
+
     /* Ensure first service item has no top margin */
     .service .xb-service-wrap .xb-service-item:first-child {
         margin-top: 0 !important;
@@ -2307,29 +2387,30 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Extra Small Screens (320px - 575px) */
 @media only screen and (max-width: 575px) {
+
     /* Service Section */
     .service.pt-135 {
         padding-top: 0 !important;
         padding-bottom: 30px !important;
         margin-top: 0 !important;
     }
-    
+
     /* Service Container - remove top padding */
     .service .container {
         padding-top: 0 !important;
     }
-    
+
     /* Service Wrap - remove top padding */
     .service .xb-service-wrap {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
-    
+
     /* Remove top margin from first service item */
     .xb-service-item:first-child {
         margin-top: 0 !important;
     }
-    
+
     /* Section Title */
     .service .sec-title h2,
     .service .sec-title h2[style*="font-size"] {
@@ -2337,18 +2418,18 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         margin-bottom: 20px !important;
     }
-    
+
     /* Service Button */
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn {
         min-height: 52px !important;
         border-radius: 10px !important;
     }
-    
+
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn .text {
         padding: 14px 18px !important;
         font-size: 13px !important;
     }
-    
+
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn .arrow {
         width: 52px !important;
         height: 52px !important;
@@ -2362,12 +2443,13 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Hero Button Active State */
     .hero-content .hero-btn .thm-btn.agency-btn:active {
         transform: scale(0.98) !important;
         box-shadow: 0 2px 8px rgba(0, 255, 151, 0.4) !important;
     }
-    
+
     /* Service Button Active State */
     .service .sec-title .xb-heading-btn .thm-btn.agency-btn:active {
         transform: scale(0.98) !important;
@@ -2380,23 +2462,24 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Brand Section Container */
     .brand.pt-170 {
         padding-top: 60px !important;
         padding-bottom: 50px !important;
     }
-    
+
     /* Brand Wrap Container */
     .xb-brand-wrap {
         padding: 20px 15px 30px !important;
         overflow: hidden !important;
     }
-    
+
     /* ============================================
        BRAND LOGO AUTO-SCROLL CAROUSEL - MOBILE
        Infinite horizontal scrolling animation
        ============================================ */
-    
+
     /* Brand Marquee Container - Overflow hidden for seamless loop */
     .brand-marquee.marquee-left,
     .brand-marquee {
@@ -2404,12 +2487,12 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100% !important;
         position: relative !important;
     }
-    
+
     /* Override JS marquee wrapper - use CSS animation instead */
     .brand-marquee.marquee-left .js-marquee-wrapper,
     .brand-marquee .js-marquee-wrapper,
-    .brand-marquee > div,
-    .brand-marquee.marquee-left > div {
+    .brand-marquee>div,
+    .brand-marquee.marquee-left>div {
         display: flex !important;
         animation: none !important;
         -webkit-animation: none !important;
@@ -2419,13 +2502,13 @@ button, .btn, .thm-btn, .agency-btn {
         width: auto !important;
         overflow: visible !important;
     }
-    
+
     /* Hide JS-generated duplicate content (we use HTML duplicates) */
-    .brand-marquee .js-marquee-wrapper > div:not(:first-child),
-    .brand-marquee > div > div:not(:first-child) {
+    .brand-marquee .js-marquee-wrapper>div:not(:first-child),
+    .brand-marquee>div>div:not(:first-child) {
         display: none !important;
     }
-    
+
     /* Brand Inner Container - AUTO-SCROLL ANIMATION TRACK */
     .xb-brand-inner,
     .xb-brand-inner.ul_li_between,
@@ -2445,7 +2528,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: brandLogoScroll 20s linear infinite !important;
         -webkit-animation: brandLogoScroll 20s linear infinite !important;
     }
-    
+
     /* Brand Item - Individual Logo Container */
     .xb-brand-item,
     .brand-marquee .xb-brand-item,
@@ -2464,7 +2547,7 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 0 10px !important;
         box-sizing: border-box !important;
     }
-    
+
     /* Brand Item Images - Override inline styles - Uniform sizing */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
@@ -2485,7 +2568,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin: 0 auto !important;
         padding: 0 !important;
     }
-    
+
     /* Fix for Morgan Stanley logo - ensure uniform size */
     .xb-brand-item[style*="align-items: flex-start"],
     .xb-brand-item[style*="display: flex"],
@@ -2497,7 +2580,7 @@ button, .btn, .thm-btn, .agency-btn {
         min-width: 120px !important;
         width: 120px !important;
     }
-    
+
     .xb-brand-item[style*="align-items: flex-start"] img,
     .xb-brand-item[style*="align-items: flex-start"] img[style],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
@@ -2513,7 +2596,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100% !important;
         max-width: 100% !important;
     }
-    
+
     /* Ensure no negative margins cause overlap */
     .xb-brand-item img[style*="margin"],
     .xb-brand-item img[style*="-77px"],
@@ -2525,7 +2608,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-    
+
     /* Prevent any absolute positioning */
     .xb-brand-item,
     .xb-brand-item * {
@@ -2535,11 +2618,12 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Extra Small Screens (320px - 575px) */
 @media only screen and (max-width: 575px) {
+
     /* Brand Wrap */
     .xb-brand-wrap {
         padding: 15px 10px 25px !important;
     }
-    
+
     /* Brand Inner - Smaller gap and SLOWER animation for readability */
     .xb-brand-inner,
     .brand-marquee .xb-brand-inner,
@@ -2549,7 +2633,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: brandLogoScroll 25s linear infinite !important;
         -webkit-animation: brandLogoScroll 25s linear infinite !important;
     }
-    
+
     /* Brand Item - Smaller on very small screens */
     .xb-brand-item,
     .brand-marquee .xb-brand-item,
@@ -2559,7 +2643,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100px !important;
         padding: 0 8px !important;
     }
-    
+
     /* Brand Item Images - Uniform sizing on very small screens */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
@@ -2576,7 +2660,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin: 0 auto !important;
         object-fit: contain !important;
     }
-    
+
     .xb-brand-item[style*="align-items: flex-start"] img,
     .xb-brand-item[style*="align-items: flex-start"] img[style],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
@@ -2596,6 +2680,7 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Small Screens (576px - 767px) */
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+
     /* Brand Inner - Slightly faster animation on larger mobile screens */
     .xb-brand-inner,
     .brand-marquee .xb-brand-inner,
@@ -2605,7 +2690,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: brandLogoScroll 18s linear infinite !important;
         -webkit-animation: brandLogoScroll 18s linear infinite !important;
     }
-    
+
     /* Brand Item - Slightly larger on small screens */
     .xb-brand-item,
     .brand-marquee .xb-brand-item,
@@ -2614,7 +2699,7 @@ button, .btn, .thm-btn, .agency-btn {
         min-width: 130px !important;
         width: 130px !important;
     }
-    
+
     /* Brand Item Images - Uniform sizing on small screens */
     .xb-brand-item img,
     .brand-marquee .xb-brand-item img,
@@ -2631,7 +2716,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin: 0 auto !important;
         object-fit: contain !important;
     }
-    
+
     .xb-brand-item[style*="align-items: flex-start"] img,
     .xb-brand-item[style*="align-items: flex-start"] img[style],
     .xb-brand-item[style*="align-items: flex-start"] img[style*="margin"],
@@ -2651,23 +2736,24 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Tablet Screens (768px - 991px) - Also enable CSS auto-scroll */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+
     /* Brand Marquee Container */
     .brand-marquee.marquee-left,
     .brand-marquee {
         overflow: hidden !important;
     }
-    
+
     /* Override JS marquee for tablets too */
     .brand-marquee.marquee-left .js-marquee-wrapper,
     .brand-marquee .js-marquee-wrapper {
         animation: none !important;
         -webkit-animation: none !important;
     }
-    
-    .brand-marquee .js-marquee-wrapper > div:not(:first-child) {
+
+    .brand-marquee .js-marquee-wrapper>div:not(:first-child) {
         display: none !important;
     }
-    
+
     /* Brand Inner - CSS animation for tablets (faster since larger screen) */
     .xb-brand-inner,
     .brand-marquee .xb-brand-inner,
@@ -2680,7 +2766,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: brandLogoScroll 15s linear infinite !important;
         -webkit-animation: brandLogoScroll 15s linear infinite !important;
     }
-    
+
     /* Brand Item - Larger on tablets */
     .xb-brand-item,
     .brand-marquee .xb-brand-item {
@@ -2689,7 +2775,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 150px !important;
         flex-shrink: 0 !important;
     }
-    
+
     .xb-brand-item img,
     .xb-brand-item img[style] {
         max-height: 100px !important;
@@ -2704,13 +2790,14 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 767px) {
+
     /* Brand Section */
     .brand {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100% !important;
     }
-    
+
     /* Brand Container */
     .brand .container {
         padding-left: 15px !important;
@@ -2719,21 +2806,21 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100% !important;
         max-width: 100% !important;
     }
-    
+
     /* Brand Wrap - Prevent overflow */
     .xb-brand-wrap {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100% !important;
     }
-    
+
     /* Brand Marquee - Allow horizontal scroll if needed for marquee */
     .brand-marquee {
         width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
     }
-    
+
     /* Brand Inner - Allow horizontal scroll for marquee effect */
     .xb-brand-inner {
         width: max-content !important;
@@ -2753,12 +2840,14 @@ button, .btn, .thm-btn, .agency-btn {
         -webkit-transform: scale(0.8) !important;
         filter: brightness(0) invert(1) !important;
     }
+
     50% {
         opacity: 0.7 !important;
         transform: scale(1.05) !important;
         -webkit-transform: scale(1.05) !important;
         filter: brightness(0) invert(1) !important;
     }
+
     100% {
         opacity: 1 !important;
         transform: scale(1) !important;
@@ -2769,26 +2858,25 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Logo wrapper glow animation - applied to container */
 @keyframes logoWrapperGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) 
-                drop-shadow(0 0 40px rgba(255, 255, 255, 0.6))
-                drop-shadow(0 0 60px rgba(255, 255, 255, 0.4))
-                drop-shadow(0 0 80px rgba(255, 255, 255, 0.3)) !important;
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 80px rgba(255, 255, 255, 0.3)) !important;
     }
+
     50% {
-        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)) 
-                drop-shadow(0 0 60px rgba(255, 255, 255, 0.9))
-                drop-shadow(0 0 90px rgba(255, 255, 255, 0.7))
-                drop-shadow(0 0 120px rgba(255, 255, 255, 0.5))
-                drop-shadow(0 0 150px rgba(255, 255, 255, 0.4)) !important;
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 90px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 150px rgba(255, 255, 255, 0.4)) !important;
     }
 }
 
 /* Mobile-specific subtle logo wrapper glow - much simpler and cleaner */
 @keyframes logoWrapperGlowMobile {
-    0%, 100% {
+
+    0%,
+    100% {
         filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5)) !important;
     }
+
     50% {
         filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7)) !important;
     }
@@ -2796,11 +2884,14 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Enhanced logo glow animation for all mobile devices */
 @keyframes vertexLogoGlow {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 1 !important;
         transform: scale(1) !important;
         -webkit-transform: scale(1) !important;
     }
+
     50% {
         opacity: 1 !important;
         transform: scale(1.05) !important;
@@ -2810,11 +2901,14 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Glow pulse animation for background effect */
 @keyframes glowPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.5 !important;
         transform: translate(-50%, -50%) scale(0.95) !important;
         -webkit-transform: translate(-50%, -50%) scale(0.95) !important;
     }
+
     50% {
         opacity: 0.9 !important;
         transform: translate(-50%, -50%) scale(1.15) !important;
@@ -2824,11 +2918,14 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Outer glow pulse animation */
 @keyframes glowPulseOuter {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.3 !important;
         transform: translate(-50%, -50%) scale(0.9) !important;
         -webkit-transform: translate(-50%, -50%) scale(0.9) !important;
     }
+
     50% {
         opacity: 0.6 !important;
         transform: translate(-50%, -50%) scale(1.2) !important;
@@ -2838,6 +2935,7 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Tablet devices (768px - 991px) - Glowing logo loader */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+
     /* Prevent body scroll when preloader is visible */
     body.preloader-active {
         overflow: hidden !important;
@@ -2847,7 +2945,7 @@ button, .btn, .thm-btn, .agency-btn {
         touch-action: none !important;
         -webkit-overflow-scrolling: none !important;
     }
-    
+
     /* Ensure preloader takes full viewport */
     .preloader {
         position: fixed !important;
@@ -2874,12 +2972,12 @@ button, .btn, .thm-btn, .agency-btn {
         opacity: 1 !important;
         transition: opacity 0.3s ease-out !important;
     }
-    
+
     .preloader.fade-out {
         opacity: 0 !important;
         pointer-events: none !important;
     }
-    
+
     /* Center loader logo */
     .preloader .loader-logo {
         position: relative !important;
@@ -2894,7 +2992,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
         -webkit-animation: logoWrapperGlow 2.5s ease-in-out infinite 0.8s !important;
     }
-    
+
     /* Glow background effect */
     .preloader .loader-logo::before {
         content: '' !important;
@@ -2913,7 +3011,7 @@ button, .btn, .thm-btn, .agency-btn {
         pointer-events: none !important;
         z-index: 0 !important;
     }
-    
+
     /* Outer glow effect */
     .preloader .loader-logo::after {
         content: '' !important;
@@ -2932,7 +3030,7 @@ button, .btn, .thm-btn, .agency-btn {
         pointer-events: none !important;
         z-index: -1 !important;
     }
-    
+
     /* Ensure logo image is properly sized and glowing */
     .preloader .loader-logo img {
         position: relative !important;
@@ -2953,7 +3051,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
         -webkit-animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s !important;
     }
-    
+
     /* Prevent any layout shifts during load */
     .preloader,
     .preloader * {
@@ -2965,6 +3063,7 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Mobile devices (up to 767px) - Glowing logo loader */
 @media only screen and (max-width: 767px) {
+
     /* Prevent body scroll when preloader is visible */
     body.preloader-active {
         overflow: hidden !important;
@@ -2974,7 +3073,7 @@ button, .btn, .thm-btn, .agency-btn {
         touch-action: none !important;
         -webkit-overflow-scrolling: none !important;
     }
-    
+
     /* Ensure preloader takes full viewport */
     .preloader {
         position: fixed !important;
@@ -2986,7 +3085,8 @@ button, .btn, .thm-btn, .agency-btn {
         width: 100vw !important;
         height: 100% !important;
         height: 100vh !important;
-        height: 100dvh !important; /* Dynamic viewport height for mobile */
+        height: 100dvh !important;
+        /* Dynamic viewport height for mobile */
         min-height: 100vh !important;
         min-height: 100dvh !important;
         max-height: 100vh !important;
@@ -3004,12 +3104,12 @@ button, .btn, .thm-btn, .agency-btn {
         opacity: 1 !important;
         transition: opacity 0.3s ease-out !important;
     }
-    
+
     .preloader.fade-out {
         opacity: 0 !important;
         pointer-events: none !important;
     }
-    
+
     /* Center loader logo - Mobile optimized with subtle glow */
     .preloader .loader-logo {
         position: relative !important;
@@ -3024,19 +3124,19 @@ button, .btn, .thm-btn, .agency-btn {
         animation: none !important;
         -webkit-animation: none !important;
     }
-    
+
     /* Remove background glow effects on mobile - they look bad */
     .preloader .loader-logo::before {
         display: none !important;
         content: none !important;
     }
-    
+
     /* Remove outer glow effect on mobile */
     .preloader .loader-logo::after {
         display: none !important;
         content: none !important;
     }
-    
+
     /* Ensure logo image is properly sized with subtle glow for mobile */
     /* Override inline styles with more specific selector */
     .preloader .loader-logo img,
@@ -3061,7 +3161,7 @@ button, .btn, .thm-btn, .agency-btn {
         animation: logoGlowUp 0.8s ease-out forwards !important;
         -webkit-animation: logoGlowUp 0.8s ease-out forwards !important;
     }
-    
+
     /* Override any inline style filters on mobile */
     .preloader .loader-logo img[style*="filter"],
     .preloader img[style*="filter"],
@@ -3069,7 +3169,7 @@ button, .btn, .thm-btn, .agency-btn {
     #preloader img[style*="filter"] {
         filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
     }
-    
+
     /* Override any inline style animations on mobile */
     .preloader .loader-logo img[style*="animation"],
     .preloader img[style*="animation"],
@@ -3078,8 +3178,8 @@ button, .btn, .thm-btn, .agency-btn {
         animation: logoGlowUp 0.8s ease-out forwards !important;
         -webkit-animation: logoGlowUp 0.8s ease-out forwards !important;
     }
-    
-    
+
+
     /* Prevent any layout shifts during load */
     .preloader,
     .preloader * {
@@ -3095,7 +3195,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 90px !important;
         height: 90px !important;
     }
-    
+
     .preloader .loader-logo img {
         max-width: 90px !important;
         filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.35)) !important;
@@ -3108,7 +3208,7 @@ button, .btn, .thm-btn, .agency-btn {
         width: 80px !important;
         height: 80px !important;
     }
-    
+
     .preloader .loader-logo img {
         max-width: 80px !important;
         filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.3)) !important;
@@ -3126,38 +3226,38 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         margin-bottom: 20px !important;
     }
-    
+
     .service-details .service-process-wrap {
         padding-top: 60px !important;
         padding-bottom: 60px !important;
     }
-    
+
     .service-details .service_process_faq {
         margin-top: 30px;
     }
-    
+
     .service-details .accordion-button {
         font-size: 16px !important;
         padding: 15px 20px !important;
         line-height: 1.4 !important;
     }
-    
+
     .service-details .accordion-body {
         font-size: 14px !important;
         line-height: 1.6 !important;
         padding: 15px 20px !important;
     }
-    
+
     .service-details .content_layer_group li {
         font-size: 14px !important;
         padding: 12px 15px !important;
         margin-bottom: 10px !important;
     }
-    
+
     .service-details .services-outcome-wrap {
         margin-top: 50px !important;
     }
-    
+
     .service-details .service-outcome-list li {
         font-size: 14px !important;
         padding: 12px 0 !important;
@@ -3171,57 +3271,57 @@ button, .btn, .thm-btn, .agency-btn {
         line-height: 1.3 !important;
         margin-bottom: 15px !important;
     }
-    
+
     .service-details .service-process-wrap {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
     }
-    
+
     .service-details .service_process_faq {
         margin-top: 20px;
     }
-    
+
     .service-details .accordion-button {
         font-size: 15px !important;
         padding: 12px 15px !important;
         line-height: 1.3 !important;
     }
-    
+
     .service-details .accordion-body {
         font-size: 13px !important;
         line-height: 1.6 !important;
         padding: 12px 15px !important;
     }
-    
+
     .service-details .content_layer_group {
         margin-top: 30px !important;
     }
-    
+
     .service-details .content_layer_group li {
         font-size: 13px !important;
         padding: 10px 12px !important;
         margin-bottom: 8px !important;
     }
-    
+
     .service-details .services-outcome-wrap {
         margin-top: 40px !important;
     }
-    
+
     .service-details .service-outcome-list {
         margin-top: 25px !important;
     }
-    
+
     .service-details .service-outcome-list li {
         font-size: 13px !important;
         padding: 10px 0 !important;
         line-height: 1.5 !important;
     }
-    
+
     .service-details .service-outcome-list li span {
         margin-right: 10px !important;
         flex-shrink: 0;
     }
-    
+
     /* Ensure breadcrumb title is readable on mobile */
     .breadcrumb__title {
         font-size: 28px !important;
@@ -3234,26 +3334,26 @@ button, .btn, .thm-btn, .agency-btn {
         font-size: 22px !important;
         line-height: 1.2 !important;
     }
-    
+
     .service-details .accordion-button {
         font-size: 14px !important;
         padding: 10px 12px !important;
     }
-    
+
     .service-details .accordion-body {
         font-size: 12px !important;
         padding: 10px 12px !important;
     }
-    
+
     .service-details .content_layer_group li {
         font-size: 12px !important;
         padding: 8px 10px !important;
     }
-    
+
     .service-details .service-outcome-list li {
         font-size: 12px !important;
     }
-    
+
     .breadcrumb__title {
         font-size: 24px !important;
     }
@@ -3278,49 +3378,50 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 768px) {
+
     /* Contact form input fields - increase left padding to prevent text overlap with icons */
     .xb-contact-form .xb-input-field input,
     .xb-contact-form .xb-input-field textarea,
     .xb-contact-form .xb-massage-field textarea {
         padding-left: 56px !important;
     }
-    
+
     /* Ensure labels align properly with increased padding */
     .xb-contact-form .xb-input-field label {
         left: 56px !important;
     }
-    
+
     /* Keep icons positioned correctly - they remain at left: 20px */
     .xb-contact-form .xb-input-field img {
         left: 20px !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
     }
-    
+
     /* Message field icon positioning - ensure it's vertically centered */
     .xb-contact-form .xb-massage-field img {
         left: 20px !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
     }
-    
+
     /* Select field - also increase padding for consistency */
     .xb-contact-form .xb-select-field .nice-select {
         padding-left: 56px !important;
     }
-    
+
     /* Select field icon positioning */
     .xb-contact-form .xb-select-field img {
         left: 20px !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
     }
-    
+
     /* File upload field - increase padding */
     .xb-contact-form .xb-select-file input {
         padding-left: 56px !important;
     }
-    
+
     /* File upload field icon positioning */
     .xb-contact-form .xb-select-file img {
         left: 20px !important;
@@ -3336,26 +3437,39 @@ button, .btn, .thm-btn, .agency-btn {
 
 /* Keyframes: active step glow pulse + chevron flow (mobile only) */
 @keyframes processMobileGlow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4),
-                    0 0 0 1px rgba(0, 255, 200, 0.35),
-                    0 0 28px rgba(0, 255, 200, 0.15),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            0 0 0 1px rgba(0, 255, 200, 0.35),
+            0 0 28px rgba(0, 255, 200, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
+
     50% {
         box-shadow: 0 24px 56px rgba(0, 0, 0, 0.45),
-                    0 0 0 1px rgba(0, 255, 200, 0.5),
-                    0 0 36px rgba(0, 255, 200, 0.22),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            0 0 0 1px rgba(0, 255, 200, 0.5),
+            0 0 36px rgba(0, 255, 200, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 }
 
 @keyframes processChevronFlow {
-    0%, 100% { transform: rotate(90deg) translateY(0); opacity: 0.6; }
-    50%      { transform: rotate(90deg) translateY(4px); opacity: 1; }
+
+    0%,
+    100% {
+        transform: rotate(90deg) translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: rotate(90deg) translateY(4px);
+        opacity: 1;
+    }
 }
 
 @media only screen and (max-width: 767px) {
+
     /* Ensure section and content are visible on mobile */
     #how-it-works.process-section,
     .process-section {
@@ -3364,25 +3478,30 @@ button, .btn, .thm-btn, .agency-btn {
         padding: 48px 0 64px !important;
         overflow: visible !important;
     }
+
     .process-section .container {
         overflow: visible !important;
     }
+
     .process-section .process-steps-wrapper,
     .process-section .process-steps,
     .process-section .process-card {
         visibility: visible !important;
     }
+
     .process-section-header {
         margin-bottom: 36px !important;
         padding: 0 8px;
         visibility: visible !important;
         opacity: 1 !important;
     }
+
     .process-section-label {
         margin-bottom: 10px !important;
         color: rgba(0, 255, 200, 0.95) !important;
         visibility: visible !important;
     }
+
     .process-section-title {
         font-size: 26px !important;
         line-height: 1.35 !important;
@@ -3398,6 +3517,7 @@ button, .btn, .thm-btn, .agency-btn {
     .process-section .process-steps-wrapper {
         padding: 0;
     }
+
     .process-section .process-steps {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -3422,16 +3542,17 @@ button, .btn, .thm-btn, .agency-btn {
         -webkit-backdrop-filter: blur(24px) !important;
         border: 1px solid rgba(0, 255, 200, 0.18) !important;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35),
-                    0 0 0 1px rgba(0, 255, 200, 0.08),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-                    inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
+            0 0 0 1px rgba(0, 255, 200, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
         transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                    border-color 0.35s ease,
-                    box-shadow 0.5s ease !important;
+            transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+            border-color 0.35s ease,
+            box-shadow 0.5s ease !important;
         opacity: 0.88 !important;
         transform: translateY(0) !important;
     }
+
     .process-section .process-card::after {
         border-radius: 999px !important;
         background: linear-gradient(135deg, rgba(0, 255, 200, 0.2) 0%, rgba(0, 200, 255, 0.08) 50%, rgba(0, 255, 200, 0.15) 100%) !important;
@@ -3461,6 +3582,7 @@ button, .btn, .thm-btn, .agency-btn {
         border-color: rgba(0, 255, 200, 0.4) !important;
         animation: processMobileGlow 2.5s ease-in-out infinite !important;
     }
+
     .process-section .process-card.is-active .process-card-fill {
         transform: scaleX(1) !important;
     }
@@ -3477,6 +3599,7 @@ button, .btn, .thm-btn, .agency-btn {
         margin-left: auto !important;
         margin-right: 0 !important;
     }
+
     .process-section .process-card.is-active .process-card-number {
         color: rgba(0, 255, 200, 1) !important;
     }
@@ -3501,11 +3624,13 @@ button, .btn, .thm-btn, .agency-btn {
         justify-content: center !important;
         transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease !important;
     }
+
     .process-section .process-card.is-active .process-card-icon-wrap {
         background: linear-gradient(145deg, rgba(0, 255, 200, 0.3) 0%, rgba(0, 200, 255, 0.18) 100%) !important;
         border-color: rgba(0, 255, 200, 0.55) !important;
         box-shadow: 0 6px 24px rgba(0, 255, 200, 0.25), inset 0 0 28px rgba(0, 255, 200, 0.1) !important;
     }
+
     .process-section .process-card-icon {
         font-size: 22px !important;
         color: rgba(0, 255, 200, 0.95) !important;
@@ -3534,13 +3659,16 @@ button, .btn, .thm-btn, .agency-btn {
         color: rgba(0, 255, 200, 0.35) !important;
         transition: color 0.35s ease, opacity 0.35s ease !important;
     }
+
     .process-section.is-inview .process-arrow {
         animation: processChevronFlow 2s ease-in-out infinite !important;
     }
+
     .process-section .process-arrow.is-highlighted {
         color: rgba(0, 255, 200, 0.85) !important;
         animation-duration: 1.5s !important;
     }
+
     .process-section .process-arrow svg {
         width: 24px !important;
         height: 24px !important;
@@ -3553,6 +3681,7 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (min-width: 992px) {
+
     /* Desktop: Keep JS marquee working, but add hover-pause for CSS fallback */
     .brand-marquee:hover .xb-brand-inner {
         animation-play-state: paused !important;
@@ -3565,6 +3694,7 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media only screen and (max-width: 768px) {
+
     /* Hide the custom cursor dot on mobile devices */
     .cb-cursor,
     .cb-cursor:before,
@@ -3588,7 +3718,7 @@ button, .btn, .thm-btn, .agency-btn {
         height: 0 !important;
         transform: none !important;
     }
-    
+
     /* Ensure cursor doesn't appear even if JS initializes it */
     body .cb-cursor,
     body .cb-cursor * {
@@ -3604,16 +3734,16 @@ button, .btn, .thm-btn, .agency-btn {
    ============================================ */
 
 @media print {
+
     .header-area,
     .footer-area,
     .xb-hamburger-menu,
     .back-to-top {
         display: none !important;
     }
-    
+
     body {
         font-size: 12pt;
         line-height: 1.5;
     }
 }
-

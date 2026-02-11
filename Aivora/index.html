@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/mobile-optimization.css">
+    <link rel="stylesheet" href="assets/css/footer-modern.css">
 
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -700,13 +701,29 @@
 
         @media (max-width: 991px) {
             .xb-testimonial-item .xb-item--inner {
-                min-height: 420px;
+                min-height: 350px;
+                padding: 25px;
             }
         }
 
         @media (max-width: 767px) {
             .xb-testimonial-item .xb-item--inner {
-                min-height: 400px;
+                min-height: 280px;
+                padding: 20px;
+            }
+
+            .xb-testimonial-item .xb-item--content {
+                font-size: 16px !important;
+                line-height: 1.5 !important;
+                margin: 15px 0 25px !important;
+            }
+
+            .xb-testimonial-item .xb-item--name {
+                font-size: 18px !important;
+            }
+
+            .xb-testimonial-item .xb-item--desig {
+                font-size: 13px !important;
             }
         }
 
@@ -1656,8 +1673,31 @@
         }
 
         @media (max-width: 767px) {
+            .testimonial-section {
+                padding: 60px 0 120px !important;
+                position: relative;
+                z-index: 2;
+            }
+
+            .tes-marquee-wrap {
+                padding: 30px 0 !important;
+                margin: 0 -15px;
+                overflow: hidden;
+            }
+
+            .testimonial-section .tes-header {
+                margin-bottom: 30px;
+            }
+
             .tes-card {
-                width: 280px;
+                width: 310px;
+            }
+
+            .footer-modern {
+                margin-top: 0 !important;
+                padding-top: 80px !important;
+                position: relative;
+                z-index: 1;
             }
         }
     </style>
@@ -2719,6 +2759,39 @@
             html {
                 overflow-x: hidden !important;
                 width: 100% !important;
+            }
+
+            /* Add spacing between button and stats cards */
+            .hero-btn,
+            div.hero-btn {
+                margin-bottom: 40px !important;
+            }
+
+            /* Make button more compact on mobile */
+            .hero-btn .agency-btn,
+            .hero-btn .thm-btn,
+            .hero-btn a.agency-btn,
+            .hero-btn a.thm-btn,
+            a.thm-btn.agency-btn {
+                max-width: 280px !important;
+                width: auto !important;
+                display: inline-flex !important;
+                padding: 14px 24px !important;
+                font-size: 14px !important;
+                flex: 0 0 auto !important;
+            }
+
+            /* Ensure parent container doesn't force full width */
+            .hero-content .hero-btn,
+            div.hero-btn {
+                display: block !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+
+            .hero-stat-cards,
+            div.hero-stat-cards {
+                margin-top: 32px !important;
             }
         }
 
@@ -4112,129 +4185,73 @@
         </main>
         <!-- main area end -->
 
-        <!-- footer strt -->
-        <footer class="footer footer-style-one footer-fixed-design">
-            <div class="xb-footer-wrap">
-                <div class="xb-social-media-wrap">
+        <!-- footer start -->
+        <footer class="footer-modern">
+            <div class="footer-container">
+                <!-- Large VERTEX Background Text -->
+                <div class="footer-bg-text">VERTEX</div>
+
+                <!-- Email Badge with Gradient -->
+                <div class="footer-email-badge">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>info@vertextechio.com</span>
+                </div>
+
+                <!-- Three Column Section -->
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <div class="column-label">WHAT WE DO?</div>
+                        <h3 class="column-title">Services</h3>
+                    </div>
+                    <div class="footer-column">
+                        <div class="column-label">WHO WE ARE?</div>
+                        <h3 class="column-title">About Us</h3>
+                    </div>
+                    <div class="footer-column">
+                        <div class="column-label">HOW WE DELIVER</div>
+                        <h3 class="column-title">Contact Us</h3>
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="footer-social">
                     <a href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank"
-                        rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
-                        <div class="xb-item--holder ul_li">
-                            <div class="xb-item--icon"><i class="fa-brands fa-facebook"></i></div>
-                            <span class="xb-item--name">FACEBOOK</span>
-                        </div>
-                        <span class="xb-item--arrow">
-                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                            </svg>
-                        </span>
+                        rel="noopener noreferrer" class="social-link">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span>FACEBOOK</span>
+                        <i class="fa-solid fa-arrow-up-right"></i>
                     </a>
-                    <a href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer"
-                        class="xb-social-media-item ul_li_between">
-                        <div class="xb-item--holder ul_li">
-                            <div class="xb-item--icon"><i class="fa-brands fa-whatsapp"></i></div>
-                            <span class="xb-item--name">WHATSAPP</span>
-                        </div>
-                        <span class="xb-item--arrow">
-                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                            </svg>
-                        </span>
+                    <a href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>WHATSAPP</span>
+                        <i class="fa-solid fa-arrow-up-right"></i>
                     </a>
                     <a href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank"
-                        rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
-                        <div class="xb-item--holder ul_li">
-                            <div class="xb-item--icon"><i class="fa-brands fa-linkedin"></i></div>
-                            <span class="xb-item--name">LINKEDIN</span>
-                        </div>
-                        <span class="xb-item--arrow">
-                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                            </svg>
-                        </span>
+                        rel="noopener noreferrer" class="social-link">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <span>LINKEDIN</span>
+                        <i class="fa-solid fa-arrow-up-right"></i>
                     </a>
                     <a href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"
-                        class="xb-social-media-item ul_li_between">
-                        <div class="xb-item--holder ul_li">
-                            <div class="xb-item--icon"><i class="fa-brands fa-instagram"></i></div>
-                            <span class="xb-item--name">INSTAGRAM</span>
-                        </div>
-                        <span class="xb-item--arrow">
-                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                            </svg>
-                        </span>
+                        class="social-link">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>INSTAGRAM</span>
+                        <i class="fa-solid fa-arrow-up-right"></i>
                     </a>
                 </div>
-                <div class="xb-footer-bottom">
-                    <div class="contact-item">
-                        <img src="assets/img/icon/location-icon.svg" alt="">
-                        <span class="contact-method">30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
+
+                <!-- Bottom Contact Info -->
+                <div class="footer-bottom">
+                    <div class="footer-bottom-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
                     </div>
-                    <div class="contact-item copyright-item">
-                        <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
+                    <div class="footer-bottom-item footer-copyright">
+                        <p>Copyright © 2025 Vertex Tech Io, All rights reserved.</p>
                     </div>
-                    <div class="contact-item contact-item-right">
-                        <a href="tel:+17637229401" class="contact-phone-link"><img src="assets/img/icon/call-icon.svg"
-                                alt=""></a>
-                        <span class="contact-method">+1(763)-722-9401</span>
-                        <a href="#" class="footer-scroll-top scroll" title="Scroll to top"><i
-                                class="far fa-arrow-up"></i></a>
+                    <div class="footer-bottom-item footer-phone">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+1(763)-722-9401</span>
                     </div>
                 </div>
             </div>
