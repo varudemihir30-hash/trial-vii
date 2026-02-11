@@ -4,8 +4,8 @@
   "description": "Vertex Tech Io - AI Agency & Technology HTML Template",
   "scripts": {
     "build": "echo 'No build step required for static site'",
-    "dev": "npx http-server Aivora -p 3000 -a 0.0.0.0 -o",
-    "start": "npx http-server Aivora -p 3000 -a 0.0.0.0 -o"
+    "dev": "npx http-server Aivora -p 3001 -a 0.0.0.0 -o",
+    "start": "npx http-server Aivora -p 3001 -a 0.0.0.0 -o"
   },
   "keywords": [
     "html",

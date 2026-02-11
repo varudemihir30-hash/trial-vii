@@ -3330,6 +3330,225 @@ button, .btn, .thm-btn, .agency-btn {
 }
 
 /* ============================================
+   Process Section – Mobile "Guided Journey" Redesign
+   MOBILE ONLY (max-width: 767px). Desktop unchanged.
+   ============================================ */
+
+/* Keyframes: active step glow pulse + chevron flow (mobile only) */
+@keyframes processMobileGlow {
+    0%, 100% {
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4),
+                    0 0 0 1px rgba(0, 255, 200, 0.35),
+                    0 0 28px rgba(0, 255, 200, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    50% {
+        box-shadow: 0 24px 56px rgba(0, 0, 0, 0.45),
+                    0 0 0 1px rgba(0, 255, 200, 0.5),
+                    0 0 36px rgba(0, 255, 200, 0.22),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+}
+
+@keyframes processChevronFlow {
+    0%, 100% { transform: rotate(90deg) translateY(0); opacity: 0.6; }
+    50%      { transform: rotate(90deg) translateY(4px); opacity: 1; }
+}
+
+@media only screen and (max-width: 767px) {
+    /* Ensure section and content are visible on mobile */
+    #how-it-works.process-section,
+    .process-section {
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: 48px 0 64px !important;
+        overflow: visible !important;
+    }
+    .process-section .container {
+        overflow: visible !important;
+    }
+    .process-section .process-steps-wrapper,
+    .process-section .process-steps,
+    .process-section .process-card {
+        visibility: visible !important;
+    }
+    .process-section-header {
+        margin-bottom: 36px !important;
+        padding: 0 8px;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    .process-section-label {
+        margin-bottom: 10px !important;
+        color: rgba(0, 255, 200, 0.95) !important;
+        visibility: visible !important;
+    }
+    .process-section-title {
+        font-size: 26px !important;
+        line-height: 1.35 !important;
+        letter-spacing: -0.02em !important;
+        max-width: 20em;
+        margin-left: auto;
+        margin-right: auto;
+        color: #ffffff !important;
+        visibility: visible !important;
+    }
+
+    /* Full-width vertical stack, generous spacing */
+    .process-section .process-steps-wrapper {
+        padding: 0;
+    }
+    .process-section .process-steps {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 20px !important;
+        padding: 0 16px !important;
+        max-width: 100%;
+    }
+
+    /* Pill/capsule cards – glassmorphism, depth, teal accent */
+    .process-section .process-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        min-height: 88px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 16px 20px 16px 12px !important;
+        border-radius: 999px !important;
+        overflow: visible !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+        backdrop-filter: blur(24px) !important;
+        -webkit-backdrop-filter: blur(24px) !important;
+        border: 1px solid rgba(0, 255, 200, 0.18) !important;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35),
+                    0 0 0 1px rgba(0, 255, 200, 0.08),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
+        transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.35s ease,
+                    box-shadow 0.5s ease !important;
+        opacity: 0.88 !important;
+        transform: translateY(0) !important;
+    }
+    .process-section .process-card::after {
+        border-radius: 999px !important;
+        background: linear-gradient(135deg, rgba(0, 255, 200, 0.2) 0%, rgba(0, 200, 255, 0.08) 50%, rgba(0, 255, 200, 0.15) 100%) !important;
+    }
+
+    /* Slight gradient depth inside card (mobile) */
+    .process-section .process-card-fill {
+        border-radius: 999px !important;
+        background: linear-gradient(135deg, rgba(0, 255, 200, 0.08) 0%, rgba(0, 200, 255, 0.04) 100%) !important;
+    }
+
+    /* Revealed: fully visible, slight slide up when scrolled into view */
+    .process-section .process-card.is-visible {
+        opacity: 0.92 !important;
+        transform: translateY(0) !important;
+    }
+
+    /* Inactive steps – slightly dimmed for hierarchy (still clearly visible) */
+    .process-section .process-card.is-visible:not(.is-active) {
+        opacity: 0.75 !important;
+    }
+
+    /* Active step – full emphasis, soft glow pulse, border highlight */
+    .process-section .process-card.is-active {
+        opacity: 1 !important;
+        transform: translateY(-2px) !important;
+        border-color: rgba(0, 255, 200, 0.4) !important;
+        animation: processMobileGlow 2.5s ease-in-out infinite !important;
+    }
+    .process-section .process-card.is-active .process-card-fill {
+        transform: scaleX(1) !important;
+    }
+
+    /* Step number – bold, clearly visible, right-aligned */
+    .process-section .process-card-number {
+        position: static !important;
+        order: 3 !important;
+        flex-shrink: 0 !important;
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.08em !important;
+        color: rgba(0, 255, 200, 0.7) !important;
+        margin-left: auto !important;
+        margin-right: 0 !important;
+    }
+    .process-section .process-card.is-active .process-card-number {
+        color: rgba(0, 255, 200, 1) !important;
+    }
+
+    /* Icon – partially embedded on left, vertically centered */
+    .process-section .process-card-icon-wrap {
+        order: 0 !important;
+        flex-shrink: 0 !important;
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        min-height: 56px !important;
+        margin-bottom: 0 !important;
+        margin-right: 14px !important;
+        margin-left: -8px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(145deg, rgba(0, 255, 200, 0.22) 0%, rgba(0, 200, 255, 0.12) 100%) !important;
+        border: 1px solid rgba(0, 255, 200, 0.35) !important;
+        box-shadow: 0 4px 20px rgba(0, 255, 200, 0.15), inset 0 0 20px rgba(0, 255, 200, 0.08) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease !important;
+    }
+    .process-section .process-card.is-active .process-card-icon-wrap {
+        background: linear-gradient(145deg, rgba(0, 255, 200, 0.3) 0%, rgba(0, 200, 255, 0.18) 100%) !important;
+        border-color: rgba(0, 255, 200, 0.55) !important;
+        box-shadow: 0 6px 24px rgba(0, 255, 200, 0.25), inset 0 0 28px rgba(0, 255, 200, 0.1) !important;
+    }
+    .process-section .process-card-icon {
+        font-size: 22px !important;
+        color: rgba(0, 255, 200, 0.95) !important;
+    }
+
+    /* Title – strong hierarchy, line spacing for readability */
+    .process-section .process-card-title {
+        order: 1 !important;
+        flex: 1 !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        line-height: 1.45 !important;
+        margin: 0 !important;
+        padding-right: 12px !important;
+        min-width: 0 !important;
+        color: #ffffff !important;
+        visibility: visible !important;
+    }
+
+    /* Chevrons – gentle flow animation to guide progression */
+    .process-section .process-arrow {
+        flex-shrink: 0 !important;
+        width: 100% !important;
+        height: 24px !important;
+        margin: 2px 0 !important;
+        color: rgba(0, 255, 200, 0.35) !important;
+        transition: color 0.35s ease, opacity 0.35s ease !important;
+    }
+    .process-section.is-inview .process-arrow {
+        animation: processChevronFlow 2s ease-in-out infinite !important;
+    }
+    .process-section .process-arrow.is-highlighted {
+        color: rgba(0, 255, 200, 0.85) !important;
+        animation-duration: 1.5s !important;
+    }
+    .process-section .process-arrow svg {
+        width: 24px !important;
+        height: 24px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* ============================================
    Desktop - Pause Brand Animation on Hover
    ============================================ */
 

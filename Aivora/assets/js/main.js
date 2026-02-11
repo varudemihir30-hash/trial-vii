@@ -299,7 +299,8 @@
 	-------------------------------------------*/
 	function initTestimonialSlider() {
 		var testimonialSliderEl = document.querySelector(".xb-testimonial-slider");
-		if (testimonialSliderEl && typeof Swiper !== 'undefined') {
+		var tesMarqueeWrap = document.querySelector(".tes-marquee-wrap[data-marquee='true']");
+		if (testimonialSliderEl && !tesMarqueeWrap && typeof Swiper !== 'undefined') {
 			// Destroy existing slider if any
 			if (testimonialSliderEl.swiper) {
 				testimonialSliderEl.swiper.destroy(true, true);

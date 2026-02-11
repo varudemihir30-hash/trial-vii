@@ -893,10 +893,23 @@
             overflow: hidden;
         }
 
-        /* Ensure service section ends exactly where content ends */
+        /* Ensure service section ends exactly where content ends + generous spacing for cinematic cut */
         #services.service .xb-service-wrap:last-child {
             margin-bottom: 0;
-            padding-bottom: 0;
+            padding-bottom: 80px;
+        }
+
+        /* Background transition: deeper charcoal fade at service section bottom (soft cinematic cut) */
+        #services.service::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(1, 3, 8, 0.85) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Make "Our Testimonial" box a full rectangle and full width */
@@ -1087,6 +1100,568 @@
         }
     </style>
 
+    <!-- Career Impact Wall: Placement + Testimonials -->
+    <style>
+        /* ========== CAREER IMPACT WALL (SECTION 1) ========== */
+        .career-impact-wall {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #05080D;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Ambient glow - breathing */
+        .career-impact-wall .career-impact-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(120vw, 900px);
+            height: min(120vw, 900px);
+            background: radial-gradient(circle, rgba(0, 255, 151, 0.18) 0%, rgba(0, 255, 151, 0.06) 35%, transparent 65%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+            animation: career-impact-glow-breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes career-impact-glow-breathe {
+
+            0%,
+            100% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.08);
+            }
+        }
+
+        /* Diagonal light streaks - very slow */
+        .career-impact-streaks {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .career-impact-streak {
+            position: absolute;
+            width: 1px;
+            height: 150%;
+            background: linear-gradient(180deg, transparent, rgba(0, 255, 151, 0.06), transparent);
+            transform-origin: center center;
+            animation: career-impact-streak 25s linear infinite;
+        }
+
+        .career-impact-streak:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            --rot: -15deg;
+        }
+
+        .career-impact-streak:nth-child(2) {
+            left: 30%;
+            animation-delay: -5s;
+            --rot: 10deg;
+        }
+
+        .career-impact-streak:nth-child(3) {
+            left: 50%;
+            animation-delay: -10s;
+            --rot: -8deg;
+        }
+
+        .career-impact-streak:nth-child(4) {
+            left: 70%;
+            animation-delay: -15s;
+            --rot: 12deg;
+        }
+
+        .career-impact-streak:nth-child(5) {
+            left: 90%;
+            animation-delay: -20s;
+            --rot: -5deg;
+        }
+
+        @keyframes career-impact-streak {
+            0% {
+                transform: translateY(-100%) rotate(var(--rot, 0deg));
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(var(--rot, 0deg));
+            }
+        }
+
+        /* Floating particles */
+        .career-impact-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .career-impact-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(0, 255, 151, 0.25);
+            border-radius: 50%;
+            animation: career-impact-particle-drift 20s ease-in-out infinite;
+        }
+
+        .career-impact-particle:nth-child(1) {
+            left: 8%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .career-impact-particle:nth-child(2) {
+            left: 25%;
+            top: 60%;
+            animation-delay: -4s;
+        }
+
+        .career-impact-particle:nth-child(3) {
+            left: 45%;
+            top: 30%;
+            animation-delay: -8s;
+        }
+
+        .career-impact-particle:nth-child(4) {
+            left: 65%;
+            top: 75%;
+            animation-delay: -12s;
+        }
+
+        .career-impact-particle:nth-child(5) {
+            left: 85%;
+            top: 40%;
+            animation-delay: -16s;
+        }
+
+        .career-impact-particle:nth-child(6) {
+            left: 15%;
+            top: 80%;
+            animation-delay: -2s;
+        }
+
+        .career-impact-particle:nth-child(7) {
+            left: 90%;
+            top: 15%;
+            animation-delay: -6s;
+        }
+
+        @keyframes career-impact-particle-drift {
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translateX(30px) translateY(-20px);
+                opacity: 0.8;
+            }
+        }
+
+        /* Title area - center */
+        .career-impact-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .career-impact-micro-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .career-impact-wall.is-visible .career-impact-micro-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .career-impact-title {
+            font-size: clamp(42px, 6.5vw, 64px);
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .career-impact-title .title-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .career-impact-title .title-char.space {
+            width: 0.25em;
+        }
+
+        .career-impact-title .brand-accent {
+            color: var(--color-primary);
+            position: relative;
+            text-shadow: 0 0 30px rgba(0, 255, 151, 0.4);
+            animation: career-impact-placed-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes career-impact-placed-pulse {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.15);
+            }
+        }
+
+        .career-impact-wall.is-visible .career-impact-title .title-char {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .career-impact-subtext {
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.65);
+            margin: 0 0 24px;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(10px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s,
+                filter 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s,
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+
+        .career-impact-wall.is-visible .career-impact-subtext {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* Green accent line - draw effect */
+        .career-impact-divider {
+            width: 0;
+            max-width: 140px;
+            height: 2px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+            border-radius: 2px;
+            transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+        }
+
+        .career-impact-wall.is-visible .career-impact-divider {
+            width: 100%;
+        }
+
+        /* Logo strip - under the text */
+        .career-impact-logos-wrap {
+            position: relative;
+            width: 100%;
+            margin-top: 64px;
+            padding: 0 20px;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .career-impact-logos-track {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            width: max-content;
+            animation: career-impact-logos-scroll 35s linear infinite;
+        }
+
+        .career-impact-wall .career-impact-logos-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes career-impact-logos-scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Logo items */
+        .career-impact-logo {
+            position: relative;
+            flex-shrink: 0;
+            width: 160px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+            opacity: 0;
+            transform: scale(0.6);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                filter 0.4s ease,
+                box-shadow 0.4s ease,
+                opacity 0.5s ease;
+        }
+
+        .career-impact-wall.is-orbit-ready .career-impact-logo {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .career-impact-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(0.85) brightness(0.9);
+            transition: filter 0.4s ease;
+        }
+
+        .career-impact-logo:hover {
+            transform: scale(1.12) !important;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 151, 0.35));
+            z-index: 10;
+        }
+
+        .career-impact-logo:hover img {
+            filter: grayscale(0) brightness(1);
+        }
+
+        /* Tooltip */
+        .career-impact-logo-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-12px);
+            padding: 8px 14px;
+            background: rgba(5, 8, 13, 0.95);
+            border: 1px solid rgba(0, 255, 151, 0.3);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 20;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .career-impact-logo:hover .career-impact-logo-tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-8px);
+        }
+
+        /* Section exit transition */
+        .career-impact-wall.is-exiting .career-impact-glow {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .career-impact-wall.is-exiting .career-impact-center {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .career-impact-wall.is-exiting .career-impact-logo {
+            opacity: 0;
+            transform: translateY(30px) scale(0.9) !important;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .career-impact-wall.is-exiting::after {
+            opacity: 1;
+        }
+
+        .career-impact-wall::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(5, 8, 13, 0.3) 60%, rgba(5, 8, 13, 0.9) 100%);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        @media (max-width: 767px) {
+            .career-impact-title {
+                font-size: clamp(36px, 8vw, 44px);
+            }
+
+            .career-impact-subtext {
+                font-size: 17px;
+            }
+
+            .career-impact-logo {
+                width: 110px;
+                height: 75px;
+            }
+
+            .career-impact-logos-track {
+                gap: 50px;
+                animation-duration: 28s;
+            }
+        }
+
+        /* ========== SECTION 2: TESTIMONIALS ========== */
+        .testimonial-section {
+            position: relative;
+            padding: 120px 0 180px;
+            background: linear-gradient(90deg, rgba(8, 18, 32, 0.97) 0%, rgba(6, 14, 26, 0.98) 50%, rgba(8, 18, 32, 0.97) 100%);
+            overflow: hidden;
+        }
+
+        .testimonial-section .tes-header {
+            text-align: center;
+            margin-bottom: 56px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .testimonial-section.is-heading-visible .tes-header {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-section .tes-micro-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            color: rgba(0, 255, 151, 0.75);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .testimonial-section .tes-title {
+            font-size: clamp(34px, 5.5vw, 48px);
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .testimonial-section .tes-subtext {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.65);
+            margin: 0;
+        }
+
+        /* Glassmorphism cards */
+        .testimonial-section .xb-testimonial-item .xb-item--inner {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 151, 0.2);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .testimonial-section .xb-testimonial-item .xb-item--inner::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 48px;
+            font-family: Georgia, serif;
+            color: rgba(0, 255, 151, 0.15);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .testimonial-section .xb-testimonial-item:hover .xb-item--inner {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+            border-color: rgba(0, 255, 151, 0.35);
+        }
+
+        .testimonial-section .xb-testimonial-item:hover .xb-item--inner::before {
+            opacity: 1;
+        }
+
+        /* Testimonial marquee - infinite loop, no gap */
+        .tes-marquee-wrap {
+            overflow: hidden;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .tes-marquee-track {
+            overflow: hidden;
+        }
+
+        .tes-marquee-inner {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: tes-marquee-scroll 45s linear infinite;
+        }
+
+        .tes-marquee-wrap:hover .tes-marquee-inner {
+            animation-play-state: paused;
+        }
+
+        @keyframes tes-marquee-scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .tes-card {
+            flex-shrink: 0;
+            width: 400px;
+            padding: 0 12px;
+        }
+
+        @media (max-width: 991px) {
+            .tes-card {
+                width: 340px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .tes-card {
+                width: 280px;
+            }
+        }
+    </style>
+
     <!-- Preloader - Simplified Vertex Logo Loader -->
     <style>
         /* Show preloader immediately - no waiting */
@@ -1175,16 +1750,801 @@
                 margin-top: 0 !important;
             }
         }
+    </style>
 
-        /* Hide service section on desktop view - show only first page/hero */
-        @media (min-width: 992px) {
-            section#services.service {
-                display: none !important;
-                visibility: hidden !important;
-                height: 0 !important;
-                overflow: hidden !important;
-                padding: 0 !important;
-                margin: 0 !important;
+    <!-- Hero Statistic Cards + tighter hero spacing (pull content up) -->
+    <style>
+        /* Pull tagline, CTA and cards up - tighter vertical spacing */
+        .hero-content .sub-title {
+            margin-top: 12px !important;
+            padding-top: 12px !important;
+        }
+
+        .hero-content .hero-btn {
+            margin-top: 10px !important;
+            padding-top: 10px !important;
+        }
+
+        .hero-stat-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: stretch;
+            gap: 20px;
+            margin-top: 14px;
+        }
+
+        .hero-stat-card {
+            position: relative;
+            min-width: 0;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 255, 200, 0.25);
+            border-radius: 18px;
+            padding: 24px 28px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .hero-stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.08) 0%, rgba(0, 200, 255, 0.04) 50%, rgba(100, 0, 255, 0.08) 100%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+            border-radius: 18px;
+        }
+
+        .hero-stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 255, 200, 0.5);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 28px rgba(0, 255, 200, 0.25), inset 0 0 20px rgba(0, 255, 200, 0.06);
+        }
+
+        .hero-stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-stat-card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hero-stat-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.2) 0%, rgba(0, 200, 255, 0.12) 50%, rgba(100, 0, 255, 0.18) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(0, 255, 200, 0.35);
+            box-shadow: 0 4px 16px rgba(0, 255, 200, 0.15), inset 0 0 20px rgba(0, 255, 200, 0.08);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .hero-stat-card:hover .hero-stat-icon-wrapper {
+            transform: scale(1.08);
+            box-shadow: 0 6px 24px rgba(0, 255, 200, 0.3), inset 0 0 28px rgba(0, 255, 200, 0.12);
+            border-color: rgba(0, 255, 200, 0.55);
+        }
+
+        .hero-stat-icon {
+            width: 26px;
+            height: 26px;
+            color: #00ffc8;
+            flex-shrink: 0;
+        }
+
+        .hero-stat-info {
+            flex: 1;
+        }
+
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 20px rgba(0, 255, 200, 0.4);
+        }
+
+        .hero-stat-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 767px) {
+            .hero-stat-cards {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-top: 20px;
+            }
+
+            .hero-stat-card {
+                padding: 20px 24px;
+            }
+
+            .hero-stat-icon-wrapper {
+                width: 48px;
+                height: 48px;
+            }
+
+            .hero-stat-icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            .hero-stat-number {
+                font-size: 32px;
+            }
+
+            .hero-stat-title {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .hero-stat-card {
+                padding: 18px 20px;
+            }
+
+            .hero-stat-number {
+                font-size: 28px;
+            }
+        }
+
+        /* E-Verify card - same row as stat cards, equal size, slightly premium glass */
+        .hero-everify-card {
+            position: relative;
+            min-width: 0;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(0, 255, 200, 0.25);
+            border-radius: 18px;
+            padding: 24px 28px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-everify-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.08) 0%, rgba(0, 200, 255, 0.04) 50%, rgba(100, 0, 255, 0.08) 100%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+            border-radius: 18px;
+        }
+
+        .hero-everify-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 255, 200, 0.5);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 32px rgba(0, 255, 200, 0.3), inset 0 0 20px rgba(0, 255, 200, 0.06);
+        }
+
+        .hero-everify-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-everify-logo-wrap {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 0;
+        }
+
+        .hero-everify-logo-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0, 255, 200, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-everify-logo {
+            position: relative;
+            display: block;
+            height: 44px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 200, 0.25));
+            transition: filter 0.35s ease;
+        }
+
+        .hero-everify-card:hover .hero-everify-logo {
+            filter: drop-shadow(0 0 14px rgba(0, 255, 200, 0.4));
+        }
+
+        @media (max-width: 767px) {
+            .hero-stat-cards {
+                grid-template-columns: 1fr;
+                margin-top: 14px;
+            }
+
+            .hero-everify-card {
+                padding: 20px 24px;
+            }
+
+            .hero-everify-logo {
+                height: 36px;
+                max-width: 160px;
+            }
+        }
+
+        /* Partition between hero (first page) and process steps */
+        .hero-process-partition {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(0, 255, 200, 0.15) 20%,
+                    rgba(0, 255, 200, 0.4) 50%,
+                    rgba(0, 255, 200, 0.15) 80%,
+                    transparent 100%);
+            margin: 0;
+        }
+
+        /* How it works / Process section */
+        .process-section {
+            position: relative;
+            padding: 80px 0 100px;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .process-section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .process-section-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(0, 255, 200, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .process-section-title {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .process-steps-wrapper {
+            width: 100%;
+            overflow-x: visible;
+            overflow-y: visible;
+            padding-bottom: 0;
+        }
+
+        .process-steps {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 0;
+            width: 100%;
+            min-width: 0;
+            padding: 0 16px;
+        }
+
+        .process-card {
+            position: relative;
+            flex: 1 1 0;
+            min-width: 0;
+            max-width: none;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 26px;
+            padding: 32px 20px 38px;
+            overflow: hidden;
+            opacity: 0.6;
+            transform: translateY(14px);
+            transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s ease,
+                box-shadow 0.5s ease;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35),
+                0 0 0 1px rgba(0, 255, 200, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .process-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 26px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.25) 0%, rgba(0, 200, 255, 0.12) 50%, rgba(0, 255, 200, 0.2) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .process-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .process-card.is-active {
+            opacity: 1;
+            transform: translateY(-6px);
+            border-color: rgba(0, 255, 200, 0.4);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(0, 255, 200, 0.2),
+                0 0 32px rgba(0, 255, 200, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .process-card-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.14) 0%, rgba(0, 200, 255, 0.08) 100%);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            border-radius: 26px;
+        }
+
+        .process-card.is-active .process-card-fill {
+            transform: scaleX(1);
+        }
+
+        .process-card-number {
+            position: absolute;
+            top: 26px;
+            right: 28px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: rgba(0, 255, 200, 0.55);
+        }
+
+        .process-card.is-active .process-card-number {
+            color: rgba(0, 255, 200, 0.98);
+        }
+
+        .process-card-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(0, 255, 200, 0.18) 0%, rgba(0, 200, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 200, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 255, 200, 0.12), inset 0 0 24px rgba(0, 255, 200, 0.06);
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .process-card.is-active .process-card-icon-wrap {
+            background: linear-gradient(145deg, rgba(0, 255, 200, 0.25) 0%, rgba(0, 200, 255, 0.15) 100%);
+            border-color: rgba(0, 255, 200, 0.5);
+            box-shadow: 0 6px 28px rgba(0, 255, 200, 0.2), inset 0 0 32px rgba(0, 255, 200, 0.1);
+        }
+
+        .process-card-icon {
+            font-size: 26px;
+            color: rgba(0, 255, 200, 0.9);
+        }
+
+        .process-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.45;
+            color: #ffffff;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.01em;
+        }
+
+        .process-card.is-active .process-card-title {
+            color: #ffffff;
+        }
+
+        .process-arrow {
+            flex-shrink: 0;
+            width: 28px;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0, 255, 200, 0.2);
+            opacity: 0;
+            transform: scale(0.85);
+            transition: color 0.4s ease, opacity 0.45s ease, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .process-arrow svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .process-section.is-inview .process-arrow {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .process-arrow.is-highlighted {
+            color: rgba(0, 255, 200, 0.7);
+        }
+
+        @media (max-width: 1199px) {
+            .process-steps {
+                padding: 0 12px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .process-section {
+                padding: 56px 0 72px;
+            }
+
+            .process-section-title {
+                font-size: 28px;
+            }
+
+            .process-section-header {
+                margin-bottom: 40px;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 28px;
+                padding: 0 20px;
+            }
+
+            .process-arrow {
+                width: auto;
+                height: 28px;
+                transform: rotate(90deg);
+            }
+
+            .process-section.is-inview .process-arrow {
+                transform: rotate(90deg) scale(1);
+            }
+
+            .process-arrow.is-highlighted {
+                color: rgba(0, 255, 200, 0.7);
+            }
+
+            .process-card {
+                min-width: 100%;
+                max-width: 100%;
+                opacity: 0.6;
+            }
+        }
+
+        /* Services transition section: "What We Offer" */
+        .services-transition {
+            position: relative;
+            padding: 100px 0 40px;
+            overflow: hidden;
+        }
+
+        .services-transition-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .services-transition-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: servicesTransitionGlow 12s ease-in-out infinite;
+        }
+
+        .services-transition-glow--1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.25) 0%, transparent 70%);
+            top: -100px;
+            left: 10%;
+        }
+
+        .services-transition-glow--2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 200, 255, 0.2) 0%, transparent 70%);
+            top: 20%;
+            right: 5%;
+            animation-delay: -4s;
+        }
+
+        .services-transition-glow--3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.18) 0%, transparent 70%);
+            bottom: -50px;
+            left: 30%;
+            animation-delay: -8s;
+        }
+
+        @keyframes servicesTransitionGlow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(1.05);
+            }
+        }
+
+        .services-transition-dots {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .services-transition-dots span {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 255, 200, 0.4);
+            border-radius: 50%;
+            animation: servicesTransitionDot 8s ease-in-out infinite;
+        }
+
+        .services-transition-dots span:nth-child(1) {
+            left: 8%;
+            top: 15%;
+            animation-delay: 0s;
+        }
+
+        .services-transition-dots span:nth-child(2) {
+            left: 22%;
+            top: 25%;
+            animation-delay: -1.5s;
+        }
+
+        .services-transition-dots span:nth-child(3) {
+            left: 45%;
+            top: 12%;
+            animation-delay: -3s;
+        }
+
+        .services-transition-dots span:nth-child(4) {
+            left: 68%;
+            top: 22%;
+            animation-delay: -4.5s;
+        }
+
+        .services-transition-dots span:nth-child(5) {
+            left: 85%;
+            top: 18%;
+            animation-delay: -6s;
+        }
+
+        .services-transition-dots span:nth-child(6) {
+            left: 12%;
+            bottom: 20%;
+            animation-delay: -2s;
+        }
+
+        .services-transition-dots span:nth-child(7) {
+            left: 35%;
+            bottom: 15%;
+            animation-delay: -5s;
+        }
+
+        .services-transition-dots span:nth-child(8) {
+            left: 58%;
+            bottom: 25%;
+            animation-delay: -7s;
+        }
+
+        .services-transition-dots span:nth-child(9) {
+            left: 78%;
+            bottom: 18%;
+            animation-delay: -1s;
+        }
+
+        .services-transition-dots span:nth-child(10) {
+            left: 92%;
+            bottom: 22%;
+            animation-delay: -3.5s;
+        }
+
+        @keyframes servicesTransitionDot {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: translateY(-12px) scale(1.2);
+            }
+        }
+
+        .services-transition-divider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(0, 255, 200, 0.2) 25%,
+                    rgba(0, 255, 200, 0.5) 50%,
+                    rgba(0, 255, 200, 0.2) 75%,
+                    transparent 100%);
+        }
+
+        .services-transition-inner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-transition-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(0, 255, 200, 0.9);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: servicesTransitionFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+        }
+
+        .services-transition-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            margin: 0 0 20px;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: servicesTransitionFadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.35s forwards;
+        }
+
+        .services-transition-accent {
+            background: linear-gradient(135deg, #00ffc8 0%, #00c8ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .services-transition-accent::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -4px;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(0, 255, 200, 0.6), rgba(0, 200, 255, 0.6));
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left center;
+            animation: servicesTransitionUnderline 1s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards;
+        }
+
+        @keyframes servicesTransitionFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes servicesTransitionUnderline {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .services-transition-support {
+            font-size: 18px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0 0 24px;
+            opacity: 0;
+            animation: servicesTransitionFadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.55s forwards;
+        }
+
+        .services-transition-cue {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0, 255, 200, 0.6);
+            animation: servicesTransitionCue 2.5s ease-in-out infinite;
+        }
+
+        .services-transition-cue svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        @keyframes servicesTransitionCue {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: 1;
+            }
+        }
+
+        .services-transition.is-inview .services-transition-glow {
+            opacity: 0.5;
+        }
+
+        /* Reduce gap between "Top Services" heading and service cards */
+        #services-transition+#services.service.pt-135 {
+            padding-top: 40px !important;
+        }
+
+        @media (max-width: 767px) {
+            .services-transition {
+                padding: 72px 0 32px;
+            }
+
+            .services-transition-title {
+                font-size: 32px;
+            }
+
+            .services-transition-support {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            #services-transition+#services.service.pt-135 {
+                padding-top: 24px !important;
             }
         }
     </style>
@@ -1301,24 +2661,41 @@
             /* Content-based height on mobile */
         }
 
-        /* Desktop Only: Full-screen landing */
+        /* Desktop Only: Full-screen landing, content in upper-middle (top-aligned, minimal top gap) */
         @media (min-width: 992px) {
 
             .hero-style,
             section.hero.hero-style.pos-rel.hero-full,
             .hero.hero-style.pos-rel.hero-full {
                 min-height: 100vh !important;
+                display: flex !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+            }
+
+            .hero-style .container,
+            section.hero.hero-style.pos-rel.hero-full .container {
+                padding-top: 28px !important;
+                padding-bottom: 0 !important;
             }
         }
 
         .hero-style .container,
         section.hero.hero-style.pos-rel.hero-full .container {
             align-items: flex-start !important;
-            padding-top: 100px !important;
-            /* Desktop spacing */
+            padding-top: 32px !important;
             display: flex !important;
             flex-direction: column !important;
             height: auto !important;
+        }
+
+        /* Desktop: minimal top padding so content sits higher */
+        @media (min-width: 992px) {
+
+            .hero-style .container,
+            section.hero.hero-style.pos-rel.hero-full .container {
+                padding-top: 28px !important;
+            }
         }
 
         /* Mobile Fixes: Eliminate side-gap and bottom spacing */
@@ -1327,7 +2704,7 @@
             .hero-style .container,
             section.hero.hero-style.pos-rel.hero-full .container {
                 padding-top: 80px !important;
-                /* Tighter on mobile */
+                /* Tighter on mobile - JS may override for header clearance */
                 padding-bottom: 20px !important;
             }
 
@@ -1963,7 +3340,7 @@
                             <div class="hero-content">
                                 <h2 class="title scale-animation wow">
                                     Two Paths,<br>
-                                    One Purpose , The Peak.
+                                    One Purpose, The Peak.
                                 </h2>
 
                                 <p class="sub-title scale-animation wow">
@@ -1981,6 +3358,52 @@
                                         </span>
                                     </a>
                                 </div>
+
+                                <div class="hero-stat-cards scale-animation wow">
+                                    <div class="hero-stat-card">
+                                        <div class="hero-stat-card-content">
+                                            <div class="hero-stat-icon-wrapper">
+                                                <svg class="hero-stat-icon" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                                                </svg>
+                                            </div>
+                                            <div class="hero-stat-info">
+                                                <div class="hero-stat-number" data-count="500">0</div>
+                                                <div class="hero-stat-title">Successful Placements</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hero-stat-card">
+                                        <div class="hero-stat-card-content">
+                                            <div class="hero-stat-icon-wrapper">
+                                                <svg class="hero-stat-icon" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                                    <circle cx="9" cy="7" r="4" />
+                                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                    <path d="m9 12 2 2 4-4" />
+                                                </svg>
+                                            </div>
+                                            <div class="hero-stat-info">
+                                                <div class="hero-stat-number" data-count="120">0</div>
+                                                <div class="hero-stat-title">Happy Clients</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="e-verify.html" class="hero-everify-card scale-animation wow">
+                                        <div class="hero-everify-logo-wrap">
+                                            <img src="assets/img/logo/E-Verify.svg" alt="E-Verify"
+                                                class="hero-everify-logo">
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1988,522 +3411,835 @@
             </section>
             <!-- hero end -->
 
+            <!-- Partition between first page (hero) and process steps -->
+            <div class="hero-process-partition" aria-hidden="true"></div>
+
+            <!-- How it works / Process section -->
+            <section id="how-it-works" class="process-section">
+                <div class="container">
+                    <div class="process-section-header">
+                        <span class="process-section-label">HOW IT WORKS</span>
+                        <h2 class="process-section-title">Our Step-by-Step Marketing Process</h2>
+                    </div>
+                    <div class="process-steps-wrapper">
+                        <div class="process-steps" id="process-steps">
+                            <div class="process-card" data-step="1">
+                                <div class="process-card-fill" aria-hidden="true"></div>
+                                <span class="process-card-number">01</span>
+                                <div class="process-card-icon-wrap">
+                                    <i class="fas fa-handshake process-card-icon"></i>
+                                </div>
+                                <h3 class="process-card-title">Partnership with Startups & Incubators</h3>
+                            </div>
+                            <div class="process-arrow" aria-hidden="true"><svg width="28" height="28"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="process-card" data-step="2">
+                                <div class="process-card-fill" aria-hidden="true"></div>
+                                <span class="process-card-number">02</span>
+                                <div class="process-card-icon-wrap">
+                                    <i class="fas fa-user-friends process-card-icon"></i>
+                                </div>
+                                <h3 class="process-card-title">Influencer & Referral Collaboration</h3>
+                            </div>
+                            <div class="process-arrow" aria-hidden="true"><svg width="28" height="28"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="process-card" data-step="3">
+                                <div class="process-card-fill" aria-hidden="true"></div>
+                                <span class="process-card-number">03</span>
+                                <div class="process-card-icon-wrap">
+                                    <i class="fas fa-bullseye process-card-icon"></i>
+                                </div>
+                                <h3 class="process-card-title">AI-Powered Targeted Outreach Strategy</h3>
+                            </div>
+                            <div class="process-arrow" aria-hidden="true"><svg width="28" height="28"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="process-card" data-step="4">
+                                <div class="process-card-fill" aria-hidden="true"></div>
+                                <span class="process-card-number">04</span>
+                                <div class="process-card-icon-wrap">
+                                    <i class="fas fa-project-diagram process-card-icon"></i>
+                                </div>
+                                <h3 class="process-card-title">Company Connection Network Strategy</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transition to Services: "What We Offer" -->
+            <section id="services-transition" class="services-transition" aria-labelledby="services-transition-heading">
+                <div class="services-transition-bg">
+                    <div class="services-transition-glow services-transition-glow--1"></div>
+                    <div class="services-transition-glow services-transition-glow--2"></div>
+                    <div class="services-transition-glow services-transition-glow--3"></div>
+                    <div class="services-transition-dots">
+                        <span></span><span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="services-transition-divider"></div>
+                <div class="container">
+                    <div class="services-transition-inner">
+                        <span class="services-transition-label">WHAT WE OFFER</span>
+                        <h2 id="services-transition-heading" class="services-transition-title">
+                            Top <span class="services-transition-accent">Services</span> We Provide
+                        </h2>
+                        <p class="services-transition-support">Designed to accelerate your growth and career outcomes.
+                        </p>
+                        <div class="services-transition-cue" aria-hidden="true">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- service start -->
             <section id="services" class="service pt-135">
                 <div class="container">
                 </div>
-    </div>
-    <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg.png">
-        <div class="xb-service-item xb-border xb-mouseenter active wow fadeInUp" data-wow-delay="0.1s"
-            data-wow-duration="0.6s">
-            <div class="xb-item--inner">
-                <div class="xb-item--item">
-                    <div class="xb-item--head-item">
-                        <h3 class="xb-item--title border-effect">
-                            <a href="service-details.html">Resume Writing</a>
-                        </h3>
-                        <a class="xb-item--icon" href="service-details.html">
-                            <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
-                        </a>
-                    </div>
-                    <p class="xb-item--content">Crafting resumes and profiles that meet U.S. hiring standards and get
-                        noticed.</p>
-                </div>
-                <div class="service-vertical-text">
-                    <h3 class="xb-item--title">
-                        <a href="service-details.html">Resume Writing</a>
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.2s"
-            data-wow-duration="0.6s">
-            <div class="xb-item--inner">
-                <div class="xb-item--item">
-                    <div class="xb-item--head-item">
-                        <h3 class="xb-item--title border-effect">
-                            <a href="service-details-linkedin-optimization.html" style="font-size: 0.9em;">LinkedIn
-                                Optimization</a>
-                        </h3>
-                        <a class="xb-item--icon" href="service-details-linkedin-optimization.html">
-                            <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
-                        </a>
-                    </div>
-                    <p class="xb-item--content">Positioning your LinkedIn profile to attract recruiters and hiring
-                        managers</p>
-                </div>
-                <div class="service-vertical-text">
-                    <h3 class="xb-item--title">
-                        <a href="service-details-linkedin-optimization.html" style="font-size: 0.9em;">LinkedIn
-                            Optimization</a>
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.3s"
-            data-wow-duration="0.6s">
-            <div class="xb-item--inner">
-                <div class="xb-item--item">
-                    <div class="xb-item--head-item">
-                        <h3 class="xb-item--title border-effect">
-                            <a href="service-details-profile-marketing.html">Profile Marketing</a>
-                        </h3>
-                        <a class="xb-item--icon" href="service-details-profile-marketing.html">
-                            <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
-                        </a>
-                    </div>
-                    <p class="xb-item--content">Actively promoting your profile across top job portals for better
-                        visibility.</p>
-                </div>
-                <div class="service-vertical-text">
-                    <h3 class="xb-item--title">
-                        <a href="service-details-profile-marketing.html">Profile Marketing</a>
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.4s"
-            data-wow-duration="0.6s">
-            <div class="xb-item--inner">
-                <div class="xb-item--item">
-                    <div class="xb-item--head-item">
-                        <h3 class="xb-item--title border-effect">
-                            <a href="service-details-interview-guidance.html" style="white-space: nowrap;">Interview
-                                Guidance</a>
-                        </h3>
-                        <a class="xb-item--icon" href="service-details-interview-guidance.html">
-                            <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
-                        </a>
-                    </div>
-                    <p class="xb-item--content">Step-by-step interview preparation to help you perform with confidence.
-                    </p>
-                </div>
-                <div class="service-vertical-text">
-                    <h3 class="xb-item--title">
-                        <a href="service-details-interview-guidance.html" style="white-space: nowrap;">Interview
-                            Guidance</a>
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.5s"
-            data-wow-duration="0.6s">
-            <div class="xb-item--inner">
-                <div class="xb-item--item">
-                    <div class="xb-item--head-item">
-                        <h3 class="xb-item--title border-effect">
-                            <a href="service-details-technical-training.html" style="font-size: 0.75em;">Technical
-                                Training & Support</a>
-                        </h3>
-                        <a class="xb-item--icon" href="service-details-technical-training.html">
-                            <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
-                        </a>
-                    </div>
-                    <p class="xb-item--content">Practical technical training and assistance aligned with job
-                        requirements.</p>
-                </div>
-                <div class="service-vertical-text">
-                    <h3 class="xb-item--title">
-                        <a href="service-details-technical-training.html" style="font-size: 0.75em;">Technical Training
-                            & Support</a>
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.6s"
-            data-wow-duration="0.6s">
-            <div class="xb-item--inner">
-                <div class="xb-item--item">
-                    <div class="xb-item--head-item">
-                        <h3 class="xb-item--title border-effect">
-                            <a href="service-details-full-job-support.html">Full Job Support</a>
-                        </h3>
-                        <a class="xb-item--icon" href="service-details-full-job-support.html">
-                            <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
-                        </a>
-                    </div>
-                    <p class="xb-item--content">End-to-end support from preparation to securing a full-time offer.</p>
-                </div>
-                <div class="service-vertical-text">
-                    <h3 class="xb-item--title">
-                        <a href="service-details-full-job-support.html">Full Job Support</a>
-                    </h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-    <!-- service end -->
-
-    <div class="bg_img" data-background="assets/img/bg/features-gradient-bg.png">
-
-
-        <!-- brand start -->
-        <section class="brand pt-170 pb-150">
-            <div class="container">
-                <div class="xb-brand-wrap">
-                    <div class="brand-marquee marquee-left">
-                        <div class="xb-brand-inner ul_li_between">
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/wallmart.png" alt="Walmart logo">
-                            </div>
-                            <!-- Duplicated for Marquee Loop -->
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-3.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-10.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-11.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/image-removebg-preview-13.png" alt="Brand logo">
-                            </div>
-                            <div class="xb-brand-item">
-                                <img src="assets/img/brand/wallmart.png" alt="Walmart logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- brand end -->
-    </div>
-
-
-
-
-    <!-- testimonial start -->
-    <section class="testimonial pb-250">
-        <div class="container">
-            <div class="sec-title sec-title-center tes-sec-title text-center mb-50">
-                <div class="brand-sub-title xb-border">
-
-                </div>
-                <h2 class="title">Hear from our happy customers</h2>
-            </div>
-        </div>
-        <div class="xb-testimonial-slider">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "The team took the time to understand my profile and career goals before starting the
-                                process. Their resume improvements, interview guidance, and regular follow‑ups made the
-                                entire job search more organized and manageable."
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Bony Patel</h3>
-                                    <span class="xb-item--desig">CNC Machinist - Cretex</span>
+                <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg.png">
+                    <div class="xb-service-item xb-border xb-mouseenter active wow fadeInUp" data-wow-delay="0.1s"
+                        data-wow-duration="0.6s">
+                        <div class="xb-item--inner">
+                            <div class="xb-item--item">
+                                <div class="xb-item--head-item">
+                                    <h3 class="xb-item--title border-effect">
+                                        <span class="xb-service-title-with-icon">
+                                            <span class="xb-service-title-icon" aria-hidden="true">
+                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path
+                                                        d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                                                    <polyline points="14 2 14 8 20 8" />
+                                                    <line x1="16" y1="13" x2="8" y2="13" />
+                                                    <line x1="16" y1="17" x2="8" y2="17" />
+                                                    <line x1="10" y1="9" x2="8" y2="9" />
+                                                </svg>
+                                            </span>
+                                            <a href="service-details.html">Resume Writing</a>
+                                        </span>
+                                    </h3>
+                                    <a class="xb-item--icon" href="service-details.html">
+                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                    </a>
                                 </div>
+                                <p class="xb-item--content">Crafting resumes and profiles that meet U.S. hiring
+                                    standards and get noticed.</p>
+                            </div>
+                            <div class="service-vertical-text">
+                                <h3 class="xb-item--title">
+                                    <span class="xb-service-title-with-icon">
+                                        <span class="xb-service-title-icon" aria-hidden="true">
+                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path
+                                                    d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                                                <polyline points="14 2 14 8 20 8" />
+                                                <line x1="16" y1="13" x2="8" y2="13" />
+                                                <line x1="16" y1="17" x2="8" y2="17" />
+                                                <line x1="10" y1="9" x2="8" y2="9" />
+                                            </svg>
+                                        </span>
+                                        <a href="service-details.html">Resume Writing</a>
+                                    </span>
+                                </h3>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "The team provided clear guidance from resume optimization to interview preparation.
-                                Their structured process and regular updates made the job search much less stressful,
-                                and I felt supported at every step."
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Keval Gajera</h3>
-                                    <span class="xb-item--desig">RMS - service engineer</span>
+                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.2s"
+                        data-wow-duration="0.6s">
+                        <div class="xb-item--inner">
+                            <div class="xb-item--item">
+                                <div class="xb-item--head-item">
+                                    <h3 class="xb-item--title border-effect">
+                                        <span class="xb-service-title-with-icon">
+                                            <span class="xb-service-title-icon" aria-hidden="true">
+                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path
+                                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                                    <rect width="4" height="12" x="2" y="9" />
+                                                    <circle cx="4" cy="4" r="2" />
+                                                </svg>
+                                            </span>
+                                            <a href="service-details-linkedin-optimization.html"
+                                                style="font-size: 0.9em;">LinkedIn Optimization</a>
+                                        </span>
+                                    </h3>
+                                    <a class="xb-item--icon" href="service-details-linkedin-optimization.html">
+                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                    </a>
                                 </div>
+                                <p class="xb-item--content">Positioning your LinkedIn profile to attract recruiters and
+                                    hiring managers.</p>
+                            </div>
+                            <div class="service-vertical-text">
+                                <h3 class="xb-item--title">
+                                    <span class="xb-service-title-with-icon">
+                                        <span class="xb-service-title-icon" aria-hidden="true">
+                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path
+                                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                                <rect width="4" height="12" x="2" y="9" />
+                                                <circle cx="4" cy="4" r="2" />
+                                            </svg>
+                                        </span>
+                                        <a href="service-details-linkedin-optimization.html"
+                                            style="font-size: 0.9em;">LinkedIn Optimization</a>
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.3s"
+                        data-wow-duration="0.6s">
+                        <div class="xb-item--inner">
+                            <div class="xb-item--item">
+                                <div class="xb-item--head-item">
+                                    <h3 class="xb-item--title border-effect">
+                                        <span class="xb-service-title-with-icon">
+                                            <span class="xb-service-title-icon" aria-hidden="true">
+                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="m3 11 18-5v12L3 14v-3z" />
+                                                    <path d="M11.6 16.8a3 3 0 0 1-5.2-2.1V9.3" />
+                                                </svg>
+                                            </span>
+                                            <a href="service-details-profile-marketing.html">Profile Marketing</a>
+                                        </span>
+                                    </h3>
+                                    <a class="xb-item--icon" href="service-details-profile-marketing.html">
+                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                    </a>
+                                </div>
+                                <p class="xb-item--content">Actively promoting your profile across top job portals for
+                                    better visibility.</p>
+                            </div>
+                            <div class="service-vertical-text">
+                                <h3 class="xb-item--title">
+                                    <span class="xb-service-title-with-icon">
+                                        <span class="xb-service-title-icon" aria-hidden="true">
+                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="m3 11 18-5v12L3 14v-3z" />
+                                                <path d="M11.6 16.8a3 3 0 0 1-5.2-2.1V9.3" />
+                                            </svg>
+                                        </span>
+                                        <a href="service-details-profile-marketing.html">Profile Marketing</a>
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.4s"
+                        data-wow-duration="0.6s">
+                        <div class="xb-item--inner">
+                            <div class="xb-item--item">
+                                <div class="xb-item--head-item">
+                                    <h3 class="xb-item--title border-effect">
+                                        <span class="xb-service-title-with-icon">
+                                            <span class="xb-service-title-icon" aria-hidden="true">
+                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z" />
+                                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                                    <line x1="12" y1="19" x2="12" y2="22" />
+                                                </svg>
+                                            </span>
+                                            <a href="service-details-interview-guidance.html"
+                                                style="white-space: nowrap;">Interview Guidance</a>
+                                        </span>
+                                    </h3>
+                                    <a class="xb-item--icon" href="service-details-interview-guidance.html">
+                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                    </a>
+                                </div>
+                                <p class="xb-item--content">Step-by-step interview preparation to help you perform with
+                                    confidence.</p>
+                            </div>
+                            <div class="service-vertical-text">
+                                <h3 class="xb-item--title">
+                                    <span class="xb-service-title-with-icon">
+                                        <span class="xb-service-title-icon" aria-hidden="true">
+                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z" />
+                                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                                <line x1="12" y1="19" x2="12" y2="22" />
+                                            </svg>
+                                        </span>
+                                        <a href="service-details-interview-guidance.html"
+                                            style="white-space: nowrap;">Interview Guidance</a>
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.5s"
+                        data-wow-duration="0.6s">
+                        <div class="xb-item--inner">
+                            <div class="xb-item--item">
+                                <div class="xb-item--head-item">
+                                    <h3 class="xb-item--title border-effect">
+                                        <span class="xb-service-title-with-icon">
+                                            <span class="xb-service-title-icon" aria-hidden="true">
+                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polyline points="16 18 22 12 16 6" />
+                                                    <polyline points="8 6 2 12 8 18" />
+                                                </svg>
+                                            </span>
+                                            <a href="service-details-technical-training.html"
+                                                style="font-size: 0.75em;">Technical Training & Support</a>
+                                        </span>
+                                    </h3>
+                                    <a class="xb-item--icon" href="service-details-technical-training.html">
+                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                    </a>
+                                </div>
+                                <p class="xb-item--content">Practical technical training and assistance aligned with job
+                                    requirements.</p>
+                            </div>
+                            <div class="service-vertical-text">
+                                <h3 class="xb-item--title">
+                                    <span class="xb-service-title-with-icon">
+                                        <span class="xb-service-title-icon" aria-hidden="true">
+                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <polyline points="16 18 22 12 16 6" />
+                                                <polyline points="8 6 2 12 8 18" />
+                                            </svg>
+                                        </span>
+                                        <a href="service-details-technical-training.html"
+                                            style="font-size: 0.75em;">Technical Training & Support</a>
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.6s"
+                        data-wow-duration="0.6s">
+                        <div class="xb-item--inner">
+                            <div class="xb-item--item">
+                                <div class="xb-item--head-item">
+                                    <h3 class="xb-item--title border-effect">
+                                        <span class="xb-service-title-with-icon">
+                                            <span class="xb-service-title-icon" aria-hidden="true">
+                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                                                    <rect width="20" height="14" x="2" y="6" rx="2" />
+                                                </svg>
+                                            </span>
+                                            <a href="service-details-full-job-support.html">Full Job Support</a>
+                                        </span>
+                                    </h3>
+                                    <a class="xb-item--icon" href="service-details-full-job-support.html">
+                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                    </a>
+                                </div>
+                                <p class="xb-item--content">End-to-end support from preparation to securing a full-time
+                                    offer.</p>
+                            </div>
+                            <div class="service-vertical-text">
+                                <h3 class="xb-item--title">
+                                    <span class="xb-service-title-with-icon">
+                                        <span class="xb-service-title-icon" aria-hidden="true">
+                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                                                <rect width="20" height="14" x="2" y="6" rx="2" />
+                                            </svg>
+                                        </span>
+                                        <a href="service-details-full-job-support.html">Full Job Support</a>
+                                    </span>
+                                </h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "What I appreciated most was the transparency. Everything was clearly explained—from
-                                services to timelines. The support was consistent and professional throughout my job
-                                search journey."
+            </section>
+            <!-- service end -->
 
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Kenil Nisar</h3>
-                                    <span class="xb-item--desig">Morgan stanley - financial analyst </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Career Impact Wall -->
+            <section class="career-impact-wall" id="career-impact-wall">
+                <div class="career-impact-glow" aria-hidden="true"></div>
+                <div class="career-impact-streaks" aria-hidden="true">
+                    <span class="career-impact-streak"></span>
+                    <span class="career-impact-streak"></span>
+                    <span class="career-impact-streak"></span>
+                    <span class="career-impact-streak"></span>
+                    <span class="career-impact-streak"></span>
                 </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "My resume and LinkedIn profile were completely transformed to match U.S. hiring
-                                standards. The interview guidance was practical and helped me approach interviews with
-                                much more confidence."
+                <div class="career-impact-particles" aria-hidden="true">
+                    <span class="career-impact-particle"></span>
+                    <span class="career-impact-particle"></span>
+                    <span class="career-impact-particle"></span>
+                    <span class="career-impact-particle"></span>
+                    <span class="career-impact-particle"></span>
+                    <span class="career-impact-particle"></span>
+                    <span class="career-impact-particle"></span>
+                </div>
 
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Sahaj Patel</h3>
-                                    <span class="xb-item--desig">Coca Cola - Frontend Engineer </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "This is not just resume help—they provide complete job support. From profile marketing
-                                to interview updates, the team stayed involved until the final outcome."
-
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Harsh Patel</h3>
-                                    <span class="xb-item--desig">verizon - backend developer </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-testimonial-item">
-                        <div class="xb-item--inner xb-border">
-                            <p class="xb-item--content">
-                                "If you’re serious about finding a full‑time role and want proper guidance, this team
-                                delivers. Their candidate‑first approach and continuous support really stand out."
-                            </p>
-                            <div class="xb-item--author ul_li">
-                                <div class="xb-item--holder">
-                                    <h3 class="xb-item--name">Disha Patel</h3>
-                                    <span class="xb-item--desig">Full Stack Developer - Optimoz</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- testimonial end -->
-
-    <!-- team start -->
-    <section class="team pos-rel pt-150 pb-195">
-        <div class="container">
-            <div class="xb-team_wrapper text-center mt-none-60 pb-50">
-                <div class="team-item">
-                    <span class="xb-item--desig">CEO</span>
-                    <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img01.jpg" data-fx="1">
-                        <a href="#!">Tirth <span>Patel</span></a>
+                <div class="career-impact-center">
+                    <span class="career-impact-micro-label">CAREER OUTCOMES</span>
+                    <h2 class="career-impact-title" id="career-impact-title">
+                        <span class="title-char">O</span><span class="title-char">u</span><span
+                            class="title-char">r</span><span class="title-char space"></span>
+                        <span class="title-char">C</span><span class="title-char">a</span><span
+                            class="title-char">n</span><span class="title-char">d</span><span
+                            class="title-char">i</span><span class="title-char">d</span><span
+                            class="title-char">a</span><span class="title-char">t</span><span
+                            class="title-char">e</span><span class="title-char">s</span><span
+                            class="title-char space"></span>
+                        <span class="title-char">A</span><span class="title-char">r</span><span
+                            class="title-char">e</span><span class="title-char space"></span>
+                        <span class="brand-accent"><span class="title-char">P</span><span
+                                class="title-char">l</span><span class="title-char">a</span><span
+                                class="title-char">c</span><span class="title-char">e</span><span
+                                class="title-char">d</span></span><span class="title-char space"></span>
+                        <span class="title-char">A</span><span class="title-char">t</span>
                     </h2>
-                </div>
-                <div class="team-item">
-                    <span class="xb-item--desig">Manging Director</span>
-                    <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img02.jpg" data-fx="1">
-                        <a href="#!">Yuvrajsinh <span>Bhati</span></a>
-                    </h2>
-                </div>
-                <div class="team-item">
-                    <span class="xb-item--desig">Marketing Head</span>
-                    <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img04.jpg" data-fx="1">
-                        <a href="#!">Harsh <span>Patel</span></a>
-                    </h2>
-                </div>
-                <div class="team-item">
-                    <span class="xb-item--desig">Senior Career Advisor</span>
-                    <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img03.jpg" data-fx="1">
-                        <a href="#!">Arya <span>Patel</span></a>
-                    </h2>
-                </div>
-            </div>
-            <div class="xb-team_shape">
-                <img src="assets/img/shape/team-lines.png" alt="" onerror="this.style.display='none'">
-            </div>
-    </section>
-    <!-- team end -->
-
-
-    </main>
-    <!-- main area end -->
-
-    <!-- footer strt -->
-    <footer class="footer footer-style-one pt-145 bg_img" data-background="assets/img/bg/footer-bg.png">
-        <div class="xb-footer-wrap">
-            <div class="xb-footer-heading wow zoomIn" data-wow-delay="0ms" data-wow-duration="600ms">
-                <h1 class="title">Vertex</h1>
-                <a class="mail" href="mailto:info@vertextechio.com"><img src="assets/img/icon/email-icon.svg"
-                        alt="icon">info@vertextechio.com</a>
-            </div>
-            <div class="xb-footer-nav">
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">What we do?</span>
-                    <h2 class="title"><a href="service.html">Services</a></h2>
-                </div>
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">Who we are?</span>
-                    <h2 class="title"><a href="about.html">About us</a></h2>
-                </div>
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">How we deliver</span>
-                    <h2 class="title"><a href="contact.html">Contact us</a></h2>
+                    <p class="career-impact-subtext">Trusted by global companies hiring top talent</p>
+                    <div class="career-impact-divider" aria-hidden="true"></div>
                 </div>
 
+                <div class="career-impact-logos-wrap">
+                    <div class="career-impact-logos-track" id="career-impact-logos-track">
+                        <div class="career-impact-logo" data-company="Dell"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Dell</span><img
+                                src="assets/img/brand/image-removebg-preview-3.png" alt="Dell"></div>
+                        <div class="career-impact-logo" data-company="Morgan Stanley"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Morgan Stanley</span><img
+                                src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley"></div>
+                        <div class="career-impact-logo" data-company="Walmart"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Walmart</span><img
+                                src="assets/img/brand/wallmart.png" alt="Walmart"></div>
+                        <div class="career-impact-logo" data-company="Warner Bros"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Warner Bros</span><img
+                                src="assets/img/brand/warnerbros-logo.png" alt="Warner Bros"></div>
+                        <div class="career-impact-logo" data-company="Company"><span
+                                class="career-impact-logo-tooltip">Candidates placed at top companies</span><img
+                                src="assets/img/brand/logo01.png" alt="Company"></div>
+                        <div class="career-impact-logo" data-company="Company"><span
+                                class="career-impact-logo-tooltip">Candidates placed at top companies</span><img
+                                src="assets/img/brand/logo02.png" alt="Company"></div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="career-impact-logo" data-company="Dell"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Dell</span><img
+                                src="assets/img/brand/image-removebg-preview-3.png" alt="Dell"></div>
+                        <div class="career-impact-logo" data-company="Morgan Stanley"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Morgan Stanley</span><img
+                                src="assets/img/brand/morganstanley.svg" alt="Morgan Stanley"></div>
+                        <div class="career-impact-logo" data-company="Walmart"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Walmart</span><img
+                                src="assets/img/brand/wallmart.png" alt="Walmart"></div>
+                        <div class="career-impact-logo" data-company="Warner Bros"><span
+                                class="career-impact-logo-tooltip">Candidates placed at Warner Bros</span><img
+                                src="assets/img/brand/warnerbros-logo.png" alt="Warner Bros"></div>
+                        <div class="career-impact-logo" data-company="Company"><span
+                                class="career-impact-logo-tooltip">Candidates placed at top companies</span><img
+                                src="assets/img/brand/logo01.png" alt="Company"></div>
+                        <div class="career-impact-logo" data-company="Company"><span
+                                class="career-impact-logo-tooltip">Candidates placed at top companies</span><img
+                                src="assets/img/brand/logo02.png" alt="Company"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- testimonial start -->
+            <section class="testimonial testimonial-section pb-250">
+                <div class="container">
+                    <div class="tes-header">
+                        <span class="tes-micro-label">TESTIMONIALS</span>
+                        <h2 class="tes-title">Hear from our happy customers</h2>
+                        <p class="tes-subtext">Real stories. Real outcomes.</p>
+                    </div>
+                </div>
+                <div class="tes-marquee-wrap" data-marquee="true">
+                    <div class="tes-marquee-track">
+                        <div class="tes-marquee-inner">
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">
+                                            "The team took the time to understand my profile and career goals before
+                                            starting the
+                                            process. Their resume improvements, interview guidance, and regular
+                                            follow‑ups made the
+                                            entire job search more organized and manageable."
+                                        </p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Bony Patel</h3>
+                                                <span class="xb-item--desig">CNC Machinist - Cretex</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">
+                                            "The team provided clear guidance from resume optimization to interview
+                                            preparation.
+                                            Their structured process and regular updates made the job search much less
+                                            stressful,
+                                            and I felt supported at every step."
+                                        </p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Keval Gajera</h3>
+                                                <span class="xb-item--desig">RMS - service engineer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">
+                                            "What I appreciated most was the transparency. Everything was clearly
+                                            explained—from
+                                            services to timelines. The support was consistent and professional
+                                            throughout my job
+                                            search journey."
+
+                                        </p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Kenil Nisar</h3>
+                                                <span class="xb-item--desig">Morgan stanley - financial analyst </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">
+                                            "My resume and LinkedIn profile were completely transformed to match U.S.
+                                            hiring
+                                            standards. The interview guidance was practical and helped me approach
+                                            interviews with
+                                            much more confidence."
+
+                                        </p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Sahaj Patel</h3>
+                                                <span class="xb-item--desig">Coca Cola - Frontend Engineer </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">
+                                            "This is not just resume help—they provide complete job support. From
+                                            profile marketing
+                                            to interview updates, the team stayed involved until the final outcome."
+
+                                        </p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Harsh Patel</h3>
+                                                <span class="xb-item--desig">verizon - backend developer </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">
+                                            "If you’re serious about finding a full‑time role and want proper guidance,
+                                            this team
+                                            delivers. Their candidate‑first approach and continuous support really stand
+                                            out."
+                                        </p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Disha Patel</h3>
+                                                <span class="xb-item--desig">Full Stack Developer - Optimoz</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Duplicated for seamless infinite loop -->
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">"The team took the time to understand my profile and
+                                            career goals before starting the process. Their resume improvements,
+                                            interview guidance, and regular follow‑ups made the entire job search more
+                                            organized and manageable."</p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Bony Patel</h3><span
+                                                    class="xb-item--desig">CNC Machinist - Cretex</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">"The team provided clear guidance from resume
+                                            optimization to interview preparation. Their structured process and regular
+                                            updates made the job search much less stressful, and I felt supported at
+                                            every step."</p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Keval Gajera</h3><span
+                                                    class="xb-item--desig">RMS - service engineer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">"What I appreciated most was the transparency.
+                                            Everything was clearly explained—from services to timelines. The support was
+                                            consistent and professional throughout my job search journey."</p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Kenil Nisar</h3><span
+                                                    class="xb-item--desig">Morgan stanley - financial analyst</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">"My resume and LinkedIn profile were completely
+                                            transformed to match U.S. hiring standards. The interview guidance was
+                                            practical and helped me approach interviews with much more confidence."</p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Sahaj Patel</h3><span
+                                                    class="xb-item--desig">Coca Cola - Frontend Engineer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">"This is not just resume help—they provide complete
+                                            job support. From profile marketing to interview updates, the team stayed
+                                            involved until the final outcome."</p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Harsh Patel</h3><span
+                                                    class="xb-item--desig">verizon - backend developer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tes-card">
+                                <div class="xb-testimonial-item">
+                                    <div class="xb-item--inner xb-border">
+                                        <p class="xb-item--content">"If you're serious about finding a full‑time role
+                                            and want proper guidance, this team delivers. Their candidate‑first approach
+                                            and continuous support really stand out."</p>
+                                        <div class="xb-item--author ul_li">
+                                            <div class="xb-item--holder">
+                                                <h3 class="xb-item--name">Disha Patel</h3><span
+                                                    class="xb-item--desig">Full Stack Developer - Optimoz</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+            <!-- testimonial end -->
+
+        </main>
+        <!-- main area end -->
+
+        <!-- footer strt -->
+        <footer class="footer footer-style-one footer-fixed-design">
+            <div class="xb-footer-wrap">
+                <div class="xb-social-media-wrap">
+                    <a href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank"
+                        rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
+                        <div class="xb-item--holder ul_li">
+                            <div class="xb-item--icon"><i class="fa-brands fa-facebook"></i></div>
+                            <span class="xb-item--name">FACEBOOK</span>
+                        </div>
+                        <span class="xb-item--arrow">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
+                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
+                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
+                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
+                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
+                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
+                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
+                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer"
+                        class="xb-social-media-item ul_li_between">
+                        <div class="xb-item--holder ul_li">
+                            <div class="xb-item--icon"><i class="fa-brands fa-whatsapp"></i></div>
+                            <span class="xb-item--name">WHATSAPP</span>
+                        </div>
+                        <span class="xb-item--arrow">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
+                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
+                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
+                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
+                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
+                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
+                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
+                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank"
+                        rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
+                        <div class="xb-item--holder ul_li">
+                            <div class="xb-item--icon"><i class="fa-brands fa-linkedin"></i></div>
+                            <span class="xb-item--name">LINKEDIN</span>
+                        </div>
+                        <span class="xb-item--arrow">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
+                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
+                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
+                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
+                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
+                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
+                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
+                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"
+                        class="xb-social-media-item ul_li_between">
+                        <div class="xb-item--holder ul_li">
+                            <div class="xb-item--icon"><i class="fa-brands fa-instagram"></i></div>
+                            <span class="xb-item--name">INSTAGRAM</span>
+                        </div>
+                        <span class="xb-item--arrow">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
+                                    transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
+                                <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
+                                <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
+                                <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
+                                <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
+                                <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
+                                <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
+                                    transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+                <div class="xb-footer-bottom">
+                    <div class="contact-item">
+                        <img src="assets/img/icon/location-icon.svg" alt="">
+                        <span class="contact-method">30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
+                    </div>
+                    <div class="contact-item copyright-item">
+                        <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
+                    </div>
+                    <div class="contact-item contact-item-right">
+                        <a href="tel:+17637229401" class="contact-phone-link"><img src="assets/img/icon/call-icon.svg"
+                                alt=""></a>
+                        <span class="contact-method">+1(763)-722-9401</span>
+                        <a href="#" class="footer-scroll-top scroll" title="Scroll to top"><i
+                                class="far fa-arrow-up"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="xb-social-media-wrap">
-                <div class="xb-social-media-item ul_li_between">
-                    <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-facebook"></i>
-                        </div>
-                        <span class="xb-item--name">Facebook</span>
-                    </div>
-                    <span class="xb-item--arrow">
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                        </svg>
-                    </span>
-                    <a class="xb-overlay" href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr"
-                        target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
-                    <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </div>
-                        <span class="xb-item--name">WhatsApp</span>
-                    </div>
-                    <span class="xb-item--arrow">
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                        </svg>
-                    </span>
-                    <a class="xb-overlay" href="https://wa.me/17637229401" target="_blank"
-                        rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
-                    <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </div>
-                        <span class="xb-item--name">LinkedIn</span>
-                    </div>
-                    <span class="xb-item--arrow">
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                        </svg>
-                    </span>
-                    <a class="xb-overlay" href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true"
-                        target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
-                    <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
-                        <span class="xb-item--name">Instagram</span>
-                    </div>
-                    <span class="xb-item--arrow">
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221"
-                                transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221"
-                                transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
-                        </svg>
-                    </span>
-                    <a class="xb-overlay" href="https://www.instagram.com/vertextech.io/" target="_blank"
-                        rel="noopener noreferrer"></a>
-                </div>
-            </div>
-            <div class="xb-footer-bottom">
-                <div class="contact-item">
-                    <img src="assets/img/icon/location-icon.svg" alt="icon">
-                    <span class="contact-method">30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
-                </div>
-                <div class="contact-item copyright-item">
-                    <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
-                </div>
-                <div class="contact-item">
-                    <a href="tel:+1763-722-9401"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
-                    <a class="contact-method" href="tel:+1763-722-9401">+1(763)-722-9401</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer end -->
+        </footer>
+        <!-- footer end -->
     </div>
 
     <!-- jquery include -->
@@ -2658,36 +4394,6 @@
         })();
     </script>
 
-    <!-- Team Image Reveal Initialization -->
-    <script>
-        // Ensure team image reveal is initialized after all scripts load
-        (function () {
-            function initTeamImageReveal() {
-                // Check if imageRevealHover is loaded and has the classes
-                const teamItems = document.querySelectorAll('.team-item .xb-img-reveal-item[data-fx="1"]');
-                if (teamItems.length > 0) {
-                    // Force re-initialization if needed
-                    teamItems.forEach(function (item) {
-                        // Check if already initialized
-                        if (!item.hasAttribute('data-reveal-initialized')) {
-                            item.setAttribute('data-reveal-initialized', 'true');
-                            // The imageRevealHover.js should handle this, but we can trigger it manually if needed
-                        }
-                    });
-                }
-            }
-
-            // Wait for everything to load
-            if (document.readyState === 'complete') {
-                setTimeout(initTeamImageReveal, 500);
-            } else {
-                window.addEventListener('load', function () {
-                    setTimeout(initTeamImageReveal, 500);
-                });
-            }
-        })();
-    </script>
-
     <!-- Testimonial Slider Autoplay Fix -->
     <script>
         // Ensure testimonial slider autoplay is working
@@ -2811,6 +4517,177 @@
             window.addEventListener('resize', function () {
                 setTimeout(removeFooterSpace, 100);
             });
+        })();
+    </script>
+
+    <!-- Hero stat cards: count-up on load -->
+    <script>
+        (function () {
+            function animateCounter(el, target, duration) {
+                var start = 0;
+                var startTime = null;
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    var progress = Math.min((timestamp - startTime) / duration, 1);
+                    var easeOut = 1 - Math.pow(1 - progress, 3);
+                    var current = Math.floor(easeOut * target);
+                    el.textContent = current + '+';
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = target + '+';
+                }
+                requestAnimationFrame(step);
+            }
+            function initHeroStatCards() {
+                var numbers = document.querySelectorAll('.hero-stat-number[data-count]');
+                numbers.forEach(function (el) {
+                    if (el.getAttribute('data-animated') === 'true') return;
+                    var target = parseInt(el.getAttribute('data-count'), 10);
+                    if (isNaN(target)) return;
+                    el.setAttribute('data-animated', 'true');
+                    animateCounter(el, target, 2000);
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initHeroStatCards);
+            } else {
+                initHeroStatCards();
+            }
+            window.addEventListener('load', function () { setTimeout(initHeroStatCards, 200); });
+        })();
+    </script>
+
+    <!-- How it works: scroll-triggered reveal, fill on active, arrow highlight -->
+    <script>
+        (function () {
+            var section = document.getElementById('process-steps');
+            if (!section) return;
+            var container = section.closest('.process-section');
+            var cards = section ? section.querySelectorAll('.process-card') : [];
+            var arrows = section ? section.querySelectorAll('.process-arrow') : [];
+            var observerOptions = { threshold: 0.2, rootMargin: '0px 0px -60px 0px' };
+
+            function revealCards() {
+                if (!container) return;
+                container.classList.add('is-inview');
+                cards.forEach(function (card, i) {
+                    var delay = 140 * i;
+                    setTimeout(function () {
+                        card.classList.add('is-visible');
+                        if (i === 0) card.classList.add('is-active');
+                    }, delay);
+                });
+                setActiveByScroll();
+            }
+
+            function setActiveByScroll() {
+                if (!container || cards.length === 0) return;
+                var rect = container.getBoundingClientRect();
+                var center = rect.top + rect.height * 0.4;
+                var activeIndex = -1;
+                cards.forEach(function (card, i) {
+                    card.classList.remove('is-active');
+                    var cr = card.getBoundingClientRect();
+                    if (cr.top + cr.height * 0.5 <= center + 80) {
+                        card.classList.add('is-active');
+                        activeIndex = i;
+                    }
+                });
+                arrows.forEach(function (arrow, i) {
+                    arrow.classList.remove('is-highlighted');
+                    if (i === activeIndex) arrow.classList.add('is-highlighted');
+                });
+            }
+
+            var once = false;
+            var obs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting || once) return;
+                    once = true;
+                    revealCards();
+                });
+            }, observerOptions);
+
+            if (container) obs.observe(container);
+            window.addEventListener('scroll', function () {
+                if (once && container) setActiveByScroll();
+            }, { passive: true });
+        })();
+    </script>
+
+    <!-- Services transition: scroll-based glow -->
+    <script>
+        (function () {
+            var section = document.getElementById('services-transition');
+            if (!section) return;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        section.classList.add('is-inview');
+                    } else {
+                        section.classList.remove('is-inview');
+                    }
+                });
+            }, { threshold: 0.2 });
+            observer.observe(section);
+        })();
+    </script>
+
+    <!-- Career Impact Wall: scroll animations, logos under text -->
+    <script>
+        (function () {
+            var section = document.getElementById('career-impact-wall');
+            var title = document.getElementById('career-impact-title');
+            if (!section) return;
+
+            var logos = section.querySelectorAll('.career-impact-logo');
+
+            if (title) {
+                var chars = title.querySelectorAll('.title-char');
+                chars.forEach(function (ch, i) {
+                    ch.style.transitionDelay = (0.03 * i) + 's';
+                });
+            }
+
+            logos.forEach(function (logo, i) {
+                logo.style.transitionDelay = (0.06 * (i % 6)) + 's';
+            });
+
+            var obs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        section.classList.add('is-visible');
+                        section.classList.remove('is-exiting');
+                        setTimeout(function () {
+                            section.classList.add('is-orbit-ready');
+                        }, 500);
+                    } else {
+                        if (entry.boundingClientRect.top < 0) {
+                            section.classList.add('is-exiting');
+                        }
+                        section.classList.remove('is-visible');
+                        section.classList.remove('is-orbit-ready');
+                    }
+                });
+            }, { threshold: [0, 0.2, 0.5, 1], rootMargin: '0px' });
+            obs.observe(section);
+        })();
+    </script>
+
+    <!-- Testimonial scroll animations -->
+    <script>
+        (function () {
+            var testimonialSection = document.querySelector('.testimonial-section');
+            var tesHeader = testimonialSection && testimonialSection.querySelector('.tes-header');
+            if (testimonialSection && tesHeader) {
+                var headerObs = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) {
+                            testimonialSection.classList.add('is-heading-visible');
+                        }
+                    });
+                }, { threshold: 0.25 });
+                headerObs.observe(tesHeader);
+            }
         })();
     </script>
 

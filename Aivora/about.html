@@ -381,6 +381,17 @@
         .about-page .xb-feature-item .xb-item--content {
             flex-grow: 1;
         }
+        /* About page: no footer background image (removes post-footer gradient area) */
+        .about-page .footer,
+        .about-page .footer.bg_img {
+            background-color: #030614 !important;
+            background-image: none !important;
+        }
+        /* No image below footer: solid page background */
+        .about-page .body_wrap,
+        .about-page .body_wrap::after {
+            background-image: none !important;
+        }
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
             font-size: 288px !important;
@@ -423,6 +434,564 @@
         @media (max-width: 767px) {
             .xb-footer-heading .title {
                 font-size: 66px !important;
+            }
+        }
+
+        /* ========== About Us: Vision / Mission / Goal — Glass panels, cinematic ========== */
+        .xb-vmg-section {
+            position: relative;
+            padding: 120px 0 140px;
+            background: linear-gradient(180deg, #030614 0%, #0a0f28 40%, #050a1a 70%, #00020f 100%);
+            overflow: hidden;
+        }
+        /* Animated gradient waves (subtle) */
+        .xb-vmg-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 90% 60% at 15% 25%, rgba(0, 255, 151, 0.07) 0%, transparent 55%),
+                radial-gradient(ellipse 70% 50% at 85% 75%, rgba(0, 164, 175, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 70% at 50% 50%, rgba(44, 50, 254, 0.04) 0%, transparent 65%);
+            animation: xb-vmg-bg-wave 18s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes xb-vmg-bg-wave {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.92; transform: scale(1.02); }
+        }
+        /* Noise grain overlay (light, performant) */
+        .xb-vmg-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Flowing background lines */
+        .xb-vmg-section .xb-vmg-bg-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .xb-vmg-section .xb-vmg-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 151, 0.15), transparent);
+            height: 1px;
+            animation: xb-vmg-line-flow 16s ease-in-out infinite;
+        }
+        .xb-vmg-section .xb-vmg-line:nth-child(1) { top: 18%; left: -20%; width: 55%; animation-delay: 0s; }
+        .xb-vmg-section .xb-vmg-line:nth-child(2) { top: 48%; left: -10%; width: 50%; animation-delay: -3s; }
+        .xb-vmg-section .xb-vmg-line:nth-child(3) { bottom: 28%; right: -20%; width: 52%; animation-delay: -7s; }
+        .xb-vmg-section .xb-vmg-line:nth-child(4) { top: 72%; right: -15%; width: 48%; animation-delay: -2s; }
+        @keyframes xb-vmg-line-flow {
+            0%, 100% { opacity: 0.2; transform: translateX(0); }
+            50% { opacity: 0.55; transform: translateX(15%); }
+        }
+        /* Floating particles */
+        .xb-vmg-section .xb-vmg-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .xb-vmg-section .xb-vmg-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 255, 151, 0.45);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(0, 255, 151, 0.4);
+            animation: xb-vmg-particle-float 11s ease-in-out infinite;
+        }
+        .xb-vmg-section .xb-vmg-particle:nth-child(1) { left: 8%; top: 22%; animation-delay: 0s; }
+        .xb-vmg-section .xb-vmg-particle:nth-child(2) { left: 28%; top: 58%; animation-delay: -2s; }
+        .xb-vmg-section .xb-vmg-particle:nth-child(3) { right: 22%; top: 32%; animation-delay: -4s; }
+        .xb-vmg-section .xb-vmg-particle:nth-child(4) { right: 12%; bottom: 28%; animation-delay: -1s; }
+        .xb-vmg-section .xb-vmg-particle:nth-child(5) { left: 52%; top: 48%; animation-delay: -5s; }
+        @keyframes xb-vmg-particle-float {
+            0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+            33% { transform: translate(14px, -20px); opacity: 0.8; }
+            66% { transform: translate(-10px, 14px); opacity: 0.5; }
+        }
+        /* Energy line SVG — Vision → Mission → Goal */
+        .xb-vmg-connect-wrap {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .xb-vmg-connect-wrap svg {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            transform: translateY(-50%);
+            overflow: visible;
+        }
+        .xb-vmg-connect-path {
+            fill: none;
+            stroke: url(#xb-vmg-path-gradient);
+            stroke-width: 0.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+        }
+        .xb-vmg-section.xb-vmg-started .xb-vmg-connect-path {
+            stroke-dashoffset: 0;
+        }
+        .xb-vmg-connect-glow {
+            fill: none;
+            stroke: url(#xb-vmg-path-gradient);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            opacity: 0.35;
+            filter: blur(4px);
+            transition: stroke-dashoffset 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+        }
+        .xb-vmg-section.xb-vmg-started .xb-vmg-connect-glow {
+            stroke-dashoffset: 0;
+        }
+        .xb-vmg-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        /* Horizontal flow, zig-zag vertical offset */
+        .xb-vmg-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            perspective: 1400px;
+        }
+        /* Glass panel — holographic slab, no card/box */
+        .xb-vmg-panel {
+            position: relative;
+            padding: 36px 28px 40px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            box-shadow: 
+                0 0 0 1px rgba(0, 255, 151, 0.06) inset,
+                0 24px 48px -12px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(40px) translateZ(0);
+            transform-style: preserve-3d;
+            transition: 
+                opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+            will-change: transform;
+        }
+        .xb-vmg-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 255, 151, 0.2) 0%, transparent 40%, transparent 60%, rgba(0, 164, 175, 0.15) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .xb-vmg-panel.xb-vmg-visible {
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+        }
+        /* Zig-zag: panel 1 up, 2 down, 3 up */
+        .xb-vmg-zones .xb-vmg-panel:nth-child(1) { transform: translateY(40px) translateY(-24px) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(1).xb-vmg-visible { transform: translateY(-24px) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(2) { transform: translateY(40px) translateY(20px) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(2).xb-vmg-visible { transform: translateY(20px) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(3) { transform: translateY(40px) translateY(-16px) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(3).xb-vmg-visible { transform: translateY(-16px) translateZ(0); }
+        /* Subtle float drift */
+        .xb-vmg-section.xb-vmg-started .xb-vmg-panel:nth-child(1) { animation: xb-vmg-float-1 8s ease-in-out infinite; }
+        .xb-vmg-section.xb-vmg-started .xb-vmg-panel:nth-child(2) { animation: xb-vmg-float-2 9s ease-in-out infinite; }
+        .xb-vmg-section.xb-vmg-started .xb-vmg-panel:nth-child(3) { animation: xb-vmg-float-3 7.5s ease-in-out infinite; }
+        @keyframes xb-vmg-float-1 {
+            0%, 100% { transform: translateY(-24px) translateZ(0); }
+            50% { transform: translateY(-28px) translateZ(0); }
+        }
+        @keyframes xb-vmg-float-2 {
+            0%, 100% { transform: translateY(20px) translateZ(0); }
+            50% { transform: translateY(24px) translateZ(0); }
+        }
+        @keyframes xb-vmg-float-3 {
+            0%, 100% { transform: translateY(-16px) translateZ(0); }
+            50% { transform: translateY(-20px) translateZ(0); }
+        }
+        /* Hover: 3D tilt, glow, text sharpen */
+        .xb-vmg-panel:hover {
+            border-color: rgba(0, 255, 151, 0.2);
+            box-shadow: 
+                0 0 0 1px rgba(0, 255, 151, 0.08) inset,
+                0 0 40px -8px rgba(0, 255, 151, 0.2),
+                0 24px 56px -12px rgba(0, 0, 0, 0.55);
+        }
+        .xb-vmg-panel:hover::before {
+            opacity: 1;
+        }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(1):hover { transform: translateY(-26px) rotateX(2deg) rotateY(-1deg) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(2):hover { transform: translateY(18px) rotateX(2deg) rotateY(1deg) translateZ(0); }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(3):hover { transform: translateY(-18px) rotateX(2deg) rotateY(1deg) translateZ(0); }
+        /* Inner glow (brand gradient) */
+        .xb-vmg-panel-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 140%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse 60% 50% at center, rgba(0, 255, 151, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .xb-vmg-panel.xb-vmg-visible .xb-vmg-panel-glow {
+            opacity: 1;
+        }
+        .xb-vmg-panel.xb-vmg-active .xb-vmg-panel-glow {
+            opacity: 1;
+            animation: xb-vmg-panel-pulse 2.5s ease-in-out infinite;
+        }
+        .xb-vmg-panel:nth-child(2) .xb-vmg-panel-glow {
+            background: radial-gradient(ellipse 60% 50% at center, rgba(0, 164, 175, 0.07) 0%, transparent 70%);
+        }
+        @keyframes xb-vmg-panel-pulse {
+            0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        /* Content: neon label */
+        .xb-vmg-panel .xb-vmg-label {
+            font-family: var(--font-heading), sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            color: rgba(0, 255, 151, 0.95);
+            text-shadow: 0 0 20px rgba(0, 255, 151, 0.4);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            display: block;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.5s ease 0.15s, color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .xb-vmg-panel.xb-vmg-visible .xb-vmg-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .xb-vmg-panel:hover .xb-vmg-label {
+            color: rgba(0, 255, 151, 1);
+            text-shadow: 0 0 24px rgba(0, 255, 151, 0.55);
+        }
+        /* Headline — type-reveal feel via fade-up */
+        .xb-vmg-panel .xb-vmg-headline {
+            font-family: var(--font-heading), sans-serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.22;
+            margin-bottom: 14px;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s ease 0.25s, transform 0.5s ease 0.25s, color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .xb-vmg-panel.xb-vmg-visible .xb-vmg-headline {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .xb-vmg-panel:hover .xb-vmg-headline {
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.12);
+        }
+        /* Supporting text (2 lines max) */
+        .xb-vmg-panel .xb-vmg-desc {
+            font-size: 0.9rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.72);
+            margin: 0;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s, color 0.3s ease;
+        }
+        .xb-vmg-panel.xb-vmg-visible .xb-vmg-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .xb-vmg-panel:hover .xb-vmg-desc {
+            color: rgba(255, 255, 255, 0.88);
+        }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(2) .xb-vmg-desc { margin-left: auto; margin-right: auto; }
+        .xb-vmg-zones .xb-vmg-panel:nth-child(3) .xb-vmg-desc { margin-left: auto; }
+        @media (max-width: 991px) {
+            .xb-vmg-zones {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .xb-vmg-connect-wrap { display: none; }
+            .xb-vmg-zones .xb-vmg-panel:nth-child(n) { transform: translateY(40px) translateZ(0) !important; animation: none !important; }
+            .xb-vmg-zones .xb-vmg-panel:nth-child(n).xb-vmg-visible { transform: translateY(0) translateZ(0) !important; }
+            .xb-vmg-zones .xb-vmg-panel:nth-child(n):hover { transform: translateY(-2px) rotateX(1deg) rotateY(0) translateZ(0) !important; }
+            .xb-vmg-panel .xb-vmg-desc { margin-left: 0 !important; margin-right: 0 !important; max-width: none; }
+        }
+        @media (max-width: 767px) {
+            .xb-vmg-section { padding: 80px 0 100px; }
+            .xb-vmg-zones { gap: 24px; }
+            .xb-vmg-panel { padding: 28px 20px 32px; }
+            .xb-vmg-panel .xb-vmg-headline { font-size: 1.4rem; }
+        }
+        /* Team section overrides - same layout and font as home page */
+        .team-item .xb-item--name,
+        .team-item .xb-item--name a,
+        .team-item .xb-item--name span {
+            font-family: 'Georgia', 'Times New Roman', serif !important;
+            font-weight: 300 !important;
+        }
+        .team-item .xb-item--name a {
+            white-space: nowrap !important;
+        }
+        .xb-team_wrapper {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            align-items: flex-start !important;
+            gap: 20px 40px;
+        }
+        .xb-team_wrapper .team-item {
+            display: block !important;
+            flex: 1 1 0 !important;
+            min-width: min-content !important;
+            max-width: none !important;
+            margin: 0 !important;
+        }
+        .team-item .xb-item--name {
+            overflow: visible !important;
+        }
+        .xb-team_wrapper .team-item:nth-child(1),
+        .xb-team_wrapper .team-item:nth-child(2),
+        .xb-team_wrapper .team-item:nth-child(3),
+        .xb-team_wrapper .team-item:nth-child(4) {
+            margin-bottom: 0 !important;
+        }
+        @media (max-width: 1199px) {
+            .xb-team_wrapper .team-item {
+                flex: 0 0 calc(50% - 12px) !important;
+            }
+            .xb-team_wrapper .team-item:nth-child(1),
+            .xb-team_wrapper .team-item:nth-child(2) {
+                margin-bottom: 40px !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .xb-team_wrapper .team-item {
+                flex: 0 0 100% !important;
+                margin-bottom: 40px !important;
+            }
+            .xb-team_wrapper .team-item:nth-child(4) {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        /* ========== Meet the Team (Intro + Names) – one continuous section ========== */
+        .xb-meet-team-intro {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 120px 24px 140px;
+            background: #030614;
+            overflow: hidden;
+        }
+        .xb-meet-team-intro::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 90% 70% at 50% 35%, rgba(31, 173, 126, 0.07) 0%, transparent 45%),
+                        radial-gradient(ellipse 100% 100% at 50% 60%, rgba(7, 20, 45, 0.92) 0%, #030614 70%);
+            animation: xb-meet-glow-pulse 12s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .xb-meet-team-intro::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 40% at 50% 85%, rgba(31, 173, 126, 0.04) 0%, transparent 60%);
+            animation: xb-meet-glow-pulse 14s ease-in-out infinite 1s;
+            pointer-events: none;
+        }
+        @keyframes xb-meet-glow-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+        .xb-meet-team-intro .xb-meet-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .xb-meet-team-intro .xb-meet-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(31, 173, 126, 0.25);
+            border-radius: 50%;
+            animation: xb-meet-particle-float 15s ease-in-out infinite;
+        }
+        .xb-meet-team-intro .xb-meet-particle:nth-child(1) { left: 15%; top: 25%; animation-delay: 0s; }
+        .xb-meet-team-intro .xb-meet-particle:nth-child(2) { left: 85%; top: 30%; animation-delay: -3s; }
+        .xb-meet-team-intro .xb-meet-particle:nth-child(3) { left: 70%; top: 70%; animation-delay: -6s; }
+        .xb-meet-team-intro .xb-meet-particle:nth-child(4) { left: 25%; top: 65%; animation-delay: -9s; }
+        .xb-meet-team-intro .xb-meet-particle:nth-child(5) { left: 50%; top: 15%; animation-delay: -2s; }
+        @keyframes xb-meet-particle-float {
+            0%, 100% { opacity: 0.2; transform: translate(0, 0); }
+            50% { opacity: 0.5; transform: translate(10px, -15px); }
+        }
+        .xb-meet-team-intro .xb-meet-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .xb-meet-team-intro .xb-meet-accent {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            color: rgba(31, 173, 126, 0.95);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: xb-meet-reveal-up 0.9s ease-out 0.2s forwards;
+        }
+        .xb-meet-team-intro .xb-meet-headline {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2rem, 4.5vw, 3.25rem);
+            font-weight: 600;
+            line-height: 1.2;
+            color: #fff;
+            margin: 0 0 20px;
+            opacity: 0;
+            animation: xb-meet-reveal-up 0.9s ease-out 0.45s forwards;
+        }
+        .xb-meet-team-intro .xb-meet-support {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            font-weight: 400;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 0 32px;
+            opacity: 0;
+            animation: xb-meet-reveal-up 0.9s ease-out 0.7s forwards;
+        }
+        @keyframes xb-meet-reveal-up {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .xb-meet-team-intro .xb-meet-divider {
+            height: 1px;
+            width: 0;
+            margin: 0 auto 0;
+            background: linear-gradient(90deg, transparent, rgba(31, 173, 126, 0.6), transparent);
+            opacity: 0;
+            animation: xb-meet-divider-draw 1.2s ease-out 1s forwards;
+            max-width: 280px;
+        }
+        @keyframes xb-meet-divider-draw {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+        /* Team names – same section, no separator, reveal after intro */
+        .xb-meet-team-intro .xb-meet-team-names {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding-top: 72px;
+            margin-top: 0;
+            background: transparent;
+            opacity: 0;
+            animation: xb-meet-names-reveal 1s ease-out 1.35s forwards;
+        }
+        .xb-meet-team-intro .xb-meet-team-names::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 900px;
+            height: 120%;
+            background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(31, 173, 126, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .xb-meet-team-intro .xb-meet-team-names .container {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes xb-meet-names-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .xb-meet-team-intro .xb-meet-team-names .team-item .xb-item--name,
+        .xb-meet-team-intro .xb-meet-team-names .team-item .xb-item--name a {
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.3), 0 0 80px rgba(31, 173, 126, 0.08);
+        }
+        @media (max-width: 767px) {
+            .xb-meet-team-intro {
+                padding: 80px 20px 100px;
+            }
+            .xb-meet-team-intro .xb-meet-accent {
+                letter-spacing: 0.2em;
+                font-size: 0.65rem;
+            }
+            .xb-meet-team-intro .xb-meet-team-names {
+                padding-top: 48px;
             }
         }
     </style>
@@ -847,6 +1416,60 @@
         </section>
         <!-- hero end -->
 
+        <!-- Vision / Mission / Goal intro section start (free-flowing, no cards) -->
+        <section class="xb-vmg-section" id="xb-vmg-section" aria-label="Our Vision, Mission, and Goal">
+            <div class="xb-vmg-bg-lines" aria-hidden="true">
+                <span class="xb-vmg-line"></span>
+                <span class="xb-vmg-line"></span>
+                <span class="xb-vmg-line"></span>
+                <span class="xb-vmg-line"></span>
+            </div>
+            <div class="xb-vmg-particles" aria-hidden="true">
+                <span class="xb-vmg-particle"></span>
+                <span class="xb-vmg-particle"></span>
+                <span class="xb-vmg-particle"></span>
+                <span class="xb-vmg-particle"></span>
+                <span class="xb-vmg-particle"></span>
+            </div>
+            <!-- Energy line: Vision → Mission → Goal (SVG draw) -->
+            <div class="xb-vmg-connect-wrap" aria-hidden="true">
+                <svg viewBox="0 0 100 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="xb-vmg-path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#00ff97" stop-opacity="0.9"/>
+                            <stop offset="50%" stop-color="#00a4af" stop-opacity="0.85"/>
+                            <stop offset="100%" stop-color="#00ff97" stop-opacity="0.9"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="xb-vmg-connect-glow" d="M 8 10 Q 30 4, 50 10 T 92 10" vector-effect="non-scaling-stroke"/>
+                    <path class="xb-vmg-connect-path" d="M 8 10 Q 30 4, 50 10 T 92 10" vector-effect="non-scaling-stroke"/>
+                </svg>
+            </div>
+            <div class="container">
+                <div class="xb-vmg-zones">
+                    <div class="xb-vmg-panel" data-vmg-panel data-vmg-order="1">
+                        <div class="xb-vmg-panel-glow" aria-hidden="true"></div>
+                        <span class="xb-vmg-label">Our Vision</span>
+                        <h2 class="xb-vmg-headline">Clarity and direction for every career path.</h2>
+                        <p class="xb-vmg-desc">A future where every professional has a clear roadmap. Ambition meets strategy; talent finds its place.</p>
+                    </div>
+                    <div class="xb-vmg-panel" data-vmg-panel data-vmg-order="2">
+                        <div class="xb-vmg-panel-glow" aria-hidden="true"></div>
+                        <span class="xb-vmg-label">Our Mission</span>
+                        <h2 class="xb-vmg-headline">Execute with strategy and care at every step.</h2>
+                        <p class="xb-vmg-desc">We turn career goals into reality. Structured support from profile building to placement.</p>
+                    </div>
+                    <div class="xb-vmg-panel" data-vmg-panel data-vmg-order="3">
+                        <div class="xb-vmg-panel-glow" aria-hidden="true"></div>
+                        <span class="xb-vmg-label">Our Goal</span>
+                        <h2 class="xb-vmg-headline">Your success is the destination we build toward.</h2>
+                        <p class="xb-vmg-desc">We measure success by yours. Every role secured, every trajectory elevated.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Vision / Mission / Goal intro section end -->
+
         <!-- about start -->
         
                 <div class="sec-title sec-title-center about-sec-title about-sec-title-two mt-45">
@@ -951,126 +1574,145 @@
         </section>
         <!-- feature end -->
 
-       
+        <!-- Meet the Team (Intro + Names) – one continuous section start -->
+        <section class="xb-meet-team-intro" id="xb-meet-team-intro" aria-label="Meet the Team">
+            <div class="xb-meet-particles" aria-hidden="true">
+                <span class="xb-meet-particle"></span>
+                <span class="xb-meet-particle"></span>
+                <span class="xb-meet-particle"></span>
+                <span class="xb-meet-particle"></span>
+                <span class="xb-meet-particle"></span>
+            </div>
+            <div class="xb-meet-content">
+                <span class="xb-meet-accent">THE PEOPLE BEHIND THE VISION</span>
+                <h2 class="xb-meet-headline">Meet the Team Leading Vertex Tech</h2>
+                <p class="xb-meet-support">Experienced leaders, strategists, and mentors shaping careers with purpose.</p>
+                <div class="xb-meet-divider"></div>
+            </div>
+            <div class="xb-meet-team-names">
+                <div class="container">
+                    <div class="xb-team_wrapper text-center mt-none-60 pb-50">
+                        <div class="team-item">
+                            <span class="xb-item--desig">CEO</span>
+                            <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img01.jpg" data-fx="1">
+                                <a href="#!">Tirth <span>Patel</span></a>
+                            </h2>
+                        </div>
+                        <div class="team-item">
+                            <span class="xb-item--desig">Manging Director</span>
+                            <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img02.jpg" data-fx="1">
+                                <a href="#!">Yuvrajsinh <span>Bhati</span></a>
+                            </h2>
+                        </div>
+                        <div class="team-item">
+                            <span class="xb-item--desig">Marketing Head</span>
+                            <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img04.jpg" data-fx="1">
+                                <a href="#!">Harsh <span>Patel</span></a>
+                            </h2>
+                        </div>
+                        <div class="team-item">
+                            <span class="xb-item--desig">Senior Career Advisor</span>
+                            <h2 class="xb-item--name xb-img-reveal-item" data-img="assets/img/team/img03.jpg" data-fx="1">
+                                <a href="#!">Arya <span>Patel</span></a>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="xb-team_shape">
+                        <img src="assets/img/shape/team-lines.png" alt="" onerror="this.style.display='none'">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Meet the Team end -->
 
     </main>
     <!-- main area end -->
 
     <!-- footer strt -->
-    <footer class="footer footer-style-one pt-145 bg_img" data-background="assets/img/bg/footer-bg.png" >
+    <footer class="footer footer-style-one footer-fixed-design">
         <div class="xb-footer-wrap">
-            <div class="xb-footer-heading wow zoomIn" data-wow-delay="0ms" data-wow-duration="600ms">
-                <h1 class="title">Vertex</h1>
-                <a class="mail" href="mailto:info@vertextechio.com"><img src="assets/img/icon/email-icon.svg" alt="icon">info@vertextechio.com</a>
-            </div>
-            <div class="xb-footer-nav">
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">What we do?</span>
-                    <h2 class="title"><a href="service.html">Services</a></h2>
-                </div>
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">Who we are?</span>
-                    <h2 class="title"><a href="about.html">About us</a></h2>
-                </div>
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">How we deliver</span>
-                    <h2 class="title"><a href="contact.html">Contact us</a></h2>
-                </div>
-               
-            </div>
             <div class="xb-social-media-wrap">
-                <div class="xb-social-media-item ul_li_between">
+                <a href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-facebook"></i>
-                        </div>
-                        <span class="xb-item--name">Facebook</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-facebook"></i></div>
+                        <span class="xb-item--name">FACEBOOK</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
+                </a>
+                <a href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </div>
-                        <span class="xb-item--name">WhatsApp</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <span class="xb-item--name">WHATSAPP</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
+                </a>
+                <a href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </div>
-                        <span class="xb-item--name">LinkedIn</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-linkedin"></i></div>
+                        <span class="xb-item--name">LINKEDIN</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
+                </a>
+                <a href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
-                        <span class="xb-item--name">Instagram</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-instagram"></i></div>
+                        <span class="xb-item--name">INSTAGRAM</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"></a>
-                </div>
+                </a>
             </div>
             <div class="xb-footer-bottom">
                 <div class="contact-item">
-                    <img src="assets/img/icon/location-icon.svg" alt="icon">
+                    <img src="assets/img/icon/location-icon.svg" alt="">
                     <span class="contact-method">30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
                 </div>
                 <div class="contact-item copyright-item">
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
                 </div>
-                <div class="contact-item">
-                    <a href="tel:+1763-722-9401"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
-                    <a class="contact-method" href="tel:+1763-722-9401">+1(763)-722-9401</a>
+                <div class="contact-item contact-item-right">
+                    <a href="tel:+17637229401" class="contact-phone-link"><img src="assets/img/icon/call-icon.svg" alt=""></a>
+                    <span class="contact-method">+1(763)-722-9401</span>
+                    <a href="#" class="footer-scroll-top scroll" title="Scroll to top"><i class="far fa-arrow-up"></i></a>
                 </div>
             </div>
         </div>
@@ -1112,6 +1754,63 @@
 
 <!-- Main custom script -->
 <script src="assets/js/main.js"></script>
+
+<!-- Team Image Reveal Initialization -->
+<script>
+    (function () {
+        function initTeamImageReveal() {
+            var teamItems = document.querySelectorAll('.team-item .xb-img-reveal-item[data-fx="1"]');
+            if (teamItems.length > 0) {
+                teamItems.forEach(function (item) {
+                    if (!item.hasAttribute('data-reveal-initialized')) {
+                        item.setAttribute('data-reveal-initialized', 'true');
+                    }
+                });
+            }
+        }
+        if (document.readyState === 'complete') {
+            setTimeout(initTeamImageReveal, 500);
+        } else {
+            window.addEventListener('load', function () {
+                setTimeout(initTeamImageReveal, 500);
+            });
+        }
+    })();
+</script>
+
+<!-- Vision / Mission / Goal: sequential panel reveal, path draw, hover active state -->
+<script>
+(function() {
+    var section = document.getElementById('xb-vmg-section');
+    var panels = section ? section.querySelectorAll('[data-vmg-panel]') : [];
+    if (!section || !panels.length) return;
+    var delays = [0, 380, 760];
+    var done = false;
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (!entry.isIntersecting || done) return;
+            done = true;
+            section.classList.add('xb-vmg-started');
+            panels.forEach(function(panel, i) {
+                setTimeout(function() {
+                    panel.classList.add('xb-vmg-visible');
+                }, delays[i]);
+            });
+        });
+    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+    observer.observe(section);
+    // Hover: add active class for soft pulse on focused panel
+    panels.forEach(function(panel) {
+        panel.addEventListener('mouseenter', function() {
+            panels.forEach(function(p) { p.classList.remove('xb-vmg-active'); });
+            panel.classList.add('xb-vmg-active');
+        });
+        panel.addEventListener('mouseleave', function() {
+            panel.classList.remove('xb-vmg-active');
+        });
+    });
+})();
+</script>
 
 </body>
 

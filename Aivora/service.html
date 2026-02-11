@@ -344,6 +344,387 @@
                 font-size: 66px !important;
             }
         }
+
+        /* ========== KEYFRAMES ========== */
+        @keyframes xb-img-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes xb-img-float-alt {
+            0%, 100% { transform: translateY(-3px); }
+            50% { transform: translateY(5px); }
+        }
+
+        /* ========== Services section: one name + 3 images per block ========== */
+        .xb-services-showcase {
+            position: relative;
+            padding: 0 0 80px;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+        .xb-services-showcase-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #00020f 0%, #0a1628 45%, #00020f 100%);
+            background-color: #00020f;
+            overflow: hidden;
+        }
+        /* Liquid glass effect overlay – only on this section bg */
+        .xb-services-showcase-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(165deg,
+                rgba(255, 255, 255, 0.04) 0%,
+                rgba(255, 255, 255, 0.01) 25%,
+                transparent 50%,
+                rgba(0, 164, 175, 0.03) 75%,
+                rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+                        inset 0 -1px 0 0 rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+        }
+        .xb-services-showcase-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(0, 164, 175, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .xb-services-showcase-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* One block per service: title then 3 images – liquid glass box bg */
+        .xb-service-block {
+            padding: 80px 32px 100px;
+            text-align: center;
+            position: relative;
+            margin: 0 auto 32px;
+            max-width: 1400px;
+            border-radius: 20px;
+            overflow: hidden;
+            /* Liquid glass effect: semi-transparent + blur so gradient shows through */
+            background:
+                radial-gradient(circle at 0% 0%, rgba(0, 255, 200, 0.16), transparent 55%),
+                radial-gradient(circle at 100% 100%, rgba(0, 180, 255, 0.12), transparent 60%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(35, 45, 60, 0.7) 45%, rgba(5, 10, 20, 0.9) 100%);
+            backdrop-filter: blur(22px) saturate(160%);
+            -webkit-backdrop-filter: blur(22px) saturate(160%);
+            border: 1px solid rgba(0, 255, 200, 0.45);
+            box-shadow:
+                0 14px 40px rgba(0, 0, 0, 0.55),
+                0 0 40px rgba(0, 255, 200, 0.12),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+                inset 0 -26px 60px rgba(0, 0, 0, 0.7);
+            will-change: transform, box-shadow, border-color;
+            transition:
+                transform 0.55s cubic-bezier(0.19, 1, 0.22, 1),
+                box-shadow 0.55s ease,
+                border-color 0.4s ease,
+                background 0.6s ease,
+                opacity 0.4s ease;
+        }
+        .xb-service-block:last-of-type {
+            margin-bottom: 0;
+        }
+        /* Glass surface highlight that follows cursor */
+        .xb-service-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    circle at var(--pointer-x, 50%) var(--pointer-y, 0%),
+                    rgba(255, 255, 255, 0.12),
+                    transparent 55%
+                );
+            opacity: 0;
+            mix-blend-mode: screen;
+            transition:
+                opacity 320ms ease-out,
+                transform 360ms ease-out;
+            transform: translate3d(0, 0, 0);
+        }
+        /* Subtle liquid ripple ring on hover */
+        .xb-service-block::after {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    circle at var(--pointer-x, 50%) var(--pointer-y, 0%),
+                    rgba(0, 255, 200, 0.14),
+                    rgba(0, 255, 200, 0.03) 40%,
+                    transparent 65%
+                );
+            opacity: 0;
+            transform: scale(0.8);
+            mix-blend-mode: screen;
+        }
+        .xb-service-block:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 26px 70px rgba(0, 0, 0, 0.75),
+                0 0 55px rgba(0, 255, 200, 0.18),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 -28px 70px rgba(0, 0, 0, 0.72);
+            border-color: rgba(0, 255, 200, 0.7);
+        }
+        .xb-service-block:hover::before {
+            opacity: 0.65;
+            transform: translate3d(0, -2px, 0);
+        }
+        .xb-service-block.is-hovered::after {
+            animation: xb-glass-ripple 900ms ease-out forwards;
+        }
+        /* ========== SERVICE NAMES (visible, solid) ========== */
+        .xb-service-block-title {
+            font-family: var(--font-heading, 'DM Sans', sans-serif);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            line-height: 1.2;
+            margin: 0 0 56px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.02em;
+            color: #ffffff;
+        }
+        .xb-service-block.is-inview .xb-service-block-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transform: translateX(-50%);
+        }
+        .xb-service-block-title .xb-title-letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .xb-service-block.is-inview .xb-service-block-title .xb-title-letter {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .xb-service-feed {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            perspective: 1200px;
+        }
+        .xb-service-feed-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        /* ========== LIQUID GLASS IMAGE EFFECTS ========== */
+        /* Accent = same as "Services" underline (rgba(0, 255, 200)) */
+        .xb-service-feed-item .xb-feed-img-wrap {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: transparent;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 255, 200, 0.5);
+            box-shadow:
+                0 10px 34px rgba(0, 0, 0, 0.5),
+                0 0 28px rgba(0, 255, 200, 0.15),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            transition:
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.5s ease,
+                border-color 0.35s ease,
+                background 0.4s ease,
+                opacity 0.35s ease;
+            transform-style: preserve-3d;
+        }
+        .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap {
+            animation: xb-img-float 5s ease-in-out infinite;
+        }
+        .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap {
+            animation: xb-img-float-alt 5.5s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+        .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap {
+            animation: xb-img-float 5.2s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+        /* Active block: border slightly brighter (intensity only, same color) */
+        .xb-service-block.is-inview .xb-service-feed-item .xb-feed-img-wrap {
+            border-color: rgba(0, 255, 200, 0.65);
+        }
+        /* Hover: slightly higher border opacity + soft glow (same accent) */
+        .xb-service-feed-item .xb-feed-img-wrap:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 255, 200, 0.8);
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.85),
+                0 0 36px rgba(0, 255, 200, 0.22),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        .xb-service-feed-item .xb-feed-img-wrap img {
+            display: block;
+            width: clamp(200px, 28vw, 380px);
+            height: auto;
+            aspect-ratio: 5 / 7;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .xb-service-feed-item .xb-feed-img-wrap:hover img {
+            transform: scale(1.05);
+        }
+        .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap img { aspect-ratio: 5 / 7.2; }
+        .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap img { aspect-ratio: 5 / 6.6; }
+        .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap img { aspect-ratio: 5 / 7.1; }
+        .xb-service-feed-item .xb-feed-caption {
+            margin-top: 12px;
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: var(--font-heading, sans-serif);
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .xb-service-feed-item:hover .xb-feed-caption {
+            color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        .xb-service-feed-item .xb-feed-caption span {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .xb-service-panel-desc {
+            max-width: 520px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.65);
+            text-align: center;
+        }
+        /* Scroll-reveal: when block enters view, animate title + images + captions + desc */
+        .xb-service-block .xb-service-block-title {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease, color 0.4s ease;
+        }
+        .xb-service-block .xb-feed-img-wrap {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .xb-service-block .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap { transition-delay: 0.08s; }
+        .xb-service-block .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap { transition-delay: 0.18s; }
+        .xb-service-block .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap { transition-delay: 0.28s; }
+        .xb-service-block .xb-feed-caption {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .xb-service-block .xb-service-feed-item:nth-child(1) .xb-feed-caption { transition-delay: 0.38s; }
+        .xb-service-block .xb-service-feed-item:nth-child(2) .xb-feed-caption { transition-delay: 0.45s; }
+        .xb-service-block .xb-service-feed-item:nth-child(3) .xb-feed-caption { transition-delay: 0.52s; }
+        .xb-service-block .xb-service-panel-desc {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
+        }
+        .xb-service-block.is-inview .xb-service-block-title,
+        .xb-service-block.is-inview .xb-feed-img-wrap,
+        .xb-service-block.is-inview .xb-feed-caption,
+        .xb-service-block.is-inview .xb-service-panel-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .xb-service-block.is-inview .xb-service-block-title { transform: translateY(0) scale(1.04); }
+        /* In-view block: slightly brighter glass border */
+        .xb-service-block.is-inview {
+            border-color: rgba(0, 255, 200, 0.6);
+            box-shadow:
+                0 16px 46px rgba(0, 0, 0, 0.7),
+                0 0 32px rgba(0, 255, 200, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 -20px 55px rgba(0, 0, 0, 0.7);
+        }
+        /* Liquid ripple keyframes for glass surface */
+        @keyframes xb-glass-ripple {
+            0% {
+                opacity: 0.18;
+                transform: scale(0.85);
+            }
+            40% {
+                opacity: 0.26;
+                transform: scale(1.02);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+        @media (max-width: 991px) {
+            .xb-service-block {
+                padding: 64px 24px 80px;
+                /* Slightly reduce blur on mobile/tablet for performance */
+                backdrop-filter: blur(18px) saturate(150%);
+                -webkit-backdrop-filter: blur(18px) saturate(150%);
+                box-shadow:
+                    0 12px 34px rgba(0, 0, 0, 0.6),
+                    0 0 30px rgba(0, 255, 200, 0.14),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+            }
+            .xb-service-block-title { margin-bottom: 44px; }
+            .xb-service-feed-item .xb-feed-img-wrap {
+                backdrop-filter: blur(16px) saturate(160%);
+                -webkit-backdrop-filter: blur(16px) saturate(160%);
+                box-shadow:
+                    0 12px 32px rgba(0, 0, 0, 0.7),
+                    0 0 26px rgba(0, 255, 200, 0.16);
+            }
+            .xb-service-feed-item .xb-feed-img-wrap img { width: clamp(160px, 24vw, 260px); }
+            .xb-service-feed { gap: 14px; }
+        }
+        @media (max-width: 767px) {
+            .xb-service-block {
+                padding: 56px 16px 72px;
+                margin-bottom: 24px;
+                /* Further reduce blur and glow for small screens */
+                backdrop-filter: blur(14px) saturate(140%);
+                -webkit-backdrop-filter: blur(14px) saturate(140%);
+                box-shadow:
+                    0 10px 28px rgba(0, 0, 0, 0.65),
+                    0 0 22px rgba(0, 255, 200, 0.12);
+            }
+            .xb-service-block-title { margin-bottom: 36px; }
+            .xb-service-feed { gap: 12px; margin-bottom: 16px; }
+            .xb-service-feed-item .xb-feed-img-wrap {
+                backdrop-filter: blur(12px) saturate(135%);
+                -webkit-backdrop-filter: blur(12px) saturate(135%);
+                box-shadow:
+                    0 10px 26px rgba(0, 0, 0, 0.7),
+                    0 0 20px rgba(0, 255, 200, 0.12);
+            }
+            .xb-service-feed-item .xb-feed-img-wrap img { width: clamp(100px, 28vw, 180px); }
+            .xb-service-feed-item .xb-feed-caption { font-size: 0.6rem; margin-top: 8px; }
+            .xb-service-panel-desc { font-size: 0.85rem; }
+        }
     </style>
 </head>
 
@@ -583,191 +964,251 @@
         </section>
         <!-- hero end -->
 
-        <!-- service start -->
-        <section class="service-horizontal-section">
-            <div class="service-horizontal-container">
-                <!-- Service 1: AI SaaS Product -->
-                <div class="service-horizontal-row service-step" data-step="1">
-                    <div class="service-row-content">
-                        <h3 class="service-row-title">
-                            <a href="service-details.html">Resume Writing</a>
-                        </h3>
-                    </div>
-                    <div class="service-row-divider"></div>
-                </div>
-
-                <!-- Service 2: Data Science -->
-                <div class="service-horizontal-row service-step" data-step="2">
-                    <div class="service-row-content">
-                        <h3 class="service-row-title">
-                            <a href="service-details-linkedin-optimization.html">LinkedIn Optimization</a>
-                        </h3>
-                    </div>
-                    <div class="service-row-divider"></div>
-                </div>
-
-                <!-- Service 3: AI Chatbot Virtual -->
-                <div class="service-horizontal-row service-step" data-step="3">
-                    <div class="service-row-content">
-                        <h3 class="service-row-title">
-                            <a href="service-details-profile-marketing.html">Profile Marketing</a>
-                        </h3>
-                    </div>
-                    <div class="service-row-divider"></div>
-                </div>
-
-                <!-- Service 4: AI for E-commerce (Emphasized) -->
-                <div class="service-horizontal-row service-row-emphasized service-step" data-step="4">
-                    <div class="service-row-content">
-                        <div class="service-row-inner">
-                            <h3 class="service-row-title service-title-rotated">
-                                <a href="service-details-interview-guidance.html">Interview Guidance</a>
-                            </h3>
+        <!-- Services section: one service name + 3 images per block (like reference) -->
+        <section class="xb-services-showcase" id="xb-services-showcase" aria-label="Services">
+            <div class="xb-services-showcase-bg"></div>
+            <div class="xb-services-showcase-inner">
+                <!-- Block 1: Resume Writing -->
+                <div class="xb-service-block" data-service-block="0">
+                    <h2 class="xb-service-block-title">Resume Writing</h2>
+                    <div class="xb-service-feed">
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-1.png" alt="Resume skills overview" width="380" height="532"></div>
+                            <div class="xb-feed-caption"><span>01</span> Drafting</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-2.png" alt="How to write a CV" width="380" height="502"></div>
+                            <div class="xb-feed-caption"><span>02</span> Refining</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-3.png" alt="Essential skills to highlight on resume" width="380" height="532"></div>
+                            <div class="xb-feed-caption"><span>03</span> Final Review</div>
                         </div>
                     </div>
-                    <div class="service-row-divider"></div>
+                    <p class="xb-service-panel-desc">Professional resume crafting that highlights your strengths and aligns with ATS requirements.</p>
                 </div>
-
-                <!-- Service 5: AI Consulting -->
-                <div class="service-horizontal-row service-step" data-step="5">
-                    <div class="service-row-content">
-                        <h3 class="service-row-title">
-                            <a href="service-details-technical-training.html">Technical Training & Support</a>
-                        </h3>
+                <!-- Block 2: LinkedIn Optimization -->
+                <div class="xb-service-block" data-service-block="1">
+                    <h2 class="xb-service-block-title">LinkedIn Optimization</h2>
+                    <div class="xb-service-feed">
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/linkedin-optimization-1.png"
+                                     alt="Anatomy of a winning LinkedIn profile infographic"
+                                     width="380" height="532">
+                            </div>
+                            <div class="xb-feed-caption"><span>01</span> Audit</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/linkedin-optimization-2.png"
+                                     alt="Full LinkedIn profile optimization layout example"
+                                     width="380" height="502">
+                            </div>
+                            <div class="xb-feed-caption"><span>02</span> Optimize</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/linkedin-optimization-3.png"
+                                     alt="LinkedIn profile displayed on mobile phone"
+                                     width="380" height="532">
+                            </div>
+                            <div class="xb-feed-caption"><span>03</span> Launch</div>
+                        </div>
                     </div>
-                    <div class="service-row-divider"></div>
+                    <p class="xb-service-panel-desc">Optimize your LinkedIn profile for visibility and engagement with recruiters and hiring managers.</p>
                 </div>
-
-                <!-- Service 6: AI Marketing -->
-                <div class="service-horizontal-row service-step" data-step="6">
-                    <div class="service-row-content">
-                        <h3 class="service-row-title">
-                            <a href="service-details-full-job-support.html">Full Job Support</a>
-                        </h3>
+                <!-- Block 3: Profile Marketing -->
+                <div class="xb-service-block" data-service-block="2">
+                    <h2 class="xb-service-block-title">Profile Marketing</h2>
+                    <div class="xb-service-feed">
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/profile-marketing-1.png"
+                                     alt="Career tips for new graduates"
+                                     width="380" height="532">
+                            </div>
+                            <div class="xb-feed-caption"><span>01</span> Strategy</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/profile-marketing-2.png"
+                                     alt="Maximum visibility enhanced opportunities graphic"
+                                     width="380" height="502">
+                            </div>
+                            <div class="xb-feed-caption"><span>02</span> Build</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/profile-marketing-3.png"
+                                     alt="Standout candidate among crowd visual"
+                                     width="380" height="532">
+                            </div>
+                            <div class="xb-feed-caption"><span>03</span> Amplify</div>
+                        </div>
                     </div>
+                    <p class="xb-service-panel-desc">Strategic personal branding to position you as the right candidate in your industry.</p>
+                </div>
+                <!-- Block 4: Interview Guidance -->
+                <div class="xb-service-block" data-service-block="3">
+                    <h2 class="xb-service-block-title">Interview Guidance</h2>
+                    <div class="xb-service-feed">
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/interview-guidance-1.png"
+                                     alt="Video interview and resume review"
+                                     width="380" height="532">
+                            </div>
+                            <div class="xb-feed-caption"><span>01</span> Prepare</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/interview-guidance-2.png"
+                                     alt="Candidates greeting interviewer and building rapport"
+                                     width="380" height="502">
+                            </div>
+                            <div class="xb-feed-caption"><span>02</span> Practice</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap">
+                                <img src="assets/img/service/interview-guidance-3.png"
+                                     alt="Professional presenting interview preparation checklist"
+                                     width="380" height="532">
+                            </div>
+                            <div class="xb-feed-caption"><span>03</span> Deliver</div>
+                        </div>
+                    </div>
+                    <p class="xb-service-panel-desc">Confident interview preparation with mock sessions and feedback to land the offer.</p>
+                </div>
+                <!-- Block 5: Technical Training & Support -->
+                <div class="xb-service-block" data-service-block="4">
+                    <h2 class="xb-service-block-title">Technical Training &amp; Support</h2>
+                    <div class="xb-service-feed">
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img13.jpg" alt="Technical Training" width="380" height="532"></div>
+                            <div class="xb-feed-caption"><span>01</span> Assess</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img14.jpg" alt="Technical Training" width="380" height="502"></div>
+                            <div class="xb-feed-caption"><span>02</span> Train</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img15.jpg" alt="Technical Training" width="380" height="532"></div>
+                            <div class="xb-feed-caption"><span>03</span> Support</div>
+                        </div>
+                    </div>
+                    <p class="xb-service-panel-desc">Skills development and technical training tailored to your target role and level.</p>
+                </div>
+                <!-- Block 6: Full Job Support -->
+                <div class="xb-service-block" data-service-block="5">
+                    <h2 class="xb-service-block-title">Full Job Support</h2>
+                    <div class="xb-service-feed">
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img16.jpg" alt="Full Job Support" width="380" height="532"></div>
+                            <div class="xb-feed-caption"><span>01</span> Apply</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img17.png" alt="Full Job Support" width="380" height="502"></div>
+                            <div class="xb-feed-caption"><span>02</span> Follow up</div>
+                        </div>
+                        <div class="xb-service-feed-item">
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img18.png" alt="Full Job Support" width="380" height="532"></div>
+                            <div class="xb-feed-caption"><span>03</span> Negotiate</div>
+                        </div>
+                    </div>
+                    <p class="xb-service-panel-desc">End-to-end support from application to negotiation so you can focus on performing.</p>
                 </div>
             </div>
         </section>
-        <!-- service end -->
 
     </main>
     <!-- main area end -->
 
     <!-- footer strt -->
-    <footer class="footer footer-style-one pt-145 bg_img" data-background="assets/img/bg/footer-bg.png" >
+    <footer class="footer footer-style-one footer-fixed-design">
         <div class="xb-footer-wrap">
-            <div class="xb-footer-heading wow zoomIn" data-wow-delay="0ms" data-wow-duration="600ms">
-                <h1 class="title">Vertex</h1>
-                <a class="mail" href="mailto:info@vertextechio.com"><img src="assets/img/icon/email-icon.svg" alt="icon">info@vertextechio.com</a>
-            </div>
-            <div class="xb-footer-nav">
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">What we do?</span>
-                    <h2 class="title"><a href="service.html">Services</a></h2>
-                </div>
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">Who we are?</span>
-                    <h2 class="title"><a href="about.html">About us</a></h2>
-                </div>
-                <div class="xb-footer-nav-item">
-                    <span class="sub-title">How we deliver</span>
-                    <h2 class="title"><a href="contact.html">Contact us</a></h2>
-                </div>
-               
-            </div>
             <div class="xb-social-media-wrap">
-                <div class="xb-social-media-item ul_li_between">
+                <a href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-facebook"></i>
-                        </div>
-                        <span class="xb-item--name">Facebook</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-facebook"></i></div>
+                        <span class="xb-item--name">FACEBOOK</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://www.facebook.com/share/1F2kNRMFUr/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
+                </a>
+                <a href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </div>
-                        <span class="xb-item--name">WhatsApp</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <span class="xb-item--name">WHATSAPP</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://wa.me/17637229401" target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
+                </a>
+                <a href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </div>
-                        <span class="xb-item--name">LinkedIn</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-linkedin"></i></div>
+                        <span class="xb-item--name">LINKEDIN</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://www.linkedin.com/company/vertex-techio/?viewAsMember=true" target="_blank" rel="noopener noreferrer"></a>
-                </div>
-                <div class="xb-social-media-item ul_li_between">
+                </a>
+                <a href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer" class="xb-social-media-item ul_li_between">
                     <div class="xb-item--holder ul_li">
-                        <div class="xb-item--icon">
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
-                        <span class="xb-item--name">Instagram</span>
+                        <div class="xb-item--icon"><i class="fa-brands fa-instagram"></i></div>
+                        <span class="xb-item--name">INSTAGRAM</span>
                     </div>
                     <span class="xb-item--arrow">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white" />
-                        <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white" />
-                        <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white" />
-                        <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white" />
-                        <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white" />
-                        <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white" />
-                        <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white" />
+                            <rect x="5.06641" y="19.2783" width="20.5712" height="2.61221" transform="rotate(-40.2798 5.06641 19.2783)" fill="white"/>
+                            <rect x="7.97144" y="6.54443" width="2.61221" height="2.61221" transform="rotate(-40.2798 7.97144 6.54443)" fill="white"/>
+                            <rect x="11.6528" y="6.84814" width="2.61221" height="2.61221" transform="rotate(-40.2798 11.6528 6.84814)" fill="white"/>
+                            <rect x="15.3345" y="7.15186" width="2.61221" height="2.61221" transform="rotate(-40.2798 15.3345 7.15186)" fill="white"/>
+                            <rect x="18.7124" y="11.1372" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.7124 11.1372)" fill="white"/>
+                            <rect x="18.4089" y="14.8198" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.4089 14.8198)" fill="white"/>
+                            <rect x="18.1045" y="18.501" width="2.61221" height="2.61221" transform="rotate(-40.2798 18.1045 18.501)" fill="white"/>
                         </svg>
                     </span>
-                    <a class="xb-overlay" href="https://www.instagram.com/vertextech.io/" target="_blank" rel="noopener noreferrer"></a>
-                </div>
+                </a>
             </div>
             <div class="xb-footer-bottom">
                 <div class="contact-item">
-                    <img src="assets/img/icon/location-icon.svg" alt="icon">
+                    <img src="assets/img/icon/location-icon.svg" alt="">
                     <span class="contact-method">30 N GOULD ST,STE R, SHERIDAN,WY,82801</span>
                 </div>
                 <div class="contact-item copyright-item">
                     <p>Copyright © 2025 <a href="index.html">Vertex Tech Io</a>, All rights reserved.</p>
                 </div>
-                <div class="contact-item">
-                    <a href="tel:+1763-722-9401"><img src="assets/img/icon/call-icon.svg" alt="icon"></a>
-                    <a class="contact-method" href="tel:+1763-722-9401">+1(763)-722-9401</a>
+                <div class="contact-item contact-item-right">
+                    <a href="tel:+17637229401" class="contact-phone-link"><img src="assets/img/icon/call-icon.svg" alt=""></a>
+                    <span class="contact-method">+1(763)-722-9401</span>
+                    <a href="#" class="footer-scroll-top scroll" title="Scroll to top"><i class="far fa-arrow-up"></i></a>
                 </div>
             </div>
         </div>
@@ -810,20 +1251,97 @@
 <!-- Main custom script -->
 <script src="assets/js/main.js"></script>
 
-<!-- Service Steps Animation -->
+<!-- Services section: vanilla JS (scroll-reveal + letter wrap + mouse tilt + highlight block in view) -->
 <script>
-    // Force animation to trigger - CSS animation should work automatically
-    // This ensures animation plays even if there are timing issues
-    (function() {
-        // Small delay to ensure DOM is ready
-        setTimeout(function() {
-            const serviceRows = document.querySelectorAll('.service-step');
-            // Force reflow to trigger animation
-            serviceRows.forEach(function(row) {
-                row.style.animationPlayState = 'running';
-            });
-        }, 100);
-    })();
+(function () {
+    var section = document.getElementById('xb-services-showcase');
+    if (!section) return;
+    var blocks = section.querySelectorAll('.xb-service-block');
+
+    // Wrap service title letters in spans for stagger animation
+    blocks.forEach(function (block) {
+        var title = block.querySelector('.xb-service-block-title');
+        if (!title || title.classList.contains('xb-letters-wrapped')) return;
+        var text = title.textContent;
+        title.innerHTML = '';
+        for (var i = 0; i < text.length; i++) {
+            var span = document.createElement('span');
+            span.className = 'xb-title-letter';
+            span.textContent = text[i];
+            span.style.transitionDelay = (i * 0.035) + 's';
+            title.appendChild(span);
+        }
+        title.classList.add('xb-letters-wrapped');
+    });
+
+    // Mouse-follow 3D tilt for image cards (simplified for liquid glass)
+    var wrappers = section.querySelectorAll('.xb-feed-img-wrap');
+    wrappers.forEach(function (wrap) {
+        wrap.addEventListener('mouseenter', function () {
+            wrap.style.transition = 'transform 0.2s ease-out';
+        });
+        wrap.addEventListener('mousemove', function (e) {
+            var rect = wrap.getBoundingClientRect();
+            var x = (e.clientX - rect.left) / rect.width - 0.5;
+            var y = (e.clientY - rect.top) / rect.height - 0.5;
+            var tiltX = -y * 6;
+            var tiltY = x * 6;
+            wrap.style.transform = 'translateY(-10px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) scale(1.02)';
+        });
+        wrap.addEventListener('mouseleave', function () {
+            wrap.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            wrap.style.transform = '';
+        });
+    });
+
+    // Cursor-follow light reflection + subtle ripple on each glass card
+    blocks.forEach(function (block) {
+        var rippleTimeout;
+
+        block.addEventListener('mousemove', function (e) {
+            var rect = block.getBoundingClientRect();
+            var relX = (e.clientX - rect.left) / rect.width;
+            var relY = (e.clientY - rect.top) / rect.height;
+
+            // Clamp to [0,1] and convert to percentages for CSS radial gradients
+            relX = Math.max(0, Math.min(1, relX));
+            relY = Math.max(0, Math.min(1, relY));
+
+            block.style.setProperty('--pointer-x', (relX * 100).toFixed(2) + '%');
+            block.style.setProperty('--pointer-y', (relY * 100).toFixed(2) + '%');
+        });
+
+        block.addEventListener('mouseenter', function () {
+            block.classList.add('is-hovered');
+
+            // Clear any existing timeout so the ripple animation can restart cleanly
+            if (rippleTimeout) {
+                clearTimeout(rippleTimeout);
+            }
+            rippleTimeout = setTimeout(function () {
+                block.classList.remove('is-hovered');
+            }, 900);
+        });
+
+        block.addEventListener('mouseleave', function () {
+            block.classList.remove('is-hovered');
+
+            // Ease pointer highlight back to center top
+            block.style.setProperty('--pointer-x', '50%');
+            block.style.setProperty('--pointer-y', '0%');
+        });
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-inview');
+            }
+        });
+    }, { root: null, rootMargin: '-10% 0px -15% 0px', threshold: 0 });
+
+    blocks.forEach(function (block) { observer.observe(block); });
+})();
 </script>
 
 </body>

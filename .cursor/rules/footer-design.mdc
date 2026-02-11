@@ -1,0 +1,23 @@
+---
+description: Do not change the approved footer design (layout, styles, or structure)
+globs: Aivora/**/layout/_footer.scss,Aivora/assets/css/main.css,**/*.html
+alwaysApply: false
+---
+
+# Footer Design — Do Not Change
+
+The site footer is **approved and fixed**. Do not change its design, layout, structure, or styling.
+
+## What is fixed
+
+- **Layout**: Two sections only — (1) social row: four equal columns (Facebook, WhatsApp, LinkedIn, Instagram) with icon, uppercase label, external-link icon; (2) bottom row: left = address with green map pin, center = copyright, right = phone + green scroll-to-top button.
+- **Styling**: Dark background (`#0a0c14`), white text, bright green (`var(--color-primary)`) for location icon, phone icon, and scroll-to-top button; thin light gray dividers between sections and columns.
+- **Markup**: Footer uses class `footer-fixed-design`. Social items are `<a>` links with `xb-social-media-item`; bottom row has `contact-item`, `copyright-item`, and `contact-item-right` with `.footer-scroll-top.scroll` for scroll-to-top.
+
+## Allowed changes only
+
+- Updating URLs (social links, phone, address) if contact details change.
+- Updating copyright year or company name text.
+- Fixing accessibility or markup bugs without changing visual design.
+
+Do not add/remove sections, change colors, spacing, typography, or structure of the footer.

@@ -5833,22 +5833,13 @@ Drop Down menu end
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  backdrop-filter: blur(40px);
-  box-shadow: 0 4px 24px -1px rgba(28, 9, 61, 0.2);
-  background: linear-gradient(215deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .xb-brand-wrap::before {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  background-image: url(../img/service/noise.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  display: none;
 }
 
 .xb-brand-item {
@@ -9236,11 +9227,26 @@ Drop Down menu end
   width: 100%;
   overflow: hidden;
   position: relative;
-  transition: all 0.6s ease;
-  backdrop-filter: blur(40px);
+  transition: all 0.4s ease-in-out;
   transform-origin: center;
-  box-shadow: 0 4px 24px -1px rgba(28, 9, 61, 0.2);
-  background: linear-gradient(209deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%);
+  /* Liquid glass: semi-transparent frosted glass with reflective highlights */
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(30, 45, 65, 0.35) 100%
+  );
+  backdrop-filter: blur(24px) saturate(180%) contrast(1.02);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) contrast(1.02);
+  border: 1px solid rgba(0, 255, 200, 0.45);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.12) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.08) inset;
 }
 
 @media (max-width: 767px) {
@@ -9255,21 +9261,31 @@ Drop Down menu end
   content: '';
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
   height: 100%;
   width: 100%;
   background-image: url(../img/service/noise.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.08;
+  pointer-events: none;
 }
 
 .xb-service-item::after {
   padding: 1px !important;
-  border-radius: 0 !important;
+  border-radius: 19px !important;
+  -webkit-border-radius: 19px !important;
 }
 
 .xb-service-item .xb-item--item {
   padding: 82px 85px 85px 92px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Collapsed rows: compact padding so head-item (service name) is visible */
+.xb-service-item:not(.active) .xb-item--item {
+  padding: 14px 24px 14px 60px;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -9299,6 +9315,9 @@ Drop Down menu end
 @media (max-width: 767px) {
   .xb-service-item .xb-item--item {
     padding: 82px 20px 85px;
+  }
+  .xb-service-item:not(.active) .xb-item--item {
+    padding: 12px 20px 12px 48px;
   }
 }
 
@@ -9400,14 +9419,104 @@ Drop Down menu end
   color: #fff;
   text-align: left;
   margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
 }
 
 .xb-service-item .xb-item--head-item .xb-item--title a {
   color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  transition: color 0.4s ease-in-out, text-shadow 0.4s ease-in-out;
 }
 
 .xb-service-item .xb-item--head-item .xb-item--icon {
   display: none;
+}
+
+/* Service title hover icon (Lucide-style outline icons) */
+.xb-service-item .xb-service-title-with-icon {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1em;
+}
+
+.xb-service-item .xb-service-title-icon {
+  width: 36px;
+  min-width: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 0;
+}
+
+.xb-service-item .xb-service-title-icon .xb-service-icon-svg {
+  width: 28px;
+  height: 28px;
+  opacity: 0;
+  transform: translateX(-8px) scale(0.92);
+  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+  color: #00ff97;
+}
+
+.xb-service-item .xb-service-title-with-icon:hover .xb-service-title-icon .xb-service-icon-svg {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: drop-shadow(0 0 8px rgba(0, 255, 151, 0.45));
+}
+
+/* Optional: brighten service text and divider when icon is active (hover) */
+.xb-service-item .service-vertical-text .xb-item--title a {
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.xb-service-item:has(.xb-service-title-with-icon:hover) .xb-item--head-item .xb-item--title a,
+.xb-service-item:has(.xb-service-title-with-icon:hover) .service-vertical-text .xb-item--title a {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 0 20px rgba(255, 255, 255, 0.12);
+}
+
+/* Service name boxes: border line = same colour as "Services" underline (rgba(0,255,200) / rgba(0,200,255)) */
+.xb-service-item.xb-border::after {
+  transition: background 0.4s ease-in-out;
+  background: linear-gradient(146deg, rgba(0, 255, 200, 0.6) 0%, rgba(0, 200, 255, 0.6) 50%, rgba(0, 255, 200, 0.6) 100%);
+}
+
+.xb-service-item:has(.xb-service-title-with-icon:hover).xb-border::after {
+  background: linear-gradient(146deg, rgba(0, 255, 200, 0.85) 0%, rgba(0, 200, 255, 0.85) 50%, rgba(0, 255, 200, 0.85) 100%);
+}
+
+/* Hover: liquid glass with stronger frosted effect + subtle glow */
+.xb-service-item:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(40, 60, 90, 0.4) 100%
+  );
+  border-color: rgba(0, 255, 200, 0.7);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 32px rgba(0, 255, 200, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.18) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.06) inset;
+}
+
+/* Active row: liquid glass with reflective highlight */
+.xb-service-item.active {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.09) 40%,
+    rgba(35, 55, 80, 0.42) 100%
+  );
+  border-color: rgba(0, 255, 200, 0.65);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    0 0 40px rgba(0, 255, 151, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.2) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.05) inset;
 }
 
 @media (max-width: 767px) {
@@ -9426,9 +9535,11 @@ Drop Down menu end
   visibility: hidden;
   font-size: 20px;
   line-height: 1.5;
-  -webkit-transition: 0.4s;
-  -o-transition: 0.4s;
-  transition: 0.4s;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.4s ease-in-out;
+  -o-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
   transform: translateY(30px);
 }
 
@@ -9464,8 +9575,14 @@ Drop Down menu end
   transition: 0.3s;
 }
 
+/* Ensure all rows show service name: min-height for collapsed rows */
+.xb-service-item:not(.active) {
+  min-height: 56px;
+  flex: 1;
+}
+
 .xb-service-item.active {
-  flex: 3;
+  flex: 2;
   transition: all 0.6s ease;
 }
 
@@ -9476,8 +9593,13 @@ Drop Down menu end
   }
 }
 
+/* Always show service name on all rows */
 .xb-service-item.active .xb-item--head-item {
-  display: none;
+  display: flex;
+  height: auto;
+  top: 24px;
+  bottom: auto;
+  align-items: flex-start;
 }
 
 .xb-service-item.active .xb-item--content,
@@ -9515,16 +9637,36 @@ Drop Down menu end
   }
 }
 
+/* Light, airy background overlay for services section (same blue/teal, soft gradient) */
+#services.service .xb-service-wrap {
+  position: relative;
+}
+#services.service .xb-service-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #0a0a0a;
+  border-radius: 0;
+}
+
+/* Glassmorphism table container: rounded corners, soft spacing */
 .xb-service-wrap {
   display: flex;
   flex-direction: column;
-  height: 600px;
+  gap: 12px;
+  height: 670px;
+  padding: 16px 8px;
+  position: relative;
 }
 
 @media (max-width: 767px) {
   .xb-service-wrap {
     flex-wrap: wrap;
     height: auto;
+    gap: 10px;
+    padding: 12px 6px;
   }
 }
 
@@ -9578,6 +9720,7 @@ Drop Down menu end
   margin-bottom: 0;
   left: auto;
   top: auto;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
@@ -17571,6 +17714,116 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
   overflow: visible;
 }
 
+/* FOOTER FIXED DESIGN - DO NOT CHANGE */
+.footer-fixed-design {
+  background: #0a0c14 !important;
+  background-image: none !important;
+  padding-top: 0 !important;
+}
+.footer-fixed-design .xb-footer-wrap {
+  padding-top: 0 !important;
+  background: #0a0c14 !important;
+  background-image: none !important;
+}
+.footer-fixed-design .xb-social-media-wrap {
+  margin-top: 0 !important;
+}
+.footer-fixed-design .xb-social-media-item {
+  padding: 20px 16px;
+  text-decoration: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+.footer-fixed-design .xb-social-media-item::before {
+  display: none !important;
+}
+.footer-fixed-design .xb-social-media-item:hover .xb-item--name {
+  color: var(--color-primary) !important;
+}
+.footer-fixed-design .xb-social-media-item:hover .xb-item--icon i {
+  color: var(--color-primary) !important;
+}
+@media (max-width: 575px) {
+  .footer-fixed-design .xb-social-media-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+.footer-fixed-design .xb-item--holder {
+  gap: 10px;
+}
+.footer-fixed-design .xb-item--name {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+.footer-fixed-design .xb-item--icon i {
+  color: var(--color-white);
+}
+.footer-fixed-design .xb-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 91px;
+  padding: 0 24px;
+}
+@media (max-width: 575px) {
+  .footer-fixed-design .xb-footer-bottom {
+    padding: 20px 16px;
+  }
+}
+.footer-fixed-design .contact-item .contact-method {
+  color: var(--color-white);
+  font-weight: 700;
+}
+.footer-fixed-design .contact-item img {
+  flex-shrink: 0;
+}
+.footer-fixed-design .contact-item.copyright-item {
+  justify-content: center;
+}
+.footer-fixed-design .contact-item.copyright-item p {
+  font-weight: 500;
+  color: var(--color-white);
+  margin: 0;
+}
+.footer-fixed-design .contact-item.copyright-item a {
+  color: var(--color-white);
+}
+.footer-fixed-design .contact-item.contact-item-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 575px) {
+  .footer-fixed-design .contact-item.contact-item-right {
+    justify-content: center;
+  }
+}
+.footer-fixed-design .footer-scroll-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary) !important;
+  color: var(--color-secondary) !important;
+  border: none;
+  border-radius: 0;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: 0.3s;
+}
+.footer-fixed-design .footer-scroll-top:hover {
+  opacity: 0.9;
+  color: var(--color-secondary) !important;
+}
+.footer-fixed-design .footer-scroll-top i {
+  font-size: 18px;
+}
+.footer-fixed-design .contact-phone-link {
+  display: inline-flex;
+}
+
 .xb-footer-nav {
   display: flex;
   align-items: center;
@@ -17783,8 +18036,6 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
   display: grid;
   margin-top: 85px;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid #262833;
-  border-bottom: 1px solid #262833;
 }
 
 @media (max-width: 767px) {
