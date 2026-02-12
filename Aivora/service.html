@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/mobile-optimization.css">
+    <link rel="preload" as="image" href="assets/img/bg/bootcamp-bg.png">
     
     <!-- Liquid Glass Header Effect -->
     <style>
@@ -397,9 +398,10 @@
         .xb-services-showcase-inner {
             position: relative;
             z-index: 1;
-            max-width: 1600px;
+            width: 100%;
+            max-width: none;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 16px;
         }
         /* One block per service: title then 3 images – liquid glass box bg */
         .xb-service-block {
@@ -407,7 +409,7 @@
             text-align: center;
             position: relative;
             margin: 0 auto 32px;
-            max-width: 1400px;
+            max-width: none;
             border-radius: 20px;
             overflow: hidden;
             /* Liquid glass effect: semi-transparent + blur so gradient shows through */
@@ -521,10 +523,11 @@
         }
         .xb-service-feed {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: flex-end;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: clamp(10px, 1.5vw, 22px);
+            flex-wrap: nowrap;
+            width: 100%;
             margin-bottom: 20px;
             perspective: 1200px;
         }
@@ -583,7 +586,7 @@
         }
         .xb-service-feed-item .xb-feed-img-wrap img {
             display: block;
-            width: clamp(200px, 28vw, 380px);
+            width: clamp(170px, 20vw, 360px);
             height: auto;
             aspect-ratio: 5 / 7;
             object-fit: cover;
@@ -628,12 +631,18 @@
         }
         .xb-service-block .xb-feed-img-wrap {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.55s ease, transform 0.55s ease;
+            transform: translateX(-110vw);
+            transition: opacity 0.75s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
         }
-        .xb-service-block .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap { transition-delay: 0.08s; }
-        .xb-service-block .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap { transition-delay: 0.18s; }
-        .xb-service-block .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap { transition-delay: 0.28s; }
+        .xb-service-block .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap { transition-delay: 0.06s; }
+        .xb-service-block .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap {
+            transform: translateX(-120vw);
+            transition-delay: 0.16s;
+        }
+        .xb-service-block .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap {
+            transform: translateX(-130vw);
+            transition-delay: 0.26s;
+        }
         .xb-service-block .xb-feed-caption {
             opacity: 0;
             transform: translateY(10px);
@@ -648,11 +657,14 @@
             transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
         }
         .xb-service-block.is-inview .xb-service-block-title,
-        .xb-service-block.is-inview .xb-feed-img-wrap,
         .xb-service-block.is-inview .xb-feed-caption,
         .xb-service-block.is-inview .xb-service-panel-desc {
             opacity: 1;
             transform: translateY(0);
+        }
+        .xb-service-block.is-inview .xb-feed-img-wrap {
+            opacity: 1;
+            transform: translateX(0);
         }
         .xb-service-block.is-inview .xb-service-block-title { transform: translateY(0) scale(1.04); }
         /* In-view block: slightly brighter glass border */
@@ -698,8 +710,23 @@
                     0 12px 32px rgba(0, 0, 0, 0.7),
                     0 0 26px rgba(0, 255, 200, 0.16);
             }
+            .xb-service-feed {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 14px;
+            }
             .xb-service-feed-item .xb-feed-img-wrap img { width: clamp(160px, 24vw, 260px); }
-            .xb-service-feed { gap: 14px; }
+            .xb-service-block .xb-feed-img-wrap {
+                transform: translateY(24px);
+                transition: opacity 0.55s ease, transform 0.55s ease;
+            }
+            .xb-service-block .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap,
+            .xb-service-block .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap {
+                transform: translateY(24px);
+            }
+            .xb-service-block.is-inview .xb-feed-img-wrap {
+                transform: translateY(0);
+            }
         }
         @media (max-width: 767px) {
             .xb-service-block {
@@ -729,7 +756,6 @@
 </head>
 
 <body class="service-page inner-page">
-<script src="assets/js/universal-preloader.js"></script>
 
 <!-- backtotop-start -->
 <div class="xb-backtotop">
@@ -973,15 +999,15 @@
                     <h2 class="xb-service-block-title">Resume Writing</h2>
                     <div class="xb-service-feed">
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-1.png" alt="Resume skills overview" width="380" height="532"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-1.png" alt="Resume skills overview" width="380" height="532" loading="eager" decoding="async" fetchpriority="high"></div>
                             <div class="xb-feed-caption"><span>01</span> Drafting</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-2.png" alt="How to write a CV" width="380" height="502"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-2.png" alt="How to write a CV" width="380" height="502" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>02</span> Refining</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-3.png" alt="Essential skills to highlight on resume" width="380" height="532"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/resume-skill-3.png" alt="Essential skills to highlight on resume" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>03</span> Final Review</div>
                         </div>
                     </div>
@@ -995,7 +1021,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/linkedin-optimization-1.png"
                                      alt="Anatomy of a winning LinkedIn profile infographic"
-                                     width="380" height="532">
+                                     width="380" height="532"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>01</span> Audit</div>
                         </div>
@@ -1003,7 +1030,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/linkedin-optimization-2.png"
                                      alt="Full LinkedIn profile optimization layout example"
-                                     width="380" height="502">
+                                     width="380" height="502"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>02</span> Optimize</div>
                         </div>
@@ -1011,7 +1039,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/linkedin-optimization-3.png"
                                      alt="LinkedIn profile displayed on mobile phone"
-                                     width="380" height="532">
+                                     width="380" height="532"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>03</span> Launch</div>
                         </div>
@@ -1026,7 +1055,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/profile-marketing-1.png"
                                      alt="Career tips for new graduates"
-                                     width="380" height="532">
+                                     width="380" height="532"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>01</span> Strategy</div>
                         </div>
@@ -1034,7 +1064,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/profile-marketing-2.png"
                                      alt="Maximum visibility enhanced opportunities graphic"
-                                     width="380" height="502">
+                                     width="380" height="502"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>02</span> Build</div>
                         </div>
@@ -1042,7 +1073,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/profile-marketing-3.png"
                                      alt="Standout candidate among crowd visual"
-                                     width="380" height="532">
+                                     width="380" height="532"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>03</span> Amplify</div>
                         </div>
@@ -1057,7 +1089,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/interview-guidance-1.png"
                                      alt="Video interview and resume review"
-                                     width="380" height="532">
+                                     width="380" height="532"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>01</span> Prepare</div>
                         </div>
@@ -1065,7 +1098,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/interview-guidance-2.png"
                                      alt="Candidates greeting interviewer and building rapport"
-                                     width="380" height="502">
+                                     width="380" height="502"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>02</span> Practice</div>
                         </div>
@@ -1073,7 +1107,8 @@
                             <div class="xb-feed-img-wrap">
                                 <img src="assets/img/service/interview-guidance-3.png"
                                      alt="Professional presenting interview preparation checklist"
-                                     width="380" height="532">
+                                     width="380" height="532"
+                                     loading="lazy" decoding="async" fetchpriority="low">
                             </div>
                             <div class="xb-feed-caption"><span>03</span> Deliver</div>
                         </div>
@@ -1085,15 +1120,15 @@
                     <h2 class="xb-service-block-title">Technical Training &amp; Support</h2>
                     <div class="xb-service-feed">
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img13.jpg" alt="Technical Training" width="380" height="532"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img13.jpg" alt="Technical Training" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>01</span> Assess</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img14.jpg" alt="Technical Training" width="380" height="502"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img14.jpg" alt="Technical Training" width="380" height="502" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>02</span> Train</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img15.jpg" alt="Technical Training" width="380" height="532"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img15.jpg" alt="Technical Training" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>03</span> Support</div>
                         </div>
                     </div>
@@ -1104,15 +1139,15 @@
                     <h2 class="xb-service-block-title">Full Job Support</h2>
                     <div class="xb-service-feed">
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img16.jpg" alt="Full Job Support" width="380" height="532"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img16.jpg" alt="Full Job Support" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>01</span> Apply</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img17.png" alt="Full Job Support" width="380" height="502"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img17.png" alt="Full Job Support" width="380" height="502" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>02</span> Follow up</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img18.png" alt="Full Job Support" width="380" height="532"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img18.png" alt="Full Job Support" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>03</span> Negotiate</div>
                         </div>
                     </div>
@@ -1220,36 +1255,36 @@
 <!-- jquery include -->
 
 <!-- Core dependencies -->
-<script src="assets/js/jquery-3.7.1.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script defer src="assets/js/jquery-3.7.1.min.js"></script>
+<script defer src="assets/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core utilities / layout helpers -->
-<script src="assets/js/imagesloaded.pkgd.min.js"></script>
-<script src="assets/js/isotope.pkgd.min.js"></script>
-<script src="assets/js/easing.min.js"></script>
-<script src="assets/js/scrollspy.js"></script>
+<script defer src="assets/js/imagesloaded.pkgd.min.js"></script>
+<script defer src="assets/js/isotope.pkgd.min.js"></script>
+<script defer src="assets/js/easing.min.js"></script>
+<script defer src="assets/js/scrollspy.js"></script>
 
 <!-- Animation & Effect libraries -->
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/appear.js"></script>
-<script src="assets/js/parallaxie.js"></script>
-<script src="assets/js/parallax-scroll.js"></script>
-<script src="assets/js/imageRevealHover.js"></script>
-<script src="assets/js/jquery.marquee.min.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.nice-select.min.js"></script>
-<script src="assets/js/odometer.min.js"></script>
+<script defer src="assets/js/wow.min.js"></script>
+<script defer src="assets/js/appear.js"></script>
+<script defer src="assets/js/parallaxie.js"></script>
+<script defer src="assets/js/parallax-scroll.js"></script>
+<script defer src="assets/js/imageRevealHover.js"></script>
+<script defer src="assets/js/jquery.marquee.min.js"></script>
+<script defer src="assets/js/jquery.magnific-popup.min.js"></script>
+<script defer src="assets/js/jquery.nice-select.min.js"></script>
+<script defer src="assets/js/odometer.min.js"></script>
 
 <!-- Sliders -->
-<script src="assets/js/swiper.min.js"></script>
+<script defer src="assets/js/swiper.min.js"></script>
 
 <!-- Special plugins -->
-<script src="assets/js/plugin.js"></script>
-<script src="assets/js/lenis.js"></script>
-<script src="assets/js/magiccursor.js"></script>
+<script defer src="assets/js/plugin.js"></script>
+<script defer src="assets/js/lenis.js"></script>
+<script defer src="assets/js/magiccursor.js"></script>
 
 <!-- Main custom script -->
-<script src="assets/js/main.js"></script>
+<script defer src="assets/js/main.js"></script>
 
 <!-- Services section: vanilla JS (scroll-reveal + letter wrap + mouse tilt + highlight block in view) -->
 <script>

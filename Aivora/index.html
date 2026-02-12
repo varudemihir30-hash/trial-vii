@@ -929,6 +929,205 @@
             z-index: 1;
         }
 
+        /* ----- Services Glass Card Carousel (premium glassmorphism refresh) ----- */
+        #services.service.services-glass-section {
+            background: transparent !important;
+            padding-bottom: 100px !important;
+            position: relative;
+            overflow: hidden;
+        }
+        #services.service.services-glass-section::before,
+        #services.service.services-glass-section .xb-service-wrap { display: none !important; }
+        #services.service.services-glass-section::after { display: none !important; }
+
+        .services-glass-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .services-glass-bg::before,
+        .services-glass-bg::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(40px);
+            pointer-events: none;
+        }
+        .services-glass-bg::before {
+            width: 240px;
+            height: 240px;
+            left: 8%;
+            top: 24%;
+            background: rgba(0, 245, 212, 0.7);
+        }
+        .services-glass-bg::after {
+            width: 280px;
+            height: 280px;
+            right: 10%;
+            bottom: 14%;
+            background: rgba(0, 136, 255, 0.65);
+        }
+        .services-glass-container { position: relative; z-index: 1; }
+        .services-glass-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .services-glass-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.02em;
+        }
+        .services-glass-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            font-weight: 400;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .services-glass-carousel-wrap {
+            overflow: hidden;
+            padding: 8px 0 24px;
+        }
+        .services-glass-swiper {
+            overflow: visible;
+            padding-bottom: 40px;
+        }
+        .services-glass-swiper .swiper-wrapper {
+            transition-timing-function: linear !important;
+        }
+        .services-glass-swiper .swiper-slide {
+            width: min(360px, calc(100vw - 40px));
+        }
+        .services-glass-card {
+            --services-card-radius: 20px;
+            display: block;
+            height: 100%;
+            min-height: 340px;
+            position: relative;
+            isolation: isolate;
+            background: linear-gradient(160deg, rgba(10, 20, 34, 0.95) 0%, rgba(8, 14, 26, 0.98) 100%);
+            border: 1px solid rgba(120, 195, 255, 0.28);
+            border-radius: var(--services-card-radius);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38);
+            overflow: visible;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.5s ease, background 0.5s ease;
+        }
+        .services-glass-card::before {
+            content: none;
+        }
+        .services-glass-card::after {
+            content: none;
+        }
+        .services-glass-card__img-wrap::after {
+            content: none;
+        }
+        .services-glass-card:focus-visible {
+            outline: none;
+            border-color: rgba(0, 255, 200, 0.7);
+            box-shadow:
+                0 16px 40px rgba(0, 0, 0, 0.45),
+                0 0 0 2px rgba(0, 255, 200, 0.3),
+                0 0 32px rgba(0, 255, 200, 0.32);
+        }
+        .services-glass-card__img-wrap {
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border-radius: var(--services-card-radius) var(--services-card-radius) 0 0;
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        .services-glass-card__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .services-glass-card__body {
+            padding: 24px;
+            position: relative;
+            z-index: 3;
+            background: transparent;
+        }
+        .services-glass-card__title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.01em;
+        }
+        .services-glass-card__desc {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.75);
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+        }
+        .services-glass-card__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #00f5d4;
+            transition: transform 0.45s ease, color 0.45s ease, letter-spacing 0.45s ease;
+        }
+        .services-glass-card__cta svg {
+            flex-shrink: 0;
+            transition: transform 0.45s ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .services-glass-card:hover {
+                transform: translateY(-12px) scale(1.02);
+                border-color: rgba(0, 255, 200, 0.55);
+                box-shadow:
+                    0 18px 42px rgba(0, 0, 0, 0.45),
+                    0 0 40px rgba(0, 255, 200, 0.25),
+                    0 0 60px rgba(0, 140, 255, 0.22);
+            }
+            .services-glass-card:hover .services-glass-card__img,
+            .services-glass-card:focus-visible .services-glass-card__img {
+                transform: scale(1.08);
+            }
+            .services-glass-card:hover .services-glass-card__cta,
+            .services-glass-card:focus-visible .services-glass-card__cta {
+                transform: translateX(8px);
+                letter-spacing: 0.01em;
+            }
+            .services-glass-card:hover .services-glass-card__cta svg,
+            .services-glass-card:focus-visible .services-glass-card__cta svg {
+                transform: translateX(8px);
+            }
+        }
+        @media (max-width: 767px) {
+            .services-glass-header { margin-bottom: 32px; }
+            .services-glass-card { min-height: 300px; }
+            .services-glass-card {
+                --services-card-radius: 18px;
+            }
+            .services-glass-bg::before {
+                width: 180px;
+                height: 180px;
+            }
+            .services-glass-bg::after {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
         /* Make "Our Testimonial" box a full rectangle and full width */
         .testimonial {
             position: relative;
@@ -2567,6 +2766,7 @@
         /* Reduce gap between "Top Services" heading and service cards */
         #services-transition+#services.service.pt-135 {
             padding-top: 40px !important;
+            margin-top: -1px;
         }
 
         @media (max-width: 767px) {
@@ -2585,6 +2785,7 @@
 
             #services-transition+#services.service.pt-135 {
                 padding-top: 24px !important;
+                margin-top: -1px;
             }
         }
     </style>
@@ -3579,292 +3780,93 @@
                 </div>
             </section>
 
-            <!-- service start -->
-            <section id="services" class="service pt-135">
-                <div class="container">
+            <!-- service start: glass card carousel -->
+            <section id="services" class="service pt-135 services-glass-section" aria-labelledby="services-heading">
+                <div class="services-glass-bg services-transition-bg">
+                    <div class="services-transition-glow services-transition-glow--1" aria-hidden="true"></div>
+                    <div class="services-transition-glow services-transition-glow--2" aria-hidden="true"></div>
+                    <div class="services-transition-glow services-transition-glow--3" aria-hidden="true"></div>
+                    <div class="services-transition-dots" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
                 </div>
-                <div class="xb-service-wrap bg_img" data-background="assets/img/bg/service-bg.png">
-                    <div class="xb-service-item xb-border xb-mouseenter active wow fadeInUp" data-wow-delay="0.1s"
-                        data-wow-duration="0.6s">
-                        <div class="xb-item--inner">
-                            <div class="xb-item--item">
-                                <div class="xb-item--head-item">
-                                    <h3 class="xb-item--title border-effect">
-                                        <span class="xb-service-title-with-icon">
-                                            <span class="xb-service-title-icon" aria-hidden="true">
-                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path
-                                                        d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                                                    <polyline points="14 2 14 8 20 8" />
-                                                    <line x1="16" y1="13" x2="8" y2="13" />
-                                                    <line x1="16" y1="17" x2="8" y2="17" />
-                                                    <line x1="10" y1="9" x2="8" y2="9" />
-                                                </svg>
-                                            </span>
-                                            <a href="service-details.html">Resume Writing</a>
-                                        </span>
-                                    </h3>
-                                    <a class="xb-item--icon" href="service-details.html">
-                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                <div class="container services-glass-container">
+                    <div class="services-glass-carousel-wrap">
+                        <div class="swiper services-glass-swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="service-details.html" class="services-glass-card">
+                                        <div class="services-glass-card__img-wrap">
+                                            <img src="assets/img/service/img01.jpg" alt="Resume Writing" class="services-glass-card__img" loading="lazy">
+                                        </div>
+                                        <div class="services-glass-card__body">
+                                            <h3 class="services-glass-card__title">Resume Writing</h3>
+                                            <p class="services-glass-card__desc">Crafting resumes that meet U.S. hiring standards and get noticed.</p>
+                                            <span class="services-glass-card__cta">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                                        </div>
                                     </a>
                                 </div>
-                                <p class="xb-item--content">Crafting resumes and profiles that meet U.S. hiring
-                                    standards and get noticed.</p>
-                            </div>
-                            <div class="service-vertical-text">
-                                <h3 class="xb-item--title">
-                                    <span class="xb-service-title-with-icon">
-                                        <span class="xb-service-title-icon" aria-hidden="true">
-                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path
-                                                    d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                                                <polyline points="14 2 14 8 20 8" />
-                                                <line x1="16" y1="13" x2="8" y2="13" />
-                                                <line x1="16" y1="17" x2="8" y2="17" />
-                                                <line x1="10" y1="9" x2="8" y2="9" />
-                                            </svg>
-                                        </span>
-                                        <a href="service-details.html">Resume Writing</a>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.2s"
-                        data-wow-duration="0.6s">
-                        <div class="xb-item--inner">
-                            <div class="xb-item--item">
-                                <div class="xb-item--head-item">
-                                    <h3 class="xb-item--title border-effect">
-                                        <span class="xb-service-title-with-icon">
-                                            <span class="xb-service-title-icon" aria-hidden="true">
-                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path
-                                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                                    <rect width="4" height="12" x="2" y="9" />
-                                                    <circle cx="4" cy="4" r="2" />
-                                                </svg>
-                                            </span>
-                                            <a href="service-details-linkedin-optimization.html"
-                                                style="font-size: 0.9em;">LinkedIn Optimization</a>
-                                        </span>
-                                    </h3>
-                                    <a class="xb-item--icon" href="service-details-linkedin-optimization.html">
-                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                <div class="swiper-slide">
+                                    <a href="service-details-linkedin-optimization.html" class="services-glass-card">
+                                        <div class="services-glass-card__img-wrap">
+                                            <img src="assets/img/service/img02.jpg" alt="LinkedIn Optimization" class="services-glass-card__img" loading="lazy">
+                                        </div>
+                                        <div class="services-glass-card__body">
+                                            <h3 class="services-glass-card__title">LinkedIn Optimization</h3>
+                                            <p class="services-glass-card__desc">Position your profile to attract recruiters and hiring managers.</p>
+                                            <span class="services-glass-card__cta">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                                        </div>
                                     </a>
                                 </div>
-                                <p class="xb-item--content">Positioning your LinkedIn profile to attract recruiters and
-                                    hiring managers.</p>
-                            </div>
-                            <div class="service-vertical-text">
-                                <h3 class="xb-item--title">
-                                    <span class="xb-service-title-with-icon">
-                                        <span class="xb-service-title-icon" aria-hidden="true">
-                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path
-                                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                                <rect width="4" height="12" x="2" y="9" />
-                                                <circle cx="4" cy="4" r="2" />
-                                            </svg>
-                                        </span>
-                                        <a href="service-details-linkedin-optimization.html"
-                                            style="font-size: 0.9em;">LinkedIn Optimization</a>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.3s"
-                        data-wow-duration="0.6s">
-                        <div class="xb-item--inner">
-                            <div class="xb-item--item">
-                                <div class="xb-item--head-item">
-                                    <h3 class="xb-item--title border-effect">
-                                        <span class="xb-service-title-with-icon">
-                                            <span class="xb-service-title-icon" aria-hidden="true">
-                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path d="m3 11 18-5v12L3 14v-3z" />
-                                                    <path d="M11.6 16.8a3 3 0 0 1-5.2-2.1V9.3" />
-                                                </svg>
-                                            </span>
-                                            <a href="service-details-profile-marketing.html">Profile Marketing</a>
-                                        </span>
-                                    </h3>
-                                    <a class="xb-item--icon" href="service-details-profile-marketing.html">
-                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                <div class="swiper-slide">
+                                    <a href="service-details-profile-marketing.html" class="services-glass-card">
+                                        <div class="services-glass-card__img-wrap">
+                                            <img src="assets/img/service/img03.jpg" alt="Profile Marketing" class="services-glass-card__img" loading="lazy">
+                                        </div>
+                                        <div class="services-glass-card__body">
+                                            <h3 class="services-glass-card__title">Profile Marketing</h3>
+                                            <p class="services-glass-card__desc">Promoting your profile across top job portals for better visibility.</p>
+                                            <span class="services-glass-card__cta">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                                        </div>
                                     </a>
                                 </div>
-                                <p class="xb-item--content">Actively promoting your profile across top job portals for
-                                    better visibility.</p>
-                            </div>
-                            <div class="service-vertical-text">
-                                <h3 class="xb-item--title">
-                                    <span class="xb-service-title-with-icon">
-                                        <span class="xb-service-title-icon" aria-hidden="true">
-                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="m3 11 18-5v12L3 14v-3z" />
-                                                <path d="M11.6 16.8a3 3 0 0 1-5.2-2.1V9.3" />
-                                            </svg>
-                                        </span>
-                                        <a href="service-details-profile-marketing.html">Profile Marketing</a>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.4s"
-                        data-wow-duration="0.6s">
-                        <div class="xb-item--inner">
-                            <div class="xb-item--item">
-                                <div class="xb-item--head-item">
-                                    <h3 class="xb-item--title border-effect">
-                                        <span class="xb-service-title-with-icon">
-                                            <span class="xb-service-title-icon" aria-hidden="true">
-                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z" />
-                                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                                                    <line x1="12" y1="19" x2="12" y2="22" />
-                                                </svg>
-                                            </span>
-                                            <a href="service-details-interview-guidance.html"
-                                                style="white-space: nowrap;">Interview Guidance</a>
-                                        </span>
-                                    </h3>
-                                    <a class="xb-item--icon" href="service-details-interview-guidance.html">
-                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                <div class="swiper-slide">
+                                    <a href="service-details-interview-guidance.html" class="services-glass-card">
+                                        <div class="services-glass-card__img-wrap">
+                                            <img src="assets/img/service/img04.jpg" alt="Interview Guidance" class="services-glass-card__img" loading="lazy">
+                                        </div>
+                                        <div class="services-glass-card__body">
+                                            <h3 class="services-glass-card__title">Interview Guidance</h3>
+                                            <p class="services-glass-card__desc">Step-by-step preparation so you perform with confidence.</p>
+                                            <span class="services-glass-card__cta">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                                        </div>
                                     </a>
                                 </div>
-                                <p class="xb-item--content">Step-by-step interview preparation to help you perform with
-                                    confidence.</p>
-                            </div>
-                            <div class="service-vertical-text">
-                                <h3 class="xb-item--title">
-                                    <span class="xb-service-title-with-icon">
-                                        <span class="xb-service-title-icon" aria-hidden="true">
-                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z" />
-                                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                                                <line x1="12" y1="19" x2="12" y2="22" />
-                                            </svg>
-                                        </span>
-                                        <a href="service-details-interview-guidance.html"
-                                            style="white-space: nowrap;">Interview Guidance</a>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.5s"
-                        data-wow-duration="0.6s">
-                        <div class="xb-item--inner">
-                            <div class="xb-item--item">
-                                <div class="xb-item--head-item">
-                                    <h3 class="xb-item--title border-effect">
-                                        <span class="xb-service-title-with-icon">
-                                            <span class="xb-service-title-icon" aria-hidden="true">
-                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <polyline points="16 18 22 12 16 6" />
-                                                    <polyline points="8 6 2 12 8 18" />
-                                                </svg>
-                                            </span>
-                                            <a href="service-details-technical-training.html"
-                                                style="font-size: 0.75em;">Technical Training & Support</a>
-                                        </span>
-                                    </h3>
-                                    <a class="xb-item--icon" href="service-details-technical-training.html">
-                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                <div class="swiper-slide">
+                                    <a href="service-details-technical-training.html" class="services-glass-card">
+                                        <div class="services-glass-card__img-wrap">
+                                            <img src="assets/img/service/img05.jpg" alt="Technical Training & Support" class="services-glass-card__img" loading="lazy">
+                                        </div>
+                                        <div class="services-glass-card__body">
+                                            <h3 class="services-glass-card__title">Technical Training & Support</h3>
+                                            <p class="services-glass-card__desc">Practical training aligned with real job requirements.</p>
+                                            <span class="services-glass-card__cta">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                                        </div>
                                     </a>
                                 </div>
-                                <p class="xb-item--content">Practical technical training and assistance aligned with job
-                                    requirements.</p>
-                            </div>
-                            <div class="service-vertical-text">
-                                <h3 class="xb-item--title">
-                                    <span class="xb-service-title-with-icon">
-                                        <span class="xb-service-title-icon" aria-hidden="true">
-                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <polyline points="16 18 22 12 16 6" />
-                                                <polyline points="8 6 2 12 8 18" />
-                                            </svg>
-                                        </span>
-                                        <a href="service-details-technical-training.html"
-                                            style="font-size: 0.75em;">Technical Training & Support</a>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xb-service-item xb-border xb-mouseenter wow fadeInUp" data-wow-delay="0.6s"
-                        data-wow-duration="0.6s">
-                        <div class="xb-item--inner">
-                            <div class="xb-item--item">
-                                <div class="xb-item--head-item">
-                                    <h3 class="xb-item--title border-effect">
-                                        <span class="xb-service-title-with-icon">
-                                            <span class="xb-service-title-icon" aria-hidden="true">
-                                                <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                    width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                                                    <rect width="20" height="14" x="2" y="6" rx="2" />
-                                                </svg>
-                                            </span>
-                                            <a href="service-details-full-job-support.html">Full Job Support</a>
-                                        </span>
-                                    </h3>
-                                    <a class="xb-item--icon" href="service-details-full-job-support.html">
-                                        <img src="assets/img/icon/rotate-arrow-black.svg" alt="arrow">
+                                <div class="swiper-slide">
+                                    <a href="service-details-full-job-support.html" class="services-glass-card">
+                                        <div class="services-glass-card__img-wrap">
+                                            <img src="assets/img/service/img06.jpg" alt="Full Job Support" class="services-glass-card__img" loading="lazy">
+                                        </div>
+                                        <div class="services-glass-card__body">
+                                            <h3 class="services-glass-card__title">Full Job Support</h3>
+                                            <p class="services-glass-card__desc">End-to-end support from preparation to securing your offer.</p>
+                                            <span class="services-glass-card__cta">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                                        </div>
                                     </a>
                                 </div>
-                                <p class="xb-item--content">End-to-end support from preparation to securing a full-time
-                                    offer.</p>
-                            </div>
-                            <div class="service-vertical-text">
-                                <h3 class="xb-item--title">
-                                    <span class="xb-service-title-with-icon">
-                                        <span class="xb-service-title-icon" aria-hidden="true">
-                                            <svg class="xb-service-icon-svg" xmlns="http://www.w3.org/2000/svg"
-                                                width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                                                <rect width="20" height="14" x="2" y="6" rx="2" />
-                                            </svg>
-                                        </span>
-                                        <a href="service-details-full-job-support.html">Full Job Support</a>
-                                    </span>
-                                </h3>
                             </div>
                         </div>
                     </div>
@@ -4646,6 +4648,80 @@
                 });
             }, { threshold: 0.2 });
             observer.observe(section);
+        })();
+    </script>
+
+    <!-- Services glass card carousel: Swiper with autoplay, pause on hover, touch/drag -->
+    <script>
+        (function () {
+            var initAttempts = 0;
+            var maxInitAttempts = 20;
+            var retryTimer = null;
+
+            function initServicesCarousel() {
+                var el = document.querySelector('.services-glass-swiper');
+                if (!el) return false;
+                if (typeof Swiper === 'undefined') {
+                    if (initAttempts < maxInitAttempts) {
+                        initAttempts += 1;
+                        clearTimeout(retryTimer);
+                        retryTimer = setTimeout(initServicesCarousel, 250);
+                    }
+                    return false;
+                }
+                if (el.swiper) return; /* already inited */
+                var swiper = new Swiper('.services-glass-swiper', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 24,
+                    loop: true,
+                    loopAdditionalSlides: 6,
+                    grabCursor: true,
+                    freeMode: true,
+                    autoplay: {
+                        delay: 0,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true
+                    },
+                    speed: 5000,
+                    breakpoints: {
+                        768: { spaceBetween: 24 },
+                        1200: { spaceBetween: 24 }
+                    }
+                });
+                if (swiper.autoplay && swiper.autoplay.start) {
+                    swiper.autoplay.start();
+                }
+                var wrap = el.closest('.services-glass-carousel-wrap');
+                if (wrap) {
+                    wrap.addEventListener('mouseenter', function () {
+                        if (swiper.autoplay && swiper.autoplay.stop) swiper.autoplay.stop();
+                    });
+                    wrap.addEventListener('mouseleave', function () {
+                        if (swiper.autoplay && swiper.autoplay.start) swiper.autoplay.start();
+                    });
+                }
+                return true;
+            }
+
+            function ensureAutoplayRunning() {
+                var el = document.querySelector('.services-glass-swiper');
+                if (!el || !el.swiper) return;
+                if (el.swiper.autoplay && el.swiper.autoplay.start) {
+                    el.swiper.autoplay.start();
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initServicesCarousel);
+            } else {
+                initServicesCarousel();
+            }
+            window.addEventListener('load', function () {
+                initServicesCarousel();
+                ensureAutoplayRunning();
+            });
+            document.addEventListener('visibilitychange', function () {
+                if (!document.hidden) ensureAutoplayRunning();
+            });
         })();
     </script>
 
