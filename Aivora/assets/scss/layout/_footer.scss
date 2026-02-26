@@ -1,7 +1,6 @@
 /* Modern Footer Design - Matching User's Image */
 .footer-modern {
     background: #000814;
-    background: linear-gradient(180deg, #000814 0%, #001d3d 100%);
     position: relative;
     overflow: hidden;
     padding: 100px 0 0;
@@ -15,48 +14,62 @@
     position: relative;
 }
 
-/* Large VERTEX Background Text */
+/* Email section: VERTEX name with mail button centred in the middle */
+.footer-email-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    margin-bottom: 120px;
+}
+
+/* Large VERTEX Background Text - Behind mail button, watermark style */
 .footer-bg-text {
     position: absolute;
-    top: 50px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    font-size: 280px;
+    transform: translate(-50%, -50%);
+    font-size: 240px;
     font-weight: 900;
-    color: #1a1a2e;
+    color: #334155;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     z-index: 0;
     pointer-events: none;
     white-space: nowrap;
-    opacity: 0.3;
+    opacity: 0.45;
+    text-shadow: 0 0 40px rgba(30, 41, 59, 0.5), 0 2px 24px rgba(0, 0, 0, 0.3);
+    -webkit-text-stroke: 2px #06b6d4;
+    paint-order: stroke fill;
 }
 
-/* Email Badge with Gradient */
+/* Email Badge with Gradient - centred between VERTEX name and 3 columns */
 .footer-email-badge {
     position: relative;
     z-index: 2;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 18px 40px;
+    gap: 10px;
+    padding: 12px 28px;
     border-radius: 50px;
     background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
     color: #fff;
-    font-size: 20px;
+    font-family: var(--font-heading);
+    font-size: 16px;
     font-weight: 600;
-    margin: 0 auto 120px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0;
+    margin-top: 260px;
+    text-decoration: none;
     box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
     transition: all 0.3s ease;
 
     i {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     &:hover {
-        transform: translateX(-50%) translateY(-2px);
+        transform: translateY(-2px);
         box-shadow: 0 15px 50px rgba(37, 99, 235, 0.6);
     }
 }
@@ -80,7 +93,7 @@
         color: #6b7280;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        margin-bottom: 15px;
+        margin-bottom: 28px;
     }
 
     .column-title {
@@ -214,8 +227,13 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+    .footer-email-section {
+        min-height: 220px;
+    }
+
     .footer-bg-text {
-        font-size: 220px;
+        font-size: 170px;
+        opacity: 0.45;
     }
 
     .footer-column .column-title {
@@ -224,15 +242,19 @@
 }
 
 @media (max-width: 992px) {
+    .footer-email-section {
+        min-height: 180px;
+        margin-bottom: 80px;
+    }
+
     .footer-bg-text {
-        font-size: 160px;
-        top: 30px;
+        font-size: 140px;
+        opacity: 0.45;
     }
 
     .footer-email-badge {
         font-size: 18px;
         padding: 15px 35px;
-        margin-bottom: 80px;
     }
 
     .footer-columns {
@@ -266,8 +288,18 @@
         justify-content: center;
     }
 
+    /* Mobile: Address first, Phone middle, Copyright last */
+    .footer-bottom-item:first-child {
+        order: 1;
+    }
+
     .footer-phone {
         justify-content: center;
+        order: 2;
+    }
+
+    .footer-copyright {
+        order: 3;
     }
 }
 
@@ -280,15 +312,21 @@
         padding: 0 20px;
     }
 
+    .footer-email-section {
+        min-height: 120px;
+        margin-bottom: 60px;
+    }
+
     .footer-bg-text {
-        font-size: 100px;
-        top: 20px;
+        font-size: 90px;
+        opacity: 0.45;
+        -webkit-text-stroke: none;
+        paint-order: unset;
     }
 
     .footer-email-badge {
         font-size: 16px;
         padding: 12px 25px;
-        margin-bottom: 60px;
 
         i {
             font-size: 20px;
@@ -329,8 +367,16 @@
 }
 
 @media (max-width: 480px) {
+    .footer-email-section {
+        min-height: 90px;
+        margin-bottom: 50px;
+    }
+
     .footer-bg-text {
-        font-size: 60px;
+        font-size: 64px;
+        opacity: 0.45;
+        -webkit-text-stroke: none;
+        paint-order: unset;
     }
 
     .footer-email-badge {

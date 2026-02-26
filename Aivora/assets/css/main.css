@@ -12953,7 +12953,7 @@ Drop Down menu end
 }
 
 .xb-testimonial-item .xb-item--inner {
-  padding: 30px 36px 30px 30px;
+  padding: 20px 24px 20px 20px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -12966,13 +12966,13 @@ Drop Down menu end
 
 @media only screen and (min-width: 1600px) and (max-width: 1700px) {
   .xb-testimonial-item .xb-item--inner {
-    padding: 30px 42px 30px 30px;
+    padding: 22px 28px 22px 22px;
   }
 }
 
 .xb-testimonial-item .xb-item--rating {
-  gap: 9px;
-  padding: 7px 10px;
+  gap: 6px;
+  padding: 5px 8px;
   background: #00020f;
   display: inline-flex;
   border-radius: 7px;
@@ -12983,7 +12983,7 @@ Drop Down menu end
 }
 
 .xb-testimonial-item .xb-item--rating li {
-  font-size: 21px;
+  font-size: 17px;
   letter-spacing: -0.03em;
 }
 
@@ -12997,14 +12997,14 @@ Drop Down menu end
 
 .xb-testimonial-item .xb-item--content {
   font-weight: 500;
-  font-size: 22px;
-  line-height: 34px;
-  margin: 23px 0 64px;
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 14px 0 28px;
   letter-spacing: -0.02em;
 }
 
 .xb-testimonial-item .xb-item--author {
-  gap: 15px;
+  gap: 12px;
 }
 
 .xb-testimonial-item .xb-item--avatar {
@@ -13017,13 +13017,13 @@ Drop Down menu end
 }
 
 .xb-testimonial-item .xb-item--avatar {
-  font-size: 21px;
+  font-size: 17px;
   line-height: 152%;
   letter-spacing: -0.01em;
 }
 
 .xb-testimonial-item .xb-item--name {
-  font-size: 21px;
+  font-size: 17px;
   text-transform: capitalize;
 }
 
@@ -17484,6 +17484,48 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
   opacity: 0;
   transform: scale(0.8);
   animation: logoGlowUp 0.8s ease-out forwards, vertexLogoGlow 2.5s ease-in-out infinite 0.8s;
+}
+
+/* Preloader tagline - career & placements (typewriter, only under loading logo) */
+#preloader .loader-inner,
+.preloader .loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#preloader .loader-tagline,
+.preloader .loader-tagline {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  min-height: 1.5em;
+  min-width: 280px;
+  max-width: 90vw;
+  opacity: 1;
+  visibility: visible;
+}
+#preloader .loader-typewriter-wrap,
+.preloader .loader-typewriter-wrap {
+  display: inline-block;
+  overflow: visible;
+  white-space: nowrap;
+  width: auto;
+}
+#preloader .loader-cursor,
+.preloader .loader-cursor {
+  display: inline-block;
+  color: #00ff97;
+  margin-left: 2px;
+  animation: loaderCursorBlink 0.7s step-end infinite;
+}
+@keyframes loaderCursorBlink {
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes logoGlowUp {

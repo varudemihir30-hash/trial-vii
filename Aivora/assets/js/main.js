@@ -8,31 +8,30 @@
 	});
 
 	/*------------------------------------------
-	= preloader - Optimized for faster loading
+	= preloader - Show 4.5s on every load/refresh/navigation
 	-------------------------------------------*/
+	var PRELOADER_DURATION_MS = 4500; // 4.5 seconds
+
 	function preloader() {
 		var $preloader = $('#preloader');
 		
 		// Check if preloader still exists (might have been removed by inline script)
 		if (!$preloader.length) {
-			// Preloader already removed, just ensure body class is removed
 			$('body').removeClass('preloader-active');
 			return;
 		}
 		
-		// Add class to body to prevent scrolling while preloader is visible
 		$('body').addClass('preloader-active');
-		
-		// Show preloader immediately if it exists
 		$preloader.css('display', 'flex');
 		
-		// Fade out faster and remove
-		$preloader.addClass('fade-out');
+		// Keep loader visible for 4.5 seconds, then fade out and remove
 		setTimeout(function(){
-			$preloader.remove();
-			// Remove class from body to allow scrolling after preloader is hidden
-			$('body').removeClass('preloader-active');
-		}, 300); // Faster fade out (300ms instead of slow fade)
+			$preloader.addClass('fade-out');
+			setTimeout(function(){
+				$preloader.remove();
+				$('body').removeClass('preloader-active');
+			}, 300);
+		}, PRELOADER_DURATION_MS);
 	}
 
 	//gasp
@@ -61,39 +60,28 @@
 	= sticky header
 	-------------------------------------------*/
 	function stickyHeader() {
-		var scrollDirection = "";
-		var lastScrollPosition = 0;
-
 		// Clone and make header sticky if the element with class 'xb-header' exists
 		if ($('.xb-header').length) {
 			$('.xb-header').addClass('original').clone(true).insertAfter('.xb-header').addClass('xb-header-area-sticky xb-sticky-stt').removeClass('original');
 		}
 
-		// Handle scroll events
-		$(window).on("scroll", function () {
+		function toggleStickyHeaderVisibility() {
 			var currentScrollPosition = $(window).scrollTop();
 
-			// Determine scroll direction
-			scrollDirection = currentScrollPosition < lastScrollPosition ? "up" : "down";
-			lastScrollPosition = currentScrollPosition;
-
-			// Check if element with ID 'xb-header-area' has class 'is-sticky'
+			// Keep sticky header visible on both scroll up and down after user starts scrolling.
 			if ($("#xb-header-area").hasClass("is-sticky")) {
-				// Add or remove classes based on scroll position for sticky header and mobile header
-				if (lastScrollPosition > 100) {
-					$(".xb-header-area-sticky.xb-sticky-stb").addClass("xb-header-fixed");
+				if (currentScrollPosition > 0) {
+					$(".xb-header-area-sticky").addClass("xb-header-fixed");
 				} else {
-					$(".xb-header-area-sticky.xb-sticky-stb").removeClass("xb-header-fixed");
-				}
-
-				// Add or remove classes for sticky header based on scroll direction
-				if (scrollDirection === "up" && lastScrollPosition > 100) {
-					$(".xb-header-area-sticky.xb-sticky-stt").addClass("xb-header-fixed");
-				} else {
-					$(".xb-header-area-sticky.xb-sticky-stt").removeClass("xb-header-fixed");
+					$(".xb-header-area-sticky").removeClass("xb-header-fixed");
 				}
 			}
-		});
+		}
+
+		// Handle scroll events
+		$(window).on("scroll", toggleStickyHeaderVisibility);
+		// Ensure correct state on load/refresh (e.g. browser restores scroll position)
+		toggleStickyHeaderVisibility();
 	}
 	stickyHeader();
 

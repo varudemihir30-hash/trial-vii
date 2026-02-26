@@ -77,20 +77,21 @@
         // Show preloader immediately
         showPreloader();
         
-        // Hide loader when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    hidePreloader();
-                    preloaderInitialized = false; // Reset for next page load
-                }, 2000); // Show for 2 seconds to ensure visibility
-            });
-        } else {
-            // DOM already loaded - still show preloader for a moment
+        // Hide loader when DOM is ready, with minimum 800ms display so logo is visible
+        var minDisplayMs = 800;
+        var startTime = Date.now();
+        function tryHide() {
+            var elapsed = Date.now() - startTime;
+            var delay = Math.max(0, minDisplayMs - elapsed);
             setTimeout(function() {
                 hidePreloader();
-                preloaderInitialized = false; // Reset for next page load
-            }, 2000);
+                preloaderInitialized = false;
+            }, delay);
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', tryHide);
+        } else {
+            tryHide();
         }
     }
     
