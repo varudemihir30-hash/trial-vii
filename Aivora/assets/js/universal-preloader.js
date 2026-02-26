@@ -41,21 +41,26 @@
     
     // Function to hide preloader
     function hidePreloader() {
-        var preloader = document.getElementById('preloader');
-        if (preloader) {
+        // Remove ALL preloader elements (script-created + static HTML) so page content is visible
+        var preloaders = document.querySelectorAll('#preloader, .preloader');
+        preloaders.forEach(function(preloader) {
             preloader.classList.add('fade-out');
-            setTimeout(function() {
-                // Show body content
-                var bodyWrap = document.querySelector('.body_wrap');
-                if (bodyWrap) {
-                    bodyWrap.style.opacity = '1';
-                    bodyWrap.style.visibility = 'visible';
-                    bodyWrap.style.pointerEvents = 'auto';
+        });
+        setTimeout(function() {
+            preloaders.forEach(function(preloader) {
+                if (preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
                 }
-                preloader.remove();
-                document.body.classList.remove('preloader-active');
-            }, 300);
-        }
+            });
+            // Show body content (in case it was hidden by showPreloader)
+            var bodyWrap = document.querySelector('.body_wrap');
+            if (bodyWrap) {
+                bodyWrap.style.opacity = '1';
+                bodyWrap.style.visibility = 'visible';
+                bodyWrap.style.pointerEvents = 'auto';
+            }
+            document.body.classList.remove('preloader-active');
+        }, 300);
     }
     
     // Ensure glowing animation keyframes are always available
@@ -77,8 +82,8 @@
         // Show preloader immediately
         showPreloader();
         
-        // Hide loader when DOM is ready, with minimum 800ms display so logo is visible
-        var minDisplayMs = 800;
+        // Hide loader when DOM is ready, short display
+        var minDisplayMs = 350;
         var startTime = Date.now();
         function tryHide() {
             var elapsed = Date.now() - startTime;
@@ -113,47 +118,9 @@
         }
     });
     
-    // Show preloader on ALL link clicks (header links, buttons, etc.)
-    document.addEventListener('click', function(e) {
-        var link = e.target.closest('a');
-        if (link && link.href) {
-            // Skip anchor links (same page anchors)
-            if (link.href.includes('#') && !link.href.match(/^https?:\/\//) && link.pathname === window.location.pathname) {
-                return; // Same page anchor link, skip
-            }
-            // Skip javascript links and empty links
-            if (link.href.includes('javascript:') || link.href === '#' || link.href === window.location.href) {
-                return;
-            }
-            
-            // Check if it's an internal link to a different page
-            try {
-                var linkUrl = new URL(link.href, window.location.origin);
-                var currentUrl = new URL(window.location.href);
-                if (linkUrl.origin === currentUrl.origin && linkUrl.pathname !== currentUrl.pathname) {
-                    // Internal navigation to different page - show preloader
-                    e.preventDefault();
-                    showPreloader();
-                    // Navigate after a brief delay to show the preloader
-                    setTimeout(function() {
-                        window.location.href = link.href;
-                    }, 100);
-                }
-            } catch(err) {
-                // Invalid URL, ignore
-            }
-        }
-        
-        // Also check for buttons that might navigate
-        var button = e.target.closest('button');
-        if (button && button.onclick) {
-            // Button with onclick handler might navigate
-            var onclickAttr = button.getAttribute('onclick');
-            if (onclickAttr && onclickAttr.includes('location') || onclickAttr.includes('window.open')) {
-                showPreloader();
-            }
-        }
-    });
+    // Do NOT intercept internal link clicks - let the browser navigate normally.
+    // This prevents redirects (e.g. to Contact Us) from getting stuck. The preloader
+    // will show when the new page loads.
     
     // Note: pageshow handler moved above to handle all page shows including reloads
     

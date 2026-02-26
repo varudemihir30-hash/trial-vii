@@ -591,7 +591,7 @@
     <style>
         .hero.hero-full {
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .aurora-container {
@@ -727,12 +727,11 @@
             }
         }
 
-        /* Hero Section - Limit Aurora Background - Desktop/Tablet Only */
+        /* Hero Section - At least full viewport, allow content to grow (no clipping) */
         @media (min-width: 769px) {
             .hero.hero-full {
                 min-height: 100vh;
-                max-height: 100vh;
-                overflow: hidden;
+                overflow: visible;
                 position: relative;
             }
 
@@ -904,8 +903,8 @@
             padding-top: 135px;
         }
 
-        /* Clip backgrounds to prevent overflow */
-        section {
+        /* Clip backgrounds on sections except hero so hero content is never cut off */
+        section:not(.hero) {
             overflow: hidden;
         }
 
@@ -1385,7 +1384,7 @@
         }
         .service-uno-card__icon img,
         .service-uno-card__icon svg { width: 100%; height: 100%; display: block; object-fit: contain; }
-        /* Same icon effect for Full Job Support and Technical Training (custom PNG icons) */
+        /* Same icon effect for Technical Training (custom PNG icons) */
         .service-uno-card--custom-icon .service-uno-card__icon {
             filter: drop-shadow(0 0 8px rgba(0, 255, 200, 0.25));
             position: relative;
@@ -2729,25 +2728,25 @@
             justify-content: center !important;
         }
 
-        /* Hero Section Full Viewport Height - Desktop/Tablet Only */
+        /* Hero Section - min full viewport, grow with content so nothing is cut off */
         @media (min-width: 769px) {
 
             section.hero.hero-style.pos-rel.hero-full,
             .hero.hero-style.pos-rel.hero-full {
                 min-height: 100vh !important;
-                height: 100vh !important;
+                height: auto !important;
                 display: flex !important;
-                align-items: center !important;
+                align-items: flex-start !important;
                 position: relative !important;
-                overflow: hidden !important;
+                overflow: visible !important;
             }
 
-            /* Hero container vertical centering */
+            /* Hero container - size to content so headline and cards are never clipped */
             section.hero.hero-style.pos-rel.hero-full .container,
             .hero.hero-style.pos-rel.hero-full .container {
-                height: 100% !important;
+                height: auto !important;
                 display: flex !important;
-                align-items: center !important;
+                align-items: flex-start !important;
             }
         }
 
@@ -3026,6 +3025,7 @@
 
         .hero-everify-col {
             padding-left: 20px;
+            margin-top: 10px; /* match .hero-stat-cards so E-Verify aligns with the 4 stat cards */
         }
 
         /* White frame: exact right-side location for E-Verify card */
@@ -4085,8 +4085,8 @@
                 // Show preloader immediately
                 showPreloader();
 
-                // Hide loader when DOM is ready, min 800ms display
-                var minDisplayMs = 800;
+                // Hide loader when DOM is ready, short display
+                var minDisplayMs = 350;
                 var startTime = Date.now();
                 function tryHide() {
                     var elapsed = Date.now() - startTime;
@@ -4120,36 +4120,9 @@
                 }
             });
 
-            // Show preloader on link clicks (page navigation)
-            document.addEventListener('click', function (e) {
-                var link = e.target.closest('a');
-                if (link && link.href) {
-                    // Skip anchor links, javascript links, and same page
-                    if (link.href.includes('#') && !link.href.match(/^https?:\/\//)) {
-                        return; // Anchor link, skip
-                    }
-                    if (link.href.includes('javascript:') || link.href === '#' || link.href === window.location.href) {
-                        return; // JavaScript link or same page, skip
-                    }
-
-                    // Check if it's an internal link
-                    try {
-                        var linkUrl = new URL(link.href, window.location.origin);
-                        var currentUrl = new URL(window.location.href);
-                        if (linkUrl.origin === currentUrl.origin && linkUrl.pathname !== currentUrl.pathname) {
-                            // Internal navigation to different page - show preloader
-                            e.preventDefault();
-                            showPreloader();
-                            // Navigate after a brief delay to show the preloader
-                            setTimeout(function () {
-                                window.location.href = link.href;
-                            }, 100);
-                        }
-                    } catch (err) {
-                        // Invalid URL, ignore
-                    }
-                }
-            });
+            // Do NOT intercept internal link clicks - let the browser navigate normally.
+            // This prevents redirects (e.g. to Contact Us) from getting stuck. The preloader
+            // will show when the new page loads.
 
             // Note: pageshow handler moved above to handle all page shows including reloads
 
@@ -4863,14 +4836,6 @@
                                     <span class="service-uno-card__icon" aria-hidden="true"><img src="assets/img/icon/service-icon01.svg" alt="" width="56" height="56" loading="lazy"></span>
                                     <h3 class="service-uno-card__title">Technical Training & Support</h3>
                                     <p class="service-uno-card__desc">Training aligned with job requirements.</p>
-                                    <span class="service-uno-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-                                </a>
-                                <a href="service-details-full-job-support.html" class="service-uno-card service-uno-card--custom-icon" data-index="5" aria-label="Full Job Support">
-                                    <span class="service-uno-card__shine" aria-hidden="true"></span>
-                                    <span class="service-uno-card__num" aria-hidden="true">06</span>
-                                    <span class="service-uno-card__icon" aria-hidden="true"><img src="assets/img/icon/full-job-support-icon.png" alt="" width="56" height="56" loading="lazy"></span>
-                                    <h3 class="service-uno-card__title">Full Job Support</h3>
-                                    <p class="service-uno-card__desc">From preparation to securing your offer.</p>
                                     <span class="service-uno-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                                 </a>
                                 </div>

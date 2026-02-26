@@ -2,7 +2,7 @@
 <html lang="zxx">
 
 <head>
-
+    <script>document.documentElement.classList.add('about-page-html');</script>
     <!--========= Required meta tags =========-->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -385,14 +385,51 @@
         }
         /* About page: no footer background image (removes post-footer gradient area) */
         .about-page .footer,
-        .about-page .footer.bg_img {
-            background-color: #030614 !important;
+        .about-page .footer.bg_img,
+        .about-page footer,
+        .about-page .footer-modern {
+            background-color: #000814 !important;
             background-image: none !important;
         }
-        /* No image below footer: solid page background */
+        /* No image below footer: solid page background so no gradient/image shows under footer */
         .about-page .body_wrap,
         .about-page .body_wrap::after {
             background-image: none !important;
+            background-color: transparent !important;
+        }
+        .about-page .body_wrap::after {
+            content: none !important;
+            display: none !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        /* Remove extra image/area under footer: body and html solid dark, no gradient, no image */
+        body.about-page {
+            background-color: #000814 !important;
+            background-image: none !important;
+        }
+        html:has(body.about-page) {
+            background-color: #000814 !important;
+            background-image: none !important;
+        }
+        /* Ensure no extra scrollable space below footer (web and mobile). Target html by class so it works without :has() */
+        html.about-page-html,
+        html:has(body.about-page),
+        body.about-page {
+            min-height: 0 !important;
+            height: auto !important;
+        }
+        .about-page .body_wrap {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+            min-height: auto !important;
+            height: auto !important;
+        }
+        .about-page footer.footer-modern {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
         }
         /* Reduce footer VERTEX text size */
         .xb-footer-heading .title {
@@ -1046,9 +1083,13 @@
             position: relative;
             z-index: 2;
         }
+        .xb-partnership-header {
+            text-align: center;
+            margin-bottom: 0;
+        }
         .xb-partnership-badge {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 1.1rem;
             font-weight: 700;
             letter-spacing: 0.32em;
             color: rgba(0, 255, 151, 0.95);
@@ -1065,15 +1106,17 @@
         }
         .xb-partnership-headline {
             font-family: var(--font-heading), Georgia, serif;
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-size: clamp(1.15rem, 3.2vw, 2.25rem);
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.3;
             color: #fff;
-            margin: 0 0 48px;
-            max-width: 720px;
+            margin: 0 auto 48px;
+            max-width: 100%;
+            padding: 0 16px;
             opacity: 0;
             transform: translateY(24px);
             transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
+            white-space: nowrap;
         }
         .xb-partnership-section.xb-partnership-visible .xb-partnership-headline {
             opacity: 1;
@@ -1134,8 +1177,8 @@
             transform: none;
         }
         .xb-partnership-logo-wrap.xb-partnership-third-eye-only img {
-            width: 50vw;
-            max-width: 560px;
+            width: 56vw;
+            max-width: 640px;
             height: auto;
             min-height: 200px;
             object-fit: contain;
@@ -1186,11 +1229,14 @@
             .xb-partnership-logo-wrap { padding: 20px 28px; }
             .xb-partnership-logo-wrap img { height: 56px; max-width: 200px; }
             .xb-partnership-logo-wrap.xb-partnership-third-eye-only { padding: 0; }
-            .xb-partnership-logo-wrap.xb-partnership-third-eye-only img { width: 75vw; max-width: 320px; min-height: 140px; }
+            .xb-partnership-logo-wrap.xb-partnership-third-eye-only img { width: 80vw; max-width: 360px; min-height: 160px; }
             .xb-partnership-card { padding: 28px 22px 32px; }
             .xb-partnership-card p { font-size: 1.05rem; line-height: 1.7; }
             .xb-partnership-card .xb-partnership-cta { font-size: 1rem; }
-            .xb-partnership-headline { margin-bottom: 36px; }
+            .xb-partnership-headline { margin-bottom: 36px; font-size: 0.9rem; }
+        }
+        @media (max-width: 480px) {
+            .xb-partnership-headline { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -1283,8 +1329,8 @@
             // Show preloader immediately
             showPreloader();
             
-            // Hide loader when DOM is ready, min 800ms display
-            var minDisplayMs = 800;
+            // Hide loader when DOM is ready, short display
+            var minDisplayMs = 350;
             var startTime = Date.now();
             function tryHide() {
                 var elapsed = Date.now() - startTime;
@@ -1784,11 +1830,13 @@
                 <span class="xb-partnership-particle"></span>
             </div>
             <div class="container">
-                <span class="xb-partnership-badge">Strategic Partnership</span>
-                <h2 class="xb-partnership-headline">Vertex Techio Inc. × Third Eye Placements LLP</h2>
+                <div class="xb-partnership-header">
+                    <span class="xb-partnership-badge">Strategic Partnership</span>
+                    <h2 class="xb-partnership-headline">Vertex Techio Inc. × Third Eye Placements LLP</h2>
+                </div>
                 <div class="xb-partnership-logos">
                     <div class="xb-partnership-logo-wrap xb-partnership-third-eye-only">
-                        <img src="assets/img/partner/third-eye-placements-logo.svg" alt="Third Eye Placements LLP" width="560" height="auto">
+                        <img src="assets/img/partner/third-eye-placements-logo.png" alt="Third Eye Placements LLP" width="560" height="auto">
                     </div>
                 </div>
                 <div class="xb-partnership-card">

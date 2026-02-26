@@ -19660,11 +19660,11 @@ body>*:last-child {
   padding-bottom: 0 !important;
 }
 
-/* Ensure document ends at footer */
+/* Ensure document ends at footer - use auto/0 so page height = content (fit-content can force viewport min in some browsers) */
 html,
 body {
-  height: fit-content !important;
-  min-height: fit-content !important;
+  height: auto !important;
+  min-height: 0 !important;
 }
 
 /* Remove any scroll padding */

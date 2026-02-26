@@ -302,14 +302,8 @@
             visibility: hidden !important;
             display: none !important;
         }
-        /* Service page: breadcrumb uses solid dark background (no image) so no image appears after footer */
-        .service-page .service-page-breadcrumb,
-        .service-page main .breadcrumb.bg_img,
-        .service-page main .breadcrumb[data-background] {
-            background-image: none !important;
-            background-color: #0a0f1a !important;
-            background: linear-gradient(180deg, #0a0f1a 0%, #00020f 100%) !important;
-        }
+        /* Service page: breadcrumb uses same banner image as About Us / Contact Us */
+        /* (no override – .breadcrumb.bg_img with data-background shows bootcamp-bg.png) */
         /* Service page: no footer background image (removes post-footer gradient area) */
         .service-page .footer-modern,
         .service-page .footer-modern.bg_img {
@@ -432,11 +426,11 @@
         }
         /* One block per service: title then 3 images – liquid glass box bg */
         .xb-service-block {
-            padding: 80px 32px 100px;
+            padding: 48px 24px 64px;
             text-align: center;
             position: relative;
-            margin: 0 auto 32px;
-            max-width: none;
+            margin: 0 auto 24px;
+            max-width: 920px;
             border-radius: 20px;
             overflow: hidden;
             /* Liquid glass effect: semi-transparent + blur so gradient shows through */
@@ -521,7 +515,7 @@
             font-weight: 700;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             line-height: 1.2;
-            margin: 0 0 56px;
+            margin: 0 0 36px;
             transition: opacity 0.5s ease, transform 0.5s ease;
             position: relative;
             display: inline-block;
@@ -544,6 +538,10 @@
             transform: translateY(16px);
             transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        /* Ensure space between words is visible when letters are wrapped in spans */
+        .xb-service-block-title .xb-title-letter.xb-title-space {
+            min-width: 0.35em;
+        }
         .xb-service-block.is-inview .xb-service-block-title .xb-title-letter {
             opacity: 1;
             transform: translateY(0);
@@ -552,10 +550,11 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            gap: clamp(10px, 1.5vw, 22px);
+            gap: clamp(8px, 1.2vw, 18px);
             flex-wrap: nowrap;
             width: 100%;
-            margin-bottom: 20px;
+            padding-top: 16px;
+            margin-bottom: 12px;
             perspective: 1200px;
         }
         .xb-service-feed-item {
@@ -565,11 +564,11 @@
             flex-shrink: 0;
         }
         /* ========== LIQUID GLASS IMAGE EFFECTS ========== */
-        /* Accent = same as "Services" underline (rgba(0, 255, 200)) */
+        /* Card (bg only) is smaller; image stays full size and overflows – no clipping */
         .xb-service-feed-item .xb-feed-img-wrap {
             position: relative;
             border-radius: 16px;
-            overflow: hidden;
+            overflow: visible;
             background: transparent;
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -585,6 +584,9 @@
                 background 0.4s ease,
                 opacity 0.35s ease;
             transform-style: preserve-3d;
+            width: clamp(70px, 7.5vw, 150px);
+            aspect-ratio: 5 / 7;
+            margin: 0 auto;
         }
         .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap {
             animation: xb-img-float 5s ease-in-out infinite;
@@ -611,22 +613,27 @@
                 0 0 36px rgba(0, 255, 200, 0.22),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
+        /* Image: original size only; centered over small card so full image shows (overflow visible) */
         .xb-service-feed-item .xb-feed-img-wrap img {
             display: block;
-            width: clamp(170px, 20vw, 360px);
+            width: clamp(240px, 28vw, 420px);
             height: auto;
             aspect-ratio: 5 / 7;
             object-fit: cover;
             transition: transform 0.6s ease;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
         .xb-service-feed-item .xb-feed-img-wrap:hover img {
-            transform: scale(1.05);
+            transform: translate(-50%, -50%) scale(1.05);
         }
         .xb-service-feed-item:nth-child(1) .xb-feed-img-wrap img { aspect-ratio: 5 / 7.2; }
         .xb-service-feed-item:nth-child(2) .xb-feed-img-wrap img { aspect-ratio: 5 / 6.6; }
         .xb-service-feed-item:nth-child(3) .xb-feed-img-wrap img { aspect-ratio: 5 / 7.1; }
         .xb-service-feed-item .xb-feed-caption {
-            margin-top: 12px;
+            margin-top: 8px;
             font-size: 0.7rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -720,7 +727,7 @@
         }
         @media (max-width: 991px) {
             .xb-service-block {
-                padding: 64px 24px 80px;
+                padding: 44px 20px 56px;
                 /* Slightly reduce blur on mobile/tablet for performance */
                 backdrop-filter: blur(18px) saturate(150%);
                 -webkit-backdrop-filter: blur(18px) saturate(150%);
@@ -729,8 +736,11 @@
                     0 0 30px rgba(0, 255, 200, 0.14),
                     inset 0 0 0 1px rgba(255, 255, 255, 0.07);
             }
-            .xb-service-block-title { margin-bottom: 44px; }
+            .xb-service-block-title { margin-bottom: 32px; }
             .xb-service-feed-item .xb-feed-img-wrap {
+                width: clamp(58px, 7vw, 110px);
+                aspect-ratio: 5 / 7;
+                overflow: visible;
                 backdrop-filter: blur(16px) saturate(160%);
                 -webkit-backdrop-filter: blur(16px) saturate(160%);
                 box-shadow:
@@ -740,9 +750,12 @@
             .xb-service-feed {
                 justify-content: center;
                 flex-wrap: wrap;
-                gap: 14px;
+                gap: 12px;
+                margin-bottom: 10px;
             }
-            .xb-service-feed-item .xb-feed-img-wrap img { width: clamp(160px, 24vw, 260px); }
+            .xb-service-feed-item .xb-feed-img-wrap img {
+                width: clamp(200px, 28vw, 320px);
+            }
             .xb-service-block .xb-feed-img-wrap {
                 transform: translateY(24px);
                 transition: opacity 0.55s ease, transform 0.55s ease;
@@ -757,8 +770,8 @@
         }
         @media (max-width: 767px) {
             .xb-service-block {
-                padding: 56px 16px 72px;
-                margin-bottom: 24px;
+                padding: 40px 16px 52px;
+                margin-bottom: 20px;
                 /* Further reduce blur and glow for small screens */
                 backdrop-filter: blur(14px) saturate(140%);
                 -webkit-backdrop-filter: blur(14px) saturate(140%);
@@ -766,16 +779,21 @@
                     0 10px 28px rgba(0, 0, 0, 0.65),
                     0 0 22px rgba(0, 255, 200, 0.12);
             }
-            .xb-service-block-title { margin-bottom: 36px; }
-            .xb-service-feed { gap: 12px; margin-bottom: 16px; }
+            .xb-service-block-title { margin-bottom: 28px; }
+            .xb-service-feed { gap: 10px; margin-bottom: 10px; }
             .xb-service-feed-item .xb-feed-img-wrap {
+                width: clamp(48px, 12vw, 80px);
+                aspect-ratio: 5 / 7;
+                overflow: visible;
                 backdrop-filter: blur(12px) saturate(135%);
                 -webkit-backdrop-filter: blur(12px) saturate(135%);
                 box-shadow:
                     0 10px 26px rgba(0, 0, 0, 0.7),
                     0 0 20px rgba(0, 255, 200, 0.12);
             }
-            .xb-service-feed-item .xb-feed-img-wrap img { width: clamp(100px, 28vw, 180px); }
+            .xb-service-feed-item .xb-feed-img-wrap img {
+                width: clamp(140px, 32vw, 240px);
+            }
             .xb-service-feed-item .xb-feed-caption { font-size: 0.6rem; margin-top: 8px; }
             .xb-service-panel-desc { font-size: 0.85rem; }
         }
@@ -1007,7 +1025,7 @@
     <!-- main area start -->
     <main>
         <!-- hero start -->
-        <section class="breadcrumb service-page-breadcrumb" aria-label="Breadcrumb">
+        <section class="breadcrumb bg_img service-page-breadcrumb" data-background="assets/img/bg/bootcamp-bg.png" aria-label="Breadcrumb">
             <div class="container">
                 <div class="breadcrumb__content">
                     <ul class="breadcrumb__list clearfix list-unstyled">
@@ -1150,38 +1168,19 @@
                     <h2 class="xb-service-block-title">Technical Training &amp; Support</h2>
                     <div class="xb-service-feed">
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img13.jpg" alt="Technical Training" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/technical-training-1.png" alt="Remote technical training and video collaboration" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>01</span> Assess</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img14.jpg" alt="Technical Training" width="380" height="502" loading="lazy" decoding="async" fetchpriority="low"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/technical-training-2.png" alt="Collaborative whiteboard training and planning" width="380" height="502" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>02</span> Train</div>
                         </div>
                         <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img15.jpg" alt="Technical Training" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
+                            <div class="xb-feed-img-wrap"><img src="assets/img/service/technical-training-3.png" alt="Technical support and hands-on guidance" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
                             <div class="xb-feed-caption"><span>03</span> Support</div>
                         </div>
                     </div>
                     <p class="xb-service-panel-desc">Skills development and technical training tailored to your target role and level.</p>
-                </div>
-                <!-- Block 6: Full Job Support -->
-                <div class="xb-service-block" data-service-block="5">
-                    <h2 class="xb-service-block-title">Full Job Support</h2>
-                    <div class="xb-service-feed">
-                        <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img16.jpg" alt="Full Job Support" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
-                            <div class="xb-feed-caption"><span>01</span> Apply</div>
-                        </div>
-                        <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img17.png" alt="Full Job Support" width="380" height="502" loading="lazy" decoding="async" fetchpriority="low"></div>
-                            <div class="xb-feed-caption"><span>02</span> Follow up</div>
-                        </div>
-                        <div class="xb-service-feed-item">
-                            <div class="xb-feed-img-wrap"><img src="assets/img/service/img18.png" alt="Full Job Support" width="380" height="532" loading="lazy" decoding="async" fetchpriority="low"></div>
-                            <div class="xb-feed-caption"><span>03</span> Negotiate</div>
-                        </div>
-                    </div>
-                    <p class="xb-service-panel-desc">End-to-end support from application to negotiation so you can focus on performing.</p>
                 </div>
             </div>
         </section>
@@ -1298,7 +1297,7 @@
     if (!section) return;
     var blocks = section.querySelectorAll('.xb-service-block');
 
-    // Wrap service title letters in spans for stagger animation
+    // Wrap service title letters in spans for stagger animation (preserve word spacing)
     blocks.forEach(function (block) {
         var title = block.querySelector('.xb-service-block-title');
         if (!title || title.classList.contains('xb-letters-wrapped')) return;
@@ -1306,8 +1305,8 @@
         title.innerHTML = '';
         for (var i = 0; i < text.length; i++) {
             var span = document.createElement('span');
-            span.className = 'xb-title-letter';
-            span.textContent = text[i];
+            span.className = 'xb-title-letter' + (text[i] === ' ' ? ' xb-title-space' : '');
+            span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
             span.style.transitionDelay = (i * 0.035) + 's';
             title.appendChild(span);
         }
