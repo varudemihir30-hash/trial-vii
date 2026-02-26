@@ -1988,7 +1988,6 @@
 <script src="assets/js/appear.js"></script>
 <script src="assets/js/parallaxie.js"></script>
 <script src="assets/js/parallax-scroll.js"></script>
-<script src="assets/js/imageRevealHover.js"></script>
 <script src="assets/js/jquery.marquee.min.js"></script>
 <script src="assets/js/jquery.magnific-popup.min.js"></script>
 <script src="assets/js/jquery.nice-select.min.js"></script>
@@ -2076,6 +2075,56 @@
         });
     }, { rootMargin: '0px 0px -80px 0px', threshold: 0.15 });
     observer.observe(section);
+})();
+</script>
+
+<!-- Remove extra space after footer (no blank area below footer) -->
+<script>
+(function () {
+    function removeFooterSpace() {
+        var footer = document.querySelector('footer.footer-modern');
+        var bodyWrap = document.querySelector('.body_wrap');
+        if (!footer || !bodyWrap) return;
+        footer.style.marginBottom = '0';
+        footer.style.paddingBottom = '0';
+        bodyWrap.style.paddingBottom = '0';
+        bodyWrap.style.marginBottom = '0';
+        bodyWrap.style.minHeight = 'auto';
+        var fRect = footer.getBoundingClientRect();
+        var wRect = bodyWrap.getBoundingClientRect();
+        var footerBottomDoc = fRect.bottom + window.scrollY;
+        var bodyWrapTopDoc = wRect.top + window.scrollY;
+        var wrapHeight = footerBottomDoc - bodyWrapTopDoc;
+        if (wrapHeight > 0) {
+            bodyWrap.style.height = wrapHeight + 'px';
+            bodyWrap.style.overflow = 'hidden';
+        }
+        document.documentElement.style.minHeight = 'auto';
+        document.documentElement.style.height = 'auto';
+        document.body.style.minHeight = 'auto';
+        document.body.style.height = 'auto';
+        document.body.style.height = footerBottomDoc + 'px';
+        document.documentElement.style.height = footerBottomDoc + 'px';
+        if (window.lenis && typeof window.lenis.resize === 'function') {
+            try { window.lenis.resize(); } catch (e) {}
+        }
+    }
+    function init() {
+        removeFooterSpace();
+        setTimeout(removeFooterSpace, 100);
+        setTimeout(removeFooterSpace, 400);
+        setTimeout(removeFooterSpace, 800);
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    window.addEventListener('load', function () {
+        setTimeout(removeFooterSpace, 150);
+        setTimeout(removeFooterSpace, 600);
+    });
+    window.addEventListener('resize', function () { setTimeout(removeFooterSpace, 150); });
 })();
 </script>
 
